@@ -1,13 +1,14 @@
-import './App.css'
+import "./App.css";
+import LandingPage from "./pages/landingPage/LandingPage";
+import SignUp from "./pages/signup/SignUp";
 
 function App() {
-  
-
   return (
     <>
-    <h1>Hello world</h1>
+      <LandingPage />
+      {/* <SignUp /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
