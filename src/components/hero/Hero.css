@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color:#2C3639;
+   
+  }
+  
+  .logo-holder {
+    margin-bottom: 20px; 
+    margin-top: 20px; 
+    margin-left: 20px;
+  }
+  .logo{
+    margin-top: 20px; 
+  margin-left: 20px; 
+  }
+  .row {
+    display: flex;
+    padding: 0 70px ;
+  }
+  
+  .content {
+    flex: 1;
+    margin-right: 20px; 
+    margin-bottom: 30px;
+  }
+  .content p{
+    color: #FFFFFF;
+    font-size: 32px;
+  }
+  
+  .image-holder {
+    flex: 1;
+    margin-bottom: -30px; 
+  }
+  
+  .image {
+    max-width: 100%;
+    height: auto;
+  }
+  .two-button{
+    margin-top: 30px;
+  }
+
+  .two-button button {
+    margin-right: 40px; 
+  }
+  
+  .two-button button:last-child {
+    margin-right: 0;
+  }
+  .two-button button {
+    width: 120px; 
+  }
+  .primary-btn-login{
+    background-color: #D2E1CC;
+    color: #000000;
+  }.primary-btn{
+    background-color: #5E8D83;
+  }
+  
