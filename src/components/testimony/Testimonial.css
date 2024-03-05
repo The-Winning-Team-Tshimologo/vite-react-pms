@@ -1,0 +1,63 @@
+/* Testimonial.css */
+
+.landing-page-inner {
+    position: relative;
+    background-color: #2C3639;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+
+.testimonials-wrapper {
+    text-align: center;
+}
+
+.testimonials {
+    font-size: 24px;
+    color: #FFFFFF; /* Adjust the color as needed */
+}
+
+.frame-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px; /* Adjust as needed */
+}
+
+.frame-group {
+    display: flex;
+    gap: 50px; /* Adjust as needed */
+}
+
+.vector-parent {
+    position: relative;
+}
+
+.frame-child {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Add border-radius for rounded corners */
+}
+
+.vector-image {
+    width: 284px; /* Set the width based on the image dimensions */
+    height: 154px; /* Set the height based on the image dimensions */
+}
+
+.super-cool-app-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff; /* Text color */
+}
+
+.super-cool-app {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.super-cool-app-description {
+    font-size: 14px;
+    margin-top: 10px; /* Adjust as needed */
+}
