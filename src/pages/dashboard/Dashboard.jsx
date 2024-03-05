@@ -1,16 +1,42 @@
-import Header from "@/components/header/Header";
-import React from "react";
+import React from 'react'
+
+const Dashboard = () => {
+  return (
+    <div>Dashboard</div>
+    import React from 'react';
+import { services } from '../Constants';
+import { SectionWrapper } from '../hoc';
+
+const ServiceCard = ({ index, title, icon }) => {
+  return(
+    <>
+      <div
+        className='w-full p-[1px] rounded-[10px] columns-2 shadow-card'
+      >
+        <div 
+          className='bg-tertiary rounded-[10px] py-5 px-12 min-h-[200px] flex justify evenly items-center flex-col'
+        >
+          <img src={icon} alt={title}
+            className='w-20 h-20 object-contain'
+          />
+          <h3 className='text-white text-[24px] font-bold text-center'>{title}</h3>
+
+        </div>
+      </div>
+    </>
+  )
+}
 
 const Dashboard = () => {
   return (
     <>
-      <Header />
-      <div className="mt-10 mr-2 mx-2">
-        <h1>Dashboard</h1>
+      <div className='mt-20 flex flex-wrap gap-10'>
+        {services.map((service, index) => (
+          <ServiceCard key={service.title} index={index} {...service} />
+        ))}
       </div>
-      <h2 className="mr-2 mx-2">Browse Professionals</h2>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default SectionWrapper( About, "about" )
