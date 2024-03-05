@@ -1,6 +1,6 @@
 /* Add these styles to your CSS file */
 :root {
-    --icon-margin: 198px; /* Adjust the margin based on the font size of the icons */
+    --icon-margin: 288px; /* Adjust the margin based on the font size of the icons */
 }
 .services-container {
     display: flex;
@@ -15,7 +15,9 @@
     margin-left: var(--icon-margin);
 }
 
-
+service-content{
+    margin-top: 30px;
+}
 
 .icons-container {
     display: flex;
@@ -66,7 +68,9 @@
 
 .service-description {
 
-    padding: 0 20px; /* Add padding as needed */
+    justify-content: center;
+    padding-left: 100px;
+
 }
 .service-description .second-header{
     font-size: 28px;
