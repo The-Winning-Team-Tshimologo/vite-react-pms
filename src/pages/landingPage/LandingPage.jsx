@@ -1,20 +1,10 @@
-import Footer from '@/components/footer/Footer'
-import Header from '@/components/header/Header'
-import Hero from '@/components/hero/Hero'
 import React from 'react'
-import Service from "@/components/service/Service.jsx";
-import Testimonial from "@/components/testimony/Testimonial.jsx";
-import MyComponent from "@/components/testimony/MyComponent.jsx";
 
 const LandingPage = () => {
   return (
-   <>
-  <Header/>
-  <Hero/>
-     <Service/>
-       <Testimonial/>
-  <Footer/>
-   </>
+    <div className='mt-10 mr-2 mx-2'><h1>Welcome</h1>
+    <h2>This is the landingPage</h2>
+    </div>
   )
 }
 
