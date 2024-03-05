@@ -5,54 +5,35 @@ import heroImage from "../../assets/cover.jpg"
 
 function Hero(){
     return(
-        <section className="frame-currents-pipes-vibes">
-            <img
-                className="property-management-system-hig-icon"
-                loading="lazy"
-                alt=""
-                src={Foto}
-            />
-            <div className="frame-div">
-                <div className="frame-parent1">
-                    <div className="vector-quote-marker-parent">
-                        <div className="vector-quote-marker">
-                            <h1 className="currents-pipes-vibes-container">
-                                <p className="currents-pipes-vibes">{`Currents, Pipes, Vibes, and Heights – `}</p>
-                                <p className="weve-got-your">
-                                    We've Got Your Space Wired Right
-                                </p>
-                            </h1>
-                            <div className="logo-frame">
-                                <button className="header-text">
-                                    <img
-                                        className="header-text-child"
-                                        alt=""
-                                        src="/rectangle-100.svg"
-                                    />
-                                    <div className="login">Login</div>
-                                </button>
-                                <button className="service-facilities">
-                                    <div className="service-facilities-child" />
-                                    <div className="sign-up">Sign up</div>
-                                </button>
-                            </div>
-                        </div>
-                        <img
-                            className="testimonials-section-icon"
-                            alt=""
-                            src="/vector.svg"
-                        />
-                    </div>
-                    <img
-                        className="image-1-icon"
-                        loading="lazy"
-                        alt=""
-                        src="/image-1@2x.png"
-                    />
-                </div>
-                <input className="vector-line" type="checkbox" />
-            </div>
-        </section>
+        <>
+<div id="hero" className="hero">
+  <div className="container">
+    <div className="logo-holder">
+      <img src={Foto} alt="" className="logo" />
+     </div>
+     <div className="row">
+
+      <div className="content">
+        <p>
+          Currents, Pipes, Vibes,<br />
+          and Heights –<br></br> We've Got Your Space<br />
+          Wired Right
+        </p>
+        <div className="two-button">
+          <button className="primary-btn-login">Login</button>
+          <button className="primary-btn">Sign up</button>
+        </div>
+      </div>
+      <div className="image-holder">
+      <img src={heroImage} alt="" className="image" />
+      </div>
+    </div>
+  </div>
+</div>
+
+ </>
+
+
     )
 }
 
