@@ -1,11 +1,20 @@
-import React from 'react'
+import React from "react";
+import Header from "../../components/landingPageHeader/Header";
+import Hero from "../../components/hero/Hero";
+import Service from "../../components/service/Service";
+import Testimonial from "../../components/testimony/Testimonial";
+import Footer from "../../components/footer/Footer";
 
 const LandingPage = () => {
   return (
-    <div className='mt-10 mr-2 mx-2'><h1>Welcome</h1>
-    <h2>This is the landingPage</h2>
-    </div>
-  )
-}
+    <>
+      <Header />
+      <Hero />
+      <Service />
+      <Testimonial />
+      <Footer />
+    </>
+  );
+};
 
-export default LandingPage
+export default LandingPage;

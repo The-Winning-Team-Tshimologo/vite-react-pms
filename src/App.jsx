@@ -1,6 +1,5 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LandingPage from "./pages/landingPage/LandingPage";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -12,9 +11,14 @@ import Issus from "./pages/mockPages/Issus";
 import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
+import LandingPage from "./pages/landingPage/LandingPage"
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/landing",
+      element: <LandingPage />,
+    },
     {
       path: "/signin",
       element: <SignIn />,
