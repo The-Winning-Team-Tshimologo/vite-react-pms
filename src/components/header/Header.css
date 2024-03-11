@@ -5,7 +5,7 @@
     position: static;
     top: 0;
     padding: .5rem;
-    background-color: var(--color-backdrop);
+    /* background-color: var(--color-backdrop); */
     width: 100%;
     align-items: center;
 }
@@ -20,4 +20,12 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+.header__hamburger-icon {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    margin: 0 auto;
+    font-size: 1.6rem;
 }

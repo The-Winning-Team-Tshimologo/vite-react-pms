@@ -12,7 +12,7 @@ function Hero() {
             <img src={Foto} alt="" className="logo" />
           </div>
           <div className="row">
-            <div className="content">
+            <div className="hero__content">
               <p>
                 Currents, Pipes, Vibes,
                 <br />
