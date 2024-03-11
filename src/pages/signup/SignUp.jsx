@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,17 @@ const SignUp = () => {
   });
 
   const [errors, setErrors] = useState({});
+  
+  const [inputType1, setInputType1] = useState("password");
+  const [inputType2, setInputType2] = useState("password");
+
+  const toggleInputType1 = () => {
+    setInputType1(inputType1 === "password" ? "text" : "password");
+  };
+
+  const toggleInputType2 = () => {
+    setInputType2(inputType2 === "password" ? "text" : "password");
+  };
 
   const navigate = useNavigate();
 
@@ -135,11 +148,19 @@ const SignUp = () => {
             {" "}
             <label>Password </label>
             <input
-              type="password"
+              type={inputType1}
               name="password"
               value={formData.password}
               onChange={handleChange}
-            />{" "}
+              id="password"
+            />
+            <span onClick={toggleInputType1} className="icon-button">
+              {inputType1 === "password" ? (
+                <FontAwesomeIcon icon={faEye} className="icon-button__icon" />
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} className="icon-button__icon"/>
+              )}
+            </span>
             {errors.password && (
               <span className="error-message">{errors.password}</span>
             )}
@@ -148,11 +169,19 @@ const SignUp = () => {
           <div className="formFiled">
             <label>Confirm Password </label>
             <input
-              type="password"
+              type={inputType2}
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-            />{" "}
+              id="password"
+            />
+            <span onClick={toggleInputType2} className="icon-button">
+              {inputType2 === "password" ? (
+                <FontAwesomeIcon icon={faEye} className="icon-button__icon"/>
+              ) : (
+                <FontAwesomeIcon icon={faEyeSlash} className="icon-button__icon" />
+              )}
+            </span>{" "}
             {errors.confirmPassword && (
               <span className="error-message">{errors.confirmPassword}</span>
             )}
