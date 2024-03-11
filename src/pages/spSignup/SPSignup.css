@@ -1,0 +1,221 @@
+.sp__context,
+.sp__context_form_top {
+  display: flex;
+  margin: 0;
+}
+
+.sp__context {
+  height: 90vh;
+}
+.sp__context_side {
+  background-image: url("src/assets/Maintenance.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 90vh;
+  width: 50%;
+  background-position: center;
+  /* background-attachment: fixed; */
+  z-index: -1;
+}
+
+.sp__context_side__title {
+  font-size: 60px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.582);
+  opacity: 0;
+  margin-top: 15px;
+  position: fixed;
+  width: 100%;
+}
+
+.sp__context_form_top input {
+  width: 12rem;
+}
+.sp__context_form {
+  width: 50%;
+}
+.sp__context_form h2 {
+  margin: 20px 0;
+}
+
+.sp__context_form,
+.sp__context_form form,
+.SignupUploadDocument,
+.SignupUploadDocument form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp__context_form button,
+.SignupUploadDocument button {
+  padding: 10px 45px;
+  background-color: var(--color-primary);
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sp__requirements,
+.sp__requirements__head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sp__requirements__head {
+  gap: 50px;
+  width: 70%;
+  margin-top: 20px;
+}
+.sp__requirements__head hr {
+  border: 1px solid gray;
+  width: 100%;
+}
+.sp__requirements {
+  flex-direction: column;
+  /* margin-top: 10px; */
+  background-color: whitesmoke;
+}
+
+.sp__requirements p {
+  width: 50%;
+  text-align: center;
+  margin: 5px;
+}
+
+.formFiled .file__input {
+  border: 1px dashed var(--color-primary);
+  height: 7rem;
+}
+
+/* file input design */
+.file-upload-container {
+  width: 400px;
+  margin: 20px auto;
+  /* text-align: left; */
+  /* display: flex;
+  flex-direction: column;
+  justify-content:center ;
+  align-items: center;
+  text-align: right; */
+}
+
+.file-upload-box {
+  width: 400px;
+  height: 100px;
+  border: 2px dashed var(--color-primary);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-upload-box:hover {
+  border-color: var(--color-primary);
+}
+
+.browse-label {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.bankDetails__header{
+    width: 400px;
+    
+}
+
+.bankDetails__header span{
+    border-bottom: 1px solid black;
+   
+    /* margin-left: 5px; */
+}
+
+
+@media screen and (max-width: 768px) {
+  .sp__context {
+    flex-direction: column;
+  }
+  .sp__context_side,
+  .sp__context_form {
+    width: 100%;
+  }
+
+  .sp__context_form_top {
+    gap: 10px;
+  }
+
+  .sp__context_side {
+    background-attachment: fixed;
+  }
+  /* .sp__requirements ul li{
+    width: 90%;
+  } */
+
+  .sp__requirements ul {
+    width: 90%;
+    text-align: center;
+  }
+
+  .sp__requirements p {
+    width: 90%;
+    text-align: center;
+    margin: 5px;
+  }
+
+  .sp__context_side__title {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .sp__context_side,
+  .sp__context_form {
+    width: 100%;
+  }
+
+  .sp__context_side {
+    background-attachment: fixed;
+  }
+  .sp__context_form_top {
+    flex-direction: column;
+  }
+
+  .sp__context_form input,
+  .SignupUploadDocument input {
+    width: 15rem;
+  }
+
+  .bankDetails__header{
+    width: 240px;
+
+}
+  .file-upload-container {
+    /* display: flex;
+  flex-direction: column;
+  justify-content:center ;
+  align-items: center;
+  text-align: right;
+  width: 350px;
+  text-align: left; */
+    margin-left: 15%;
+    width: 350px;
+  }
+
+  .file-upload-container label {
+    margin: 0 auto;
+  }
+
+  .icon-button {
+    left: 44%;
+  }
+
+  .file-upload-box {
+    width: 70%;
+  }
+  .file-upload__icon {
+    height: 25px;
+  }
+}
