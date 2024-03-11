@@ -27,12 +27,12 @@
     padding: 0 70px ;
   }
   
-  .content {
+  .hero__content {
     flex: 1;
     margin-right: 20px; 
     margin-bottom: 30px;
   }
-  .content p{
+  .hero__content p{
     color: #FFFFFF;
     font-size: 32px;
   }

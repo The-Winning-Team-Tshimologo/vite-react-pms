@@ -1,4 +1,7 @@
+import React from 'react';
 import "./App.css";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -11,9 +14,10 @@ import Issus from "./pages/mockPages/Issus";
 import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
-import LandingPage from "./pages/landingPage/LandingPage"
+import LandingPage from "./pages/landingPage/LandingPage";
+import LogIssue from './pages/logIssue/LogIssue';
 
-function App() {
+function App({ children }) {
   const router = createBrowserRouter([
     {
       path: "/landing",
@@ -33,7 +37,6 @@ function App() {
           <Sidebar />
         </ProtectedRoute>
       ),
-
       children: [
         {
           index: true,
@@ -64,7 +67,7 @@ function App() {
           path: "/issues",
           element: (
             <ProtectedRoute>
-              <Issus />
+              <LogIssue />
             </ProtectedRoute>
           ),
         },
@@ -89,11 +92,13 @@ function App() {
   ]);
 
   return (
-    <>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router}>
+          {children}
+        </RouterProvider>
+      </LocalizationProvider>
+    </AuthProvider>
   );
 }
 

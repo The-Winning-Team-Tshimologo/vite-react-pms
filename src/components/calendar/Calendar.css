@@ -1,0 +1,8 @@
+.weekend .MuiPickersDay-day {
+    background-color: var(--color-tertiary) !important; /* Light green background for weekends */
+  }
+  
+  .MuiPickersDay-daySelected {
+    background-color: var(--color-primary) !important; /* Override for the selected date */
+  }
+  
