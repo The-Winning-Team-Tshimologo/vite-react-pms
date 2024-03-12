@@ -1,80 +1,46 @@
-// import React, { useEffect, useState } from "react";
-// import './Dropdown.css'
-
-// const Dropdown = () => {
-//   const [selectedCategory, setSelectedCategory] = useState("");
-//   const [categories, setCategories] = useState([]);
-
-//   // Simulating retrieving categories from backend
-//   useEffect(() => {
-//     const fetchedCategories = [
-//       { id: 1, name: "Electricity" },
-//       { id: 2, name: "Plumbing" },
-//       { id: 3, name: "Gardening" },
-//       { id: 4, name: "Fitting" },
-//       { id: 5, name: "Housekeeping" },
-//     ];
-
-//     setCategories(fetchedCategories);
-//     // setSelectedCategory(fetchedCategories[0].name);
-//   }, []);
-
-//   const handleChange = (event) => {
-//     setSelectedCategory(event.target.value);
-//   };
-
-//   return (
-//     <div className="flex flex-col dropdown-container">
-//       <label htmlFor="category-dropdown" className="category-label">Category</label>
-//       <select
-//         id="category-dropdown"
-//         value={selectedCategory}
-//         onChange={handleChange}
-//         className="dropdown"
-//       >
-//         {categories.map((category) => (
-//           <option key={category.id} value={category.name}>
-//             {category.name}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   );
-// };
-
-// export default Dropdown;
-
-import React, { useState } from 'react';
-import './Dropdown.css';
-// import { Fa9 } from 'react-icons/fa6';
-import { FaChevronUp } from 'react-icons/fa';
-import { FaChevronDown } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import "./Dropdown.css";
 
 const Dropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Plumbing');
+  const [isOpen, setIsOpen] = useState(true);
+  const [selectedOption, setSelectedOption] = useState("Plumbing");
+  const categories = [
+    "Electricity",
+    "Plumbing",
+    "Gardening",
+    "Fitting",
+    "Housekeeping",
+  ];
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = value => () => {
+  const onOptionClicked = (value) => () => {
     setSelectedOption(value);
-    setIsOpen(false);
+    // setIsOpen(false);
   };
 
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={toggleDropdown}>
         {selectedOption}
-        <i className={`Fa9 ${isOpen ? FaChevronUp : FaChevronDown}`}></i>
+        <div className="flex flex-col">
+          <FaChevronUp className="w-2 h-2" /> <FaChevronDown className="w-2 h-2" />
+        </div>
+        {/* {isOpen ? <FaChevronUp className='w-2'/> : <FaChevronDown className='w-2' />} */}
       </div>
       {isOpen && (
         <div className="dropdown-list-container">
           <ul className="dropdown-list">
-            <li onClick={onOptionClicked('Electricity')} className={selectedOption === 'Electricity' ? 'selected' : ''}>Electricity</li>
-            <li onClick={onOptionClicked('Plumbing')} className={selectedOption === 'Plumbing' ? 'selected' : ''}>Plumbing</li>
-            <li onClick={onOptionClicked('Gardening')} className={selectedOption === 'Gardening' ? 'selected' : ''}>Gardening</li>
-            <li onClick={onOptionClicked('Fitting')} className={selectedOption === 'Fitting' ? 'selected' : ''}>Fitting</li>
-            <li onClick={onOptionClicked('Housekeeping')} className={selectedOption === 'Housekeeping' ? 'selected' : ''}>Housekeeping</li>
+            {categories.map((category, index) => (
+              <li
+                key={index}
+                onClick={onOptionClicked(category)}
+                className={selectedOption === category ? "selected" : ""}
+              >
+                {category}
+              </li>
+            ))}
           </ul>
         </div>
       )}
