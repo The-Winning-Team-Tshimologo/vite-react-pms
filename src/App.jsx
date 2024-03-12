@@ -16,6 +16,8 @@ import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
 import LogIssue from './pages/logIssue/LogIssue';
+import { SPSignup } from './pages/spSignup/SPSignup';
+import { SPSignupUploadDocument } from './pages/spSignup/SPSignupUploadDocument';
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -30,6 +32,14 @@ function App({ children }) {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/spsignup",
+      element: <SPSignup />,
+    },
+    {
+      path: "/spsignupUploadDocument",
+      element: <SPSignupUploadDocument />,
     },
     {
       element: (
