@@ -109,8 +109,6 @@
   --color-primary: #5E8D83;
   --color-secondary: #2C3639;
   --color-tertiary: #0B8E00;
-  --color-tertiary-opaque: #0c8e0034;
-
   --color-accent: #fec195;
   --color-backdrop: #D9D9D9;
 
@@ -186,22 +184,4 @@ svg {
 }
 
 
-.margin-center {
-  margin: 0 auto;
-}
 
-/* .icon-button {
-  position: relative;
-  top: -30px;
-  left: 11.5rem;
-  height: 0px;
-  margin: auto;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 2px auto;
-}
-
-.icon-button__icon{
-  height: 20px;
-} */
