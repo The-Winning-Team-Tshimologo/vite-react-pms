@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -15,8 +15,11 @@ import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
-import LogIssue from './pages/logIssue/LogIssue';
-import Payment from "@/components/payment/Payment.jsx";
+import LogIssue from "./pages/logIssue/LogIssue";
+import { SPSignup } from "./pages/spSignup/SPSignup";
+import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
+import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
+import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -31,6 +34,21 @@ function App({ children }) {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/spsignup",
+      element: <SPSignup />,
+    },
+    {
+      path: "/spsignupUploadDocument",
+      element: <SPSignupUploadDocument />,
+    },
+    {
+      path: "/bookAppointment",
+      element: <BookAppointment />,
+    },{
+      path: "/browseProfessionals",
+      element: <BrowseProfessionals />,
     },
     {
       element: (
@@ -81,14 +99,6 @@ function App({ children }) {
           ),
         },
         {
-          path: "/payment",
-          element: (
-              <ProtectedRoute>
-               <Payment/>
-              </ProtectedRoute>
-          ),
-        },
-        {
           path: "/sp",
           element: (
             <ProtectedRoute>
@@ -103,9 +113,7 @@ function App({ children }) {
   return (
     <AuthProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router}>
-          {children}
-        </RouterProvider>
+        <RouterProvider router={router}>{children}</RouterProvider>
       </LocalizationProvider>
     </AuthProvider>
   );

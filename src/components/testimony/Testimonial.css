@@ -3,7 +3,7 @@
 .landing-page-inner {
     position: relative;
     background-color: #2C3639;
-    min-height: 100%; /* Make the minimum height 100% */
+    height: 450px;
 
 }
 
@@ -28,8 +28,6 @@
 .frame-group {
     display: flex;
     gap: 80px; /* Adjust as needed */
-    flex-wrap: wrap;
-margin-bottom: 80px;
 }
 
 .vector-parent {
@@ -57,12 +55,12 @@ margin-bottom: 80px;
 }
 
 .super-cool-app {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .super-cool-app-description {
-    font-size: 16px;
+    font-size: 24px;
  /* Adjust as needed */
 }
 /* Testimonial.css */
@@ -85,23 +83,4 @@ margin-bottom: 80px;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-}
-@media screen and (max-width: 768px) {
-    .frame-group {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .frame-child {
-        width: calc(100% - 20px); /* Make cards full width with some margin on smaller screens */
-    }
-
-    .super-cool-app {
-        font-size: 16px; /* Adjust font size for better mobile readability */
-    }
-
-    .super-cool-app-description {
-        font-size: 16px; /* Adjust font size for better mobile readability */
-    }
-
 }

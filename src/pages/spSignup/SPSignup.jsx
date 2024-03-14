@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import "./SPSignup.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faFile,
-//   faCloudUploadAlt,
-//   faEye,
-//   faEyeSlash,
-// } from "@fortawesome/free-solid-svg-icons";
-import { FaFile } from "react-icons/fa6";
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFile,
+  faCloudUploadAlt,
+  faEye,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
 
@@ -150,11 +146,12 @@ export const SPSignup = () => {
               />
               <span onClick={toggleInputType1} className="icon-button">
                 {inputType1 === "password" ? (
-                 
-                  <FaEye className="icon-button__icon" />
+                  <FontAwesomeIcon icon={faEye} className="icon-button__icon" />
                 ) : (
-                 
-                  <FaEyeSlash className="icon-button__icon"/>
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    className="icon-button__icon"
+                  />
                 )}
               </span>{" "}
               {/* {errors.password && (
@@ -180,9 +177,11 @@ export const SPSignup = () => {
               />
               <span onClick={toggleInputType2} className="icon-button">
                 {inputType2 === "password" ? (
-                  <FaEye className="icon-button__icon" />
+                  <FontAwesomeIcon icon={faEye} className="icon-button__icon" />
                 ) : (
-                  <FaEyeSlash className="icon-button__icon"
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    className="icon-button__icon"
                   />
                 )}
               </span>{" "}
@@ -280,7 +279,7 @@ export const SPSignup = () => {
       <div className="sp__requirements">
         <div className="sp__requirements__head">
           <hr />
-          <FaFile className="w-52  h-10" color="gray" />
+          <FontAwesomeIcon icon={faFile} size="2x" color="gray" />
           <hr />
         </div>
         <h2>Requirements</h2>
