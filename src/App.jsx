@@ -17,6 +17,9 @@ import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
 import LogIssue from './pages/logIssue/LogIssue';
 import Payment from "@/components/payment/Payment.jsx";
+import JobRequest from "@/components/jobRequest/JobRequest.jsx";
+import {SPSignup} from "@/pages/spSignup/SPSignup.jsx";
+import {SPSignupUploadDocument} from "@/pages/spSignup/SPSignupUploadDocument.jsx";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -31,6 +34,15 @@ function App({ children }) {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/sp-signup",
+      element: <SPSignup/>,
+    },
+
+    {
+      path: "/sp-signup-documents",
+      element: <SPSignupUploadDocument/>,
     },
     {
       element: (
@@ -94,6 +106,14 @@ function App({ children }) {
             <ProtectedRoute>
               <SP />
             </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/job-request",
+          element: (
+              <ProtectedRoute>
+                <JobRequest/>
+              </ProtectedRoute>
           ),
         },
       ],
