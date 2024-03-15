@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -20,6 +21,8 @@ import { SPSignup } from "./pages/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
+import Payment from "@/components/payment/Payment.jsx";
+import JobRequest from "@/components/jobRequest/JobRequest.jsx";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -46,7 +49,8 @@ function App({ children }) {
     {
       path: "/bookAppointment",
       element: <BookAppointment />,
-    },{
+    },
+    {
       path: "/browseProfessionals",
       element: <BrowseProfessionals />,
     },
@@ -106,6 +110,22 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
+        {
+          path: "/payment",
+          element: (
+              <ProtectedRoute>
+                <Payment/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/jobrequest",
+          element: (
+              <ProtectedRoute>
+                <JobRequest/>
+              </ProtectedRoute>
+          ),
+        },
       ],
     },
   ]);
@@ -120,3 +140,4 @@ function App({ children }) {
 }
 
 export default App;
+
