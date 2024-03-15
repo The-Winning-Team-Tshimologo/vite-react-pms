@@ -1,13 +1,25 @@
+// JobHeader.js
 import React, { useState } from 'react';
 import { IoMenuOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import './JobHeader.css';
 
-const JobHeader = () => {
+const JobHeader = ({ onSearch }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleSearch = () => {
+        onSearch(searchQuery);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
     };
 
     return (
@@ -16,8 +28,15 @@ const JobHeader = () => {
             <IoMenuOutline className="menu-icon" onClick={toggleDropdown}/>
             {/* Search Bar */}
             <div className="search-container">
-                <input type="text" placeholder="Search..." className="search-input" />
-                <IoIosSearch className="search-icon" />
+                <input
+                    type="text"
+                    placeholder="Search city or service..."
+                    className="search-input"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                />
+                <IoIosSearch className="search-icon" onClick={handleSearch} />
             </div>
             {/* Dropdown */}
             {isDropdownOpen && (

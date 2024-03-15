@@ -16,10 +16,13 @@ import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
-import LogIssue from "./pages/logIssue/LogIssue"import { SPSignup } from "./pages/spSignup/SPSignup";
+import LogIssue from "./pages/logIssue/LogIssue";
+import { SPSignup } from "./pages/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
+import Payment from "@/components/payment/Payment.jsx";
+import JobRequest from "@/components/jobRequest/JobRequest.jsx";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -46,7 +49,8 @@ function App({ children }) {
     {
       path: "/bookAppointment",
       element: <BookAppointment />,
-    },{
+    },
+    {
       path: "/browseProfessionals",
       element: <BrowseProfessionals />,
     },
@@ -104,6 +108,22 @@ function App({ children }) {
             <ProtectedRoute>
               <SP />
             </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/payment",
+          element: (
+              <ProtectedRoute>
+                <Payment/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/jobrequest",
+          element: (
+              <ProtectedRoute>
+                <JobRequest/>
+              </ProtectedRoute>
           ),
         },
       ],
