@@ -14,10 +14,6 @@
     margin-left: var(--icon-margin);
 }
 
-.service-container{
-    display: flex;
-    margin-top: 60px;
-}
 
 
 .icons-container {
@@ -67,9 +63,6 @@
     flex: 2; /* Adjust the flex value as needed */
 }
 
-
-
-
 .service-description {
 
     justify-content: center;
@@ -99,50 +92,3 @@
     width: 100%; /* Make the SVG fill its container */
     height: auto; /* Maintain the aspect ratio */
 }
-
-@media screen and (max-width: 768px) {
-    .service-container {
-        padding: 10px; /* Optional: Add padding for better mobile readability */
-        display: inline;
-    }
-
-    .top-icons,
-    .bottom-icons {
-        flex-direction: row; /* Stack icons vertically on mobile */
-    }
-
-    .service-item {
-        margin-bottom: 0; /* Optional: Add margin between icon items on mobile */
-    }
-
-    .service-description{
-        text-align: center;
-    }
-    .service-description h1 {
-        font-size: 30px; /* Adjust font size for better mobile readability */
-        font-weight: bold;
-    }
-
-    .icons-container {
-        padding: 0 30px;
-    }
-
-
-
-    .service-svg {
-        margin-top: 10px; /* Optional: Adjust the margin for better spacing on mobile */
-    }
-}
-@media screen and (max-width: 413px) {
-    .service-description h1 {
-        font-size: 20px; /* Adjust font size for screens less than 412 pixels wide */
-    }
-
-    .service-description p {
-        font-size: 14px; /* Adjust font size for screens less than 412 pixels wide */
-        margin-bottom: 10px; /* Adjust margin for screens less than 412 pixels wide */
-    }
-
-
-}
-

@@ -20,11 +20,12 @@ const Testimonial = () => {
         </div>
     );
 };
+
 const TestimonialCard = () => {
     return (
         <div className="vector-parent">
             <div className="frame-child">
-                <img className="vector-image" loading="lazy" alt="vector" src={Vector9} />
+                <img className="vector-image" loading="lazy" alt="" src={Vector9} />
                 <div className="super-cool-app-container">
                     <p className="super-cool-app">Super Cool App</p>
                     <p className="super-cool-app-description">
