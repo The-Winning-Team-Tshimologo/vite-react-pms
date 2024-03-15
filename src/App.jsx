@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -15,8 +16,7 @@ import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
-import LogIssue from "./pages/logIssue/LogIssue";
-import { SPSignup } from "./pages/spSignup/SPSignup";
+import LogIssue from "./pages/logIssue/LogIssue"import { SPSignup } from "./pages/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
@@ -120,3 +120,4 @@ function App({ children }) {
 }
 
 export default App;
+

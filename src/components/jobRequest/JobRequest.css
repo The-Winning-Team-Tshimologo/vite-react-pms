@@ -1,0 +1,53 @@
+.job-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    margin-top: 100px;
+    width: 100%;
+}
+
+.center-content {
+
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+.personal-request {
+    width: 591px;
+    margin: 1rem;
+    background-color: white;
+    display: flex;
+    border-radius: 35px;
+    padding: 1.25rem;
+    border: 1px solid #576E6A;
+}
+
+/* Add styles for the parent container */
+.track-job ul {
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+
+
+    padding: 0; /* Remove default padding */
+}
+
+.track-job{
+    background-color: #D9D9D9;
+
+   
+}
+.personal-request .information-details-container {
+    display: flex;
+    justify-content: space-between; /* Ensure equal space between children */
+    align-items: center; /* Align items vertically */
+}
+
+.personal-request .two-buttons {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+
+
+
+
