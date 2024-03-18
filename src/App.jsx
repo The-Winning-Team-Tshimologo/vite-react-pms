@@ -23,6 +23,7 @@ import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
 import Payment from "@/components/payment/Payment.jsx";
 import JobRequest from "@/components/jobRequest/JobRequest.jsx";
+import Review from "@/components/review/Review.jsx";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -123,6 +124,14 @@ function App({ children }) {
           element: (
               <ProtectedRoute>
                 <JobRequest/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/review",
+          element: (
+              <ProtectedRoute>
+                <Review/>
               </ProtectedRoute>
           ),
         },
