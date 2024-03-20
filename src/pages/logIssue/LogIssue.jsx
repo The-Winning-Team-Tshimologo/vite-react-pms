@@ -15,9 +15,9 @@ const LogIssue = () => {
   return (
     <>
       <Header />
-      <div className="mt-10 mr-2 mx-2">
+      {/* <div className="mt-10 mr-2 mx-2">
         <h1>Log an Issue</h1>
-      </div>
+      </div> */}
 
       <div className="issues__container">
         <div className="flex justify-around pt-4">

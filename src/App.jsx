@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -11,7 +10,7 @@ import AuthProvider from "./security/auth/AuthContext";
 import SignIn from "./pages/signin/SignIn";
 import ProtectedRoute from "./security/ProtectedRoute";
 import Activity from "./pages/mockPages/Activity";
-import Issus from "./pages/mockPages/Issus";
+
 import SP from "./pages/mockPages/SP";
 import About from "./pages/mockPages/About";
 import Messages from "./pages/mockPages/Messages";
@@ -19,11 +18,13 @@ import LandingPage from "./pages/landingPage/LandingPage";
 import LogIssue from "./pages/logIssue/LogIssue";
 import { SPSignup } from "./pages/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
+
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
 import Payment from "@/components/payment/Payment.jsx";
 import JobRequest from "@/components/jobRequest/JobRequest.jsx";
 import Review from "@/components/review/Review.jsx";
+
 import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
 import Appointments from "./pages/appointments/Appointments";
 import SPDashboard from "./pages/adminDashboard/adminDashboard";
@@ -43,20 +44,16 @@ function App({ children }) {
       element: <SignUp />,
     },
     {
-      path: "/spsignup",
+      path: "/SPSignup",
       element: <SPSignup />,
     },
     {
-      path: "/spsignupUploadDocument",
+      path: "/SPSignupUploadDocuments",
       element: <SPSignupUploadDocument />,
     },
     {
-      path: "/bookAppointment",
-      element: <BookAppointment />,
-    },
-    {
-      path: "/browseProfessionals",
-      element: <BrowseProfessionals />,
+      path: "/SPSignupProfile",
+      element: <SPSignupProfile />,
     },
     {
       element: (
@@ -115,19 +112,19 @@ function App({ children }) {
           ),
         },
         {
-          path: "/payment",
+          path: "/appointments",
           element: (
-              <ProtectedRoute>
-                <Payment/>
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <Appointments />
+            </ProtectedRoute>
           ),
         },
         {
-          path: "/jobrequest",
+          path: "/spDashboard",
           element: (
-              <ProtectedRoute>
-                <JobRequest/>
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <SPDashboard />
+            </ProtectedRoute>
           ),
         },
         {
@@ -152,4 +149,3 @@ function App({ children }) {
 }
 
 export default App;
-
