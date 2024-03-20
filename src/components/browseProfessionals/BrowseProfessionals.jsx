@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./BrowseProfessionals.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faMapMarker } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar, faMapMarker } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "@/components/ui/button";
 import ProfileCard from "./ProfileCard";

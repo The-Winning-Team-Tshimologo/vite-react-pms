@@ -13,7 +13,7 @@ const Dropdown = () => {
     "Housekeeping",
   ];
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  // const toggleDropdown = () => setIsOpen(!isOpen);
 
   const onOptionClicked = (value) => () => {
     setSelectedOption(value);
@@ -22,7 +22,7 @@ const Dropdown = () => {
 
   return (
     <div className="dropdown">
-      <div className="dropdown-header" onClick={toggleDropdown}>
+      <div className="dropdown-header" /*onClick={toggleDropdown}*/>
         {selectedOption}
         <div className="flex flex-col">
           <FaChevronUp className="w-2 h-2" /> <FaChevronDown className="w-2 h-2" />

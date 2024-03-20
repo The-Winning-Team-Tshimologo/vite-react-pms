@@ -12,20 +12,25 @@ const LogIssue = () => {
     window.alert("yey you");
   };
 
+const handleCalendar = (selectedDate) => {
+  // Do what you gotta do
+  // console.log(selectedDate);
+}
+
   return (
     <>
       <Header />
-      <div className="mt-10 mr-2 mx-2">
+      {/* <div className="mt-10 mr-2 mx-2">
         <h1>Log an Issue</h1>
-      </div>
+      </div> */}
 
       <div className="issues__container">
-        <div className="flex justify-around pt-4">
-          <div className="">
+        <div className="flex justify-between pt-4">
+          <div className="ms-10 p-4">
             <h2>Category</h2>
             <Dropdown />
           </div>
-          <div>
+          <div className="me-10 p-4">
             <h2>Address</h2>
             <div className="flex flex-col pr-20 py-1 address__container">
               <input
@@ -89,7 +94,7 @@ const LogIssue = () => {
 
           <div className="flex-1 flex flex-col justify-center">
             {/* Adjusted to center the Calendar and Submit button vertically */}
-            <Calendar />
+            <Calendar getSelectedDate={handleCalendar}/>
             {/* <button className="mt-4 ">Submit</button> */}
             <div className="flex justify-center margin-center w-96">
               <Button variant="custom">Submit</Button>
