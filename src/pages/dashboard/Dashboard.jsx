@@ -16,10 +16,10 @@ const Dashboard = () => {
       <div className="mt-10 mr-2 mx-2">
         <h1>Dashboard</h1>
       </div>
-      <h2 className="mr-2 mx-2">Browse Professionals</h2>
+      {/* <h2 className="mr-2 mx-2">Browse Professionals</h2>
       <Calendar />
 
-      <FileUpload onClick={handleClick} />
+      <FileUpload onClick={handleClick} /> */}
 
       {/* <div className="flex justify-center">
        <img className="img-size" src="/src/assets/upload-icon.png" alt="" />

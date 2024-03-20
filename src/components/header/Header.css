@@ -10,7 +10,12 @@
     align-items: center;
 }
 
-.header__container img {
+.header__logo {
+    height: 5rem;
+    width: 5rem;
+}
+
+.header__cutomer-img {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
