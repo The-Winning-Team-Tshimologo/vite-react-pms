@@ -39,7 +39,8 @@ function App({ children }) {
     },
     {
       path: "/signup",
-      element: <SignUp />,
+      element: <SignUp />, 
+      // Eyes
     },
     {
       path: "/SPSignup",
