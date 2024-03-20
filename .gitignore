@@ -1,0 +1,62 @@
+# Dependency directories
+node_modules/
+
+# Production build directory
+dist/
+
+# Vite build output
+build/
+
+# ESLint cache
+.eslintcache
+
+
+# Environment variable files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage directory used by tools like Istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Jekyll metadata file
+.jekyll-metadata
+
+# Next.js specific
+.next/
+out/
+
+# Storybook static build directory
+storybook-static/
+
+# Parcel cache directory
+.cache/
+
+# Misc
+*.log
+*.tmp
+*.tmp.*
+temp/
+tmp/

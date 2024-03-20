@@ -1,0 +1,25 @@
+/* .stats-box .stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: .5rem;
+}
+
+.stats-box progress {
+    width: 70%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+Customizing the progress bar color
+.stats-box progress[value]::-webkit-progress-value {
+    background-color: #ffc107;
+    border-radius: 5px;
+}
+
+.stats-box progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 5px;
+} */
