@@ -24,6 +24,9 @@ import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessi
 import Payment from "@/components/payment/Payment.jsx";
 import JobRequest from "@/components/jobRequest/JobRequest.jsx";
 import Review from "@/components/review/Review.jsx";
+import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
+import Appointments from "./pages/appointments/Appointments";
+import SPDashboard from "./pages/adminDashboard/adminDashboard";
 
 function App({ children }) {
   const router = createBrowserRouter([
