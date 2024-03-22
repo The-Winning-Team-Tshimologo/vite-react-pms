@@ -23,7 +23,7 @@ const Sidebar = () => {
         {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
         {sidebarCollapsed && (
           <div className="sidebar__logo">
-            <GiHamburgerMenu className="hamburger-icon" />
+            <GiHamburgerMenu className="hamburger-icon" onClick={handleSideBarCollapse}/>
           </div>
         )}
         {/* </div> */}

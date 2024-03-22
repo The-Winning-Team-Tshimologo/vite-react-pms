@@ -47,6 +47,7 @@
   /* justify-content: space-between; */
   width: 15rem;
   text-decoration: none;
+  margin-top: 3rem;
 }
 
 .bottom-links {
@@ -104,6 +105,7 @@
 
 .collapsed .sidebar__links {
   width: 5rem;
+  margin-top: 0;
 }
 
 .collapsed .sidebar__links h3 {

@@ -9,11 +9,10 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import AuthProvider from "./security/auth/AuthContext";
 import SignIn from "./pages/signin/SignIn";
 import ProtectedRoute from "./security/ProtectedRoute";
-import Activity from "./pages/mockPages/Activity";
 
-import SP from "./pages/mockPages/SP";
-import About from "./pages/mockPages/About";
-import Messages from "./pages/mockPages/Messages";
+
+
+
 import LandingPage from "./pages/landingPage/LandingPage";
 import LogIssue from "./pages/logIssue/LogIssue";
 import { SPSignup } from "./pages/spSignup/SPSignup";
@@ -78,22 +77,8 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
-        {
-          path: "/activity",
-          element: (
-            <ProtectedRoute>
-              <Activity />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/about",
-          element: (
-            <ProtectedRoute>
-              <About />
-            </ProtectedRoute>
-          ),
-        },
+      
+      
         {
           path: "/issues",
           element: (
@@ -102,22 +87,8 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
-        {
-          path: "/messages",
-          element: (
-            <ProtectedRoute>
-              <Messages />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/sp",
-          element: (
-            <ProtectedRoute>
-              <SP />
-            </ProtectedRoute>
-          ),
-        },
+      
+     
         {
           path: "/appointments",
           element: (
