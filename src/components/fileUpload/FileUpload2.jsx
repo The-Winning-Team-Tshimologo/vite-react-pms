@@ -42,7 +42,7 @@ const FileUpload2 = ({handleChange, onDrop, inputName,formData,errors,labelName}
               </div>
               {formData && (
                 <div className="file-feedback">
-                  <p>File selected: {formData.name}</p>
+                  <p>File selected: <span style={{ color:"blue" }}  > {formData.name}</span></p>
                 </div>
               )}
             </div>
