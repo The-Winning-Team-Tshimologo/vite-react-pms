@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form__container {
+  display: flex;
+  height: 100vh;
+}
+
+.signin-form__signin {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem; 
+
+}
+
+.background-image-right {
+  flex: 1;
+  background-image: url("../assets/handyman.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.form__container h1 {
+margin-right: 23rem;
+  margin-bottom: 1rem;
+}
+
+#form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+
+.signin-form__signin input {
+  border: 1px solid #5e8d83;
+  padding: 12px;
+  margin-bottom: 29px;
+  width: 35rem;
+  border-radius: 1px;
+  
+}
+
+.paragraph-red {
+  margin-left: -25rem;
+}
+
+
+.paragraph-red {
+  color: red;
+}
+
+.image-div {
+  height: fit-content;
+  width: fit-content;
+}
+
+
+#signin-button {
+  background-color: #5e8d83;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+
+  width: 9rem;
+}
+
+.green-colour-disabled-purple {
+  color: #8d855e;
+}
+
+.Signin_labelname{
+margin-left: -30rem;
+margin-bottom: 6px;
+}
+
+

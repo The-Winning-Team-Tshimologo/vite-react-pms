@@ -1,0 +1,49 @@
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: auto; /* Center the form horizontally */
+    
+}
+.application_input_select{
+    border: 1px solid #5e8d83;
+    padding: 12px; 
+}
+
+.split-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.application_input {
+    border: 1px solid #5e8d83;
+    padding: 12px;
+    margin-bottom: 29px;
+    width: 35rem;
+    border-radius: 1px;
+}
+
+
+.submit-button {
+    
+        margin-top: 31px;
+        padding: 9px;
+        background-color: #5E8D83;
+        color: white;
+        cursor: pointer;
+        border: none;
+        width: 5rem;
+        margin-left: 9rem;
+    
+}
+
+.flex-col h1{
+
+    padding: 18px;
+}
+
+/* border: 1px solid #5e8d83;
+padding: 12px;
+margin-bottom: 29px;
+width: 35rem;
+border-radius: 1px; */
