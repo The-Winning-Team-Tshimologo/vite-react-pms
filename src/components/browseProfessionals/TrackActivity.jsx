@@ -59,7 +59,7 @@ const TrackActivity = () => {
   return (
     <div className="TrackActivity">
       {" "}
-      <h2>TrackActivity</h2>
+      <h2 className="px-10">TrackActivity</h2>
       <div className="profile-container">
         {Service.map((Service, index) => (
           <div
