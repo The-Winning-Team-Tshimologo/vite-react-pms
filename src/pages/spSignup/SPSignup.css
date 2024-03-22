@@ -40,14 +40,18 @@
 
 .sp__context_form,
 .sp__context_form form,
-.SignupUploadDocument,
+/* .SignupUploadDocument, */
+.SPSignupUploadDocument__form,
 .SignupUploadDocument form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.SignupUploadDocument{
+  display: flex;
+  flex-direction: row;
+}
 .sp__context_form button,
 .SignupUploadDocument button {
   padding: 10px 45px;
@@ -132,8 +136,16 @@
    
     /* margin-left: 5px; */
 }
+#textIndent{
+  text-indent: 20px;
+}
 
-
+.SPSignupProfile__progress,.SPSignupUploadDocument__progress{
+  width: 40%;
+}
+.pbar{
+  width: 10%;
+}
 @media screen and (max-width: 768px) {
   .sp__context {
     flex-direction: column;
@@ -168,6 +180,7 @@
   .sp__context_side__title {
     opacity: 1;
   }
+ 
 }
 
 @media screen and (max-width: 430px) {
@@ -217,5 +230,26 @@
   }
   .file-upload__icon {
     height: 25px;
+  }
+
+  .SignupUploadDocument{
+    flex-direction: column;
+  }
+
+  .SPSignupUploadDocument__progress{
+    display: flex;
+    margin: auto 100px;
+    /* background-color: red; */
+    width: 500px;
+
+    /* width: ; */
+  }
+  .progress__bar{
+    width: 400px;
+    margin: auto 20px;
+  }
+ 
+  .SPSignupProfile__progress,.SPSignupUploadDocument__progress{
+    width: 300px;
   }
 }

@@ -54,14 +54,6 @@ function App({ children }) {
       element: <SPSignupProfile />,
     },
     {
-      path: "/bookAppointment",
-      element: <BookAppointment />,
-    },
-    {
-      path: "/browseProfessionals",
-      element: <BrowseProfessionals />,
-    },
-    {
       element: (
         <ProtectedRoute>
           <Sidebar />
@@ -127,6 +119,22 @@ function App({ children }) {
               <ProtectedRoute>
                 <Review/>
               </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/bookAppointment",
+          element: (
+            <ProtectedRoute>
+              <BookAppointment />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/BrowseProfessionals",
+          element: (
+            <ProtectedRoute>
+              <BrowseProfessionals />
+            </ProtectedRoute>
           ),
         },
       ],
