@@ -3,7 +3,7 @@ import { DateCalendar } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const Calendar = () => {
+const Calendar = ({getSelectedDate}) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const maxDate = dayjs("2030-12-31");
 
@@ -23,6 +23,7 @@ const Calendar = () => {
           value={selectedDate}
           onChange={(newValue) => {
             setSelectedDate(newValue);
+            getSelectedDate(newValue);
           }}
           views={["year", "month", "day"]}
           showDaysOutsideCurrentMonth

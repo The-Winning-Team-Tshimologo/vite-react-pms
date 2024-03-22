@@ -20,14 +20,13 @@ const Sidebar = () => {
   return (
     <div className={`container ${sidebarCollapsed ? "collapsed" : ""}`}>
       <nav className={`sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
-        <div className="sidebar__logo" onClick={handleSideBarCollapse}>
-          {sidebarCollapsed ? (
-            <GiHamburgerMenu  className="hamburger-icon"/>
-          ) : (
-            <img src="/src/assets/logo.png" alt="logo" /> 
-            // <GiHamburgerMenu  className="hamburger-icon text-3xl cursor-pointer z-50"/>
-          )}
-        </div>
+        {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
+        {sidebarCollapsed && (
+          <div className="sidebar__logo">
+            <GiHamburgerMenu className="hamburger-icon" />
+          </div>
+        )}
+        {/* </div> */}
         <div className="sidebar__links">
           <NavLink to="/">
             <h3>
