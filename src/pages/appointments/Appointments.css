@@ -1,0 +1,15 @@
+.rbc-header {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+  
+  .rbc-btn {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+  
+  /* Continue styling other parts of the calendar as needed */
+
+  .custom-width {
+    width: 80%;
+  }

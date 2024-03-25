@@ -1,0 +1,154 @@
+
+  .BrowseProfessionals h2{
+    margin-left: 50px;
+  }
+   
+    .profile-container {
+      display: grid;
+      grid-template-columns: 30rem 30rem;
+      cursor: pointer;
+  
+    }
+  
+    
+    
+    .profile-card {
+      background: linear-gradient( var(--color-primary), rgba(87, 110, 106, 0.6)); 
+      border-radius: 50px;
+      width: 400px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      height: 130px;
+      transition: transform 0.3s ease;
+    }
+    
+    .profile-card:hover{
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,.5);
+      transform: scale(1.1);
+    }
+  
+    .profile-card .profile-header, .TrackActivity__card .TrackActivity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .profile-card img,.image, .TrackActivity__card img{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+  
+    }
+    
+    .profile-card h2 {
+      font-size: 20px;
+      color: black;
+    }
+    
+    .profile-card p {
+      font-size: 16px;
+      color: black;
+    }
+    
+    .profile-card .profile-rating {
+      display: flex;
+      align-items: center;
+      /* background-color: teal; */
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    
+    .profile-card button {
+      background-color: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      margin-top: 15px;
+      padding: 5px;
+      font-size: 18px;
+    }
+    
+    .profile-card button:hover {
+      opacity: 1;
+    }
+  
+    .profile-rating .rating__icon__container{
+      width: 25px;
+      height:25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      /* border: 1px solid gray; */
+    }
+    .rating__icon__container{
+      background-color: #C4C4C4;
+      margin-left: 10px;
+  
+    }
+    .rating__icon{
+      color: #E5B80B;
+      width: 25px;
+      height:25px;
+    }
+   
+    /* .image{
+    } */
+  .table__Icons__container{
+    color: gray;
+    width: 30px;
+  
+  }
+  
+  .table__Icons{
+  
+    color: gray;
+    width: 30px;
+    height: 20px;
+  
+  }
+  
+  .profile-header table {
+   width: 260px;
+  }
+  
+  .service__status span{
+   padding: 10px 20px;
+   /* height: 20px; */
+   background-color: red;
+   color:white;
+   border-radius: 10px;
+  
+  }
+  .TrackActivity__card{
+    border-radius: 50px;
+      width: 400px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      height: 130px;
+      transition: transform 0.3s ease;
+      background-color: var(--color-secondary);
+      color: white;
+  
+  }
+  /* .profile__AppointmentDate{
+    color: ;
+  } */
+    @media screen and (max-width:770px){
+      /* .profile-container {
+        
+         
+      } */
+    }
+  
+    @media screen and (max-width:430px){
+      .profile-container {
+         grid-template-columns: 1fr ;
+         width: 300px;
+      }
+    }

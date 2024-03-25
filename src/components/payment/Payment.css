@@ -1,0 +1,255 @@
+/* Payment.css */
+
+.payment-container {
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center;
+}
+
+.payment-details {
+    border-radius: 16px;
+    width: 60%;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 10rem;
+}
+
+.payment-details h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+.price-description {
+    display: flex;
+    margin-bottom: 24px;
+    align-items: center;
+    gap: 513px; /* Adjust the gap as needed */
+}
+
+.price-description p {
+    color: #161D23;
+    font-size: 24px;
+
+}
+
+.price-description .price {
+    font-weight: bold;
+    font-size: 62px;
+}
+
+.description .desc-description {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.select-payment {
+    margin-top: 40px; /* Adjust the margin as needed */
+text-align: left;
+    width: 60%; /* Same width as payment-details */
+    padding: 15px; /* Added padding for spacing within select-payment */
+}
+
+.select-payment h2{
+    font-weight: bold;
+    font-size: 32px;
+
+}
+.radio-select-bank label{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.custom-radio {
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.custom-radio label {
+    position: relative;
+    padding-left: 40px;
+    font-size: 16px;
+}
+
+.custom-radio label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border: 1px solid #FBCD02;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.custom-radio input[type="radio"]:checked + label:before {
+    background-color: white;
+    border: 8px solid #FBCD02;
+}
+/* Apply the common styles to select-Bank */
+.select-Bank {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 21px;
+}
+
+/* Apply the common styles to radion-credit */
+.radio-credit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.select-payment-container{
+    padding: 0 30px;
+}
+
+
+.credit-container {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+    margin-top: 20px;
+
+}
+label img{
+    width: 46px;
+    height: 46px;
+}
+
+.credit-payment{
+    margin-top: 40px;
+}
+.credit-payment h3{
+    color: #667483;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+.credit-description h2{
+    font-weight: bold;
+    font-size: 26px;
+}
+.credit-description p{
+    color: #667483;
+    font-size: 12px;
+}
+
+/* Add this to your existing CSS or modify accordingly */
+
+.payment-form {
+    max-width: 700px; /* Adjust the maximum width as needed */
+
+}
+
+.payment-form form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input-with-icon {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-with-icon label {
+    position: absolute;
+    font-size: 28px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.input-with-icon input#cardNumber {
+    width: 700px;
+    height: 64px;
+    border: none;
+    padding: 10px;
+    background-color: #eef2f7;
+    border-radius: 8px;
+
+}
+.input-group .input-with-icon input {
+    width: 340px;
+    height: 64px; /* Same height as the card number input */
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #eef2f7;
+    color: #161D23;
+}
+
+.payment-form{
+    margin-top: 60px;
+}
+
+
+.input-group .input-with-icon label {
+    position: absolute;
+    font-size: 28px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+.input-group{
+    display: flex;
+    gap: 20px;
+}
+
+.img-lock{
+    display: flex;
+    margin-top: 15px;
+}
+.img-lock img{
+    margin-right: 5px;
+    width: 12px;
+    height: 18px;
+
+}
+.payment-form button {
+    background-color: #FFDF54; /* Adjust the color as needed */
+    color: #161D23;
+    padding: 10px;
+    width: 230px;
+    height: 62px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 26px;
+    margin-right: auto; /* Align the button to the right */
+    display: block; /* Ensure it takes the full width */
+    margin-top: 30px;
+}
+
+.payment-form button:hover {
+    background-color: #2980b9; /* Adjust the hover color as needed */
+}
+::placeholder {
+    color: #17212B;
+}
+
+/* Specific styles for the card number input */
+.input-with-icon input#cardNumber::placeholder {
+    color: #17212B;
+}
+
+/* Specific styles for the MM / YY input */
+.input-group .input-with-icon input#expiration::placeholder {
+    color: #17212B;
+}
+
+/* Specific styles for the CVV input */
+.input-group .input-with-icon input#cvv::placeholder {
+    color: #17212B;
+}
