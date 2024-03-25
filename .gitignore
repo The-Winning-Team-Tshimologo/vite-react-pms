@@ -1,42 +1,62 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Dependency directories
+node_modules/
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Production build directory
+dist/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Vite build output
+build/
 
-# IDEs and editors
+# ESLint cache
+.eslintcache
+
+
+# Environment variable files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editors
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+.vscode/
+*.swp
+*.swo
+*~
 
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# System files
+# OS files
 .DS_Store
 Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage directory used by tools like Istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Jekyll metadata file
+.jekyll-metadata
+
+# Next.js specific
+.next/
+out/
+
+# Storybook static build directory
+storybook-static/
+
+# Parcel cache directory
+.cache/
+
+# Misc
+*.log
+*.tmp
+*.tmp.*
+temp/
+tmp/

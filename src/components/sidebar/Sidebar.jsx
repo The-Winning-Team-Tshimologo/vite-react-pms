@@ -23,7 +23,7 @@ const Sidebar = () => {
         {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
         {sidebarCollapsed && (
           <div className="sidebar__logo">
-            <GiHamburgerMenu className="hamburger-icon" />
+            <GiHamburgerMenu className="hamburger-icon" onClick={handleSideBarCollapse}/>
           </div>
         )}
         {/* </div> */}
@@ -37,7 +37,7 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="/activity">
+          <NavLink to="">
             <h3>
               <TfiCommentAlt />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
@@ -46,14 +46,14 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="/about">
+          <NavLink to="">
             <h3>
               <AiOutlineInfoCircle />
               <span className={sidebarCollapsed ? "icon-only" : ""}>ABOUT</span>
             </h3>
           </NavLink>
 
-          <NavLink to="/messages">
+          <NavLink to="">
             <h3>
               <MdOutlineContacts />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
@@ -71,7 +71,7 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="/sp">
+          <NavLink to="">
             <h3>
               <FiUsers />
               <span className={sidebarCollapsed ? "icon-only" : ""}>SP</span>

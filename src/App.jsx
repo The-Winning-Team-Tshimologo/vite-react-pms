@@ -7,12 +7,8 @@ import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
 import AuthProvider from "./security/auth/AuthContext";
-import SignIn from "./pages/signin/SignIn";
+// import SignIn from "./pages/signin/Signin";
 import ProtectedRoute from "./security/ProtectedRoute";
-
-
-
-
 import LandingPage from "./pages/landingPage/LandingPage";
 import LogIssue from "./pages/logIssue/LogIssue";
 import { SPSignup } from "./pages/spSignup/SPSignup";
@@ -25,6 +21,8 @@ import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessi
 import Payment from "./components/payment/Payment";
 import JobRequest from "./components/jobRequest/JobRequest";
 import Review from "./components/review/Review";
+import Signin from "./pages/signin/SignIn";
+
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -34,7 +32,7 @@ function App({ children }) {
     },
     {
       path: "/signin",
-      element: <SignIn />,
+      element: <Signin /> ,
     },
     {
       path: "/signup",
@@ -53,6 +51,14 @@ function App({ children }) {
       path: "/SPSignupProfile",
       element: <SPSignupProfile />,
     },
+    // {
+    //   path: "/bookAppointment",
+    //   element: <BookAppointment />,
+    // },
+    // {
+    //   path: "/browseProfessionals",
+    //   element: <BrowseProfessionals />,
+    // },
     {
       element: (
         <ProtectedRoute>
@@ -79,8 +85,6 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
-      
-     
         {
           path: "/appointments",
           element: (

@@ -1,0 +1,156 @@
+/* .sign__container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    gap: 5rem;
+    margin: 0 auto;
+}
+
+.signin-form {
+    flex: 1;
+    padding: 20px;
+
+
+}
+
+.form-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-flex label {
+    margin-bottom: 8px;
+    width: fit-content;
+}
+
+.form-flex input {
+    border: 1px solid #5E8D83;
+    padding: 5px;
+    margin-bottom: 29px;
+    width: 35rem;
+}
+
+.form-flex button {
+    background-color: #5E8D83;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    margin: o auto;
+    width: 9rem;
+
+}
+
+.form-flex button:hover {
+    background-color: #5E8D83;
+}
+
+.form-flex a {
+    text-decoration: none;
+    color: #5E8D83;
+    margin-left: 16rem;
+
+}
+
+.form-flex a:hover {
+    text-decoration: underline;
+}
+
+.solid-color {
+    flex: 1;
+    background-image: url("../../assets/plumber.jpeg");
+    height: 100%;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .form__container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .signin-form__signin {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem; 
+  
+  }
+  
+  .background-image-right {
+    flex: 1;
+    background-image: url("/src/assets/handyman.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+  
+  .form__container h1 {
+  margin-right: 23rem;
+    margin-bottom: 1rem;
+  }
+  
+  #form2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0 1rem;
+    width: 100%;
+  }
+  
+  
+  .signin-form__signin input {
+    border: 1px solid #5e8d83;
+    padding: 12px;
+    margin-bottom: 29px;
+    width: 35rem;
+    border-radius: 1px;
+    
+  }
+  
+  .paragraph-red {
+    margin-left: -25rem;
+  }
+  
+  
+  .paragraph-red {
+    color: red;
+  }
+  
+  .image-div {
+    height: fit-content;
+    width: fit-content;
+  }
+  
+  
+  #signin-button {
+    background-color: #5e8d83;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  
+    width: 9rem;
+  }
+  
+  .green-colour-disabled-purple {
+    color: #8d855e;
+  }
+  
+  .Signin_labelname{
+  margin-left: -30rem;
+  margin-bottom: 6px;
+  }
+  
+  
