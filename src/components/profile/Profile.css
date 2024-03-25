@@ -1,0 +1,104 @@
+.body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-left: 1300px;
+}
+
+.hero img {
+
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-top: 65px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 65px;
+}
+
+.professional {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+.location {
+  font-size: 14px;
+  color: #000000;
+}
+
+.header {
+  color: #000000;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  
+}
+.section{
+  background-color: #D2E1CC;
+  height: 130vh;
+  width: 65%;
+  margin-left: 380px;
+}
+.hero {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  margin-top: 15px;
+
+}
+
+.profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.menu-dots {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-dot {
+  width: 5px;
+  height: 5px;
+  background-color:black;
+  border-radius: 50%;
+  margin: 3px 0;
+}
+.content{
+  margin-left: 100px;
+}
+.button {
+  text-align: right;
+  margin-top: 40px;
+  margin-right: 20px;
+
+
+
+}
+
+.primary-btn {
+  background-color: #5E8D83;
+  color: #fff;
+  width: 90px;
+  height:38px;
+  font-size:20px;
+}
