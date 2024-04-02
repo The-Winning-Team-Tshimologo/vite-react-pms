@@ -1,6 +1,6 @@
 import React from "react";
 import "./Hero.css";
-import Foto from "../../assets/logo.png";
+import Foto from "../../assets/pms-logo.png";
 import heroImage from "../../assets/cover.jpg";
 
 function Hero() {

@@ -14,14 +14,16 @@ const Header = () => {
 
   return (
     <div className="header__container">
-      {!sidebarCollapsed && <GiHamburgerMenu className="header__hamburger-icon" onClick={handleSideBarCollapse} />}
-      <div></div>
+      {/* {!sidebarCollapsed && <GiHamburgerMenu className="header__hamburger-icon" onClick={handleSideBarCollapse} />} */}
+      <div >
+        <img  className="w-fit h-20" src="/src/assets/pms-logo.png" alt="PMS Logo" onClick={handleSideBarCollapse}/>
+      </div>
       <div className="header__user-details">
         <FaRegEnvelope />
         <p>Sbusiso Mabaso</p>
-        <img
+        <img className="header__cutomer-img"
           src="https://media.istockphoto.com/id/155596999/photo/young-south-african-girl-in-classroom.jpg?s=2048x2048&w=is&k=20&c=UQEeHJug5CdnJK50y61bqSaOG29unDz9hwkdV0U6m88="
-          alt=""
+          alt="Customer Image"
         />
         <HiEllipsisVertical />
       </div>

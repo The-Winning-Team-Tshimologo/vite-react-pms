@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -8,18 +7,22 @@ import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
 import AuthProvider from "./security/auth/AuthContext";
-import SignIn from "./pages/signin/SignIn";
+// import SignIn from "./pages/signin/Signin";
 import ProtectedRoute from "./security/ProtectedRoute";
-import Activity from "./pages/mockPages/Activity";
-import Issus from "./pages/mockPages/Issus";
-import SP from "./pages/mockPages/SP";
-import About from "./pages/mockPages/About";
-import Messages from "./pages/mockPages/Messages";
 import LandingPage from "./pages/landingPage/LandingPage";
-import LogIssue from "./pages/logIssue/LogIssue"import { SPSignup } from "./pages/spSignup/SPSignup";
+import LogIssue from "./pages/logIssue/LogIssue";
+import { SPSignup } from "./pages/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
+import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
+import Appointments from "./pages/appointments/Appointments";
+import SPDashboard from "./pages/adminDashboard/adminDashboard";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
 import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
+import Payment from "./components/payment/Payment";
+import JobRequest from "./components/jobRequest/JobRequest";
+import Review from "./components/review/Review";
+import Signin from "./pages/signin/SignIn";
+
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -29,27 +32,33 @@ function App({ children }) {
     },
     {
       path: "/signin",
-      element: <SignIn />,
+      element: <Signin /> ,
     },
     {
       path: "/signup",
-      element: <SignUp />,
+      element: <SignUp />, 
+      // Eyes
     },
     {
-      path: "/spsignup",
+      path: "/SPSignup",
       element: <SPSignup />,
     },
     {
-      path: "/spsignupUploadDocument",
+      path: "/SPSignupUploadDocuments",
       element: <SPSignupUploadDocument />,
     },
     {
-      path: "/bookAppointment",
-      element: <BookAppointment />,
-    },{
-      path: "/browseProfessionals",
-      element: <BrowseProfessionals />,
+      path: "/SPSignupProfile",
+      element: <SPSignupProfile />,
     },
+    // {
+    //   path: "/bookAppointment",
+    //   element: <BookAppointment />,
+    // },
+    // {
+    //   path: "/browseProfessionals",
+    //   element: <BrowseProfessionals />,
+    // },
     {
       element: (
         <ProtectedRoute>
@@ -66,22 +75,8 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
-        {
-          path: "/activity",
-          element: (
-            <ProtectedRoute>
-              <Activity />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/about",
-          element: (
-            <ProtectedRoute>
-              <About />
-            </ProtectedRoute>
-          ),
-        },
+      
+      
         {
           path: "/issues",
           element: (
@@ -91,18 +86,58 @@ function App({ children }) {
           ),
         },
         {
-          path: "/messages",
+          path: "/appointments",
           element: (
             <ProtectedRoute>
-              <Messages />
+              <Appointments />
             </ProtectedRoute>
           ),
         },
         {
-          path: "/sp",
+          path: "/spDashboard",
           element: (
             <ProtectedRoute>
-              <SP />
+              <SPDashboard />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/payment",
+          element: (
+              <ProtectedRoute>
+                <Payment/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/jobrequest",
+          element: (
+              <ProtectedRoute>
+                <JobRequest/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/review",
+          element: (
+              <ProtectedRoute>
+                <Review/>
+              </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/bookAppointment",
+          element: (
+            <ProtectedRoute>
+              <BookAppointment />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/BrowseProfessionals",
+          element: (
+            <ProtectedRoute>
+              <BrowseProfessionals />
             </ProtectedRoute>
           ),
         },
@@ -120,4 +155,3 @@ function App({ children }) {
 }
 
 export default App;
-
