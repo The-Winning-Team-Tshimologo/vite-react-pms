@@ -22,6 +22,7 @@ import Payment from "./components/payment/Payment";
 import JobRequest from "./components/jobRequest/JobRequest";
 import Review from "./components/review/Review";
 import Signin from "./pages/signin/SignIn";
+import MessagingPage from "./pages/messagingPage/MessagingPage";
 
 
 function App({ children }) {
@@ -138,6 +139,14 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <BrowseProfessionals />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/inbox",
+          element: (
+            <ProtectedRoute>
+              <MessagingPage />
             </ProtectedRoute>
           ),
         },

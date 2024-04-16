@@ -21,11 +21,18 @@ const Sidebar = () => {
     <div className={`container ${sidebarCollapsed ? "collapsed" : ""}`}>
       <nav className={`sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
         {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
-        {sidebarCollapsed && (
+        {/* {sidebarCollapsed && (
           <div className="sidebar__logo">
             <GiHamburgerMenu className="hamburger-icon" onClick={handleSideBarCollapse}/>
           </div>
-        )}
+        )} */}
+        {sidebarCollapsed ? (
+          <div className="sidebar__logo">
+            <GiHamburgerMenu className="hamburger-icon" onClick={handleSideBarCollapse}/>
+          </div>
+        ) : <div className="">
+            <p></p>
+          </div>}
         {/* </div> */}
         <div className="sidebar__links">
           <NavLink to="/">
@@ -53,7 +60,7 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="">
+          <NavLink to="/inbox">
             <h3>
               <MdOutlineContacts />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
