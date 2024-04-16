@@ -16,7 +16,7 @@ const Header = () => {
     <div className="header__container">
       {/* {!sidebarCollapsed && <GiHamburgerMenu className="header__hamburger-icon" onClick={handleSideBarCollapse} />} */}
       <div >
-        <img  className="w-fit h-20" src="/src/assets/pms-logo-removebg-preview.png" alt="PMS Logo" onClick={handleSideBarCollapse}/>
+        <img  className="w-fit h-20" src="/src/assets/pms-logo.png" alt="PMS Logo" onClick={handleSideBarCollapse}/>
       </div>
       <div className="header__user-details">
         <FaRegEnvelope />
