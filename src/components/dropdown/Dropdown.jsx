@@ -21,7 +21,7 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="dropdown">
+    <div className="dropdown__category">
       <div className="dropdown-header" /*onClick={toggleDropdown}*/>
         {selectedOption}
         <div className="flex flex-col">

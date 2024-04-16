@@ -2,16 +2,17 @@
 
 .payment-container {
     display: flex;
-    flex-direction: column; /* Arrange children in a column */
+    flex-direction: column;
+    /* Arrange children in a column */
     align-items: center;
 }
 
 .payment-details {
     border-radius: 16px;
-    width: 60%;
+    width: 90%;
     padding: 0 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    margin-top: 10rem;
+    margin-top: 2.5rem;
 }
 
 .payment-details h1 {
@@ -24,7 +25,10 @@
     display: flex;
     margin-bottom: 24px;
     align-items: center;
-    gap: 513px; /* Adjust the gap as needed */
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap: -10rem; */
+    /* Adjust the gap as needed */
 }
 
 .price-description p {
@@ -44,18 +48,22 @@
 }
 
 .select-payment {
-    margin-top: 40px; /* Adjust the margin as needed */
-text-align: left;
-    width: 60%; /* Same width as payment-details */
-    padding: 15px; /* Added padding for spacing within select-payment */
+    margin-top: 40px;
+    /* Adjust the margin as needed */
+    text-align: left;
+    width: 90%;
+    /* Same width as payment-details */
+    padding: 15px;
+    /* Added padding for spacing within select-payment */
 }
 
-.select-payment h2{
+.select-payment h2 {
     font-weight: bold;
     font-size: 32px;
 
 }
-.radio-select-bank label{
+
+.radio-select-bank label {
     font-weight: bold;
     font-size: 18px;
 }
@@ -66,7 +74,8 @@ text-align: left;
 }
 
 .custom-radio input[type="radio"] {
-    display: none; /* Hide the default radio button */
+    display: none;
+    /* Hide the default radio button */
 }
 
 .custom-radio label {
@@ -83,15 +92,16 @@ text-align: left;
     transform: translateY(-50%);
     width: 28px;
     height: 28px;
-    border: 1px solid #FBCD02;
+    border: 1px solid var(--color-secondary);
     border-radius: 50%;
     background-color: white;
 }
 
-.custom-radio input[type="radio"]:checked + label:before {
+.custom-radio input[type="radio"]:checked+label:before {
     background-color: white;
-    border: 8px solid #FBCD02;
+    border: 8px solid var(--color-secondary);
 }
+
 /* Apply the common styles to select-Bank */
 .select-Bank {
     display: flex;
@@ -108,7 +118,7 @@ text-align: left;
     margin-top: 10px;
 }
 
-.select-payment-container{
+.select-payment-container {
     padding: 0 30px;
 }
 
@@ -120,25 +130,29 @@ text-align: left;
     margin-top: 20px;
 
 }
-label img{
+
+label img {
     width: 46px;
     height: 46px;
 }
 
-.credit-payment{
+.credit-payment {
     margin-top: 40px;
 }
-.credit-payment h3{
+
+.credit-payment h3 {
     color: #667483;
     font-weight: bold;
     font-size: 18px;
 
 }
-.credit-description h2{
+
+.credit-description h2 {
     font-weight: bold;
     font-size: 26px;
 }
-.credit-description p{
+
+.credit-description p {
     color: #667483;
     font-size: 12px;
 }
@@ -146,7 +160,8 @@ label img{
 /* Add this to your existing CSS or modify accordingly */
 
 .payment-form {
-    max-width: 700px; /* Adjust the maximum width as needed */
+    max-width: 700px;
+    /* Adjust the maximum width as needed */
 
 }
 
@@ -179,9 +194,11 @@ label img{
     border-radius: 8px;
 
 }
+
 .input-group .input-with-icon input {
     width: 340px;
-    height: 64px; /* Same height as the card number input */
+    height: 64px;
+    /* Same height as the card number input */
     border: none;
     border-radius: 8px;
     padding: 10px;
@@ -189,7 +206,7 @@ label img{
     color: #161D23;
 }
 
-.payment-form{
+.payment-form {
     margin-top: 60px;
 }
 
@@ -202,24 +219,28 @@ label img{
     transform: translateY(-50%);
 
 }
-.input-group{
+
+.input-group {
     display: flex;
     gap: 20px;
 }
 
-.img-lock{
+.img-lock {
     display: flex;
     margin-top: 15px;
 }
-.img-lock img{
+
+.img-lock img {
     margin-right: 5px;
     width: 12px;
     height: 18px;
 
 }
+
 .payment-form button {
-    background-color: #FFDF54; /* Adjust the color as needed */
-    color: #161D23;
+    background-color:var(--color-secondary);
+    /* Adjust the color as needed */
+    color: var(--color-backdrop);
     padding: 10px;
     width: 230px;
     height: 62px;
@@ -227,29 +248,33 @@ label img{
     border-radius: 8px;
     cursor: pointer;
     font-size: 26px;
-    margin-right: auto; /* Align the button to the right */
-    display: block; /* Ensure it takes the full width */
+    margin-right: auto;
+    /* Align the button to the right */
+    display: block;
+    /* Ensure it takes the full width */
     margin-top: 30px;
 }
 
+/* 
 .payment-form button:hover {
-    background-color: #2980b9; /* Adjust the hover color as needed */
-}
+    background-color: #2980b9;
+} */
+
 ::placeholder {
-    color: #17212B;
+    color: var(--color-secondary);
 }
 
 /* Specific styles for the card number input */
 .input-with-icon input#cardNumber::placeholder {
-    color: #17212B;
+    color: var(--color-secondary);
 }
 
 /* Specific styles for the MM / YY input */
 .input-group .input-with-icon input#expiration::placeholder {
-    color: #17212B;
+    color: var(--color-secondary);
 }
 
 /* Specific styles for the CVV input */
 .input-group .input-with-icon input#cvv::placeholder {
-    color: #17212B;
+    color: var(--color-secondary);
 }

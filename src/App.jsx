@@ -17,12 +17,13 @@ import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
 import Appointments from "./pages/appointments/Appointments";
 import SPDashboard from "./pages/adminDashboard/adminDashboard";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
-import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
-import Payment from "./components/payment/Payment";
+import BrowseProfessionals from "./pages/browseProfessionals/BrowseProfessionals";
+import Payment from "./pages/payment/Payment";
 import JobRequest from "./components/jobRequest/JobRequest";
 import Review from "./components/review/Review";
 import Signin from "./pages/signin/SignIn";
 import MessagingPage from "./pages/messagingPage/MessagingPage";
+import Invoice from "./components/invoice/Invoice";
 
 
 function App({ children }) {
@@ -39,6 +40,7 @@ function App({ children }) {
       path: "/signup",
       element: <SignUp />, 
       // Eyes
+      // Button
     },
     {
       path: "/SPSignup",
@@ -95,7 +97,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/spDashboard",
+          path: "/service-provider-dashboard",
           element: (
             <ProtectedRoute>
               <SPDashboard />
@@ -127,7 +129,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/bookAppointment",
+          path: "/schedule-appointment",
           element: (
             <ProtectedRoute>
               <BookAppointment />
@@ -135,7 +137,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/BrowseProfessionals",
+          path: "/browse-professionals",
           element: (
             <ProtectedRoute>
               <BrowseProfessionals />
@@ -147,6 +149,14 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <MessagingPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/invoice",
+          element: (
+            <ProtectedRoute>
+              <Invoice/>
             </ProtectedRoute>
           ),
         },

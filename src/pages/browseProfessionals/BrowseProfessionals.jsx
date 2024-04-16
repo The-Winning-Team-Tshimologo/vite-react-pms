@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import ProfileCard from "./ProfileCard";
 import { useNavigate } from "react-router";
 import TrackActivity from "./TrackActivity";
+import Header from "../../components/header/Header";
 
 const BrowseProfessionals = () => {
   const navigate = useNavigate();
@@ -71,8 +72,9 @@ const BrowseProfessionals = () => {
   };
   return (
     <>
+    <Header/>
+    {/* Add means of checking whether there are activities to showcase or not */}
     <TrackActivity/>
-    
     <div className="BrowseProfessionals">
       <h2> Browse Professionals</h2>
       <div className="profile-container">
