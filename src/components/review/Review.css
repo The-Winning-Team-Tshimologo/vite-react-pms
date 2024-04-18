@@ -1,0 +1,38 @@
+/* Updated CSS */
+.oval-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; 
+    margin-bottom: 20px; 
+}
+
+.oval-shape {
+    width: 80px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1.5px solid rgb(51, 58, 36); 
+    border-radius: 20px; 
+    text-align: center;
+    line-height: 40px; 
+    margin-right: 10px; 
+    cursor: pointer; 
+}
+
+.oval-shape:hover {
+    background-color: rgb(92, 101, 88); 
+}
+
+/* Specific hover effect for each oval shape */
+
+.oval-work:hover ~ .text-center button {
+    background-color: rgb(76, 92, 76);
+}
+
+.selected {
+    background-color:  rgb(51, 58, 36);
+    color: white;
+}
+
+.text-center button{
+margin-top: -9rem;
+}
