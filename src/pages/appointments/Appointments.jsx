@@ -73,7 +73,7 @@ const myEventsList = [
   ),
 ];
 
-const eventStyleGetter = (event, start, end, isSelected) => {
+export const eventStyleGetter = (event, start, end, isSelected) => {
   const style = {
     backgroundColor: "var(--color-tertiary-opaque)",
     borderRadius: "0px",

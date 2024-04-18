@@ -25,6 +25,8 @@ import Signin from "./pages/signin/SignIn";
 import MessagingPage from "./pages/messagingPage/MessagingPage";
 import Invoice from "./components/invoice/Invoice";
 import Profile from "./pages/profile/Profile";
+import ADDashboard from "./pages/adminDashboard/adminDashboard";
+import Reminders from "./pages/reminders/Reminders";
 
 
 function App({ children }) {
@@ -170,6 +172,22 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <Profile/>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/add-dashboard",
+          element: (
+            <ProtectedRoute>
+              <ADDashboard/>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/reminders",
+          element: (
+            <ProtectedRoute>
+              <Reminders/>
             </ProtectedRoute>
           ),
         },
