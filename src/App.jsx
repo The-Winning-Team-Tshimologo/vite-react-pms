@@ -24,6 +24,7 @@ import Review from "./components/review/Review";
 import Signin from "./pages/signin/SignIn";
 import MessagingPage from "./pages/messagingPage/MessagingPage";
 import Invoice from "./components/invoice/Invoice";
+import Profile from "./pages/profile/Profile";
 
 
 function App({ children }) {
@@ -157,6 +158,14 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <Invoice/>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoute>
+              <Profile/>
             </ProtectedRoute>
           ),
         },

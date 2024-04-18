@@ -22,7 +22,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar__container ${sidebarCollapsed ? "collapsed" : ""}`}
+      className={`content__container ${sidebarCollapsed ? "collapsed" : ""}`}
     >
       <nav className={`sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
         {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
@@ -98,7 +98,7 @@ const Sidebar = () => {
           </NavLink>
         </div>
 
-        <div className="sidebar__links">
+        <div className="bottom-links">
           <NavLink to="/">
             <h3>
               <MdOutlineManageAccounts />

@@ -7,7 +7,6 @@ import invoicemockData from "../mockdata/invoicedata";
 import Header from "../header/Header";
 import getCurrentDateTime from "@/utils/date";
 
-
 const Invoice = () => {
   const {
     profileName,
@@ -19,14 +18,16 @@ const Invoice = () => {
     note,
   } = invoicemockData;
 
-  const now = getCurrentDateTime(); 
+  const now = getCurrentDateTime();
 
   return (
     <>
       <Header />
-      <div>
-        <h1 className="name-holder">Invoice</h1>
-        <div className="date">Date: <p>{now}</p></div>
+      <div className="invoice__container">
+        <h2 className="invoice__heading">Invoice</h2>
+        <div className="date">
+          Date: <p>{now}</p>
+        </div>
 
         <div className="info">
           <div className="address">
@@ -51,8 +52,8 @@ const Invoice = () => {
 
         <table className="invoice-table">
           <thead>
-            <tr className="heading">
-              <th>Item</th>
+            <tr className="heading  ">
+              <th >Item</th>
               <th>Hours</th>
               <th>Price</th>
               <th>Amount</th>
@@ -62,9 +63,9 @@ const Invoice = () => {
             {items.map((item, index) => (
               <tr key={index}>
                 <td>{item.name}</td>
-                <td>{item.hours}</td>
-                <td>{item.price}</td>
-                <td>{item.amount}</td>
+                <td className="">{item.hours}</td>
+                <td className="">{item.price}</td>
+                <td className="">{item.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -75,14 +76,14 @@ const Invoice = () => {
             </tr>
           </tfoot>
         </table>
-      </div>
 
-      <div className="last-part">
-        <div>
-          <strong>Payment method:</strong> {paymentMethod}
-        </div>
-        <div>
-          <strong>Note:</strong> {note}
+        <div className="last-part">
+          <div>
+            <strong>Payment method:</strong> {paymentMethod}
+          </div>
+          <div>
+            <strong>Note:</strong> {note}
+          </div>
         </div>
       </div>
     </>
