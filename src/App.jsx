@@ -184,7 +184,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/reminder",
+          path: "/reminders",
           element: (
             <ProtectedRoute>
               <Reminders/>

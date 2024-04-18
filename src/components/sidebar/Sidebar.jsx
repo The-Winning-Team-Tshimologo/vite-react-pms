@@ -45,7 +45,7 @@ const Sidebar = () => {
         )}
         {/* </div> */}
         <div className="sidebar__links">
-          <NavLink to="/">
+          <NavLink to="/browse-professionals">
             <h3>
               <LuLayoutDashboard />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
@@ -63,7 +63,7 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="">
+          <NavLink to="/reminders">
             <h3>
               <SlCalender />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
@@ -99,7 +99,7 @@ const Sidebar = () => {
         </div>
 
         <div className="bottom-links">
-          <NavLink to="/">
+          <NavLink to="/profile">
             <h3>
               <MdOutlineManageAccounts />
               <span className={sidebarCollapsed ? "icon-only" : ""}>

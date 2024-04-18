@@ -63,10 +63,10 @@ const ReviewCarouselCard = () => {
 
   const [helpful, setHelpful] = useState(false);
 
-  const handleHelpfulClick = () => {
-    // This would typically trigger a backend update to increment the helpful count
-    setHelpful(true);
-  };
+  // const handleHelpfulClick = () => {
+  //   // This would typically trigger a backend update to increment the helpful count
+  //   setHelpful(true);
+  // };
 
   // Helper function to convert rating to stars
   const renderStars = (rating) => {
