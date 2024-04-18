@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 import "./Invoice.css";
-import Sidebar from '../sidebar/Sidebar';
+// import Sidebar from '../sidebar/Sidebar';
 import heroImage from "../../assets/cover.jpg";
-import Logo from "../../assets/logo.png";
-import invoicemockData from '../mockdata/invoicedata';
+// import Logo from "../../assets/logo.png";
+import invoicemockData from "../mockdata/invoicedata";
+import Header from "../header/Header";
+import getCurrentDateTime from "@/utils/date";
+
 
 const Invoice = () => {
   const {
@@ -13,57 +16,49 @@ const Invoice = () => {
     items,
     totalAmount,
     paymentMethod,
-    note
-  } = invoicemockData; 
-  
+    note,
+  } = invoicemockData;
+
+  const now = getCurrentDateTime(); 
+
   return (
     <>
-      <div className='body'>
-        <Sidebar />
-        <div className='logo'>
-          <img src={Logo} alt="" className="round-image" />
-        </div>
-
-        <div className="profile">
-          <img src={heroImage} alt="" className="round-image" />
-          <span>{profileName}</span>
-        </div>
-        <div className="menu-dots">
-          <div className="menu-dot"></div>
-          <div className="menu-dot"></div>
-          <div className="menu-dot"></div>
-        </div>
-      </div>
-
+      <Header />
       <div>
-        <h1 className='name-holder'>Invoice</h1>
-        <div className="date">Date: March 12, 2024</div>
+        <h1 className="name-holder">Invoice</h1>
+        <div className="date">Date: <p>{now}</p></div>
 
         <div className="info">
           <div className="address">
-            <strong>Billed to:</strong><br />
-            {billedToAddress.name}<br />
-            {billedToAddress.street}<br />
+            <strong>Billed to:</strong>
+            <br />
+            {billedToAddress.name}
+            <br />
+            {billedToAddress.street}
+            <br />
             {billedToAddress.email}
           </div>
           <div className="address-2">
-            <strong>From:</strong><br />
-            {fromAddress.name}<br />
-            {fromAddress.street}<br />
+            <strong>From:</strong>
+            <br />
+            {fromAddress.name}
+            <br />
+            {fromAddress.street}
+            <br />
             {fromAddress.email}
           </div>
         </div>
 
         <table className="invoice-table">
           <thead>
-            <tr className='heading'>
+            <tr className="heading">
               <th>Item</th>
               <th>Hours</th>
               <th>Price</th>
               <th>Amount</th>
             </tr>
           </thead>
-          <tbody className='tbody'>
+          <tbody className="tbody">
             {items.map((item, index) => (
               <tr key={index}>
                 <td>{item.name}</td>
@@ -82,14 +77,16 @@ const Invoice = () => {
         </table>
       </div>
 
-      <div className='last-part'>
-        <div><strong>Payment method:</strong> {paymentMethod}</div>
-        <div><strong>Note:</strong> {note}</div>
+      <div className="last-part">
+        <div>
+          <strong>Payment method:</strong> {paymentMethod}
+        </div>
+        <div>
+          <strong>Note:</strong> {note}
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default Invoice;
-
-
