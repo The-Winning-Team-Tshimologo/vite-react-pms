@@ -55,6 +55,10 @@ function App({ children }) {
       path: "/SPSignupProfile",
       element: <SPSignupProfile />,
     },
+    {
+      path: "/review",
+      element: <Review />,
+    },
     // {
     //   path: "/bookAppointment",
     //   element: <BookAppointment />,
