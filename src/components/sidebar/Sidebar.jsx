@@ -112,7 +112,7 @@ const Sidebar = () => {
             <h3>
               <IoIosLogOut />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                ACCOUNT
+                LOGOUT
               </span>
             </h3>
           </NavLink>

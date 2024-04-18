@@ -26,7 +26,10 @@ import MessagingPage from "./pages/messagingPage/MessagingPage";
 import Invoice from "./components/invoice/Invoice";
 import Profile from "./pages/profile/Profile";
 import ADDashboard from "./pages/adminDashboard/adminDashboard";
+<<<<<<< HEAD
 import Reminders from "./pages/reminders/Reminders";
+=======
+>>>>>>> 474e7d9603f43932b9b785597fffbc2d3506c0b6
 
 
 function App({ children }) {
@@ -183,6 +186,7 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
+<<<<<<< HEAD
         {
           path: "/reminders",
           element: (
@@ -191,6 +195,8 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
+=======
+>>>>>>> 474e7d9603f43932b9b785597fffbc2d3506c0b6
       ],
     },
   ]);
