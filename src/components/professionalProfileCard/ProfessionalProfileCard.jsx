@@ -1,5 +1,7 @@
 import React from "react";
 import "./ProfessionalProfileCard.css";
+import { NavLink } from "react-router-dom";
+import { Button } from "../ui/button";
 
 // Mock data for professional's profile (this would typically be fetched from an API)
 const professionalProfile = {
@@ -50,12 +52,12 @@ const professionalProfile = {
   },
 };
 
-const ProfessionalProfileCard = () => {
+const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
   return (
     <div className="professional-profile__card">
       <div className="professional-profile__header">
         <img
-          src="/src/assets/oliviaAvatar.png" // Replace with path to professional's image
+          src="/src/assets/sbusisoAvatar.png"
           alt={professionalProfile.name}
           className="professional-profile__image"
         />
@@ -133,10 +135,34 @@ const ProfessionalProfileCard = () => {
           <p>{professionalProfile.skills.softSkills}</p>
         </div>
       </div>
-      <div className="professional-profile__actions">
-        <button className="professional-profile__message-btn">Message</button>
-        <button className="professional-profile__issue-btn">Log Issue</button>
-      </div>
+      {useButtons && (
+        <div className="professional-profile__actions">
+          <NavLink className="professional-profile__message-btn" to="/inbox">
+            Message
+          </NavLink>
+          <NavLink className="professional-profile__issue-btn" to="/issues">
+            Log Issue
+          </NavLink>
+          {/* <button className="professional-profile__message-btn">Message</button>
+        <button className="professional-profile__issue-btn">Log Issue</button> */}
+        </div>
+      )}
+      {useDocs && (
+        <>
+          <div className="application-documents__container">
+            <div>Document 1</div>
+            <div>Document 2</div>
+            <div>Document 3</div>
+          </div>
+          <div className="application-documents-action__btns">
+            <Button className="application-document__download-btn">
+              Download
+            </Button>
+            <Button className="application-document__accept-btn">Accept</Button>
+            <Button className="application-document__reject-btn">Reject</Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

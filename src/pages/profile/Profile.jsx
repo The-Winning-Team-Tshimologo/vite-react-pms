@@ -11,7 +11,7 @@ const Profile = () => {
     <div className="profile__container">
       <Header />
       <div className="review-carousel__container">
-        <ProfessionalProfileCard/>
+        <ProfessionalProfileCard useButtons={true}/>
         <ReviewSummary/>
         <ReviewCarouselCard />
       </div>
