@@ -1,27 +1,42 @@
-/* Add these styles to your CSS file */
-:root {
-    --icon-margin: 188px; /* Adjust the margin based on the font size of the icons */
-}
 .services-container {
     display: flex;
-
+    padding: 2rem;
     background-color: #D9D9D9;
-
+    flex-direction: row;
+    justify-content: center;
 }
-/* Add these styles to your CSS file */
 
-.services-container .top-icons{
+.service-svg {
+    position: absolute;
+    height: 100vh;
+    width: 80vh;
+}
+
+.graphic-grid {
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    top: -15rem;
+    left: -50rem;
+}
+
+.services-container .top-icons {
     margin-left: var(--icon-margin);
 }
 
+.service-description {
 
+   position: relative;
+   right: -5rem;
+
+}
 
 .icons-container {
     display: flex;
     flex-direction: column;
-    padding: 0 250px;
+    position: relative;
+    right: -5rem;
 }
-
 
 .top-icons,
 .bottom-icons {
@@ -39,44 +54,27 @@
 .top-icons .service-item:first-child .icon-container,
 .bottom-icons .service-item:first-child .icon-container,
 .bottom-icons .service-item:nth-child(3) .icon-container {
-    background-color: #8B8B8B; /* Your desired background color for the first icon */
-
-    padding: calc((182px - 74px) / 2) calc((var(--icon-margin) - 74px) / 2); /* Adjust padding */
+    background-color: #8B8B8B;
+    padding: calc((182px - 74px) / 2) calc((var(--icon-margin) - 74px) / 2);
 }
 
 /* Background color and size for the second icon in both top-icons and bottom-icons */
 .top-icons .service-item:nth-child(2) .icon-container,
 .bottom-icons .service-item:nth-child(2) .icon-container {
-    background-color: #C4C4C4; /* Your desired background color for the second icon */
-
-    padding: calc((182px - 74px) / 2) calc((var(--icon-margin) - 74px) / 2); /* Adjust padding */
+    background-color: #C4C4C4;
+    padding: calc((182px - 74px) / 2) calc((var(--icon-margin) - 74px) / 2);
 }
 
-
-.svg-container img {
-    width: 200px; /* Make the SVG fill its container */
-    height: auto; /* Maintain the aspect ratio */
-
-}
-
-.service-svg {
-    flex: 2; /* Adjust the flex value as needed */
-}
-
-.service-description {
-
-    justify-content: center;
-    padding-left: 100px;
-
-}
-.service-description .second-header{
+.service-description .second-header {
     font-size: 28px;
 }
-.service-description p{
+
+.service-description p {
     font-size: 20px;
     margin-bottom: 25px;
 }
-.service-description h1{
+
+.service-description h1 {
 
     font-size: 48px;
 }
@@ -85,10 +83,4 @@
 .service-item {
     display: flex;
     align-items: center;
-}
-
-
-.svg-container svg {
-    width: 100%; /* Make the SVG fill its container */
-    height: auto; /* Maintain the aspect ratio */
 }

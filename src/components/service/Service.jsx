@@ -9,7 +9,7 @@ function Service() {
       <div className="service-content"></div>
       <div className="service-svg" style={{ marginTop: "99px" }}>
         {svg.map((item, index) => (
-          <div key={index} className="svg-container">
+          <div key={index}>
             {item.svg}
           </div>
         ))}

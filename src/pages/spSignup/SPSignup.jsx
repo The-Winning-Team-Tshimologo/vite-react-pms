@@ -13,6 +13,7 @@ import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
+import { NavLink } from "react-router-dom";
 
 export const SPSignup = () => {
   const [formData, setFormData] = useState({
@@ -150,11 +151,9 @@ export const SPSignup = () => {
               />
               <span onClick={toggleInputType1} className="icon-button">
                 {inputType1 === "password" ? (
-                 
                   <FaEye className="icon-button__icon" />
                 ) : (
-                 
-                  <FaEyeSlash className="icon-button__icon"/>
+                  <FaEyeSlash className="icon-button__icon" />
                 )}
               </span>{" "}
               {/* {errors.password && (
@@ -182,8 +181,7 @@ export const SPSignup = () => {
                 {inputType2 === "password" ? (
                   <FaEye className="icon-button__icon" />
                 ) : (
-                  <FaEyeSlash className="icon-button__icon"
-                  />
+                  <FaEyeSlash className="icon-button__icon" />
                 )}
               </span>{" "}
               {/* {errors.confirmPassword && (
@@ -271,6 +269,11 @@ export const SPSignup = () => {
               )}
             </div>
 
+            <NavLink></NavLink>
+            <p>
+              Already have an account? <NavLink to={"/"}>Signin</NavLink>
+            </p>
+
             <button type="submit">Next</button>
             <br />
           </form>
@@ -300,7 +303,6 @@ export const SPSignup = () => {
         <br />
         <p>
           <strong>
-            {" "}
             We (Property Maintenance System) are not an employer, simply connect
             independent service providers with customers
           </strong>

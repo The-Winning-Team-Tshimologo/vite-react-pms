@@ -20,9 +20,10 @@
 
 .frame-parent {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    /* Adjust as needed */
+    position: relative;
+    top: 25%;
 }
 
 .frame-group {
@@ -60,12 +61,10 @@
 }
 
 .super-cool-app-description {
-    font-size: 24px;
- /* Adjust as needed */
+    width: 20rem;
+    font-size: 18px;
 }
-/* Testimonial.css */
 
-/* ... existing styles ... */
 
 .circle-image-container {
     position: absolute;

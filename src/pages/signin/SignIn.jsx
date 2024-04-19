@@ -139,7 +139,7 @@ function Signin() {
         <div className="background-image-right"></div>
       </div>
 
-      <Application />
+      {/* <Application /> */}
     </>
 
     // <div class="split-screen">

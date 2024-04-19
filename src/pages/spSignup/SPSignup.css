@@ -56,7 +56,7 @@
 .SignupUploadDocument button {
   padding: 10px 45px;
   background-color: var(--color-primary);
-  color: black;
+  color: white;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -76,10 +76,12 @@
   border: 1px solid gray;
   width: 100%;
 }
+
 .sp__requirements {
   flex-direction: column;
-  /* margin-top: 10px; */
   background-color: whitesmoke;
+  padding-bottom: 5rem;
+  padding-top: 2rem;
 }
 
 .sp__requirements p {
