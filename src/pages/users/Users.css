@@ -1,0 +1,30 @@
+.users-heading {
+    margin-inline-start: 2.5rem;
+    padding: 1rem;
+    padding-top: 2rem ;
+}
+
+.users-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-backdrop);
+    /* margin-top: 1rem; */
+    margin: 1rem auto;
+    padding: 2rem;
+    width: 85%;
+}
+
+.users-card__img{
+    border-radius: 50%;
+}
+
+.users-card-names {
+    width: 10rem;
+}
+
+.users-card__btn {
+    background-color: var(--color-secondary) ;
+    color: var(--color-backdrop); 
+}

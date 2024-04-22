@@ -1,0 +1,169 @@
+.professional-profile__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--color-backdrop);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 70%;
+    margin: auto;
+
+}
+
+.professional-profile__header {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-backdrop);
+    padding: 1rem 0;
+
+}
+
+.professional-profile__header-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.professional-profile__image {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.professional-profile__profession-info {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.professional-profile__name {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: var(--fw-semi-bold);
+    margin: 0;
+    width: 30rem;
+}
+
+.professional-profile__profession {
+    font-weight: var(--fw-semi-bold);
+    font-size: 18px;
+}
+
+
+.professional-profile__details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: .5rem;
+    gap: 1rem;
+}
+
+.professional-profile-horizontal-divider {
+    border: 1px solid var(--color-backdrop);
+    height: 2.5rem;
+}
+
+.professional-profile__ratings,
+.professional-profile__rate-availability {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.professional-profile__rating {
+    color: var(--color-tertiary);
+    /* Gold color for the stars */
+    margin-right: 10px;
+}
+
+.professional-profile__reviews,
+.professional-profile__rate,
+.professional-profile__availability {
+    font-size: 14px;
+    color: #514e4e71;
+}
+
+.professional-profile__body-details {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.professional-profile__text-bold {
+    font-weight: var(--fw-semi-bold);
+}
+
+.professional-profile__message-btn,
+.professional-profile__issue-btn {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: var(--color-tertiary);
+    /* for Message button */
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.professional-profile__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: .5rem;
+}
+
+.professional-profile__issue-btn  {
+    border: 1px solid var(--color-tertiary);
+    color: var(--color-primary);
+    background-color: #fff;
+
+}
+
+.application-documents__container {
+    background-color: var(--color-secondary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    color: var(--color-backdrop);
+}
+
+.application-documents-action__btns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.application-document__download-btn {
+    border: 1px solid var(--color-tertiary);
+    color: var(--color-tertiary) !important;
+    background-color: #fff !important;
+    transition: .3s ease-in-out;
+}
+
+.application-document__download-btn:hover {
+    background-color: var(--color-tertiary) !important;
+    color: white !important;
+}
+
+.application-document__accept-btn {
+    background-color: var(--color-tertiary) !important;
+    color: white !important;
+}
+
+.application-document__reject-btn {
+    background-color: var(--color-accent) !important;
+    color: white !important;
+}

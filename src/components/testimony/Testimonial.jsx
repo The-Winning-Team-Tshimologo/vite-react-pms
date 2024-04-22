@@ -7,14 +7,13 @@ const Testimonial = () => {
     return (
         <div className="landing-page-inner">
             <div className="testimonials-wrapper">
-                <h1 className="testimonials">Testimonials</h1>
+                {/* <h1 className="testimonials">Testimonials</h1> */}
             </div>
             <div className="frame-parent">
                 <div className="frame-group">
                     <TestimonialCard />
                     <TestimonialCard />
                     <TestimonialCard />
-
                 </div>
             </div>
         </div>

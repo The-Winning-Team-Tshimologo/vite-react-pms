@@ -17,13 +17,20 @@ import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
 import Appointments from "./pages/appointments/Appointments";
 import SPDashboard from "./pages/adminDashboard/adminDashboard";
 import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
-import BrowseProfessionals from "./components/browseProfessionals/BrowseProfessionals";
-import Payment from "./components/payment/Payment";
+import BrowseProfessionals from "./pages/browseProfessionals/BrowseProfessionals";
+import Payment from "./pages/payment/Payment";
 import JobRequest from "./components/jobRequest/JobRequest";
-import Review from "./components/review/Review";
+// import Review from "./components/review/Review";
 import Signin from "./pages/signin/SignIn";
 import MessagingPage from "./pages/messagingPage/MessagingPage";
-
+import Invoice from "./components/invoice/Invoice";
+import Profile from "./pages/profile/Profile";
+import ADDashboard from "./pages/adminDashboard/adminDashboard";
+import Reminders from "./pages/reminders/Reminders";
+import ReviewPage from "./pages/reviewPage/ReviewPage";
+import Applications from "./pages/applications/Applications";
+import Users from "./pages/users/Users";
+import ApplicantPage from "./pages/applicantPage/ApplicantPage";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -33,12 +40,13 @@ function App({ children }) {
     },
     {
       path: "/signin",
-      element: <Signin /> ,
+      element: <Signin />,
     },
     {
       path: "/signup",
-      element: <SignUp />, 
+      element: <SignUp />,
       // Eyes
+      // Button
     },
     {
       path: "/SPSignup",
@@ -76,8 +84,7 @@ function App({ children }) {
             </ProtectedRoute>
           ),
         },
-      
-      
+
         {
           path: "/issues",
           element: (
@@ -95,7 +102,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/spDashboard",
+          path: "/service-provider-dashboard",
           element: (
             <ProtectedRoute>
               <SPDashboard />
@@ -105,29 +112,22 @@ function App({ children }) {
         {
           path: "/payment",
           element: (
-              <ProtectedRoute>
-                <Payment/>
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
           ),
         },
         {
           path: "/jobrequest",
           element: (
-              <ProtectedRoute>
-                <JobRequest/>
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <JobRequest />
+            </ProtectedRoute>
           ),
         },
+
         {
-          path: "/review",
-          element: (
-              <ProtectedRoute>
-                <Review/>
-              </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/bookAppointment",
+          path: "/schedule-appointment",
           element: (
             <ProtectedRoute>
               <BookAppointment />
@@ -135,7 +135,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/BrowseProfessionals",
+          path: "/browse-professionals",
           element: (
             <ProtectedRoute>
               <BrowseProfessionals />
@@ -147,6 +147,70 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <MessagingPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/invoice",
+          element: (
+            <ProtectedRoute>
+              <Invoice />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/add-dashboard",
+          element: (
+            <ProtectedRoute>
+              <ADDashboard />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/reminders",
+          element: (
+            <ProtectedRoute>
+              <Reminders />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/review",
+          element: (
+            <ProtectedRoute>
+              <ReviewPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/applications",
+          element: (
+            <ProtectedRoute>
+              <Applications />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/system-users",
+          element: (
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/applicant",
+          element: (
+            <ProtectedRoute>
+              <ApplicantPage />
             </ProtectedRoute>
           ),
         },

@@ -4,9 +4,12 @@ import { Outlet, NavLink } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { SlCalender } from "react-icons/sl";
 import { MdOutlineContacts } from "react-icons/md";
 import { SlPicture } from "react-icons/sl";
 import { FiUsers } from "react-icons/fi";
+import { MdOutlineManageAccounts } from "react-icons/md";
+import { IoIosLogOut } from "react-icons/io";
 import { useAuth } from "../../security/auth/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -18,7 +21,9 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`container ${sidebarCollapsed ? "collapsed" : ""}`}>
+    <div
+      className={`content__container ${sidebarCollapsed ? "collapsed" : ""}`}
+    >
       <nav className={`sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
         {/* <div className="sidebar__logo" onClick={handleSideBarCollapse}> */}
         {/* {sidebarCollapsed && (
@@ -28,14 +33,19 @@ const Sidebar = () => {
         )} */}
         {sidebarCollapsed ? (
           <div className="sidebar__logo">
-            <GiHamburgerMenu className="hamburger-icon" onClick={handleSideBarCollapse}/>
+            <GiHamburgerMenu
+              className="hamburger-icon"
+              onClick={handleSideBarCollapse}
+            />
           </div>
-        ) : <div className="">
+        ) : (
+          <div className="">
             <p></p>
-          </div>}
+          </div>
+        )}
         {/* </div> */}
         <div className="sidebar__links">
-          <NavLink to="/">
+          <NavLink to="/browse-professionals">
             <h3>
               <LuLayoutDashboard />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
@@ -44,19 +54,21 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="">
+          <NavLink to="/issues">
             <h3>
               <TfiCommentAlt />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                ACTIVITY
+                LOG ISSUES
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="">
+          <NavLink to="/reminders">
             <h3>
-              <AiOutlineInfoCircle />
-              <span className={sidebarCollapsed ? "icon-only" : ""}>ABOUT</span>
+              <SlCalender />
+              <span className={sidebarCollapsed ? "icon-only" : ""}>
+                REMINDERS
+              </span>
             </h3>
           </NavLink>
 
@@ -69,11 +81,11 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="/issues">
+          <NavLink to="/completed-jobs">
             <h3>
               <SlPicture />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                LOG ISSUE
+                COMPLETED JOBS
               </span>
             </h3>
           </NavLink>
@@ -82,6 +94,26 @@ const Sidebar = () => {
             <h3>
               <FiUsers />
               <span className={sidebarCollapsed ? "icon-only" : ""}>SP</span>
+            </h3>
+          </NavLink>
+        </div>
+
+        <div className="bottom-links">
+          <NavLink to="/profile">
+            <h3>
+              <MdOutlineManageAccounts />
+              <span className={sidebarCollapsed ? "icon-only" : ""}>
+                ACCOUNT
+              </span>
+            </h3>
+          </NavLink>
+
+          <NavLink to="/">
+            <h3>
+              <IoIosLogOut />
+              <span className={sidebarCollapsed ? "icon-only" : ""}>
+                LOGOUT
+              </span>
             </h3>
           </NavLink>
         </div>

@@ -1,0 +1,115 @@
+.review-summary__container {
+  /* background-color: #f7f7f7; */
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 5rem;
+  margin-bottom: 20px;
+  width: fit-content;
+  margin: 0 auto;
+  gap: .5rem;
+
+}
+
+.review-summary__rating__container {
+  display: flex;
+  justify-content: row;
+  width: fit-content;
+  gap: 2rem;
+}
+
+.review-summary-horizontal-line {
+  height: 8rem;
+  /* color: var(--color-backdrop); */
+  border: 1px solid var(--color-backdrop);
+  margin: auto 0;
+}
+
+.review-summary__title {
+  font-weight: var(--fw-semi-bold);
+  width: fit-content;
+}
+
+.review-summary__container p {
+  width: fit-content;
+}
+
+.review-summary__rating-overall {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.review-summary__rating-value {
+  font-weight: bold;
+  font-size: var(--fs-paragraph);
+  margin-right: 10px;
+  color: var(--color-tertiary);
+}
+
+.review-summary__rating-stars {
+  margin-right: 10px;
+  font-size: 3rem;
+  color: var(--color-tertiary);
+}
+
+.review-summary__total-reviews {
+  color: #666;
+}
+
+.review-summary__distribution-row {
+  display: flex;
+  align-items: center;
+  width: 15rem;
+  margin-bottom: 5px;
+}
+
+.review-summary__rating {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.review-summary__bar-container {
+  background-color: #ddd;
+  flex-grow: 1;
+  border-radius: 4px;
+}
+
+.review-summary__bar {
+  height: 10px;
+  background-color: var(--color-tertiary);
+  border-radius: 4px;
+}
+
+.review-summary__mentions {
+  padding-top: 10px;
+  width: fit-content;
+}
+
+.review-summary__mention {
+  background-color: #fff;
+  padding: 3px 8px;
+  margin-right: 5px;
+  border-radius: 14px;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 5px;
+
+}
+
+/* const grade = (AverageRating) => {
+    if (AverageRating <= 1) {
+      setStars("★☆☆☆☆");
+      setRating("Poor");
+    } else if ((AverageRating = 2)) {
+      setStars("★★☆☆☆");
+      setRating("Okay");
+    } else if ((AverageRating = 3)) {
+      setStars("★★★☆☆");
+      setRating("Average");
+    } else if (AverageRating >= 4) {
+      setStars("★★★★★");
+      setRating("Great");
+    }
+  }; */

@@ -1,0 +1,9 @@
+
+/* .profile__container {
+    width: fit-content;
+} */
+
+.review-carousel__container {
+    width: 90%;
+    margin: 0 auto;
+}
