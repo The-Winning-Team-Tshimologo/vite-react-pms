@@ -15,9 +15,13 @@
 
 
 .button {
-    display: flex; 
-    justify-content: flex-end; 
+    /* display: flex;  */
+    /* justify-content: flex-end;  */
     margin-top: 10px; 
+    color: white;
+    margin-left: 720px;
+   
+   
 }
 .myTextarea{
  
@@ -28,8 +32,9 @@
         border: 1px solid #ccc; 
         border-radius: 5px; 
         resize: vertical; 
-      
-      
-      
 }
 
+.summary__container {
+    width: 50rem;
+    margin: 0 auto;
+}

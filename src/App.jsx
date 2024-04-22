@@ -31,7 +31,12 @@ import ReviewPage from "./pages/reviewPage/ReviewPage";
 import Applications from "./pages/applications/Applications";
 import Users from "./pages/users/Users";
 import ApplicantPage from "./pages/applicantPage/ApplicantPage";
+<<<<<<< HEAD
 import Update from "./components/updateProfile/Update";
+=======
+import Update from "./pages/updateProfile/Update";
+
+>>>>>>> 4e3f94e6b5eccdd47597e5099ab289046f1b0cb8
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -216,10 +221,17 @@ function App({ children }) {
           ),
         },
         {
+<<<<<<< HEAD
           path: "/profile/:id",
           element: (
             <ProtectedRoute>
             <Update/>
+=======
+          path: "/update",
+          element: (
+            <ProtectedRoute>
+              <Update/>
+>>>>>>> 4e3f94e6b5eccdd47597e5099ab289046f1b0cb8
             </ProtectedRoute>
           ),
         },
