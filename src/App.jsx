@@ -31,6 +31,8 @@ import ReviewPage from "./pages/reviewPage/ReviewPage";
 import Applications from "./pages/applications/Applications";
 import Users from "./pages/users/Users";
 import ApplicantPage from "./pages/applicantPage/ApplicantPage";
+import Update from "./pages/updateProfile/Update";
+
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -211,6 +213,14 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <ApplicantPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/update",
+          element: (
+            <ProtectedRoute>
+              <Update/>
             </ProtectedRoute>
           ),
         },
