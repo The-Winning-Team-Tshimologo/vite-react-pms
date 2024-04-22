@@ -14,10 +14,14 @@ import { useAuth } from "../../security/auth/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Sidebar = () => {
-  const { sidebarCollapsed, setSidebarCollapsed } = useAuth();
+  const { sidebarCollapsed, setSidebarCollapsed, logout } = useAuth();
 
   const handleSideBarCollapse = () => {
     setSidebarCollapsed(!sidebarCollapsed);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -108,14 +112,14 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <NavLink to="/">
+          <div onClick={handleLogout}>
             <h3>
               <IoIosLogOut />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
                 LOGOUT
               </span>
             </h3>
-          </NavLink>
+          </div>
         </div>
       </nav>
       <div className="content">

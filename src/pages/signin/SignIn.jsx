@@ -71,60 +71,80 @@
 
 // export default SignIn;
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Signin.css";
-import Application from "@/components/signin/application/Application";
+import { useNavigate } from "react-router";
+import { useAuth } from "@/security/auth/AuthContext";
 
 function Signin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Assuming your login function expects an object with email and password
+    const response = await auth.login({ email, password });
+
+    if (response) {
+      // Redirect to the dashboard or another route as needed
+      navigate("/");
+    } else {
+      // Show an error message or indicate login failed
+      alert("Login failed");
+    }
+  };
+
+  const handleSignup = () => {
+    navigate("/register");
+  };
   const {
     register,
-    handleSubmit,
     formState: { errors, isSubmitting },
     reset,
   } = useForm();
-
-  const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    reset();
-  };
 
   return (
     <>
       <div className="form__container">
         <div className="signin-form__signin">
-          <form onSubmit={handleSubmit(onSubmit)} id="form2">
-            <h1>Sign in</h1>
+          <form onSubmit={handleSubmit} id="form2">
+            <h2>Sign in</h2>
             <label className="Signin_labelname">Email</label>
+            {errors.email && (
+              <p className="paragraph-red">{errors.email.message}</p>
+            )}
             <input
               {...register("email", {
                 required: "Email is required",
               })}
               type="email"
               placeholder="Enter Email"
-              className="px-4 py-2 rounded"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              // className="px-4 py-2 rounded"
             />
-            {errors.email && (
-              <p className="paragraph-red">{errors.email.message}</p>
-            )}
 
             <label className="Signin_labelname">Password</label>
+            {errors.password && (
+              <p className="paragraph-red">{errors.password.message}</p>
+            )}
             <input
               {...register("password", {
                 required: "Password is required",
                 minLength: {
-                  value: 10,
+                  value: 5,
                   message: "Password must contain at least 10 characters",
                 },
               })}
               type="password"
-              placeholder="Enter Password"
-              className="px-4 py-2 rounded"
+              className="input"
+              placeholder="Enter your Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.password && (
-              <p className="paragraph-red">{errors.password.message}</p>
-            )}
 
             <button
               id="signin-button"
@@ -138,17 +158,7 @@ function Signin() {
         </div>
         <div className="background-image-right"></div>
       </div>
-
-      {/* <Application /> */}
     </>
-
-    // <div class="split-screen">
-    //   {/* <!-- Left content --> */}
-    //   <div class="split-screen__half">...</div>
-
-    //   {/* <!-- Right content --> */}
-    //   <div class="split-screen__half">...</div>
-    // </div>
   );
 }
 

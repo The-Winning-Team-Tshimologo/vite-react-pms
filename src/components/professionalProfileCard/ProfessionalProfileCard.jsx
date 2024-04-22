@@ -8,7 +8,7 @@ const professionalProfile = {
   name: "Sibusiso Mabaso",
   profession: "Plumber",
   location: "Johannesburg, Gauteng",
-  reviewsCount: 126,
+  reviewsCount: 10,
   projectsCompleted: 10,
   hourlyRate: 300,
   availability: ["Mon", "Tue", "Wed"],

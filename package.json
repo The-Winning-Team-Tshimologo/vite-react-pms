@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch db.json --port 5000"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -23,6 +24,7 @@
     "date-fns": "^3.3.1",
     "dayjs": "^1.11.10",
     "embla-carousel-react": "^8.0.2",
+    "json-server": "^1.0.0-alpha.23",
     "lucide-react": "^0.343.0",
     "react": "^18.2.0",
     "react-big-calendar": "^1.11.1",
