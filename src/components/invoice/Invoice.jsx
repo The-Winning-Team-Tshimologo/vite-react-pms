@@ -2,7 +2,7 @@ import React from 'react';
 import "./Invoice.css";
 import Sidebar from '../sidebar/Sidebar';
 import heroImage from "../../assets/cover.jpg";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/pms-logo.png.";
 import invoicemockData from '../mockdata/invoicedata';
 
 const Invoice = () => {
