@@ -2,6 +2,7 @@ import React from "react";
 import "./ProfessionalProfileCard.css";
 import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
+// import { useAuth } from "@/security/auth/AuthContext";
 
 // Mock data for professional's profile (this would typically be fetched from an API)
 const professionalProfile = {
@@ -53,6 +54,7 @@ const professionalProfile = {
 };
 
 const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
+
   return (
     <div className="professional-profile__card">
       <div className="professional-profile__header">

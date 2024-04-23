@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router";
 
 export const AuthContext = createContext();
@@ -7,79 +6,54 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [isAuthenticated, setAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
+   // Initialize state from local storage to maintain state after refresh
+   const [isAuthenticated, setAuthenticated] = useState(() => {
+    return JSON.parse(localStorage.getItem("isAuthenticated")) || false;
+  });
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  });
+  const [error, setError] = useState(null);
 
-  const fetchUserByEmail = async (email) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/users?email=${encodeURIComponent(email)}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const users = await response.json();
+  // const navigate = Navigate(); 
 
-     
+  useEffect(() => {
+    // Store user and authentication status in local storage
+    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+    localStorage.setItem("user", JSON.stringify(user));
 
-
-
-      if (users) {
-        console.log("User found:", users);
-        return user;
-      } else {
-        console.log("No user found with the email:", email);
-        return null;
-      }
-    } catch (error) {
-      console.error("Failed to fetch user:", error);
-      return null;
+    if (user) {
+      console.log("User found:", user);
+      // <Navigate to={"/"} />;
     }
-  };
+  }, [user, isAuthenticated]);
 
   const login = async ({ email, password }) => {
     try {
       const response = await fetch(
-        "http://localhost:5000/users?email=" + encodeURIComponent(email)
+        `http://localhost:5000/users?email=${encodeURIComponent(email)}`
       );
-      const users = await response.json();
-      console.log("All users: ", users )
-      const foundUser = users.find(
+      const foundUser = await response.json();
+
+      const verifiedUser = foundUser.find(
         (u) => u.email === email && u.password === password
       );
-      if (foundUser) {
-        setUser(foundUser);
+
+      if (verifiedUser) {
+        setUser(verifiedUser);
         setAuthenticated(true);
-        console.log("User found:", user);
-        // navigate("/");
-        // <Navigate to={"/"} />;
         return true;
       } else {
+        setError("User not verified.");
         setAuthenticated(false);
         setUser(null);
-        // throw new Error(`HTTP error! status: ${response.status}`);
         return false;
       }
     } catch (error) {
+      setError(`Login failed: ${error}`);
       console.error("Login failed:", error);
       return false;
     }
-    // fetchUserByEmail(email).then((user) => {
-    //   if (user) {
-    //     // User with email exists
-    //     setUser(foundUser);
-    //     setAuthenticated(true);
-    //     // navigate("/");
-    //     <Navigate to={"/"} />;
-    //     return true;
-    //   } else {
-    //     // User with email does not exist
-    //     setAuthenticated(false);
-    //     setUser(null);
-    //     return false;
-    //   }
-    // });
   };
 
   const register = async ({ username, email, password }) => {
@@ -96,24 +70,25 @@ export const AuthProvider = ({ children }) => {
         const newUser = await response.json();
         setUser(newUser);
         setAuthenticated(true);
-        <Navigate to={"/"} />;
-        return true;
       } else {
+        setError("Registration failed.");
         return false;
       }
     } catch (error) {
       console.error("Registration failed:", error);
+      setError(`Registration failed: ${error}`);
       return false;
     }
   };
 
   const logout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
     setUser(null);
     setAuthenticated(false);
     <Navigate to={"/signin"} />;
   };
 
-  // Remember to add user and logout to the value
   const value = {
     sidebarCollapsed,
     setSidebarCollapsed,
@@ -122,6 +97,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    error,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

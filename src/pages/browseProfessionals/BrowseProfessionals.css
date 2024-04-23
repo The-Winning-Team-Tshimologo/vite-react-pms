@@ -114,7 +114,7 @@
 
 .table__Icons {
 
-  color: gray;
+  color: var(--color-backdrop);
   width: 30px;
   height: 20px;
 

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -104,7 +104,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/service-provider-dashboard",
+          path: "/admin-dashboard",
           element: (
             <ProtectedRoute>
               <SPDashboard />
@@ -201,7 +201,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/system-users",
+          path: "/users",
           element: (
             <ProtectedRoute>
               <Users />
@@ -227,6 +227,7 @@ function App({ children }) {
       ],
     },
   ]);
+
 
   return (
     <AuthProvider>

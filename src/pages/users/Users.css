@@ -18,6 +18,7 @@
 
 .users-card__img{
     border-radius: 50%;
+    height: 5rem;
 }
 
 .users-card-names {
