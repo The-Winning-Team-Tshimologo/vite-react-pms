@@ -6,8 +6,8 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-   // Initialize state from local storage to maintain state after refresh
-   const [isAuthenticated, setAuthenticated] = useState(() => {
+  // Initialize state from local storage to maintain state after refresh
+  const [isAuthenticated, setAuthenticated] = useState(() => {
     return JSON.parse(localStorage.getItem("isAuthenticated")) || false;
   });
   const [user, setUser] = useState(() => {
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [error, setError] = useState(null);
 
-  // const navigate = Navigate(); 
+  // const navigate = Navigate();
 
   useEffect(() => {
     // Store user and authentication status in local storage
@@ -55,6 +55,31 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
+
+  // const register = async ({ username, email, password }) => {
+  //   try {
+  //     const response = await fetch("http://localhost:5000/users", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ username, email, password }),
+  //     });
+
+  //     if (response.ok) {
+  //       const newUser = await response.json();
+  //       setUser(newUser);
+  //       setAuthenticated(true);
+  //     } else {
+  //       setError("Registration failed.");
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     console.error("Registration failed:", error);
+  //     setError(`Registration failed: ${error}`);
+  //     return false;
+  //   }
+  // };
 
   const register = async ({ username, email, password }) => {
     try {

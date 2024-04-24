@@ -37,6 +37,7 @@ import Update from "./pages/updateProfile/Update";
 function App({ children }) {
   const router = createBrowserRouter([
     {
+      index: true,
       path: "/landing",
       element: <LandingPage />,
     },
@@ -44,6 +45,7 @@ function App({ children }) {
       path: "/signin",
       element: <Signin />,
     },
+  
     {
       path: "/signup",
       element: <SignUp />,
@@ -77,14 +79,26 @@ function App({ children }) {
         </ProtectedRoute>
       ),
       children: [
+        // {
+        //   index: true,
+        //   path: "/landing",
+        //   element: (
+            
+        //       <LandingPage />
+            
+        //   ),
+        // },
         {
-          index: true,
           path: "/",
           element: (
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: "/update",
+          element: <Update />,
         },
 
         {

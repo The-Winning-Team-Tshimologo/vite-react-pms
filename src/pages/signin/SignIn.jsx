@@ -76,6 +76,7 @@ import { useForm } from "react-hook-form";
 import "./Signin.css";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/security/auth/AuthContext";
+import { NavLink } from "react-router-dom";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -154,6 +155,7 @@ function Signin() {
             >
               Submit
             </button>
+            <div className="mt-5"><p>Don't have an account yet? <NavLink to={"/signup"} className={" text-blue-500"}>Signup</NavLink></p></div>
           </form>
         </div>
         <div className="background-image-right"></div>

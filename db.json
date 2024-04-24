@@ -24,7 +24,7 @@
       "password": "password",
       "address": "123 Main St,",
       "city": "Cityville",
-      "date": "2023-04-03",
+      "date": "2023-02-03",
       "time": "02:52 PM",
       "profilePicture": "/src/assets/Ellipse23.png",
       "rate": {
@@ -33,21 +33,30 @@
       },
       "requests": [
         {
+          "id": 1,
+          "serviceName": "Gesyer Fix",
+          "serviceProviderId": 3,
+          "status": "Accepted",
+          "date": "2024-03-01"
+        },
+        {
+          "id": 2,
+          "serviceName": "Fitting",
+          "serviceProviderId": 4,
+          "status": "Declined",
+          "date": ""
+        },
+        {
           "id": 3,
-          "status": "Accepted"
-        },
-        {
-          "id": 4,
-          "status": "Declined"
-        },
-        {
-          "id": 5,
-          "status": "pending"
+          "serviceName": "Faulty Plug",
+          "status": "Pending",
+          "date" : ""
+
         }
       ],
       "reminders": [
         {
-          "title": "Fitting | Tulisa Park | Heide Ave | 2001",
+          "title": "Gesyer Fix | Tulisa Park | Heide Ave | 2001",
           "start": "2024-03-01T10:00:00.000Z",
           "end": "2024-03-01T11:00:00.000Z"
         }

@@ -271,7 +271,7 @@ export const SPSignup = () => {
 
             <NavLink></NavLink>
             <p>
-              Already have an account? <NavLink to={"/"}>Signin</NavLink>
+              Already have an account? <NavLink to={"/signin"}>Signin</NavLink>
             </p>
 
             <button type="submit">Next</button>

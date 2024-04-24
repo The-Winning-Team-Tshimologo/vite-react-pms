@@ -16,4 +16,3 @@ const fetchUserById = async (userId) => {
       return null; 
     }
   };
-  
