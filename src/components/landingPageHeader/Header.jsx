@@ -17,8 +17,7 @@ function Header() {
           <img
             className="header__img"
             src="/src/assets/pms-logo.png"
-            alt=""
-            srcset=""
+            alt="pms logo"
           />
         </div>
 

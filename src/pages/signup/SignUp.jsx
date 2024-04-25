@@ -11,6 +11,11 @@ const SignUp = () => {
     username: "",
     password: "",
     confirmPassword: "",
+    streetName: "",
+    surburb: "",
+    city: "",
+    province: "",
+    postalCode: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -126,11 +131,85 @@ const SignUp = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-            />{" "}
+            />
             {errors.username && (
               <span className="error-message">{errors.username}</span>
             )}
           </div>
+
+          <div className="formFiled">
+            <label>Address </label>
+            <div className="flex flex-col signup-address__container">
+              <div className="flex flex-col">
+                <input
+                  className="p-2"
+                  type="text"
+                  placeholder="Street Name"
+                  name="streetName"
+                  value={formData.streetName}
+                  onChange={handleChange}
+                />{" "}
+                {errors.streetName && (
+                  <span className="error-message">{errors.streetName}</span>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2"
+                  type="text"
+                  placeholder="Suburb"
+                  name="suburb"
+                  value={formData.surburb}
+                  onChange={handleChange}
+                />
+                {errors.surburb && (
+                  <span className="error-message">{errors.surburb}</span>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2"
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                />
+                {errors.city && (
+                  <span className="error-message">{errors.city}</span>
+                )}
+              </div>
+
+              <div className="flex flex-col">
+                <input
+                  className="p-2"
+                  type="text"
+                  placeholder="Province"
+                  name="Province"
+                  value={formData.province}
+                  onChange={handleChange}
+                />
+                {errors.province && (
+                  <span className="error-message">{errors.province}</span>
+                )}
+              </div>
+
+              <div className="flex flex-col">
+                <input
+                  className="p-2"
+                  type="number"
+                  placeholder="Postal Code"
+                  name="Postal Code"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                />
+                {errors.postalCode && (
+                  <span className="error-message">{errors.postalCode}</span>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="formFiled">
             {" "}
             <label>Password </label>

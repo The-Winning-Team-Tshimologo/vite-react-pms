@@ -13,7 +13,7 @@ const TrackActivity = () => {
 
     fetchAllUsers()
       .then(setUsers)
-      // console.log("Users: ", users)
+      console.log("Track Activity Users: ", users)
       .catch((err) => {
         console.error("Error loading users:", err);
         setError("Failed to load users");
@@ -34,36 +34,36 @@ const TrackActivity = () => {
       fetchUserData();
     }
   }, [users.id]);
-  // const [Service, setService] = useState([
-  //   {
-  //     id: 1,
-  //     name: "Lady Smith",
-  //     date: "20 Apr 2024",
-  //     status: "Accepted",
-  //     imageUrl: "src/assets/Maintenance.jpg",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Lady Smith",
-  //     date: "20 Apr 2024",
-  //     status: "Accepted",
-  //     imageUrl: "src/assets/Maintenance.jpg",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Lady Smith",
-  //     date: "20 Apr 2024",
-  //     status: "Declined",
-  //     imageUrl: "src/assets/Maintenance.jpg",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Lady Smith",
-  //     date: "",
-  //     status: "Pending",
-  //     imageUrl: "src/assets/Maintenance.jpg",
-  //   },
-  // ]);
+  const [Service, setService] = useState([
+    {
+      id: 1,
+      name: "Lady Smith",
+      date: "20 Apr 2024",
+      status: "Accepted",
+      imageUrl: "src/assets/Maintenance.jpg",
+    },
+    {
+      id: 2,
+      name: "Lady Smith",
+      date: "20 Apr 2024",
+      status: "Accepted",
+      imageUrl: "src/assets/Maintenance.jpg",
+    },
+    {
+      id: 3,
+      name: "Lady Smith",
+      date: "20 Apr 2024",
+      status: "Declined",
+      imageUrl: "src/assets/Maintenance.jpg",
+    },
+    {
+      id: 4,
+      name: "Lady Smith",
+      date: "",
+      status: "Pending",
+      imageUrl: "src/assets/Maintenance.jpg",
+    },
+  ]);
   const handleClick = (selectedService) => {
     console.log(selectedService);
     // navigate("/");
@@ -90,7 +90,7 @@ const TrackActivity = () => {
   return (
     <div className="TrackActivity">
       <h2 className="px-10">TrackActivity</h2>
-      {/* <div className="profile-container">
+      <div className="profile-container">
         {user.map((user, index) => (
           <div
             className="TrackActivity__card"
@@ -120,7 +120,7 @@ const TrackActivity = () => {
             </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
