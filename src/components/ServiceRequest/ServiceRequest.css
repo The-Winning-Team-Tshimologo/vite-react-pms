@@ -1,0 +1,79 @@
+
+  .nomps{
+    position: relative;
+    width: 75%; 
+    height: 550px; 
+    border: 1px solid black;
+    margin-left: 150px;
+    margin-top: 100px;
+
+}
+
+ .nomps h4 {
+    position: absolute;
+    top: -13px; 
+    right: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+   
+} 
+ .mpilo{
+  margin-top: 45px;
+  width: 20%; 
+  height: 55px; 
+  border: 1px solid black;
+  margin-left: 80px;
+
+} 
+.mpilo h3 {
+  position: absolute;
+  top: 32px; 
+  font-weight: bold;
+} 
+.mpilo p{
+  margin-top: 15px;
+  margin-left: 3.9px;
+} 
+.S-mpilo{
+  margin-top: 45px;
+  width: 480px; 
+  height: 60px; 
+  border: 1px solid black;
+  margin-left: 80px;
+
+
+} 
+.S-mpilo h3 {
+  position: absolute;
+  top: 132px; 
+  font-weight: bold;
+} 
+.S-mpilo p{
+  margin-top: 17px;
+  margin-left: 3.9px;
+} 
+.nompi h3{
+  font-weight: 600;
+}
+.nompi {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  margin-left: 80px;
+ 
+}
+
+.nompi h3 {
+  width: 100%;
+ 
+}
+
+.card-img {
+  width: 200px; 
+  height: 200px; 
+  margin: 3px; 
+  object-fit: cover; 
+  margin-right: 40px;
+}

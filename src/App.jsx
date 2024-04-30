@@ -32,6 +32,10 @@ import Applications from "./pages/applications/Applications";
 import Users from "./pages/users/Users";
 import ApplicantPage from "./pages/applicantPage/ApplicantPage";
 import Update from "./pages/updateProfile/Update";
+import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
+import Comms from "./components/comms/Comms";
+
+
 
 
 function App({ children }) {
@@ -221,6 +225,22 @@ function App({ children }) {
           element: (
             <ProtectedRoute>
               <Update/>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/ServiceRequest",
+          element: (
+            <ProtectedRoute>
+             <ServiceRequest/>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/Comms",
+          element: (
+            <ProtectedRoute>
+                 <Comms/>
             </ProtectedRoute>
           ),
         },
