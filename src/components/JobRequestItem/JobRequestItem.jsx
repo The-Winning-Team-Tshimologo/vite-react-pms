@@ -2,6 +2,8 @@ import React from 'react';
 import {MdOutlinePinDrop, MdQuestionMark} from "react-icons/md";
 
 const JobRequestItem = ({ item }) => {
+
+    
     return (
         <li className="personal-request">
             <div className="flex items-center h-auto">

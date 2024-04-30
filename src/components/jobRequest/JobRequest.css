@@ -13,6 +13,7 @@
 }
 
 .personal-request {
+
     width: 591px;
     margin: 1rem;
     background-color: white;
@@ -24,10 +25,8 @@
 
 /* Add styles for the parent container */
 .track-job ul {
-    display: flex; /* Use flexbox */
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-
-
+  display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 0; /* Remove default padding */
 }
 
