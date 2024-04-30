@@ -74,7 +74,14 @@
 
 .signup-address__container input:focus {
   outline: none;
-  caret-color: var(--color-tertiary)
+  caret-color: var(--color-tertiary);
+  background-color: white !important;
+}
+
+.signup-address__container input {
+  outline: none;
+  caret-color: var(--color-tertiary);
+  background-color: white;
 }
 
 .signup-address__container input:autofill {

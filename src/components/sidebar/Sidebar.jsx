@@ -52,7 +52,7 @@ const Sidebar = () => {
           <NavLink
             to="/admin-dashboard"
             style={{
-              display: user?.role?.includes("admin") ? "block" : "none",
+              display: user?.roles?.includes("ROLE_ADMIN") ? "block" : "none",
             }}
           >
             <h3>
@@ -66,7 +66,7 @@ const Sidebar = () => {
           <NavLink
             to="/browse-professionals"
             style={{
-              display: user?.role?.includes("customer") ? "block" : "none",
+              display: user?.roles?.includes("ROLE_CUSTOMER") ? "block" : "none",
             }}
           >
             <h3>
@@ -80,7 +80,7 @@ const Sidebar = () => {
           <NavLink
             to="/issues"
             style={{
-              display: user?.role?.includes("customer") ? "block" : "none",
+              display: user?.roles?.includes("ROLE_CUSTOMER") ? "block" : "none",
             }}
           >
             <h3>
@@ -94,7 +94,7 @@ const Sidebar = () => {
           <NavLink
             to="/reminders"
             style={{
-              display: user?.role?.includes("customer") ? "block" : "none",
+              display: user?.roles?.includes("ROLE_CUSTOMER") ? "block" : "none",
             }}
           >
             <h3>
@@ -117,7 +117,7 @@ const Sidebar = () => {
           <NavLink
             to="/completed-jobs"
             style={{
-              display: user?.role?.includes("service_provider")
+              display: user?.roles?.includes("ROLE_SERVICE_PROVIDER")
                 ? "block"
                 : "none",
             }}
@@ -131,7 +131,7 @@ const Sidebar = () => {
           </NavLink>
 
           <NavLink to="/users" style={{
-              display: user?.role?.includes("admin")
+              display: user?.roles?.includes("ROLE_ADMIN")
                 ? "block"
                 : "none",
             }}>
@@ -147,8 +147,8 @@ const Sidebar = () => {
             to="/profile"
             style={{
               display:
-                user?.role?.includes("customer") ||
-                user?.role?.includes("service_provider")
+                user?.roles?.includes("ROLE_CUSTOMER") ||
+                user?.roles?.includes("ROLE_SERVICE_PROVIDER")
                   ? "block"
                   : "none",
             }}
