@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import dummyData from './DummyData.jsx';
 import './JobRequest.css'; // Import the CSS file
 import dummyWithRate from '../helpwanted/dummyDataWithRate.jsx'
-
 import JobRequestItem from "@/components/JobRequestItem/JobRequestItem.jsx";
 import JobHeader from "@/components/jobheader/JobHeader.jsx";
 import { Button } from "@/components/ui/button.jsx";
@@ -28,8 +27,10 @@ function JobRequest() {
     );
 
     return (
+       
         <div className="job-container">
             <div className="center-content">
+                  
                 <JobHeader onSearch={handleSearch} />
             </div>
             <div className="job-request">
