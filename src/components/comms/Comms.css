@@ -1,4 +1,4 @@
-
+/* 
  .inbox {
   
     background-color: #2C3639; 
@@ -17,13 +17,13 @@
 }
 
 .date-divider {
-  text-align: center; /* Center-align the date */
-  margin-bottom: 10px; /* Add space below the date */
+  text-align: center; 
+  margin-bottom: 10px; 
 }
 
 .chat {
   display: flex;
-  margin-bottom: 10px; /* Add space between messages */
+  margin-bottom: 10px; 
 }
 
 .sender {
@@ -32,21 +32,21 @@
 }
 
 .message {
-  background-color: #555; /* Darker grey for messages */
-  padding: 10px; /* Add padding */
-  border-radius: 10px; /* Rounded corners */
-  max-width: 70%; /* Limit message width */
+  background-color: #555; 
+  padding: 10px; 
+  border-radius: 10px; 
+  max-width: 70%; 
 }
 
 .input-container {
   display: flex;
-  align-items: center; /* Align items vertically */
-  margin-top: 20px; /* Add space above input */
+  align-items: center; 
+  margin-top: 20px; 
   margin-left: 120px;
 }
 
 .smiley, .btn {
-  margin-right: 10px; /* Add space between elements */
+  margin-right: 10px;
 }
 .btn{
   width: 25px;
@@ -55,11 +55,11 @@
 }
 
 .custom-border {
-  background-color: transparent; /* Transparent background */
-  border: 1px solid #888; /* Custom border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 5px; /* Add padding */
-  width: 50%; /* Full width */
+  background-color: transparent; 
+  border: 1px solid #888; 
+  border-radius: 5px;
+  padding: 5px; 
+  width: 50%;
   height: 40px;
 }
 
@@ -92,17 +92,17 @@
   }
   
   .location img {
-    width: 25px; /* Adjust pin icon width */
-    height: 25px; /* Adjust pin icon height */
-    margin-right: 5px; /* Add space between icon and text */
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
 
   }
   .square-lines {
-    width: 650px; /* Adjust the width of the square */
-    height: 180px; /* Adjust the height of the square */
+    width: 650px; 
+    height: 180px; 
     border: 1px solid black;
-    /* text-align: center; */
-    margin-left: 250px; /* Thin black border */
+ 
+    margin-left: 250px; 
     margin-top: 50px;
   }
   .content {
@@ -110,20 +110,20 @@
   }
   
   .content h4 {
-    margin: 0; /* Remove default margin */
+    margin: 0; 
   }
   
   .separator {
-    border-left: 1px solid #ccc; /* Thin vertical line */
-    height: 2.5em; /* Adjust height of the line */
+    border-left: 1px solid #ccc; 
+    height: 2.5em; 
     margin: 0 6.5px; 
   }
   .custom-textarea {
-    width: 60%; /* Set the width to fill its container */
-    height: 30px; /* Set the initial height */
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 5px; /* Add rounded corners */
-    resize: vertical; /* Allow vertical resizing */
+    width: 60%; 
+    height: 30px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    resize: vertical; 
 
   }
-  
+   */

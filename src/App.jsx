@@ -39,8 +39,6 @@ import Comms from "./components/comms/Comms";
 
 
 
-import Update from "./pages/updateProfile/Update";
-
 function App({ children }) {
   const router = createBrowserRouter([
     {
