@@ -3,7 +3,7 @@ import "./ReviewSummary.css";
 
 // Mock data for the rating summary (this would usually come from a back-end or be calculated)
 const ratingSummary = {
-  totalReviews: 17,
+  totalReviews: 5,
   averageRating: 4.8,
   overrallCustomerPercpective:
     "Customers rated this pro highly for work quality, professionalism, and value.",

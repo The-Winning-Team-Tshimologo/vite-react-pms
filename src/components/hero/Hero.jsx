@@ -23,7 +23,7 @@ function Hero() {
               </h3>
             </div>
             <div className="hero__buttons">
-              <button className="primary-btn-login">Login</button>
+              <button className="primary-btn-login"  onClick={() => {navigate("/signin")}}>Login</button>
               <button
                 className="primary-btn"
                 onClick={() => {navigate("/signup")}}

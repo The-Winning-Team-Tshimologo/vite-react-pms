@@ -1,8 +1,39 @@
-import React, { useState } from "react";
-import "./BrowseProfessionals.css"
+import React, { useEffect, useState } from "react";
+import "./BrowseProfessionals.css";
 import { blue } from "@mui/material/colors";
+import { fetchAllUsers } from "@/utils/fetchAllUsers";
 
 const TrackActivity = () => {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+
+    fetchAllUsers()
+      .then(setUsers)
+      console.log("Track Activity Users: ", users)
+      .catch((err) => {
+        console.error("Error loading users:", err);
+        setError("Failed to load users");
+      });
+
+    const fetchUserData = async () => {
+      setLoading(true);
+      const fetchedUser = await fetchUserById(users.id);
+      if (fetchedUser) {
+        setUser(fetchedUser);
+      } else {
+        setError("Unable to fetch user data.");
+      }
+      setLoading(false);
+    };
+
+    if (users.id) {
+      fetchUserData();
+    }
+  }, [users.id]);
   const [Service, setService] = useState([
     {
       id: 1,
@@ -58,34 +89,31 @@ const TrackActivity = () => {
 
   return (
     <div className="TrackActivity">
-      {" "}
       <h2 className="px-10">TrackActivity</h2>
       <div className="profile-container">
-        {Service.map((Service, index) => (
+        {user.map((user, index) => (
           <div
             className="TrackActivity__card"
-            key={Service.id}
+            key={user.id}
             onClick={() => {
-              handleClick(Service);
+              handleClick(user);
             }}
           >
             <div className="TrackActivity-header">
-              <img src={Service.imageUrl} alt={Service.name} />
+              <img src={user.profilePicture} alt={user.firstName + user.lastName} />
               <div>
-                <p>{Service.name}</p>
+                <p>{user.requests.serviceName}</p>
                 <p>Appointment:</p>
                 <p>
-                  {Service.date ? (
+                  {user.reervice.date ? (
                     Service.date
                   ) : (
-                    <span style={{ color: "blue" }}>
-                      Book Appoitment
-                    </span>
+                    <span style={{ color: "blue" }}>Book Appoitment</span>
                   )}
                 </p>
               </div>
               <div className="service__status">
-                <span  style={{ backgroundColor: StatusColor(Service.status) }}>
+                <span style={{ backgroundColor: StatusColor(Service.status) }}>
                   {Service.status}
                 </span>
               </div>

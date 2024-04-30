@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -31,6 +31,7 @@ import ReviewPage from "./pages/reviewPage/ReviewPage";
 import Applications from "./pages/applications/Applications";
 import Users from "./pages/users/Users";
 import ApplicantPage from "./pages/applicantPage/ApplicantPage";
+
 import Update from "./pages/updateProfile/Update";
 import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
@@ -38,9 +39,12 @@ import Comms from "./components/comms/Comms";
 
 
 
+import Update from "./pages/updateProfile/Update";
+
 function App({ children }) {
   const router = createBrowserRouter([
     {
+      index: true,
       path: "/landing",
       element: <LandingPage />,
     },
@@ -48,6 +52,7 @@ function App({ children }) {
       path: "/signin",
       element: <Signin />,
     },
+  
     {
       path: "/signup",
       element: <SignUp />,
@@ -81,14 +86,26 @@ function App({ children }) {
         </ProtectedRoute>
       ),
       children: [
+        // {
+        //   index: true,
+        //   path: "/landing",
+        //   element: (
+            
+        //       <LandingPage />
+            
+        //   ),
+        // },
         {
-          index: true,
           path: "/",
           element: (
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: "/update",
+          element: <Update />,
         },
 
         {
@@ -108,7 +125,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/service-provider-dashboard",
+          path: "/admin-dashboard",
           element: (
             <ProtectedRoute>
               <SPDashboard />
@@ -205,7 +222,7 @@ function App({ children }) {
           ),
         },
         {
-          path: "/system-users",
+          path: "/users",
           element: (
             <ProtectedRoute>
               <Users />
@@ -221,10 +238,10 @@ function App({ children }) {
           ),
         },
         {
-          path: "/update",
+          path: "/profile/:id",
           element: (
             <ProtectedRoute>
-              <Update/>
+              <Update />
             </ProtectedRoute>
           ),
         },
@@ -247,6 +264,7 @@ function App({ children }) {
       ],
     },
   ]);
+
 
   return (
     <AuthProvider>

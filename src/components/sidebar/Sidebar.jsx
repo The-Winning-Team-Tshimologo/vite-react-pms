@@ -14,10 +14,14 @@ import { useAuth } from "../../security/auth/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Sidebar = () => {
-  const { sidebarCollapsed, setSidebarCollapsed } = useAuth();
+  const { sidebarCollapsed, setSidebarCollapsed, logout, user } = useAuth();
 
   const handleSideBarCollapse = () => {
     setSidebarCollapsed(!sidebarCollapsed);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -45,29 +49,58 @@ const Sidebar = () => {
         )}
         {/* </div> */}
         <div className="sidebar__links">
-          <NavLink to="/browse-professionals">
+          <NavLink
+            to="/admin-dashboard"
+            style={{
+              display: user?.role?.includes("admin") ? "block" : "none",
+            }}
+          >
             <h3>
               <LuLayoutDashboard />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                DASHBOARD
+                Dashboard
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="/issues">
+          <NavLink
+            to="/browse-professionals"
+            style={{
+              display: user?.role?.includes("customer") ? "block" : "none",
+            }}
+          >
+            <h3>
+              <LuLayoutDashboard />
+              <span className={sidebarCollapsed ? "icon-only" : ""}>
+                Service Providers
+              </span>
+            </h3>
+          </NavLink>
+
+          <NavLink
+            to="/issues"
+            style={{
+              display: user?.role?.includes("customer") ? "block" : "none",
+            }}
+          >
             <h3>
               <TfiCommentAlt />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                LOG ISSUES
+                Log Issues
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="/reminders">
+          <NavLink
+            to="/reminders"
+            style={{
+              display: user?.role?.includes("customer") ? "block" : "none",
+            }}
+          >
             <h3>
               <SlCalender />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                REMINDERS
+                Reminders
               </span>
             </h3>
           </NavLink>
@@ -76,46 +109,66 @@ const Sidebar = () => {
             <h3>
               <MdOutlineContacts />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                MESSAGES
+                Messages
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="/completed-jobs">
+          <NavLink
+            to="/completed-jobs"
+            style={{
+              display: user?.role?.includes("service_provider")
+                ? "block"
+                : "none",
+            }}
+          >
             <h3>
               <SlPicture />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                COMPLETED JOBS
+                Completed Jobs
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="">
+          <NavLink to="/users" style={{
+              display: user?.role?.includes("admin")
+                ? "block"
+                : "none",
+            }}>
             <h3>
               <FiUsers />
-              <span className={sidebarCollapsed ? "icon-only" : ""}>SP</span>
+              <span className={sidebarCollapsed ? "icon-only" : ""}>Users</span>
             </h3>
           </NavLink>
         </div>
 
         <div className="bottom-links">
-          <NavLink to="/profile">
+          <NavLink
+            to="/profile"
+            style={{
+              display:
+                user?.role?.includes("customer") ||
+                user?.role?.includes("service_provider")
+                  ? "block"
+                  : "none",
+            }}
+          >
             <h3>
               <MdOutlineManageAccounts />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                ACCOUNT
+                Account
               </span>
             </h3>
           </NavLink>
 
-          <NavLink to="/">
+          <div onClick={handleLogout}>
             <h3>
               <IoIosLogOut />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
-                LOGOUT
+                Logout
               </span>
             </h3>
-          </NavLink>
+          </div>
         </div>
       </nav>
       <div className="content">

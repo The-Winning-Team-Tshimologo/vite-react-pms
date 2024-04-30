@@ -1,0 +1,263 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "role": "admin",
+      "username": "admin",
+      "firstname": "James",
+      "lastname": "Bond",
+      "email": "admin@example.com",
+      "password": "admin1234",
+      "profilePicture": "/src/assets/sbusisoAvatar.png",
+      "rate": {
+        "numerator": 4,
+        "denominator": 5
+      }
+    },
+    {
+      "id": 2,
+      "role": "customer",
+      "username": "example",
+      "firstname": "ex",
+      "lastname": "ample",
+      "email": "user@gmail.com",
+      "password": "password",
+      "address": "123 Main St,",
+      "city": "Cityville",
+      "date": "2023-02-03",
+      "time": "02:52 PM",
+      "profilePicture": "/src/assets/Ellipse23.png",
+      "rate": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "requests": [
+        {
+          "id": 1,
+          "serviceName": "Gesyer Fix",
+          "serviceProviderId": 3,
+          "status": "Accepted",
+          "date": "2024-03-01"
+        },
+        {
+          "id": 2,
+          "serviceName": "Fitting",
+          "serviceProviderId": 4,
+          "status": "Declined",
+          "date": ""
+        },
+        {
+          "id": 3,
+          "serviceName": "Faulty Plug",
+          "status": "Pending",
+          "date" : ""
+
+        }
+      ],
+      "reminders": [
+        {
+          "title": "Gesyer Fix | Tulisa Park | Heide Ave | 2001",
+          "start": "2024-03-01T10:00:00.000Z",
+          "end": "2024-03-01T11:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "role": "service_provider",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "john@example.com",
+      "password": "password",
+      "address": "123 Main St,",
+      "city": "Johannesburg",
+      "service": "Plumbing",
+      "profilePicture": "/src/assets/grahamAvatar.png",
+      "rate": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "profession": "Plumber",
+      "location": "Johannesburg, Gauteng",
+      "reviewsCount": 10,
+      "projectsCompleted": 10,
+      "hourlyRate": 300,
+      "availability": ["Mon", "Tue", "Wed"],
+      "date": "2024-04-23",
+      "time": "10:00 AM",
+      "appointments": [
+        {
+          "title": "Fitting | Tulisa Park | Heide Ave | 2001",
+          "start": "2024-03-01T10:00:00.000Z",
+          "end": "2024-03-01T11:00:00.000Z"
+        }
+      ],
+      "professionalSummary": "Efficient plumber with 7+ years of experience. Skilled in PEX and copper installation, repair, and maintenance. Seeking to deliver high-quality work for Benny Sondergeld Services. At Dickinson Elwood, completed work 20% faster than company average, with 95% customer satisfaction ratings and 10% less errors. Volunteered to work on call 365 days a year.",
+      "workExperience": [
+        {
+          "company": "Dickinson Elwood Plumbing",
+          "date": "May 2013–May 2019",
+          "description": "Worked in a high-volume plumbing business, completing 10–30 client calls per week. Installed new plumbing systems on 20+ $1M–$3M homes"
+        },
+        {
+          "company": "Jim’s Rooter of Lexington",
+          "date": "April 2012–June 2013",
+          "description": "Answered 50+ customer calls per week. Maintained upsell rate 15% higher than franchise average."
+        }
+      ],
+      "education": {
+        "institution": "Ivy Tech Community College of Lexington",
+        "date": "2012–2012",
+        "description": "Vocational Training and Apprenticeship. Commended 6x by the contractor I apprenticed with for efficiency. Excelled in new installation instruction."
+      },
+      "license": "Journeyman License #8823473, Kentucky Division of Plumbing",
+      "skills": {
+        "technical": [
+          "Installation",
+          "Repair",
+          "PEX",
+          "Copper",
+          "Sewage lines",
+          "PVC",
+          "Venting"
+        ],
+        "soft": [
+          "Physical fitness",
+          "Problem solving",
+          "Strong work ethic",
+          "Customer service"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "role": "service_provider",
+      "firstName": "Emily",
+      "lastName": "Johnson",
+      "email": "emily@example.com",
+      "password": "password",
+      "address": "456 Elm St,",
+      "city": "Townsville",
+      "service": "Electrician",
+      "profilePicture": "/src/assets/oliviaAvatar.png",
+      "rate": {
+        "numerator": 3,
+        "denominator": 5
+      },
+      "profession": "Electrician",
+      "location": "Johannesburg, Gauteng",
+      "reviewsCount": 10,
+      "projectsCompleted": 10,
+      "hourlyRate": 300,
+      "availability": ["Tue", "Wed", "Thur"],
+      "date": "2024-04-23",
+      "time": "11:00 AM",
+      "appointments": [
+        {
+          "title": "Fitting | Tulisa Park | Heide Ave | 2001",
+          "start": "2024-03-01T10:00:00.000Z",
+          "end": "2024-03-01T11:00:00.000Z"
+        }
+      ],
+      "professionalSummary": "Efficient electrician with 7+ years of experience. Skilled in electrical installations, repair, and maintenance. Seeking to deliver high-quality work for Benny Sondergeld Services. At Dickinson Elwood, completed work 20% faster than company average, with 95% customer satisfaction ratings and 10% less errors. Volunteered to work on call 365 days a year.",
+      "workExperience": [
+        {
+          "company": "Dickinson Elwood Electric",
+          "date": "May 2013–May 2019",
+          "description": "Worked in a high-volume electrical business, completing 10–30 client calls per week. Installed new electrical systems on 20+ $1M–$3M homes"
+        },
+        {
+          "company": "Jim’s Electric of Lexington",
+          "date": "April 2012–June 2013",
+          "description": "Answered 50+ customer calls per week. Maintained upsell rate 15% higher than franchise average."
+        }
+      ],
+      "education": {
+        "institution": "Ivy Tech Community College of Lexington",
+        "date": "2012–2012",
+        "description": "Vocational Training and Apprenticeship. Commended 6x by the contractor I apprenticed with for efficiency. Excelled in new installation instruction."
+      },
+      "license": "Journeyman License #8823474, Kentucky Division of Electrical Work",
+      "skills": {
+        "technical": [
+          "Electrical installations",
+          "Electrical repair",
+          "Wiring",
+          "Circuit breakers",
+          "Safety regulations compliance"
+        ],
+        "soft": [
+          "Physical fitness",
+          "Problem solving",
+          "Strong work ethic",
+          "Customer service"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "role": "service_provider",
+      "firstName": "Michael",
+      "lastName": "Williams",
+      "email": "michael@example.com",
+      "password": "password",
+      "address": "789 Oak St,",
+      "city": "Villagetown",
+      "service": "Housekeeping",
+      "profilePicture": "/src/assets/pro.png",
+      "rate": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "rating": 4,
+      "profession": "Housekeeper",
+      "location": "Johannesburg, Gauteng",
+      "reviewsCount": 10,
+      "projectsCompleted": 10,
+      "hourlyRate": 300,
+      "availability": ["Mon", "Tue", "Wed", "Thur", "Fri"],
+      "date": "2024-04-23",
+      "time": "12:00 PM",
+      "appointments": [
+        {
+          "title": "Fitting | Tulisa Park | Heide Ave | 2001",
+          "start": "2024-03-01T10:00:00.000Z",
+          "end": "2024-03-01T11:00:00.000Z"
+        }
+      ],
+      "professionalSummary": "Efficient housekeeper with 7+ years of experience. Skilled in thorough cleaning and maintenance of residential and commercial properties. Seeking to deliver high-quality work for Benny Sondergeld Services. At Dickinson Elwood, completed work 20% faster than company average, with 95% customer satisfaction ratings and 10% less errors. Volunteered to work on call 365 days a year.",
+      "workExperience": [
+        {
+          "company": "Dickinson Elwood Housekeeping",
+          "date": "May 2013–May 2019",
+          "description": "Worked in a high-volume housekeeping business, completing 10–30 client calls per week. Managed cleaning and maintenance of 20+ $1M–$3M homes"
+        },
+        {
+          "company": "Jim’s Housekeeping of Lexington",
+          "date": "April 2012–June 2013",
+          "description": "Answered 50+ customer calls per week. Maintained upsell rate 15% higher than franchise average."
+        }
+      ],
+      "education": {
+        "institution": "Ivy Tech Community College of Lexington",
+        "date": "2012–2012",
+        "description": "Vocational Training and Apprenticeship. Commended 6x by the contractor I apprenticed with for efficiency. Excelled in new installation instruction."
+      },
+      "license": "Professional Housekeeping License #8823475, Kentucky Division of Housekeeping Services",
+      "skills": {
+        "technical": [
+          "Cleaning",
+          "Maintenance",
+          "Sanitization",
+          "Waste management"
+        ],
+        "soft": [
+          "Physical fitness",
+          "Problem solving",
+          "Strong work ethic",
+          "Customer service"
+        ]
+      }
+    }
+  ]
+}

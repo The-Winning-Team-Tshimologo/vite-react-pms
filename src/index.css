@@ -203,6 +203,11 @@ svg {
   background-color: var(--color-secondary-opaque);
 }
 
+input:focus {
+  outline: none;
+  caret-color: var(--color-tertiary)
+}
+
 
 /* .icon-button {
   position: relative;
