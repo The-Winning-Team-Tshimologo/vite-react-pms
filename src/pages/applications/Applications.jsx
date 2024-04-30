@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Applications.css";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/Header";
@@ -38,7 +38,30 @@ const mockData = [
   },
 ];
 
+
+
+
 const Applications = () => {
+
+  const [applications, setApplications] = useState([]);
+  const token = localStorage.getItem("token");
+
+useEffect(() => {
+  fetch("http://localhost:8081/api/v1/admin/pending-sp", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setApplications(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+}, []);
+
+
   return (
     <div>
       <Header />
@@ -53,6 +76,24 @@ const Applications = () => {
           <p className="application-card-names">
             {application.firstname} {application.lastname}
           </p>
+          <p className="application-card-date">{application.date}</p>
+          <p className="application-card-time">{application.time}</p>
+          <Button className="application-card__btn">View</Button>
+        </div>
+      ))}
+
+<h2 className="applications-heading">Applications</h2>
+      {applications.map((application) => (
+        <div key={application.userId} className="application-card">
+          <img
+            className="application-card__img"
+            src={`data:multipart/form-data;base64,${application.profilePicture}`}
+            alt={`${application.firstName} ${application.lastName}`}
+          />
+          <p className="application-card-names">
+            {application.firstName} {application.lastName}
+          </p>
+          
           <p className="application-card-date">{application.date}</p>
           <p className="application-card-time">{application.time}</p>
           <Button className="application-card__btn">View</Button>

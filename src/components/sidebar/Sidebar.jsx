@@ -63,6 +63,20 @@ const Sidebar = () => {
 						</h3>
 					</NavLink>
 
+          <NavLink
+            to="/applications"
+            style={{
+              display: user?.roles?.includes("ROLE_ADMIN") ? "block" : "none",
+            }}
+          >
+            <h3>
+              <LuLayoutDashboard />
+              <span className={sidebarCollapsed ? "icon-only" : ""}>
+              Applications
+              </span>
+            </h3>
+          </NavLink>
+
 					<NavLink
 						to='/browse-professionals'
 						style={{
