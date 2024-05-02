@@ -87,7 +87,7 @@
 
 .background-image-right {
   flex: 1;
-  background-image: url("/src/assets/handyman.jpg");
+  background-image: url("/src/assets/handymanred.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
