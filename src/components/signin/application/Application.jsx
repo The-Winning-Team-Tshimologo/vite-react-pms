@@ -4,7 +4,7 @@ import "../Form.css";
 const Application = ({ data, handleChange }) => {
   return (
     <div className="flex-col">
-      <h1>Application</h1>
+      {/* <h1>Application</h1> */}
 
       <label htmlFor="UserName">Username</label>
       <input

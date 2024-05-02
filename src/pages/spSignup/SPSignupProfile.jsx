@@ -67,7 +67,7 @@ export const SPSignupProfile = () => {
   return (
     <div className="SPSignupProfile__container flex">
       <div className="SPSignupProfile__progress  ml-10">
-        <SPSIgnupProgress formData={formData} page={"Profile"} />
+        <SPSIgnupProgress completedPages={75} page={"Profile"} />
       </div>
 
       <div className="SPSignupProfile__form_container ">

@@ -65,7 +65,7 @@ export const SPSignupUploadDocument = () => {
   return (
     <div className="SignupUploadDocument flex   ">
       <div className="SPSignupUploadDocument__progress  ml-10 ">
-        <SPSIgnupProgress formData={formData} page={"Background Check"} />
+        <SPSIgnupProgress completedPages={50} page={"Background Check"} />
       </div>
       {/* <h2>SPSignupUploadDocument</h2> */}
       <div className="SPSignupUploadDocument__form">

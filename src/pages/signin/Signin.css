@@ -94,7 +94,7 @@
   height: 100vh;
 }
 
-.form__container h1 {
+.form__container h3 {
   /* margin-right: 23rem;
   margin-bottom: 1rem; */
 }
@@ -115,7 +115,7 @@
   padding: 12px;
   margin-bottom: 29px;
   width: 35rem;
-  border-radius: 1px;
+  border-radius: 5px;
 
 }
 
@@ -155,4 +155,8 @@
   margin-left: -30rem;
   /* margin-bottom: 6px; */
   text-align: left;
+}
+
+.Signin_labelname-email {
+  margin-left: -32rem;
 }

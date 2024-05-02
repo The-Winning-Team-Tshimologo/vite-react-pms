@@ -113,7 +113,7 @@ function Signin() {
         <div className="signin-form__signin">
           <form onSubmit={handleSubmit} id="form2">
             <h2>Sign in</h2>
-            <label className="Signin_labelname">Email</label>
+            <label className="Signin_labelname-email">Email</label>
             {errors.email && (
               <p className="paragraph-red">{errors.email.message}</p>
             )}

@@ -1,61 +1,33 @@
-/** @format */
-
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { useAuth } from "@/security/auth/AuthContext";
-import { HiEllipsisVertical } from "react-icons/hi2";
+import { HiEllipsisVertical } from "react-icons/hi2";  // Correct the import path as mentioned previously
 import { FaRegEnvelope } from "react-icons/fa";
 
 const Header = () => {
-  const { sidebarCollapsed, setSidebarCollapsed, userDetails, setUserDetails } =
-    useAuth();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          throw new Error("Token not found in local storage");
-        }
-
-        const response = await fetch(
-          "http://localhost:8081/api/v1/user/user-details",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user details");
-        }
-
-        const userData = await response.json();
-        setUserDetails(userData);
-        setLoading(false); // Set loading to false once user details are fetched
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-        setLoading(false); // Set loading to false in case of error
-      }
-    };
-
-    fetchUserDetails();
-  }, []);
+  const { sidebarCollapsed, setSidebarCollapsed, userDetails } = useAuth();
 
   const handleSideBarCollapse = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
-  // Render loading state if userDetails is still being fetched
-  if (loading) {
-    return <div>Loading...</div>;
+
+  // If no userDetails, only render the logo
+  if (!userDetails) {
+    return (
+      <div className="header__container">
+        <div>
+          <img
+            className="w-fit h-20"
+            src="/src/assets/pms-logo.png"
+            alt="PMS Logo"
+            onClick={handleSideBarCollapse}
+          />
+        </div>
+      </div>
+    );
   }
 
-  // Render the header with user details if userDetails is available
   return (
     <div className="header__container">
       <div>
@@ -68,10 +40,8 @@ const Header = () => {
       </div>
       <div className="header__user-details">
         <FaRegEnvelope />
-        <p>
-          {userDetails ? userDetails.fullName : "No user details available"}
-        </p>
-        {userDetails.profilePicture ? (
+        <p>{userDetails ? userDetails.fullName : "No user details available"}</p>
+        {userDetails && userDetails.profilePicture ? (
           <>
             <img
               className="header__customer-img"
@@ -80,7 +50,13 @@ const Header = () => {
             />
             <HiEllipsisVertical />
           </>
-        ): <img className="header__customer-img"  src={"/src/assets/user-placeholder.png"}/>}
+        ) : (
+          <img
+            className="header__customer-img"
+            src="/src/assets/user-placeholder.png"
+            alt="Default user placeholder"
+          />
+        )}
       </div>
     </div>
   );

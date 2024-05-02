@@ -142,12 +142,19 @@
   text-indent: 20px;
 }
 
-.SPSignupProfile__progress,.SPSignupUploadDocument__progress{
-  width: 40%;
+.SPSignupProfile__progress, .SPSignupUploadDocument__progress{
+  width: 25%;
 }
 .pbar{
   width: 10%;
+  color: var(--color-primary);
 }
+
+/* .pbar-color {
+  color: aqua;
+  
+} */
+
 @media screen and (max-width: 768px) {
   .sp__context {
     flex-direction: column;

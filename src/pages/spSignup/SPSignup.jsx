@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import "./SPSignup.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faFile,
-//   faCloudUploadAlt,
-//   faEye,
-//   faEyeSlash,
-// } from "@fortawesome/free-solid-svg-icons";
 import { FaFile } from "react-icons/fa6";
-import { FaCloudUploadAlt } from "react-icons/fa";
+// import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
+import { useAuth } from "@/security/auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const SPSignup = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +18,9 @@ export const SPSignup = () => {
     confirmPassword: "",
     profilePicture: "",
   });
+  // const { user, setUser } = useAuth();
+
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -50,7 +48,11 @@ export const SPSignup = () => {
     const errors = validateForm(formData);
     if (Object.keys(errors).length === 0) {
       console.log("Form submitted:", formData);
+      // setUser(formData);
       setErrors(errors);
+      // <Navigate to={<sp}/>
+      navigate("/SPSignupProfileApplication");
+      // <Navigate to={"/SPSignupProfileApplication"} />;
     } else {
       setErrors(errors);
     }
@@ -99,7 +101,7 @@ export const SPSignup = () => {
             <div className="sp__context_form_top">
               <div className="formFiled">
                 <label>
-                  Name{" "}
+                  Name
                   {errors.name && (
                     <span className="error-message">{errors.name}</span>
                   )}
@@ -109,7 +111,7 @@ export const SPSignup = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                />{" "}
+                />
                 {/* {errors.name && (
                   <span className="error-message">{errors.name}</span>
                 )} */}
@@ -117,7 +119,7 @@ export const SPSignup = () => {
 
               <div className="formFiled">
                 <label>
-                  Surname{" "}
+                  Surname
                   {errors.surname && (
                     <span className="error-message">{errors.surname}</span>
                   )}
@@ -127,7 +129,7 @@ export const SPSignup = () => {
                   name="surname"
                   value={formData.surname}
                   onChange={handleChange}
-                />{" "}
+                />
                 {/* {errors.surname && (
                   <span className="error-message">{errors.surname}</span>
                 )} */}
@@ -135,12 +137,11 @@ export const SPSignup = () => {
             </div>
 
             <div className="formFiled">
-              {" "}
               <label>
-                Password{" "}
+                Password
                 {errors.password && (
                   <span className="error-message">{errors.password}</span>
-                )}{" "}
+                )}
               </label>
               <input
                 type={inputType1}
@@ -268,12 +269,10 @@ export const SPSignup = () => {
                 </div>
               )}
             </div>
-
-            <NavLink></NavLink>
             <p>
               Already have an account? <NavLink to={"/signin"}>Signin</NavLink>
             </p>
-
+            <br />
             <button type="submit">Next</button>
             <br />
           </form>

@@ -25,12 +25,48 @@ export const AuthProvider = ({ children }) => {
     // Store user and authentication status in local storage
     localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
     localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
 
     if (user) {
       console.log("User found:", user);
       // <Navigate to={"/"} />;
     }
-  }, [user, isAuthenticated]);
+  }, [user, isAuthenticated, userDetails]);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Token not found in local storage");
+        }
+
+        const response = await fetch(
+          "http://localhost:8081/api/v1/user/user-details",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+
+        const userData = await response.json();
+        setUserDetails(userData);
+        // setLoading(false); // Set loading to false once user details are fetched
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+        // setLoading(false); // Set loading to false in case of error
+      }
+    };
+
+    fetchUserDetails();
+  }, [user]);
 
   const login = async ({ email, password }) => {
     try {
@@ -75,7 +111,7 @@ export const AuthProvider = ({ children }) => {
           case "ROLE_ADMIN":
             // Redirect admin to admin dashboard
             // history.push("/admin/dashboard");
-			<Navigate to={"/admin-dashboard"} />;
+            <Navigate to={"/admin-dashboard"} />;
             break;
           default:
             break;
@@ -94,31 +130,6 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-
-  // const register = async ({ username, email, password }) => {
-  //   try {
-  //     const response = await fetch("http://localhost:5000/users", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ username, email, password }),
-  //     });
-
-  //     if (response.ok) {
-  //       const newUser = await response.json();
-  //       setUser(newUser);
-  //       setAuthenticated(true);
-  //     } else {
-  //       setError("Registration failed.");
-  //       return false;
-  //     }
-  //   } catch (error) {
-  //     console.error("Registration failed:", error);
-  //     setError(`Registration failed: ${error}`);
-  //     return false;
-  //   }
-  // };
 
   // Define the AddressDTO
   const AddressDTO = ({ streetName, city, province, zipCode }) => ({
@@ -169,10 +180,57 @@ export const AuthProvider = ({ children }) => {
       throw new Error("Registration failed");
     }
   };
+
+  const registerSP = async ({
+    name,
+    surname,
+    email,
+    user_name,
+    password,
+    address,
+  }) => {
+    try {
+      const response = await fetch(
+        "http://localhost:8081/api/v1/auth/signup-sp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName: user_name,
+            email,
+            password,
+            firstName: name,
+            lastName: surname,
+            address: AddressDTO(address), // Convert address to AddressDTO
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorMessage = await response.text(); // Get the error message from the response
+        throw new Error(errorMessage); // Throw an error with the message
+      }
+
+      // If registration is successful, navigate to the sign-in page
+      //   navigate("/signin");
+      <Navigate to={"/signin"} />;
+
+      return true;
+    } catch (error) {
+      console.error("Registration failed:", error);
+      throw new Error("Registration failed");
+    }
+  };
+
   const logout = () => {
+    localStorage.removeItem("userDetails");
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user");
+
     setUser(null);
+    setUserDetails(null);
     setAuthenticated(false);
     <Navigate to={"/signin"} />;
   };
@@ -181,9 +239,7 @@ export const AuthProvider = ({ children }) => {
     sidebarCollapsed,
     setSidebarCollapsed,
     isAuthenticated,
-    setUser,
     userDetails,
-    setUserDetails,
     user,
     login,
     register,

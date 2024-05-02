@@ -2,7 +2,11 @@ import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useNavigate,
+} from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -35,9 +39,7 @@ import ApplicantPage from "./pages/applicantPage/ApplicantPage";
 import Update from "./pages/updateProfile/Update";
 import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
-
-
-
+import SPSignupApplication from "./pages/spSignup/SPSignupApplication";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -50,7 +52,7 @@ function App({ children }) {
       path: "/signin",
       element: <Signin />,
     },
-  
+
     {
       path: "/signup",
       element: <SignUp />,
@@ -69,6 +71,11 @@ function App({ children }) {
       path: "/SPSignupProfile",
       element: <SPSignupProfile />,
     },
+    {
+      path: "/SPSignupProfileApplication",
+      element: < SPSignupApplication />,
+    },
+
     // {
     //   path: "/bookAppointment",
     //   element: <BookAppointment />,
@@ -88,9 +95,9 @@ function App({ children }) {
         //   index: true,
         //   path: "/landing",
         //   element: (
-            
+
         //       <LandingPage />
-            
+
         //   ),
         // },
         {
@@ -247,7 +254,7 @@ function App({ children }) {
           path: "/ServiceRequest",
           element: (
             <ProtectedRoute>
-             <ServiceRequest/>
+              <ServiceRequest />
             </ProtectedRoute>
           ),
         },
@@ -255,14 +262,13 @@ function App({ children }) {
           path: "/Comms",
           element: (
             <ProtectedRoute>
-                 <Comms/>
+              <Comms />
             </ProtectedRoute>
           ),
         },
       ],
     },
   ]);
-
 
   return (
     <AuthProvider>

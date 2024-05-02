@@ -1,13 +1,11 @@
 import React from "react";
 import { Progress } from "@/components/ui/progress";
 
-const SPSIgnupProgress = ({ formData, page }) => {
+const SPSIgnupProgress = ({ completedPages, page }) => {
 
-  const totalFields = Object.keys(formData).length;
-  const completedFields = Object.values(formData).filter(
-    (value) => value !== ""
-  ).length;
-  const progressPercentage = (completedFields / totalFields) * 100;
+  const totalPages = Object.keys(page).length;
+  // const completedPages = ;
+  const progressPercentage = (completedPages / 100) * 100;
 
   return (
     <div className="progress__bar sticky top-10 ">
@@ -39,20 +37,20 @@ const SPSIgnupProgress = ({ formData, page }) => {
       >
         Profile
       </p>
-      <p
+      {/* <p
         className={
           page === "ID Verification" ? "border-b-2 border-[#576E6A]  w-3/5" : ""
         }
       >
         ID Verification
-      </p>
-      <p
+      </p> */}
+      {/* <p
         className={
           page === "Activation" ? "border-b-2 border-[#576E6A]  w-3/5" : ""
         }
       >
         Activation
-      </p>
+      </p> */}
     </div>
   );
 };
