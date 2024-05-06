@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }) => {
             break;
           case "ROLE_SERVICE_PROVIDER":
             // Redirect service provider to provider dashboard
-            <Navigate to={"/"} />;
+            <Navigate to={"/jobrequest"} />;
             break;
           case "ROLE_ADMIN":
             // Redirect admin to admin dashboard
