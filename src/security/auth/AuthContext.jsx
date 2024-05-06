@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
-// import apiClient from "../client";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
@@ -18,8 +17,6 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("userDetails")) || null;
   });
   const [error, setError] = useState(null);
-
-  // const navigate = Navigate();
 
   useEffect(() => {
     // Store user and authentication status in local storage
@@ -225,10 +222,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    // Remove all related items from local storage
     localStorage.removeItem("userDetails");
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
 
+    // Reset all state variables
     setUser(null);
     setUserDetails(null);
     setAuthenticated(false);

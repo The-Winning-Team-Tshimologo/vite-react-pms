@@ -36,7 +36,7 @@ const Application = ({ data, handleChange }) => {
         pattern="[\w\d\s.#]{2,}"
       />
 
-      <label htmlFor="PhysicalAdress" className="offscreen">
+      {/* <label htmlFor="PhysicalAdress" className="offscreen">
         {" "}
         Physical Adress{" "}
       </label>
@@ -46,9 +46,9 @@ const Application = ({ data, handleChange }) => {
         id="PhysicalAdress"
         name="PhysicalAdress"
         pattern="[\w\d\s.#]{2,}"
-      />
+      /> */}
 
-      <label htmlFor="Streetname" className="offscreen">
+      {/* <label htmlFor="Streetname" className="offscreen">
         Street Name
       </label>
       <input
@@ -57,7 +57,7 @@ const Application = ({ data, handleChange }) => {
         id="Streetname"
         name="Streetname"
         pattern="[\w\d\s.#]{2,}"
-      />
+      /> */}
 
       <label htmlFor="City">City</label>
       <input
@@ -65,6 +65,15 @@ const Application = ({ data, handleChange }) => {
         type="text"
         id="City"
         name="City"
+        pattern="([A-Z])[\w\s.]{1,}"
+      />
+
+      <label htmlFor="City">Province</label>
+      <input
+        className="application_input"
+        type="text"
+        id="Province"
+        name="Province"
         pattern="([A-Z])[\w\s.]{1,}"
       />
 

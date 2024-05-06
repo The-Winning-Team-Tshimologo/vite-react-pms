@@ -3,7 +3,7 @@ import Form from "@/components/signin/Form";
 import React from "react";
 import SPSIgnupProgress from "./SPSIgnupProgress";
 
-const SPSignupApplication = () => {
+const SPSignupApplication = ({formData}) => {
   return (
     <>
     <Header/>
@@ -12,7 +12,7 @@ const SPSignupApplication = () => {
           <SPSIgnupProgress completedPages={25} page={"Personal Information"} />
         </div>
         {/* <Header /> */}
-        <Form />
+        <Form formData2 = {formData}/>
       </div>
     </>
   );
