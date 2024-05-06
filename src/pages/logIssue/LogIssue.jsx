@@ -38,8 +38,8 @@ const handleCalendar = (selectedDate) => {
                 type="text"
                 placeholder="Address line 1"
               />
-              <input className="p-2" type="text" placeholder="Address line 2" />
-              <input className="p-2" type="text" placeholder="Suburb" />
+              
+              <input className="p-2" type="text" placeholder="streetName" />
               <input className="p-2" type="text" placeholder="City" />
               <input className="p-2" type="text" placeholder="Province" />
               <input className="p-2" type="number" placeholder="Postal Code" />
