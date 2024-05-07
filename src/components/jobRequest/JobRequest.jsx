@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import dummyData from './DummyData.jsx';
+
 import './JobRequest.css'; // Import the CSS file
-import dummyWithRate from '../helpwanted/dummyDataWithRate.jsx'
+
 import JobRequestItem from "@/components/JobRequestItem/JobRequestItem.jsx";
 import JobHeader from "@/components/jobheader/JobHeader.jsx";
 import { Button } from "@/components/ui/button.jsx";
@@ -14,7 +14,7 @@ function JobRequest() {
 	const [ServiceRequest, setServiceRequest] = useState([]);
 	const [SystemWide, setSystemWide] = useState([]);
 
-	const itemsToShow = showAllItems ? dummyData : dummyData.slice(0, 4); // Assuming initially showing 4 items
+	
 
 	useEffect(() => {
 		const fetchServiceRequests = async () => {
@@ -42,6 +42,7 @@ function JobRequest() {
 				}
 
 				const data = await response.json();
+				console.log(data);
 				setServiceRequest(data);
 			} catch (error) {
 				console.error("Error fetching service requests:", error.message);
@@ -73,6 +74,7 @@ function JobRequest() {
 				}
 
 				const data = await response.json();
+				
 				setSystemWide(data);
 			} catch (error) {
 				console.error("Error fetching system-wide data:", error.message);
@@ -90,11 +92,7 @@ function JobRequest() {
 		setSearchQuery(query);
 	};
 
-	const filteredItems = itemsToShow.filter(
-		(ServiceRequest) =>
-			ServiceRequest.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			ServiceRequest.service.toLowerCase().includes(searchQuery.toLowerCase())
-	);
+
 
 	return (
 		<>
