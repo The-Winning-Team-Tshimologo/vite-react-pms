@@ -11,6 +11,11 @@ const Header = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  useEffect(() => {
+    // This effect will re-run whenever userDetails changes
+    console.log("User details updated", userDetails);
+  }, [userDetails]);
+
 
   // If no userDetails, only render the logo
   if (!userDetails) {

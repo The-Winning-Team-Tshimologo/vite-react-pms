@@ -51,10 +51,11 @@ export const SPSignup = () => {
       // setUser(formData);
       setErrors(errors);
       // <Navigate to={<sp}/>
-      navigate("/SPSignupProfileApplication");
-      // <Navigate to={"/SPSignupProfileApplication"} />;
+      // navigate("/SPSignupProfileApplication");
+      <Navigate to={< SPSignupApplication formData = {formData}/>} />;
     } else {
       setErrors(errors);
+      
     }
   };
 

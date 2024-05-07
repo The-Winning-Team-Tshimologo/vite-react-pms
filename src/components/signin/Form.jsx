@@ -2,7 +2,7 @@ import Application from "./application/Application";
 import { useState } from "react";
 import "./Form.css";
 
-const Form = () => {
+const Form = ({formdata}) => {
   const [data, setData] = useState({
     UserName: "",
     MobileNumber: "",
@@ -39,8 +39,8 @@ const Form = () => {
 
   const content = (
     <form className="form flex-col" onSubmit={handleSubmit}>
-      {/* <h2>Application</h2> */}
-
+      <h2>Application</h2>
+      <br />
       <Application data={data} handleChange={handleChange} />
 
       <button className="submit-button" disabled={!canSave}>

@@ -1,128 +1,104 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
-import "./BrowseProfessionals.css";
-import { blue } from "@mui/material/colors";
-import { fetchAllUsers } from "@/utils/fetchAllUsers";
+import axios from "axios";
 
 const TrackActivity = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+	const [serviceData, setServiceData] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
-  useEffect(() => {
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
 
-    fetchAllUsers()
-      .then(setUsers)
-      console.log("Track Activity Users: ", users)
-      .catch((err) => {
-        console.error("Error loading users:", err);
-        setError("Failed to load users");
-      });
+		const fetchData = async () => {
+			setLoading(true);
+			try {
+				const response = await axios.get(
+					"http://localhost:8081/api/v1/service/customer",
+					config
+				);
+				setServiceData(response.data);
+				setLoading(false);
+			} catch (error) {
+				setError("Failed to fetch data");
+				setLoading(false);
+			}
+		};
+		fetchData();
+	}, []);
 
-    const fetchUserData = async () => {
-      setLoading(true);
-      const fetchedUser = await fetchUserById(users.id);
-      if (fetchedUser) {
-        setUser(fetchedUser);
-      } else {
-        setError("Unable to fetch user data.");
-      }
-      setLoading(false);
-    };
+	const StatusColor = (serviceStatus) => {
+		let statusColor = "";
+		switch (serviceStatus) {
+			case "ACCEPTED":
+				statusColor = "green";
+				break;
+			case "REJECTED":
+				statusColor = "red";
+				break;
+			case "PENDING":
+				statusColor = "grey";
+				break;
+			default:
+				statusColor = "transparent"; // Default color if status is not recognized
+		}
+		return statusColor;
+	};
 
-    if (users.id) {
-      fetchUserData();
-    }
-  }, [users.id]);
-  const [Service, setService] = useState([
-    {
-      id: 1,
-      name: "Lady Smith",
-      date: "20 Apr 2024",
-      status: "Accepted",
-      imageUrl: "src/assets/Maintenance.jpg",
-    },
-    {
-      id: 2,
-      name: "Lady Smith",
-      date: "20 Apr 2024",
-      status: "Accepted",
-      imageUrl: "src/assets/Maintenance.jpg",
-    },
-    {
-      id: 3,
-      name: "Lady Smith",
-      date: "20 Apr 2024",
-      status: "Declined",
-      imageUrl: "src/assets/Maintenance.jpg",
-    },
-    {
-      id: 4,
-      name: "Lady Smith",
-      date: "",
-      status: "Pending",
-      imageUrl: "src/assets/Maintenance.jpg",
-    },
-  ]);
-  const handleClick = (selectedService) => {
-    console.log(selectedService);
-    // navigate("/");
-  };
-
-  const StatusColor = (ServiceStatus) => {
-    let statusColor = "";
-    switch (ServiceStatus) {
-      case "Accepted":
-        statusColor = "green";
-        break;
-      case "Declined":
-        statusColor = "red";
-        break;
-      case "Pending":
-        statusColor = "grey";
-        break;
-      default:
-        statusColor = "transparent"; // Default color if status is not recognized
-    }
-    return statusColor;
-  };
-
-  return (
-    <div className="TrackActivity">
-      <h2 className="px-10">TrackActivity</h2>
-      <div className="profile-container">
-        {user.map((user, index) => (
-          <div
-            className="TrackActivity__card"
-            key={user.id}
-            onClick={() => {
-              handleClick(user);
-            }}
-          >
-            <div className="TrackActivity-header">
-              <img src={user.profilePicture} alt={user.firstName + user.lastName} />
-              <div>
-                <p>{user.requests.serviceName}</p>
-                <p>Appointment:</p>
-                <p>
-                  {user.reervice.date ? (
-                    Service.date
-                  ) : (
-                    <span style={{ color: "blue" }}>Book Appoitment</span>
-                  )}
-                </p>
-              </div>
-              <div className="service__status">
-                <span style={{ backgroundColor: StatusColor(Service.status) }}>
-                  {Service.status}
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+	return (
+		<div className='TrackActivity'>
+			<h2 className='px-10'>Track Activity</h2>
+			{loading && <p>Loading...</p>}
+			{error && <p>{error}</p>}
+			{serviceData.length === 0 && <p>No activity</p>}
+			{serviceData.length > 0 && (
+				<div className='profile-container'>
+					{serviceData.map((service, index) => (
+						<div
+							className='TrackActivity__card'
+							key={index}
+							onClick={() => {
+								handleClick(service);
+							}}
+						>
+							<div className='TrackActivity-header'>
+								<img
+									src={service.profilePicture}
+									alt={`${service.firstName} ${service.lastName}`}
+								/>
+								<div>
+									<p>
+										{service.firstName} {service.lastName}
+									</p>
+									<p>Appointment:</p>
+									<p>
+										{service.appointmentDate ? (
+											service.appointmentDate
+										) : (
+											<span style={{ color: "blue" }}>Book Appointment</span>
+										)}
+									</p>
+								</div>
+								<div className='service__status'>
+									<span
+										style={{ backgroundColor: StatusColor(service.status) }}
+									>
+										{service.status}
+									</span>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default TrackActivity;

@@ -58,6 +58,8 @@ const BrowseProfessionals = () => {
 	return (
 		<>
 			<Header />
+
+			<TrackActivity/>
 			{/* Add means of checking whether there are activities to showcase or not */}
 			{/* <TrackActivity /> */}
 			<div className='BrowseProfessionals'>
