@@ -195,6 +195,23 @@ function App({ children }) {
           ),
         },
         {
+          path: "/sp-profile/:id/:review",
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        
+        {
+          path: "/sp-profile/:id",
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        {
           path: "/add-dashboard",
           element: (
             <ProtectedRoute>

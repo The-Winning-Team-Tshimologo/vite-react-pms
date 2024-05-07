@@ -4,6 +4,7 @@ import Header from "@/components/header/Header";
 import { Button } from "@/components/ui/button";
 import { fetchAllUsers } from "@/utils/fetchAllUsers";
 import { fetchUsersByRole } from "@/utils/fetchUsersByRole";
+import { useNavigate } from "react-router";
 
 // const mockSPData = [
 //   {
@@ -81,33 +82,56 @@ const Users = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchAllUsers()
-      .then(setUsers)
-      // console.log("Users: ", users)
-      .catch((err) => {
-        console.error("Error loading users:", err);
-        setError("Failed to load users");
-      });
+  // useEffect(() => {
+  //   fetchAllUsers()
+  //     .then(setUsers)
+  //     // console.log("Users: ", users)
+  //     .catch((err) => {
+  //       console.error("Error loading users:", err);
+  //       setError("Failed to load users");
+  //     });
 
-    fetchUsersByRole("service_provider").then((users) => {
-      if (users) {
-        setServiceProviders(users);
-        console.log("Fetched service providers:", users);
-      } else {
-        console.log("No service providers found or an error occurred.");
-      }
-    });
+  //   fetchUsersByRole("service_provider").then((users) => {
+  //     if (users) {
+  //       setServiceProviders(users);
+  //       console.log("Fetched service providers:", users);
+  //     } else {
+  //       console.log("No service providers found or an error occurred.");
+  //     }
+  //   });
 
-    fetchUsersByRole("customer").then((users) => {
-      if (users) {
-        setCustomers(users);
-        console.log("Fetched customers:", users);
-      } else {
-        console.log("No customers were found or an error occurred.");
-      }
+  //   fetchUsersByRole("customer").then((users) => {
+  //     if (users) {
+  //       setCustomers(users);
+  //       console.log("Fetched customers:", users);
+  //     } else {
+  //       console.log("No customers were found or an error occurred.");
+  //     }
+  //   });
+  // }, []);
+
+
+  const [applications, setApplications] = useState([]);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+useEffect(() => {
+  fetch("http://localhost:8081/api/v1/admin/pending-sp", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setApplications(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
     });
-  }, []);
+}, []);
+
+
+
 
   return (
     <div>
