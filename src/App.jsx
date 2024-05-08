@@ -40,6 +40,7 @@ import Update from "./pages/updateProfile/Update";
 import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import SPSignupApplication from "./pages/spSignup/SPSignupApplication";
+import { FormProvider } from "./utils/FormContext";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -64,6 +65,11 @@ function App({ children }) {
       element: <SPSignup />,
     },
     {
+      path: "/SPSignupProfileApplication",
+      element: <SPSignupApplication />,
+    },
+
+    {
       path: "/SPSignupUploadDocuments",
       element: <SPSignupUploadDocument />,
     },
@@ -71,11 +77,7 @@ function App({ children }) {
       path: "/SPSignupProfile",
       element: <SPSignupProfile />,
     },
-    {
-      path: "/SPSignupProfileApplication",
-      element: < SPSignupApplication />,
-    },
-
+    
     // {
     //   path: "/bookAppointment",
     //   element: <BookAppointment />,
@@ -271,11 +273,13 @@ function App({ children }) {
   ]);
 
   return (
-    <AuthProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router}>{children}</RouterProvider>
-      </LocalizationProvider>
-    </AuthProvider>
+    <FormProvider>
+      <AuthProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <RouterProvider router={router}>{children}</RouterProvider>
+        </LocalizationProvider>
+      </AuthProvider>
+    </FormProvider>
   );
 }
 
