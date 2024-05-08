@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfessionalProfileCard.css";
 import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
+import axios from "axios";
 // import { useAuth } from "@/security/auth/AuthContext";
 
 // Mock data for professional's profile (this would typically be fetched from an API)
@@ -53,33 +54,119 @@ const professionalProfile = {
   },
 };
 
-const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
+const ProfessionalProfileCard = ({
+  useButtons,
+  useDocs,
+  serviceProvider,
+  id,
+}) => {
+  const [serviceProviderInfo, setServiceProviderInfo] = useState([]);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8081/api/v1/admin/get-sp/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setServiceProviderInfo(response.data);
+        console.log("sp :", serviceProviderInfo);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id, token]);
+
+  const handleClick = async (serviceProviderID, Accept) => {
+    console.log("click " + id + status + "toke ");
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8081/api/v1/admin/toogle-service-providers-status/${serviceProviderID}`,
+        null,
+        {
+          params: {
+            Accept: Accept,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data); // Handle the response data as needed
+
+      return response.data; // Return data if needed
+    } catch (error) {
+      console.error("Error:", error);
+      throw new Error("Failed to submit service provider status");
+    }
+  };
+
+  const handleDownload = (dataUrl, fileName) => {
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = fileName;
+    link.click();
+  };
+
+  const renderImage = (blobData, fileName) => {
+    if (blobData && blobData instanceof Blob) {
+      const imgUrl = URL.createObjectURL(blobData);
+      return (
+        <>
+          <img src={imgUrl} alt={fileName} width={200} height={200} />
+          <button onClick={() => handleDownload(imgUrl, fileName)}>Download {fileName}</button>
+        </>
+      );
+    } else {
+      return <div>No image available</div>;
+    }
+  };
 
   return (
     <div className="professional-profile__card">
       <div className="professional-profile__header">
         <img
-          src="/src/assets/sbusisoAvatar.png"
-          alt={professionalProfile.name}
+          src={`data:multipart/form-data;base64,${serviceProviderInfo.profilePicture}`}
+          alt={serviceProviderInfo.firstName}
           className="professional-profile__image"
         />
         <div className="professional-profile__header-info">
           <h2 className="professional-profile__name">
-            {professionalProfile.name}
+            {serviceProviderInfo.firstName}
             <div className="professional-profile__rating">
-              {professionalProfile.rating}/5 ★
+              {serviceProviderInfo.rating}/5 ★
             </div>
           </h2>
           <div className="professional-profile__profession-info">
             <p className="professional-profile__profession">
-              {professionalProfile.profession}
+              {serviceProviderInfo.category
+                ? serviceProviderInfo.category.name
+                : "N/A"}
             </p>
-            <p> {professionalProfile.location} </p>
+            <p>
+              {" "}
+              {serviceProviderInfo.address
+                ? serviceProviderInfo.address.city
+                : "N/A"}{" "}
+            </p>
           </div>
 
           <div className="professional-profile__details">
             <span className="professional-profile__reviews">
-              {professionalProfile.reviewsCount} Reviews
+              {serviceProviderInfo.reviews
+                ? serviceProviderInfo.reviews.length
+                : 0}{" "}
+              Reviews
             </span>
             <span className="professional-profile-horizontal-divider"></span>
             <span className="professional-profile__reviews">
@@ -87,7 +174,11 @@ const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
             </span>
             <span className="professional-profile-horizontal-divider"></span>
             <span className="professional-profile__rate">
-              R{professionalProfile.hourlyRate} per hour
+              R
+              {serviceProviderInfo.profile
+                ? serviceProviderInfo.profile.hourlyRate
+                : "N/A"}{" "}
+              per hour
             </span>
             <span className="professional-profile-horizontal-divider"></span>
             <span className="professional-profile__availability">
@@ -101,40 +192,65 @@ const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
       </div>
       <div className="professional-profile__body-details">
         <div className="professional-profile__summary">
-          <h3 className="professional-profile__text-bold">
+          <h2 className="professional-profile__text-bold">
             Professional Summary
-          </h3>
-          <p>{professionalProfile.professionalSummary}</p>
+          </h2>
+          <p>
+            {serviceProviderInfo.profile
+              ? serviceProviderInfo.profile.professionalSummary
+              : "N/A"}
+          </p>
         </div>
+        <br />
         <div className="professional-profile__experience">
-          <h3 className="professional-profile__text-bold">Work Experience</h3>
-          {professionalProfile.experience.map((job, index) => (
-            <div key={index} className="professional-profile__job">
-              <h4>
-                {job.title} at {job.company}
-              </h4>
-              <p>{job.dateRange}</p>
-              {job.achievements.map((achievement, index) => (
-                <p key={index}>• {achievement}</p>
-              ))}
-            </div>
-          ))}
+          <h2 className="professional-profile__text-bold">Work Experience</h2>
+          {serviceProviderInfo &&
+            serviceProviderInfo.profile &&
+            Array.isArray(serviceProviderInfo.profile.workExperienceList) &&
+            serviceProviderInfo.profile.workExperienceList.map((job, index) => (
+              <div key={index} className="professional-profile__job">
+                <h4>
+                  <strong> {job.title} </strong> at {job.companyName}
+                </h4>
+                <p>
+                  {job.startDate.split("T")[0]} to {"     "}
+                  {job.endDate ? job.endDate.split("T")[0] : "Present"}
+                </p>
+                <p>{job.description}</p>
+                <br />
+              </div>
+            ))}
         </div>
+
         <div className="professional-profile__education">
-          <h3 className="professional-profile__text-bold">Education</h3>
-          <p>{professionalProfile.education.institution}</p>
-          <p>{professionalProfile.education.degree}</p>
-          {professionalProfile.education.accolades.map((accolade, index) => (
-            <p key={index}>• {accolade}</p>
-          ))}
+          <h2 className="professional-profile__text-bold">Education</h2>
+          {serviceProviderInfo &&
+            serviceProviderInfo.profile &&
+            Array.isArray(serviceProviderInfo.profile.education) &&
+            serviceProviderInfo.profile.education.map((education, index) => (
+              <div key={index}>
+                <p>
+                  {" "}
+                  <strong>{education.qualification} </strong>
+                </p>
+                <p>{education.institution} </p>
+                <p>
+                  {education.startDate.split("T")[0]} to {"     "}
+                  {education.enddate
+                    ? education.enddate.split("T")[0]
+                    : "Present"}
+                </p>
+              </div>
+            ))}
         </div>
-        <div className="professional-profile__license">
-          <p>{professionalProfile.license}</p>
-        </div>
+        <br />
         <div className="professional-profile__skills">
-          <h3 className="professional-profile__text-bold">Skills</h3>
-          <p>{professionalProfile.skills.technicalSkills}</p>
-          <p>{professionalProfile.skills.softSkills}</p>
+          <h2 className="professional-profile__text-bold">Skills</h2>
+          <p>
+            {serviceProviderInfo.profile
+              ? serviceProviderInfo.profile.skills
+              : "N/A"}
+          </p>
         </div>
       </div>
       {useButtons && (
@@ -154,14 +270,34 @@ const ProfessionalProfileCard = ({ useButtons, useDocs }) => {
           <div className="application-documents__container">
             <div>Document 1</div>
             <div>Document 2</div>
-            <div>Document 3</div>
+            <div>
+              <h3>Bank Statement</h3>
+              {renderImage(
+                serviceProviderInfo.bankStatement,
+                "bank_statement.png"
+              )}
+            </div>
+            <div>
+              <h3>Resume</h3>
+              {renderImage(serviceProviderInfo.resume, "resume.png")}
+            </div>
           </div>
           <div className="application-documents-action__btns">
             <Button className="application-document__download-btn">
               Download
             </Button>
-            <Button className="application-document__accept-btn">Accept</Button>
-            <Button className="application-document__reject-btn">Reject</Button>
+            <Button
+              className="application-document__accept-btn"
+              onClick={() => handleClick(id, true)}
+            >
+              Accept
+            </Button>
+            <Button
+              className="application-document__reject-btn"
+              onClick={() => handleClick(id, false)}
+            >
+              Reject
+            </Button>
           </div>
         </>
       )}

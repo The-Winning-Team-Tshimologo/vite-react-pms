@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Applications.css";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/Header";
+import { useNavigate } from "react-router";
 
 const mockData = [
   {
@@ -45,8 +46,11 @@ const Applications = () => {
 
   const [applications, setApplications] = useState([]);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
 useEffect(() => {
+
+  const fetchUserData = async () => {
   fetch("http://localhost:8081/api/v1/admin/pending-sp", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -59,8 +63,19 @@ useEffect(() => {
     .catch((error) => {
       console.error("Error fetching data:", error);
     });
+
+  }
+
+
+  fetchUserData();
 }, []);
 
+  const handleClick =(userId)=>{
+    console.log(userId);  
+    navigate("/sp-profile/"+userId+"/"+true)
+
+
+  }
 
   return (
     <div>
@@ -83,7 +98,7 @@ useEffect(() => {
       ))}
 
 <h2 className="applications-heading">Applications</h2>
-      {applications.map((application) => (
+      { applications.length >0 ? applications.map((application) => (
         <div key={application.userId} className="application-card">
           <img
             className="application-card__img"
@@ -94,11 +109,11 @@ useEffect(() => {
             {application.firstName} {application.lastName}
           </p>
           
-          <p className="application-card-date">{application.date}</p>
-          <p className="application-card-time">{application.time}</p>
-          <Button className="application-card__btn">View</Button>
+           <p className="application-card-date">{application.createdDate.split('T')[0]}</p>
+          <p className="application-card-time">{application.createdDate.split('T')[1].split('.')[0]}</p>
+          <Button className="application-card__btn" onClick={()=>handleClick(application.userId)}>View</Button>
         </div>
-      ))}
+      )) :<h2 className="pl-12">No Applications</h2>}
     </div>
   );
 };

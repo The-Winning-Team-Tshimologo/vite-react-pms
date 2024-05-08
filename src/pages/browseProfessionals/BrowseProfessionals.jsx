@@ -52,7 +52,7 @@ const BrowseProfessionals = () => {
 
 	const handleClick = (selectedProfile) => {
 		console.log(selectedProfile);
-		// navigate("/");
+		navigate("/sp-profile/3");
 	};
 
 	return (

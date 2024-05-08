@@ -11,7 +11,7 @@ const ProfileCard = ({ profile, handleClick }) => {
 			className='profile-card'
 			key={profile.id}
 			onClick={() => {
-				handleClick(profile);
+				handleClick(profile.id);
 			}}
 		>
 			<div className='profile-header'>
