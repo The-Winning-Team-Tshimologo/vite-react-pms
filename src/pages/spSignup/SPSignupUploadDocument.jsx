@@ -63,8 +63,8 @@ export const SPSignupUploadDocument = () => {
         </div>
         {/* <h2>SPSignupUploadDocument</h2> */}
         <div className="SPSignupUploadDocument__form">
-          <h2 className="flex items-center justify-center -ms-56">
-            Application
+          <h2 className="w-full text-center">
+            <span className="-ms-52">Application</span>
           </h2>
 
           <form onSubmit={handleSubmit}>
@@ -102,21 +102,6 @@ export const SPSignupUploadDocument = () => {
               errors={errors.resume}
               labelName={"Resume"}
             />
-
-            {/* <div className="formFiled">
-              <label>
-                SARS No.{" "}
-                {errors.sarsNo && (
-                  <span className="error-message">{errors.sarsNo}</span>
-                )}
-              </label>
-              <input
-                type="number"
-                name="sarsNo"
-                value={formData.sarsNo}
-                onChange={handleChange}
-              />{" "}
-            </div> */}
 
             <div className="bankDetails__header">
               <span>Account Details</span>

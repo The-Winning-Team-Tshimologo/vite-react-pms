@@ -11,7 +11,9 @@ const Form = () => {
 
   return (
     <div className="form flex-col">
-      <h2>Application</h2>
+      <h2 className="w-full text-center">
+            <span className="-ms-52">Application</span>
+          </h2>
       <br />
       <Application/>
 

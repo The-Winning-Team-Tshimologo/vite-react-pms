@@ -5,11 +5,23 @@
 }
 
 .SPSignupProfile__form_container {
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 1rem;
+ flex: 1;
+ 
   
+}
+
+.textarea-custom__border {
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary) !important;
+  width: 50rem !important;
+  caret-color: var(--color-primary);
+  outline: none;
+}
+
+
+.inputbox-custom__border {
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary) !important;
 }
 
 .sp__context {
@@ -75,7 +87,14 @@
   color: white;
   cursor: pointer;
   border-radius: 5px;
-  
+}
+
+.sp__profile-btn {
+  padding: 10px 45px;
+  background-color: var(--color-secondary) !important;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .sp__requirements,
@@ -162,7 +181,7 @@
 }
 
 .SPSignupProfile__progress, .SPSignupUploadDocument__progress{
-  width: 25%;
+  width: 35%;
 }
 .pbar{
   width: 10%;
@@ -273,8 +292,8 @@
     /* width: ; */
   }
   .progress__bar{
-    width: 400px;
-    margin: auto 20px;
+    /* width: 500px;
+    margin: auto 20px; */
   }
  
   .SPSignupProfile__progress,.SPSignupUploadDocument__progress{

@@ -5,6 +5,7 @@ import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
 import { NavLink, useNavigate } from "react-router-dom";
+import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
 export const SPSignup = () => {
   const { formData, updateFormData } = useFormContext();
@@ -23,10 +24,13 @@ export const SPSignup = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    updateFormData({ [name]: type === "file" ? e.target.files[0] : value });
+    const { name, type, files } = e.target;
+    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
   };
 
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    updateFormData({ [inputName]: acceptedFiles[0] });
+  };
   const validateForm = () => {
     const newErrors = {};
     [
@@ -81,13 +85,10 @@ export const SPSignup = () => {
           <form onSubmit={handleSubmit}>
             <div className="sp__context_form_top">
               <div className="formFiled">
-                <label>
-                  Firstname
-                  
-                </label>
+                <label>Firstname</label>
                 {errors.firstname && (
-                    <span className="error-message">{errors.firstname}</span>
-                  )}
+                  <span className="error-message">{errors.firstname}</span>
+                )}
                 <input
                   type="text"
                   name="firstname"
@@ -97,13 +98,10 @@ export const SPSignup = () => {
               </div>
 
               <div className="formFiled">
-                <label>
-                  Lastname
-                  
-                </label>
+                <label>Lastname</label>
                 {errors.lastname && (
-                    <span className="error-message">{errors.lastname}</span>
-                  )}
+                  <span className="error-message">{errors.lastname}</span>
+                )}
                 <input
                   type="text"
                   name="lastname"
@@ -166,18 +164,14 @@ export const SPSignup = () => {
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
               </label>
-              <div
-                {...getRootProps()}
-                className="file-upload-box"
-                style={{
-                  borderColor: isDragActive ? "#888" : "#5E8D83",
-                  backgroundColor: isDragAccept ? "#f0f8ff" : "#f8fafc",
-                }}
-              >
-                <img src={uploadIcon} alt="Upload" className="h-12" />
-                <input {...getInputProps()} />
-                <p>Drag & drop files or click to browse</p>
-              </div>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="profilePicture"
+                formData={formData.profilePicture}
+                errors={errors.profilePicture}
+                labelName="Upload Avatar"
+              />
               {formData.profilePicture && (
                 <div className="file-feedback">
                   <p>File selected: {formData.profilePicture.name}</p>

@@ -41,6 +41,8 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import SPSignupApplication from "./pages/spSignup/SPSignupApplication";
 import { FormProvider } from "./utils/FormContext";
+import Onboarding from "./pages/onbaording/Activation";
+import Activation from "./pages/onbaording/Activation";
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -76,6 +78,10 @@ function App({ children }) {
     {
       path: "/SPSignupProfile",
       element: <SPSignupProfile />,
+    },
+    {
+      path: "/SPActivation",
+      element: <Activation />,
     },
     
     // {
