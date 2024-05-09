@@ -37,6 +37,7 @@ const BrowseProfessionals = () => {
 
 				// Parse the response JSON
 				const data = await response.json();
+				console.log(data);
 
 				// Update the state variable with the fetched data
 				setProfiles(data);
@@ -52,8 +53,9 @@ const BrowseProfessionals = () => {
 
 	const handleClick = (selectedProfile) => {
 		console.log(selectedProfile);
-		navigate("/sp-profile/3");
+		navigate(`/sp-profile/${selectedProfile.userId}`);
 	};
+
 
 	return (
 		<>

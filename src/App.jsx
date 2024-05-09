@@ -43,249 +43,257 @@ import SPSignupApplication from "./pages/spSignup/SPSignupApplication";
 
 function App({ children }) {
   const router = createBrowserRouter([
-    {
-      index: true,
-      path: "/landing",
-      element: <LandingPage />,
-    },
-    {
-      path: "/signin",
-      element: <Signin />,
-    },
+		{
+			index: true,
+			path: "/landing",
+			element: <LandingPage />,
+		},
+		{
+			path: "/signin",
+			element: <Signin />,
+		},
 
-    {
-      path: "/signup",
-      element: <SignUp />,
-      // Eyes
-      // Button
-    },
-    {
-      path: "/SPSignup",
-      element: <SPSignup />,
-    },
-    {
-      path: "/SPSignupUploadDocuments",
-      element: <SPSignupUploadDocument />,
-    },
-    {
-      path: "/SPSignupProfile",
-      element: <SPSignupProfile />,
-    },
-    {
-      path: "/SPSignupProfileApplication",
-      element: < SPSignupApplication />,
-    },
+		{
+			path: "/signup",
+			element: <SignUp />,
+			// Eyes
+			// Button
+		},
+		{
+			path: "/SPSignup",
+			element: <SPSignup />,
+		},
+		{
+			path: "/SPSignupUploadDocuments",
+			element: <SPSignupUploadDocument />,
+		},
+		{
+			path: "/SPSignupProfile",
+			element: <SPSignupProfile />,
+		},
+		{
+			path: "/SPSignupProfileApplication",
+			element: <SPSignupApplication />,
+		},
 
-    // {
-    //   path: "/bookAppointment",
-    //   element: <BookAppointment />,
-    // },
-    // {
-    //   path: "/browseProfessionals",
-    //   element: <BrowseProfessionals />,
-    // },
-    {
-      element: (
-        <ProtectedRoute>
-          <Sidebar />
-        </ProtectedRoute>
-      ),
-      children: [
-        // {
-        //   index: true,
-        //   path: "/landing",
-        //   element: (
+		// {
+		//   path: "/bookAppointment",
+		//   element: <BookAppointment />,
+		// },
+		// {
+		//   path: "/browseProfessionals",
+		//   element: <BrowseProfessionals />,
+		// },
+		{
+			element: (
+				<ProtectedRoute>
+					<Sidebar />
+				</ProtectedRoute>
+			),
+			children: [
+				// {
+				//   index: true,
+				//   path: "/landing",
+				//   element: (
 
-        //       <LandingPage />
+				//       <LandingPage />
 
-        //   ),
-        // },
-        {
-          path: "/",
-          element: (
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/update",
-          element: <Update />,
-        },
+				//   ),
+				// },
+				{
+					path: "/",
+					element: (
+						<ProtectedRoute>
+							<Dashboard />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/update",
+					element: <Update />,
+				},
 
-        {
-          path: "/issues",
-          element: (
-            <ProtectedRoute>
-              <LogIssue />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/appointments",
-          element: (
-            <ProtectedRoute>
-              <Appointments />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/admin-dashboard",
-          element: (
-            <ProtectedRoute>
-              <SPDashboard />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/payment",
-          element: (
-            <ProtectedRoute>
-              <Payment />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/jobrequest",
-          element: (
-            <ProtectedRoute>
-              <JobRequest />
-            </ProtectedRoute>
-          ),
-        },
+				{
+					path: "/issues",
+					element: (
+						<ProtectedRoute>
+							<LogIssue />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/issues/:id",
+					element: (
+						<ProtectedRoute>
+							<LogIssue />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/appointments",
+					element: (
+						<ProtectedRoute>
+							<Appointments />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/admin-dashboard",
+					element: (
+						<ProtectedRoute>
+							<SPDashboard />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/payment",
+					element: (
+						<ProtectedRoute>
+							<Payment />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/jobrequest",
+					element: (
+						<ProtectedRoute>
+							<JobRequest />
+						</ProtectedRoute>
+					),
+				},
 
-        {
-          path: "/schedule-appointment",
-          element: (
-            <ProtectedRoute>
-              <BookAppointment />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/browse-professionals",
-          element: (
-            <ProtectedRoute>
-              <BrowseProfessionals />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/inbox",
-          element: (
-            <ProtectedRoute>
-              <MessagingPage />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/invoice",
-          element: (
-            <ProtectedRoute>
-              <Invoice />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/profile",
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/sp-profile/:id/:review",
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          ),
-        },
-        
-        {
-          path: "/sp-profile/:id",
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/add-dashboard",
-          element: (
-            <ProtectedRoute>
-              <ADDashboard />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/reminders",
-          element: (
-            <ProtectedRoute>
-              <Reminders />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/review",
-          element: (
-            <ProtectedRoute>
-              <ReviewPage />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/applications",
-          element: (
-            <ProtectedRoute>
-              <Applications />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/users",
-          element: (
-            <ProtectedRoute>
-              <Users />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/applicant",
-          element: (
-            <ProtectedRoute>
-              <ApplicantPage />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/profile/:id",
-          element: (
-            <ProtectedRoute>
-              <Update />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/ServiceRequest",
-          element: (
-            <ProtectedRoute>
-              <ServiceRequest />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/Comms",
-          element: (
-            <ProtectedRoute>
-              <Comms />
-            </ProtectedRoute>
-          ),
-        },
-      ],
-    },
-  ]);
+				{
+					path: "/schedule-appointment",
+					element: (
+						<ProtectedRoute>
+							<BookAppointment />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/browse-professionals",
+					element: (
+						<ProtectedRoute>
+							<BrowseProfessionals />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/inbox",
+					element: (
+						<ProtectedRoute>
+							<MessagingPage />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/invoice",
+					element: (
+						<ProtectedRoute>
+							<Invoice />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/profile",
+					element: (
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/sp-profile/:id/:review",
+					element: (
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					),
+				},
+
+				{
+					path: "/sp-profile/:id",
+					element: (
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/add-dashboard",
+					element: (
+						<ProtectedRoute>
+							<ADDashboard />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/reminders",
+					element: (
+						<ProtectedRoute>
+							<Reminders />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/review",
+					element: (
+						<ProtectedRoute>
+							<ReviewPage />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/applications",
+					element: (
+						<ProtectedRoute>
+							<Applications />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/users",
+					element: (
+						<ProtectedRoute>
+							<Users />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/applicant",
+					element: (
+						<ProtectedRoute>
+							<ApplicantPage />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/profile/:id",
+					element: (
+						<ProtectedRoute>
+							<Update />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/ServiceRequest",
+					element: (
+						<ProtectedRoute>
+							<ServiceRequest />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/Comms",
+					element: (
+						<ProtectedRoute>
+							<Comms />
+						</ProtectedRoute>
+					),
+				},
+			],
+		},
+	]);
 
   return (
     <AuthProvider>

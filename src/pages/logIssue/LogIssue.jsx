@@ -7,11 +7,14 @@ import "./LogIssue.css";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const LogIssue = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [description, setDescription] = useState("");
-  const [descriptionBook, setDescriptionBook] = useState("");
+	const { id } = useParams(); // Ensure this line extracts the 'id' correctly
+
+	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [description, setDescription] = useState("");
+	const [descriptionBook, setDescriptionBook] = useState("");
 	const [address, setAddress] = useState({
 		streetName: "",
 		city: "",
@@ -29,52 +32,47 @@ const LogIssue = () => {
 		setSelectedDate(selectedDate); // Set the selected date
 	};
 
-const handleSubmit = async () => {
-	try {
-		// Retrieve the token from local storage
-		const token = localStorage.getItem("token");
+	const handleSubmit = async () => {
+		try {
+			const token = localStorage.getItem("token");
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			};
 
-		// Set the Authorization header with the token
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
-			},
-		};
+			const postData = {
+				createServiceRequestDTO: {
+					description,
+					address,
+				},
+				createAppointmentDTO: {
+					appointmentDate: selectedDate ? selectedDate : null,
+					appointmentMessage: descriptionBook,
+				},
+			};
 
-		// Construct the data object to be posted
-		const postData = {
-			createServiceRequestDTO: {
-				description,
-				address,
-			},
-			createAppointmentDTO: {
-				appointmentDate: selectedDate ? selectedDate : null, // Convert to ISO string if selectedDate is not null
-				appointmentMessage: descriptionBook,
-			},
-		};
+			let url = `http://localhost:8081/api/v1/service/create/`;
 
-		console.log("Data to be posted:", postData); // Log the data being posted
+			if (id) {
+				// If serviceProviderId is available, include it in the URL
+				url += `${id}/${selectedCategory}`;
+			} else {
+				// Otherwise, use the default endpoint
+				url += `${selectedCategory}`;
+			}
 
-		// Send the POST request
-		const response = await axios.post(
-			`http://localhost:8081/api/v1/service/create/${selectedCategory}`,
-			postData,
-			config
-		);
+			const response = await axios.post(url, postData, config);
+			console.log(response.data);
+			window.alert("Service requested successfully");
+		} catch (error) {
+			console.error("Error requesting service:", error);
+			window.alert("Failed to request service. Please try again later.");
+		}
+	};
 
-		console.log(response.data); // Log the response data if needed
-		window.alert("Service requested successfully");
-		// Optionally, perform additional logic after the service request is successful
-	} catch (error) {
-		console.error("Error requesting service:", error);
-		window.alert("Failed to request service. Please try again later.");
-		// Optionally, handle errors gracefully
-	}
-};
-
-
-  return (
+	return (
 		<>
 			<Header />
 			{/* <div className="mt-10 mr-2 mx-2">
@@ -146,8 +144,6 @@ const handleSubmit = async () => {
 					<h2 className='text-center'>Upload</h2>
 					<FileUpload onClick={handleFileUpload} />
 				</div>
-
-		
 
 				<div className='appointment__container flex'>
 					<div className='flex-1'>

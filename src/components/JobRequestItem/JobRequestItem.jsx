@@ -4,8 +4,13 @@ import React from "react";
 import { MdOutlinePinDrop, MdQuestionMark } from "react-icons/md";
 import ServiceRequest from "../ServiceRequest/ServiceRequest";
 import axios from "axios";
+import { useEffect } from "react";
 
 const JobRequestItem = ({ ServiceRequest }) => {
+
+	useEffect(() => {
+		
+	});
  const handleAcceptRequest = async () => {
 		const token = localStorage.getItem("token");
 		const config = {
@@ -73,6 +78,8 @@ const JobRequestItem = ({ ServiceRequest }) => {
 			console.error("Error accepting request:", error);
 		}
 	};
+
+
 	return (
 		<li className='personal-request'>
 			<div className='flex items-center h-auto'>
