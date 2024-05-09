@@ -1,13 +1,17 @@
 .flex-col {
     display: flex;
     flex-direction: column;
-    max-width: 400px; /* Adjust the maximum width as needed */
-    margin: auto; /* Center the form horizontally */
-    
+    max-width: 400px;
+    /* Adjust the maximum width as needed */
+    margin: auto;
+    /* Center the form horizontally */
+    padding-bottom: 1rem;
+
 }
-.application_input_select{
+
+.application_input_select {
     border: 1px solid #5e8d83;
-    padding: 12px; 
+    padding: 12px;
 }
 
 .split-container {
@@ -16,28 +20,29 @@
 }
 
 .application_input {
-    border: 1px solid #5e8d83;
-    padding: 12px;
+    border: 1px solid var(--color-secondary);
+    padding: 10px;
     margin-bottom: 29px;
     width: 35rem;
-    border-radius: 1px;
+    border-radius: 8px;
 }
 
 
 .submit-button {
-    
-        margin-top: 31px;
-        padding: 9px;
-        background-color: #5E8D83;
-        color: white;
-        cursor: pointer;
-        border: none;
-        width: 5rem;
-        margin-left: 9rem;
-    
+
+    /* margin-top: 31px; */
+    padding: 9px;
+    background-color: var(--color-secondary);
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 10rem;
+    border-radius: 8px;
+    /* margin-left: 9rem; */
+
 }
 
-.flex-col h1{
+.flex-col h1 {
 
     padding: 18px;
 }

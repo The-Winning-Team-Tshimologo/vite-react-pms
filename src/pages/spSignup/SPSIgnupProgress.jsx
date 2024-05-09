@@ -44,13 +44,13 @@ const SPSIgnupProgress = ({ completedPages, page }) => {
       >
         ID Verification
       </p> */}
-      {/* <p
+      <p
         className={
           page === "Activation" ? "border-b-2 border-[#576E6A]  w-3/5" : ""
         }
       >
         Activation
-      </p> */}
+      </p>
     </div>
   );
 };

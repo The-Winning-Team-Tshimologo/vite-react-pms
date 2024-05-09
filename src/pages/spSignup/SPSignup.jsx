@@ -1,29 +1,17 @@
 import React, { useState } from "react";
+import { useFormContext } from "@/utils/FormContext";
 import "./SPSignup.css";
-import { FaFile } from "react-icons/fa6";
-// import { FaCloudUploadAlt } from "react-icons/fa";
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
+import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
-import { NavLink, Navigate } from "react-router-dom";
-import { useAuth } from "@/security/auth/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
 export const SPSignup = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    password: "",
-    confirmPassword: "",
-    profilePicture: "",
-  });
-  // const { user, setUser } = useAuth();
-
+  const { formData, updateFormData } = useFormContext();
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
-
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
 
@@ -36,55 +24,51 @@ export const SPSignup = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "file" ? e.target.files[0] : value,
+    const { name, type, files } = e.target;
+    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
+  };
+
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    updateFormData({ [inputName]: acceptedFiles[0] });
+  };
+  const validateForm = () => {
+    const newErrors = {};
+    [
+      "firstname",
+      "lastname",
+      "password",
+      "confirmPassword",
+      "profilePicture",
+    ].forEach((field) => {
+      if (!formData[field]) {
+        newErrors[field] = "  This field is required";
+      }
     });
+
+    if (
+      formData.password &&
+      formData.confirmPassword &&
+      formData.password !== formData.confirmPassword
+    ) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errors = validateForm(formData);
-    if (Object.keys(errors).length === 0) {
+    if (validateForm()) {
       console.log("Form submitted:", formData);
-      // setUser(formData);
-      setErrors(errors);
-      // <Navigate to={<sp}/>
-      // navigate("/SPSignupProfileApplication");
-      <Navigate to={< SPSignupApplication formData = {formData}/>} />;
+      navigate("/SPSignupProfileApplication"); // Redirect on successful submission
     } else {
-      setErrors(errors);
-      
+      console.log("Validation errors:", errors);
     }
   };
 
-  const validateForm = (data) => {
-    const errors = {};
-
-    for (const key in data) {
-      if (!data[key]) {
-        // errors[key] = `${
-        //   key.charAt(0).toUpperCase() + key.slice(1)
-        // } is required `;
-
-        errors[key] = ` is required `;
-      }
-    }
-
-    if (data.password !== data.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-
-    return errors;
-  };
-
-  const onDrop = (acceptedFiles, fieldName) => {
-    setFormData({
-      ...formData,
-      ["profilePicture"]: acceptedFiles[0],
-    });
-    console.log(acceptedFiles[0]);
+  const onDrop = (acceptedFiles) => {
+    updateFormData({ profilePicture: acceptedFiles[0] });
   };
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept } =
@@ -101,39 +85,29 @@ export const SPSignup = () => {
           <form onSubmit={handleSubmit}>
             <div className="sp__context_form_top">
               <div className="formFiled">
-                <label>
-                  Name
-                  {errors.name && (
-                    <span className="error-message">{errors.name}</span>
-                  )}
-                </label>
+                <label>Firstname</label>
+                {errors.firstname && (
+                  <span className="error-message">{errors.firstname}</span>
+                )}
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="firstname"
+                  value={formData.firstname || ""}
                   onChange={handleChange}
                 />
-                {/* {errors.name && (
-                  <span className="error-message">{errors.name}</span>
-                )} */}
               </div>
 
               <div className="formFiled">
-                <label>
-                  Surname
-                  {errors.surname && (
-                    <span className="error-message">{errors.surname}</span>
-                  )}
-                </label>
+                <label>Lastname</label>
+                {errors.lastname && (
+                  <span className="error-message">{errors.lastname}</span>
+                )}
                 <input
                   type="text"
-                  name="surname"
-                  value={formData.surname}
+                  name="lastname"
+                  value={formData.lastname || ""}
                   onChange={handleChange}
                 />
-                {/* {errors.surname && (
-                  <span className="error-message">{errors.surname}</span>
-                )} */}
               </div>
             </div>
 
@@ -147,9 +121,8 @@ export const SPSignup = () => {
               <input
                 type={inputType1}
                 name="password"
-                value={formData.password}
+                value={formData.password || ""}
                 onChange={handleChange}
-                // id="password"
               />
               <span onClick={toggleInputType1} className="icon-button">
                 {inputType1 === "password" ? (
@@ -157,27 +130,23 @@ export const SPSignup = () => {
                 ) : (
                   <FaEyeSlash className="icon-button__icon" />
                 )}
-              </span>{" "}
-              {/* {errors.password && (
-                <span className="error-message">{errors.password}</span>
-              )} */}
+              </span>
             </div>
 
             <div className="formFiled">
               <label>
-                Confirm Password{" "}
+                Confirm Password
                 {errors.confirmPassword && (
                   <span className="error-message">
                     {errors.confirmPassword}
                   </span>
-                )}{" "}
+                )}
               </label>
               <input
                 type={inputType2}
                 name="confirmPassword"
-                value={formData.confirmPassword}
+                value={formData.confirmPassword || ""}
                 onChange={handleChange}
-                // id="password"
               />
               <span onClick={toggleInputType2} className="icon-button">
                 {inputType2 === "password" ? (
@@ -185,85 +154,24 @@ export const SPSignup = () => {
                 ) : (
                   <FaEyeSlash className="icon-button__icon" />
                 )}
-              </span>{" "}
-              {/* {errors.confirmPassword && (
-                <span className="error-message">{errors.confirmPassword}</span>
-              )} */}
+              </span>
             </div>
-
-            {/* <div className="file-upload-container">
-              <label>Upload Avatar {errors.profilePicture && (
-                <span className="error-message">{errors.profilePicture}</span>
-              )}</label>
-              <div
-                className="file-upload-box"
-                {...getRootProps()}
-                style={{
-                  borderColor: isDragActive ? "#888" : "#5E8D83",
-                  backgroundColor: isDragAccept ? "#f0f8ff" : "#f8fafc",
-                }}
-              >
-                <FontAwesomeIcon icon={faCloudUploadAlt} size="3x" className="file-upload__icon" />
-                <p>
-                  Drag & drop files or{" "}
-                  <label htmlFor="file-upload" className="browse-label">
-                    Browse
-                  </label>
-                </p>
-                <p style={{ fontSize: "12px" }}>
-                  Supported formats: JPEG, PNG, PDF
-                </p>
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="profilePicture"
-                  onChange={handleChange}
-                  style={{ display: "none" }}
-                />
-              </div>
-              {formData.profilePicture && (
-                <div className="file-feedback">
-                  <p>File selected: {formData.profilePicture.name}</p>
-                </div>
-              )}
-
-            </div> */}
 
             <div className="file-upload-container">
               <label>
-                Upload Avatar{" "}
+                Upload Avatar
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
               </label>
-              <div
-                className="file-upload-box"
-                {...getRootProps()}
-                style={{
-                  borderColor: isDragActive ? "#888" : "#5E8D83",
-                  backgroundColor: isDragAccept ? "#f0f8ff" : "#f8fafc",
-                }}
-              >
-                <div className="flex items-center justify-center p-2 rounded-full h-10 ">
-                  <img src={uploadIcon} alt="Upload" className="h-12" />
-                </div>
-                <p>
-                  Drag & drop files or{" "}
-                  <label htmlFor="file-upload" className="browse-label">
-                    Browse
-                  </label>
-                </p>
-                <p style={{ fontSize: "12px" }}>
-                  Supported formats: JPEG, PNG, PDF
-                </p>
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="profilePicture"
-                  onChange={handleChange}
-                  style={{ display: "none" }}
-                />
-              </div>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="profilePicture"
+                formData={formData.profilePicture}
+                errors={errors.profilePicture}
+                labelName="Upload Avatar"
+              />
               {formData.profilePicture && (
                 <div className="file-feedback">
                   <p>File selected: {formData.profilePicture.name}</p>
@@ -271,15 +179,12 @@ export const SPSignup = () => {
               )}
             </div>
             <p>
-              Already have an account? <NavLink to={"/signin"}>Signin</NavLink>
+              Already have an account? <NavLink to={"/signin"}>Sign in</NavLink>
             </p>
-            <br />
             <button type="submit">Next</button>
-            <br />
           </form>
         </div>
       </div>
-
       <div className="sp__requirements">
         <div className="sp__requirements__head">
           <hr />

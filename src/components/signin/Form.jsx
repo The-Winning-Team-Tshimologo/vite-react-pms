@@ -1,54 +1,27 @@
-import Application from "./application/Application";
-import { useState } from "react";
+import React from "react";
 import "./Form.css";
+import Application from "./application/Application";
+import { useFormContext } from "@/utils/FormContext";
 
-const Form = ({formdata}) => {
-  const [data, setData] = useState({
-    UserName: "",
-    MobileNumber: "",
-    email: "",
-    PhysicalAdress: "",
-    Streetname: "",
-    City: "",
-    Location: "",
-    ZipCode: "",
-    MainService: "",
-  });
+const Form = () => {
+  // const { formData, updateFormData } = useFormContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(JSON.stringify(data));
-  };
+  
+  // const canSave = Object.values(formData).every(Boolean);
 
-  const handleChange = (e) => {
-    const type = e.target.type;
-
-    const name = e.target.name;
-
-    const value = type === "checkbox" ? e.target.checked : e.target.value;
-
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const { Streetname, ...otherProps } = data;
-
-  const canSave = [...Object.values(otherProps)].every(Boolean);
-
-  const content = (
-    <form className="form flex-col" onSubmit={handleSubmit}>
-      <h2>Application</h2>
+  return (
+    <div className="form flex-col">
+      <h2 className="w-full text-center">
+            <span className="-ms-52">Application</span>
+          </h2>
       <br />
-      <Application data={data} handleChange={handleChange} />
+      <Application/>
 
-      <button className="submit-button" disabled={!canSave}>
-        Submit
-      </button>
-    </form>
+      {/* <button className="submit-button" disabled={!canSave}>
+        Next
+      </button> */}
+    </div>
   );
-
-  return content;
 };
+
 export default Form;

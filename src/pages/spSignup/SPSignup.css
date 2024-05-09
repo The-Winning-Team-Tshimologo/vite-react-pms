@@ -4,9 +4,30 @@
   margin: 0;
 }
 
+.SPSignupProfile__form_container {
+ flex: 1;
+ 
+  
+}
+
+.textarea-custom__border {
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary) !important;
+  width: 50rem !important;
+  caret-color: var(--color-primary);
+  outline: none;
+}
+
+
+.inputbox-custom__border {
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary) !important;
+}
+
 .sp__context {
   height: 90vh;
 }
+
 .sp__context_side {
   background-image: url("src/assets/Maintenance.jpg");
   background-size: cover;
@@ -40,14 +61,21 @@
 
 .sp__context_form,
 .sp__context_form form,
-/* .SignupUploadDocument, */
-.SPSignupUploadDocument__form,
 .SignupUploadDocument form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.SPSignupUploadDocument__form {
+  /* padding: 5rem; */
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
 .SignupUploadDocument{
   display: flex;
   flex-direction: row;
@@ -55,7 +83,15 @@
 .sp__context_form button,
 .SignupUploadDocument button {
   padding: 10px 45px;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sp__profile-btn {
+  padding: 10px 45px;
+  background-color: var(--color-secondary) !important;
   color: white;
   cursor: pointer;
   border-radius: 5px;
@@ -76,6 +112,8 @@
   border: 1px solid gray;
   width: 100%;
 }
+
+
 
 .sp__requirements {
   flex-direction: column;
@@ -143,7 +181,7 @@
 }
 
 .SPSignupProfile__progress, .SPSignupUploadDocument__progress{
-  width: 25%;
+  width: 35%;
 }
 .pbar{
   width: 10%;
@@ -254,8 +292,8 @@
     /* width: ; */
   }
   .progress__bar{
-    width: 400px;
-    margin: auto 20px;
+    /* width: 500px;
+    margin: auto 20px; */
   }
  
   .SPSignupProfile__progress,.SPSignupUploadDocument__progress{
