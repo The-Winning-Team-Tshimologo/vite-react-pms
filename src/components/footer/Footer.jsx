@@ -3,7 +3,7 @@ import fb from "../../assets/fb.png";
 import x from "../../assets/xcom.png";
 import ig from "../../assets/ig.png";
 
-const footer = () => {
+const Footer = () => {
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
@@ -128,4 +128,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
