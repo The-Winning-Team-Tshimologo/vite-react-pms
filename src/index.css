@@ -233,8 +233,12 @@ input:-webkit-autofill:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 85, 0, 0.5);
   /* Green tint */
   z-index: 1050;
   /* High z-index to cover everything */
+}
+
+.icon-button {
+  left: 44%;
 }

@@ -6,8 +6,6 @@
 
 .SPSignupProfile__form_container {
  flex: 1;
- 
-  
 }
 
 .textarea-custom__border {
@@ -50,7 +48,7 @@
 }
 
 .sp__context_form_top input {
-  width: 12rem;
+  width: 14.7rem;
 }
 .sp__context_form {
   width: 50%;
@@ -88,6 +86,7 @@
   cursor: pointer;
   border-radius: 5px;
 }
+
 
 .sp__profile-btn {
   padding: 10px 45px;
@@ -268,10 +267,7 @@
     margin: 0 auto;
   }
 
-  .icon-button {
-    left: 44%;
-  }
-
+ 
   .file-upload-box {
     width: 70%;
   }
