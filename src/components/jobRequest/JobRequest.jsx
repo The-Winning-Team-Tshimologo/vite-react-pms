@@ -74,7 +74,7 @@ function JobRequest() {
 				}
 
 				const data = await response.json();
-				
+				console.log(data);
 				setSystemWide(data);
 			} catch (error) {
 				console.error("Error fetching system-wide data:", error.message);

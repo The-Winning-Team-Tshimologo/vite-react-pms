@@ -22,6 +22,8 @@ const Profile = () => {
 						<ProfessionalProfileCard
 							useButtons={false}
 							useDocs={true}
+							// useServiceDetails
+							
 							id={id}
 						/>
 					) : (
