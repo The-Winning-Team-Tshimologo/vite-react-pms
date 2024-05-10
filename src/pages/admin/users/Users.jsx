@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Users.css";
 import Header from "@/components/header/Header";
 import { Button } from "@/components/ui/button";
-import { fetchAllUsers } from "@/utils/fetchAllUsers";
-import { fetchUsersByRole } from "@/utils/fetchUsersByRole";
+// import { fetchAllUsers } from "@/utils/fetchAllUsers";
+// import { fetchUsersByRole } from "@/utils/fetchUsersByRole";
 import { useNavigate } from "react-router";
 
 // const mockSPData = [

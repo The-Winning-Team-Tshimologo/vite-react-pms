@@ -1,7 +1,7 @@
 import Header from "@/components/header/Header";
 import React from "react";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
-import { eventStyleGetter } from "../appointments/Appointments";
+import { eventStyleGetter } from "../../serviceProvider/appointments/Appointments";
 import dayjs from "dayjs";
 
 const Reminders = () => {

@@ -1,13 +1,11 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import "./BrowseProfessionals.css";
 import { Button } from "@/components/ui/button";
 import ProfileCard from "./ProfileCard";
 import { useNavigate } from "react-router";
 import TrackActivity from "./TrackActivity";
-import Header from "../../components/header/Header";
-import { fetchUsersByRole } from "@/utils/fetchUsersByRole";
+import Header from "@/components/header/Header";
+// import { fetchUsersByRole } from "@/utils/fetchUsersByRole";
 
 const BrowseProfessionals = () => {
 	const navigate = useNavigate();

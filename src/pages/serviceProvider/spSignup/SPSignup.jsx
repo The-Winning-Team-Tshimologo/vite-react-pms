@@ -3,7 +3,7 @@ import { useFormContext } from "@/utils/FormContext";
 import "./SPSignup.css";
 import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
-import uploadIcon from "../../assets/upload-icon.png";
+import uploadIcon from "@/assets/upload-icon.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
