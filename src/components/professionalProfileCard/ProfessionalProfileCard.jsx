@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { useParams } from "react-router"; // Import useParams hook
-import { Alert } from "@mui/material";
 // import { useAuth } from "@/security/auth/AuthContext";
 
 // Mock data for professional's profile (this would typically be fetched from an API)
@@ -126,9 +125,7 @@ const ProfessionalProfileCard = ({
       return (
         <>
           <img src={imgUrl} alt={fileName} width={200} height={200} />
-          <button onClick={() => handleDownload(imgUrl, fileName)}>
-            Download {fileName}
-          </button>
+          <button onClick={() => handleDownload(imgUrl, fileName)}>Download {fileName}</button>
         </>
       );
     } else {
@@ -137,200 +134,186 @@ const ProfessionalProfileCard = ({
   };
 
   return (
-    <div className="professional-profile__card">
-      <div className="professional-profile__header">
-        <img
-          src={`data:multipart/form-data;base64,${serviceProviderInfo.profilePicture}`}
-          alt={serviceProviderInfo.firstName}
-          className="professional-profile__image"
-        />
-        <div className="professional-profile__header-info">
-          <h2 className="professional-profile__name">
-            {serviceProviderInfo.firstName}
-            <div className="professional-profile__rating">
-              {serviceProviderInfo.rating}/5 ★
-            </div>
-          </h2>
-          <div className="professional-profile__profession-info">
-            <p className="professional-profile__profession">
-              {serviceProviderInfo.category
-                ? serviceProviderInfo.category.name
-                : "N/A"}
-            </p>
-            <p>
-              {" "}
-              {serviceProviderInfo.address
-                ? serviceProviderInfo.address.city
-                : "N/A"}{" "}
-            </p>
-          </div>
+		<div className='professional-profile__card'>
+			<div className='professional-profile__header'>
+				<img
+					src={`data:multipart/form-data;base64,${serviceProviderInfo.profilePicture}`}
+					alt={serviceProviderInfo.firstName}
+					className='professional-profile__image'
+				/>
+				<div className='professional-profile__header-info'>
+					<h2 className='professional-profile__name'>
+						{serviceProviderInfo.firstName}
+						<div className='professional-profile__rating'>
+							{serviceProviderInfo.rating}/5 ★
+						</div>
+					</h2>
+					<div className='professional-profile__profession-info'>
+						<p className='professional-profile__profession'>
+							{serviceProviderInfo.category
+								? serviceProviderInfo.category.name
+								: "N/A"}
+						</p>
+						<p>
+							{" "}
+							{serviceProviderInfo.address
+								? serviceProviderInfo.address.city
+								: "N/A"}{" "}
+						</p>
+					</div>
 
-          <div className="professional-profile__details">
-            <span className="professional-profile__reviews">
-              {serviceProviderInfo.reviews
-                ? serviceProviderInfo.reviews.length
-                : 0}{" "}
-              Reviews
-            </span>
-            <span className="professional-profile-horizontal-divider"></span>
-            <span className="professional-profile__reviews">
-              Projects Completed {professionalProfile.reviewsCount}
-            </span>
-            <span className="professional-profile-horizontal-divider"></span>
-            <span className="professional-profile__rate">
-              R
-              {serviceProviderInfo.profile
-                ? serviceProviderInfo.profile.hourlyRate
-                : "N/A"}{" "}
-              per hour
-            </span>
-            <span className="professional-profile-horizontal-divider"></span>
-            <span className="professional-profile__availability">
-              <p className="w-fit">Availability:</p>{" "}
-              {professionalProfile.availability.join(", ")}
-            </span>
-          </div>
-          <div className="professional-profile__ratings"></div>
-          <div className="professional-profile__rate-availability"></div>
-        </div>
-      </div>
-      <div className="professional-profile__body-details">
-        <div className="professional-profile__summary">
-          <h2 className="professional-profile__text-bold">
-            Professional Summary
-          </h2>
-          <p>
-            {serviceProviderInfo.profile
-              ? serviceProviderInfo.profile.professionalSummary
-              : "N/A"}
-          </p>
-        </div>
-        <br />
-        <div className="professional-profile__experience">
-          <h2 className="professional-profile__text-bold">Work Experience</h2>
-          {serviceProviderInfo &&
-            serviceProviderInfo.profile &&
-            Array.isArray(serviceProviderInfo.profile.workExperienceList) &&
-            serviceProviderInfo.profile.workExperienceList.map((job, index) => (
-              <div key={index} className="professional-profile__job">
-                <h4>
-                  <strong> {job.title} </strong> at {job.companyName}
-                </h4>
-                <p>
-                  {job.startDate.split("T")[0]} to {"     "}
-                  {job.endDate ? job.endDate.split("T")[0] : "Present"}
-                </p>
-                <p>{job.description}</p>
-                <br />
-              </div>
-            ))}
-        </div>
+					<div className='professional-profile__details'>
+						<span className='professional-profile__reviews'>
+							{serviceProviderInfo.reviews
+								? serviceProviderInfo.reviews.length
+								: 0}{" "}
+							Reviews
+						</span>
+						<span className='professional-profile-horizontal-divider'></span>
+						<span className='professional-profile__reviews'>
+							Projects Completed {professionalProfile.reviewsCount}
+						</span>
+						<span className='professional-profile-horizontal-divider'></span>
+						<span className='professional-profile__rate'>
+							R
+							{serviceProviderInfo.profile
+								? serviceProviderInfo.profile.hourlyRate
+								: "N/A"}{" "}
+							per hour
+						</span>
+						<span className='professional-profile-horizontal-divider'></span>
+						<span className='professional-profile__availability'>
+							<p className='w-fit'>Availability:</p>{" "}
+							{professionalProfile.availability.join(", ")}
+						</span>
+					</div>
+					<div className='professional-profile__ratings'></div>
+					<div className='professional-profile__rate-availability'></div>
+				</div>
+			</div>
+			<div className='professional-profile__body-details'>
+				<div className='professional-profile__summary'>
+					<h2 className='professional-profile__text-bold'>
+						Professional Summary
+					</h2>
+					<p>
+						{serviceProviderInfo.profile
+							? serviceProviderInfo.profile.professionalSummary
+							: "N/A"}
+					</p>
+				</div>
+				<br />
+				<div className='professional-profile__experience'>
+					<h2 className='professional-profile__text-bold'>Work Experience</h2>
+					{serviceProviderInfo &&
+						serviceProviderInfo.profile &&
+						Array.isArray(serviceProviderInfo.profile.workExperienceList) &&
+						serviceProviderInfo.profile.workExperienceList.map((job, index) => (
+							<div
+								key={index}
+								className='professional-profile__job'
+							>
+								<h4>
+									<strong> {job.title} </strong> at {job.companyName}
+								</h4>
+								<p>
+									{job.startDate.split("T")[0]} to {"     "}
+									{job.endDate ? job.endDate.split("T")[0] : "Present"}
+								</p>
+								<p>{job.description}</p>
+								<br />
+							</div>
+						))}
+				</div>
 
-        <div className="professional-profile__education">
-          <h2 className="professional-profile__text-bold">Education</h2>
-          {serviceProviderInfo &&
-            serviceProviderInfo.profile &&
-            Array.isArray(serviceProviderInfo.profile.education) &&
-            serviceProviderInfo.profile.education.map((education, index) => (
-              <div key={index}>
-                <p>
-                  {" "}
-                  <strong>{education.qualification} </strong>
-                </p>
-                <p>{education.institution} </p>
-                <p>
-                  {education.startDate.split("T")[0]} to {"     "}
-                  {education.enddate
-                    ? education.enddate.split("T")[0]
-                    : "Present"}
-                </p>
-              </div>
-            ))}
-        </div>
-        <br />
-        <div className="professional-profile__skills">
-          <h2 className="professional-profile__text-bold">Skills</h2>
-          <p>
-            {serviceProviderInfo.profile
-              ? serviceProviderInfo.profile.skills
-              : "N/A"}
-          </p>
-        </div>
-      </div>
-      {useButtons && (
-        <div className="professional-profile__actions">
-          <NavLink className="professional-profile__message-btn" to="/inbox">
-            Message
+				<div className='professional-profile__education'>
+					<h2 className='professional-profile__text-bold'>Education</h2>
+					{serviceProviderInfo &&
+						serviceProviderInfo.profile &&
+						Array.isArray(serviceProviderInfo.profile.education) &&
+						serviceProviderInfo.profile.education.map((education, index) => (
+							<div key={index}>
+								<p>
+									{" "}
+									<strong>{education.qualification} </strong>
+								</p>
+								<p>{education.institution} </p>
+								<p>
+									{education.startDate.split("T")[0]} to {"     "}
+									{education.enddate
+										? education.enddate.split("T")[0]
+										: "Present"}
+								</p>
+							</div>
+						))}
+				</div>
+				<br />
+				<div className='professional-profile__skills'>
+					<h2 className='professional-profile__text-bold'>Skills</h2>
+					<p>
+						{serviceProviderInfo.profile
+							? serviceProviderInfo.profile.skills
+							: "N/A"}
+					</p>
+				</div>
+			</div>
+			{useButtons && (
+				<div className='professional-profile__actions'>
+					<NavLink
+						className='professional-profile__message-btn'
+						to='/inbox'
+					>
+						Message
+					</NavLink>
+					<NavLink
+						className='professional-profile__issue-btn'
+						to={`/issues/${id}`}
+					>
+						Log Issue
           </NavLink>
-          <NavLink
-            className="professional-profile__issue-btn"
-            to={`/issues/${id}`}
-          >
-            Log Issue
-          </NavLink>
-
-          {/* <button className="professional-profile__message-btn">Message</button>
+         
+					{/* <button className="professional-profile__message-btn">Message</button>
         <button className="professional-profile__issue-btn">Log Issue</button> */}
-        </div>
-      )}
-      {useDocs && (
-        <>
-          <div className="application-documents__container">
-            <div>Document 1</div>
-            <div>Document 2</div>
-            <div>
-              <h3>Bank Statement</h3>
-              {renderImage(
-                serviceProviderInfo.bankStatement,
-                "bank_statement.png"
-              )}
-            </div>
-            <div>
-              <h3>Resume</h3>
-              {renderImage(serviceProviderInfo.resume, "resume.png")}
-            </div>
-          </div>
-          <div className="application-documents-action__btns">
-            <Button className="application-document__download-btn">
-              Download
-            </Button>
-            <Button
-              className="application-document__accept-btn"
-              onClick={() => handleClick(id, true)}
-            >
-              Accept
-            </Button>
-            <Button
-              className="application-document__reject-btn"
-              onClick={() => handleClick(id, false)}
-            >
-              Reject
-            </Button>
-          </div>
-        </>
-      )}
-
-      {useServiceDetails && (
-        <div className="flex flex-col">
-          <div>
-            <p>{/* Service Category */} i.e., Plumbling</p>
-
-            <p>{/* Appoint */} i.e., 05/02/24</p>
-          </div>
-          <div>{/* Description */} i.e., OMG my ..........</div>
-          <div className="flex flex-row w-12 h-12">
-            {/* pictures */}{" "}
-            <img src="/src/assets/Maintenance.jpg" alt="" srcset="" />
-            <img src="/src/assets/Maintenance.jpg" alt="" srcset="" />
-            <img src="/src/assets/Maintenance.jpg" alt="" srcset="" />
-          </div>
-          <div>
-            <button onClick={() => {Alert("Button Clicked")}}>Accept Request</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+				</div>
+			)}
+			{useDocs && (
+				<>
+					<div className='application-documents__container'>
+						<div>Document 1</div>
+						<div>Document 2</div>
+						<div>
+							<h3>Bank Statement</h3>
+							{renderImage(
+								serviceProviderInfo.bankStatement,
+								"bank_statement.png"
+							)}
+						</div>
+						<div>
+							<h3>Resume</h3>
+							{renderImage(serviceProviderInfo.resume, "resume.png")}
+						</div>
+					</div>
+					<div className='application-documents-action__btns'>
+						<Button className='application-document__download-btn'>
+							Download
+						</Button>
+						<Button
+							className='application-document__accept-btn'
+							onClick={() => handleClick(id, true)}
+						>
+							Accept
+						</Button>
+						<Button
+							className='application-document__reject-btn'
+							onClick={() => handleClick(id, false)}
+						>
+							Reject
+						</Button>
+					</div>
+				</>
+			)}
+		</div>
+	);
 };
 
 export default ProfessionalProfileCard;

@@ -3,17 +3,12 @@ import {MdOutlinePinDrop, MdQuestionMark} from "react-icons/md";
 import dummyData from './dummyDataWithRate.jsx'
 import {IoMdStar} from "react-icons/io";
 import {yellow} from "@mui/material/colors";
-import { useNavigate } from 'react-router';
 const HelpWanted = ({SystemWide}) => {
 
-    const  navigate = useNavigate();
-	
-	const handleClickEvent = () => {
-		navigate(`/customer-profile/${SystemWide.userId}`)
-	}
+    //
   
     return (
-			<li className='personal-request w-[491px] bg-[#D9D9D9] border-none	' onClick={handleClickEvent}>
+			<li className='personal-request w-[491px] bg-[#D9D9D9] border-none	'>
 				<div className='flex items-center h-auto'>
 					<img
 						src={SystemWide.pictures}
