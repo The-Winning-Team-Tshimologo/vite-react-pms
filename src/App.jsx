@@ -12,12 +12,6 @@ import AuthProvider from "./security/auth/AuthContext";
 
 import ProtectedRoute from "./security/ProtectedRoute";
 import LandingPage from "./pages/landingPage/LandingPage";
-
-
-
-
-
-
 import { FormProvider } from "./utils/FormContext";
 import Signin from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
