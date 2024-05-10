@@ -6,7 +6,7 @@ import JobRequestItem from "@/components/JobRequestItem/JobRequestItem.jsx";
 import JobHeader from "@/components/jobheader/JobHeader.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import HelpWanted from "@/components/helpwanted/HelpWanted.jsx";
-import Header from '../header/Header.jsx';
+import Header from '../../../components/header/Header.jsx';
 
 function JobRequest() {
 	const [showAllItems, setShowAllItems] = useState(false);

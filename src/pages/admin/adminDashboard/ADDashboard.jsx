@@ -1,12 +1,9 @@
 import Header from "@/components/header/Header";
 import React from "react";
-// import { BarChart, PieChart } from "recharts";
-// import StatsBox from "./components/statsBox/StatsBox";
 import JobCompletion from "./components/jobCompletion/JobCompletion";
-// import LayoutGrid from "./components/layoutGrid/LayoutGrid";
 import MyBarChart from "./components/myBarChart/MyBarChart";
 import MyPieChart from "./components/myPieChart/MyPieChart";
-import "./adminDashboard.css";
+import "./ADDashboard.css";
 import StatsComponent from "./components/statsBox/StatsComponent";
 
 const ADDashboard = () => {

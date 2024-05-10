@@ -1,11 +1,11 @@
 import React from "react";
 import "./Payment.css";
-import VisaImg from "../../assets/visa.png";
-import PaymentCard from "../../assets/payment.png";
+import VisaImg from "@/assets/visa.png";
+import PaymentCard from "@/assets/payment.png";
 import { FaCreditCard, FaCalendar, FaLock } from "react-icons/fa";
-import ImageLock from "../../assets/Vector.png";
-import { Button } from "../../components/ui/button";
-import Header from "../../components/header/Header";
+import ImageLock from "@/assets/visa.png";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/header/Header";
 
 function Payment() {
   return (

@@ -5,7 +5,7 @@ import {
     sarahBrownImage,
     davidDavisImage,
     jessicaGarciaImage
-} from '../jobRequest/images.js';
+} from '../../pages/serviceProvider/jobRequest/images.js';
 
 const dummyData = [
     {

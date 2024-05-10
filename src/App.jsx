@@ -7,43 +7,45 @@ import {
   createBrowserRouter,
   useNavigate,
 } from "react-router-dom";
-import SignUp from "./pages/signup/SignUp";
-import Sidebar from "./components/sidebar/Sidebar";
-import Dashboard from "./pages/dashboard/Dashboard";
+
 import AuthProvider from "./security/auth/AuthContext";
-// import SignIn from "./pages/signin/Signin";
+
 import ProtectedRoute from "./security/ProtectedRoute";
 import LandingPage from "./pages/landingPage/LandingPage";
-import LogIssue from "./pages/logIssue/LogIssue";
-import { SPSignup } from "./pages/spSignup/SPSignup";
-import { SPSignupUploadDocument } from "./pages/spSignup/SPSignupUploadDocument";
-import { SPSignupProfile } from "./pages/spSignup/SPSignupProfile";
-import Appointments from "./pages/appointments/Appointments";
-import SPDashboard from "./pages/adminDashboard/adminDashboard";
-import { BookAppointment } from "./pages/bookAppointment/BookAppointment";
-import BrowseProfessionals from "./pages/browseProfessionals/BrowseProfessionals";
-import Payment from "./pages/payment/Payment";
-import JobRequest from "./components/jobRequest/JobRequest";
-// import Review from "./components/review/Review";
+
+
+
+
+
+
+import { FormProvider } from "./utils/FormContext";
 import Signin from "./pages/signin/SignIn";
+import SignUp from "./pages/signup/SignUp";
+import { SPSignup } from "./pages/serviceProvider/spSignup/SPSignup";
+import { SPSignupUploadDocument } from "./pages/serviceProvider/spSignup/SPSignupUploadDocument";
+import { SPSignupProfile } from "./pages/serviceProvider/spSignup/SPSignupProfile";
+import SPSignupApplication from "./pages/serviceProvider/spSignup/SPSignupApplication";
+import Sidebar from "./components/sidebar/Sidebar";
+import Update from "./pages/serviceProvider/updateProfile/Update";
+import LogIssue from "./pages/customer/logIssue/LogIssue";
+import Appointments from "./pages/serviceProvider/appointments/Appointments";
+import ADDashboard from "./pages/admin/adminDashboard/ADDashboard";
+import Payment from "./pages/customer/payment/Payment";
+import JobRequest from "./pages/serviceProvider/jobRequest/JobRequest";
+import { BookAppointment } from "./pages/customer/bookAppointment/BookAppointment";
+import BrowseProfessionals from "./pages/customer/browseProfessionals/BrowseProfessionals";
 import MessagingPage from "./pages/messagingPage/MessagingPage";
 import Invoice from "./components/invoice/Invoice";
-import Profile from "./pages/profile/Profile";
-import ADDashboard from "./pages/adminDashboard/adminDashboard";
-import Reminders from "./pages/reminders/Reminders";
+import Profile from "./pages/admin/profile/Profile";
+import Reminders from "./pages/customer/reminders/Reminders";
 import ReviewPage from "./pages/reviewPage/ReviewPage";
-import Applications from "./pages/applications/Applications";
-import Users from "./pages/users/Users";
-import ApplicantPage from "./pages/applicantPage/ApplicantPage";
-
-import Update from "./pages/updateProfile/Update";
-import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
+import Applications from "./pages/admin/applications/Applications";
+import Users from "./pages/admin/users/Users";
+import ApplicantPage from "./pages/admin/applicantPage/ApplicantPage";
+import ServiceRequest from "./components/serviceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
-import SPSignupApplication from "./pages/spSignup/SPSignupApplication";
-import { FormProvider } from "./utils/FormContext";
-import Onboarding from "./pages/onbaording/Activation";
-import Activation from "./pages/onbaording/Activation";
-import CustomerProfile from "./pages/customerProfile/CustomerProfile";
+import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
+
 
 function App({ children }) {
   const router = createBrowserRouter([
@@ -105,15 +107,7 @@ function App({ children }) {
 				//   ),
 				// },
 				{
-					path: "/",
-					element: (
-						<ProtectedRoute>
-							<Dashboard />
-						</ProtectedRoute>
-					),
-				},
-				{
-					path: "/update",
+					path: "/updateServiceProvider",
 					element: <Update />,
 				},
 
@@ -145,7 +139,7 @@ function App({ children }) {
 					path: "/admin-dashboard",
 					element: (
 						<ProtectedRoute>
-							<SPDashboard />
+							<ADDashboard />
 						</ProtectedRoute>
 					),
 				},
@@ -220,14 +214,6 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<Profile />
-						</ProtectedRoute>
-					),
-				},
-				{
-					path: "/add-dashboard",
-					element: (
-						<ProtectedRoute>
-							<ADDashboard />
 						</ProtectedRoute>
 					),
 				},

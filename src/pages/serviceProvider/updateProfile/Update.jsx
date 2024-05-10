@@ -2,9 +2,9 @@ import "./Update.css";
 import React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import Header from "../../components/header/Header";
+import Header from "@/components/header/Header";
 
-import Profile from "../../assets/sbusisoAvatar.png";
+import Profile from "@/assets/sbusisoAvatar.png";
 function Update() {
   return (
     <>

@@ -1,6 +1,6 @@
 import Header from "@/components/header/Header";
 import React from "react";
-import SPSIgnupProgress from "../spSignup/SPSIgnupProgress";
+import SPSIgnupProgress from "../SPSIgnupProgress";
 import "./Activation.css";
 
 const Activation = () => {
