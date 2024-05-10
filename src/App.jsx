@@ -7,9 +7,7 @@ import {
   createBrowserRouter,
   useNavigate,
 } from "react-router-dom";
-
 import AuthProvider from "./security/auth/AuthContext";
-
 import ProtectedRoute from "./security/ProtectedRoute";
 import LandingPage from "./pages/landingPage/LandingPage";
 import { FormProvider } from "./utils/FormContext";
@@ -39,6 +37,7 @@ import ApplicantPage from "./pages/admin/applicantPage/ApplicantPage";
 import ServiceRequest from "./components/serviceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
+import Dashboard from "./components/dashboard/Dashboard";
 
 
 function App({ children }) {
@@ -75,15 +74,6 @@ function App({ children }) {
 			path: "/SPSignupProfileApplication",
 			element: <SPSignupApplication />,
 		},
-
-		// {
-		//   path: "/bookAppointment",
-		//   element: <BookAppointment />,
-		// },
-		// {
-		//   path: "/browseProfessionals",
-		//   element: <BrowseProfessionals />,
-		// },
 		{
 			element: (
 				<ProtectedRoute>
@@ -91,15 +81,15 @@ function App({ children }) {
 				</ProtectedRoute>
 			),
 			children: [
-				// {
-				//   index: true,
-				//   path: "/landing",
-				//   element: (
+				{
+				  
+				  path: "/",
+				  element: (
 
-				//       <LandingPage />
+				      <Dashboard />
 
-				//   ),
-				// },
+				  ),
+				},
 				{
 					path: "/updateServiceProvider",
 					element: <Update />,

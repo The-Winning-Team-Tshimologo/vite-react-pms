@@ -98,7 +98,6 @@ export const AuthProvider = ({ children }) => {
         switch (authenticationResponse.roles) {
           case "ROLE_CUSTOMER":
             // Redirect customer to customer dashboard
-            // navigate("/");
             <Navigate to={"/"} />;
             break;
           case "ROLE_SERVICE_PROVIDER":
@@ -107,7 +106,6 @@ export const AuthProvider = ({ children }) => {
             break;
           case "ROLE_ADMIN":
             // Redirect admin to admin dashboard
-            // history.push("/admin/dashboard");
             <Navigate to={"/admin-dashboard"} />;
             break;
           default:
@@ -122,8 +120,8 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
     } catch (error) {
-      setError(`Login failed: ${error.message}`);
-      console.error("Login failed:", error);
+      setError(`Login failed: ${error.message}, Please check your credentials.`);
+      console.error("Login failed: Bad Credentials");
       return false;
     }
   };

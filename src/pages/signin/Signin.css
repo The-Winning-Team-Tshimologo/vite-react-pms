@@ -1,77 +1,6 @@
-/* .sign__container {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    gap: 5rem;
-    margin: 0 auto;
-}
-
-.signin-form {
-    flex: 1;
-    padding: 20px;
-
-
-}
-
-.form-flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-flex label {
-    margin-bottom: 8px;
-    width: fit-content;
-}
-
-.form-flex input {
-    border: 1px solid #5E8D83;
-    padding: 5px;
-    margin-bottom: 29px;
-    width: 35rem;
-}
-
-.form-flex button {
-    background-color: #5E8D83;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-    margin: o auto;
-    width: 9rem;
-
-}
-
-.form-flex button:hover {
-    background-color: #5E8D83;
-}
-
-.form-flex a {
-    text-decoration: none;
-    color: #5E8D83;
-    margin-left: 16rem;
-
-}
-
-.form-flex a:hover {
-    text-decoration: underline;
-}
-
-.solid-color {
-    flex: 1;
-    background-image: url("../../assets/plumber.jpeg");
-    height: 100%;
-} */
-
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
 .form__container {
   display: flex;
+  position: relative;
   /* height: 100vh; */
 }
 
@@ -79,34 +8,41 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
   padding: 0 2rem;
 
 }
 
+/* .signin-form__signin form {
+  width: fit-content;
+} */
+
 .background-image-right {
   flex: 1;
-  background-image: url("/src/assets/handymanred.jpg");
+  background-image: url("/src/assets/handymanSignin.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
 }
 
-.form__container h3 {
+.form__container h2 {
   /* margin-right: 23rem;
   margin-bottom: 1rem; */
+  margin: 0 auto;
 }
 
 #form2 {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   /* justify-content: center; */
-  margin: auto 0;
+  /* margin: auto 0; */
+
   padding: 0 1rem;
-  width: 100%;
+  width: fit-content;
+  /* width: 100%; */
 }
 
 
@@ -117,15 +53,26 @@
   width: 35rem;
   border-radius: 5px;
 
+
 }
 
-.paragraph-red {
-  margin-left: -25rem;
-}
+/* .signin-form__signin input:focus {
+  outline: thin;
+  outline-color: var(--color-primary);
+  caret-color: var(--color-primary);
+} */
 
 
 .paragraph-red {
   color: red;
+
+
+}
+
+.paragraph-red-2 {
+  color: red;
+
+
 }
 
 .image-div {
@@ -135,28 +82,24 @@
 
 
 #signin-button {
-  background-color: #5e8d83;
+  background-color: var(--color-secondary);
   color: #fff;
   padding: 10px;
   cursor: pointer;
   border: none;
-
+  border-radius: 8px;
+  margin: 0 auto;
   width: 9rem;
+  transition: ease-in-out 500ms;
+}
+
+#signin-button:hover {
+  box-shadow: 10px 10px 5px 0px rgba(17, 66, 61, 0.2);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(17, 66, 61, 0.2);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(17, 66, 61, 0.2);
+
 }
 
 .green-colour-disabled-purple {
   color: #8d855e;
-}
-
-.Signin_labelname {
-  position: relative;
-  left: 0;
-  
-  margin-left: -30rem;
-  /* margin-bottom: 6px; */
-  text-align: left;
-}
-
-.Signin_labelname-email {
-  margin-left: -32rem;
 }

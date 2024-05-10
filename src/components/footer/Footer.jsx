@@ -93,10 +93,10 @@ const footer = () => {
               <p>Privacy</p>
             </a>
           </div>
-          <div>
+          <div className="footer-newsletter__container">
             <p>Subscribe to our email newsletter</p>
-            <div>
-              <input type="text" /> <button>SUBSCRIBE</button>
+            <div className="flex flex-row gap-5">
+              <input type="text" className="footer-newsletter__input" /> <button className="footer-newsletter__btn">SUBSCRIBE</button>
             </div>
             <p>Follow us</p>
             <div className="flex gap-4">
