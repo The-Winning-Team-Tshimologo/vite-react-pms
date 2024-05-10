@@ -60,7 +60,6 @@ const ProfessionalProfileCard = ({
   useButtons,
   useDocs,
   useServiceDetails,
-  serviceProvider,
   id,
 }) => {
   const [serviceProviderInfo, setServiceProviderInfo] = useState([]);

@@ -42,7 +42,7 @@ import ReviewPage from "./pages/reviewPage/ReviewPage";
 import Applications from "./pages/admin/applications/Applications";
 import Users from "./pages/admin/users/Users";
 import ApplicantPage from "./pages/admin/applicantPage/ApplicantPage";
-import ServiceRequest from "./components/serviceRequest/ServiceRequest";
+import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 
