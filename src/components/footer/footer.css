@@ -1,101 +1,26 @@
-.section_padding {
-  padding: 4rem 4rem;
-}
 
-.footer {
-  background-image: var(--color-linear-gradient);
-}
-
-.sb_footer {
-  display: flex;
-  flex-direction: column;
-}
-
-.sb_footer-links {
-  text-shadow: rgb(65, 65, 65) 0.2px 0.1px;
-  color: var(--color-backdrop);
-  display: flex;
-  padding: 2rem;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-.sb_footer-links a {
-  color: whitesmoke;
-  padding: 2px 0;
-  list-style: none;
-}
-
-.sb_footer-links a:hover {
-  color: rgb(100, 180, 170);
-  text-decoration: none;
-}
-
-.sb_footer-links_div {
-  width: 150px;
-  margin: 1rem;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
-.sb_footer-links-socials img {
-  width: 25px;
-  height: 25px;
-  padding: 2px 10px 0 0;
-}
-
-.sb_footer-links-home {
-  padding: 1rem 0;
-}
-
-.sb_footer-below {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  padding: 2rem 20rem;
-  line-height: 1rem;
-  border-top: 1px solid var(--color-backdrop);
-  width: 89%;
-  margin: 0 auto;
-}
-
-.sb_footer-below-links {
-  display: flex;
-  flex-direction: row;
-}
-
-.sb_footer-below-links a {
-  font-size: 12px;
-  line-height: 14px;
-  margin-left: 2rem;
-  color: white;
-  font-weight: 600;
-}
-
-.sb_footer-below a {
-  color: white;
-}
-
-.sb_footer-below a:hover {
-  color: rgb(100, 180, 170);
-  text-decoration: none;
-}
-
-hr {
-  color: white !important;
-  width: 96%;
-}
-
-.sb_footer-copyright {
-  font-size: 15px;
-  line-height: 1rem;
-  color: rgb(255, 255, 255);
-  font-weight: 600;
-}
+.body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer {
+    background-color: #D9D9D9;
+    color: #000000;
+    padding: 20px 0;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer_flex-row{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: .2rem;
+    margin: 0 auto;
+  }
+  

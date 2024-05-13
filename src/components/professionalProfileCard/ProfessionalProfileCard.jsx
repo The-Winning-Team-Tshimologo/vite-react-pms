@@ -3,8 +3,10 @@ import "./ProfessionalProfileCard.css";
 import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
 import axios from "axios";
-import { useParams } from "react-router"; // Import useParams hook
+import { useLocation } from "react-router"; // Import useParams hook
 // import { useAuth } from "@/security/auth/AuthContext";
+import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 
 // Mock data for professional's profile (this would typically be fetched from an API)
 const professionalProfile = {
@@ -59,81 +61,121 @@ const ProfessionalProfileCard = ({
   useButtons,
   useDocs,
   useServiceDetails,
-  id,
+	id,
+  id2,
 }) => {
-  const [serviceProviderInfo, setServiceProviderInfo] = useState([]);
-  const token = localStorage.getItem("token");
+	const { pathname } = useLocation(); // Get the current URL path
+	const [serviceProviderInfo, setServiceProviderInfo] = useState([]);
+	const token = localStorage.getItem("token");
+	const navigate = useNavigate();
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get(
+					`http://localhost:8081/api/v1/admin/get-sp/${id}`,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8081/api/v1/admin/get-sp/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+				setServiceProviderInfo(response.data);
+				console.log("sp :", serviceProviderInfo);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		};
 
-        setServiceProviderInfo(response.data);
-        console.log("sp :", serviceProviderInfo);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+		fetchData();
+	}, [id, token]);
 
-    fetchData();
-  }, [id, token]);
+	useEffect(() => {
+		const fetchData = async () => {
+			// Check if the URL path matches the customer profile endpoint and token is present
+			if (pathname === `/customer-profile/${id}` && token) {
+				try {
+					const response = await axios.get(
+						`http://localhost:8081/api/v1/customer/get-customer/${id}`,
+						{
+							headers: {
+								Authorization: `Bearer ${token}`,
+							},
+						}
+					);
+					setServiceProviderInfo(response.data);
+					console.log("sp :", response.data); // Update console log to log the fetched data
+				} catch (error) {
+					console.error("Error fetching data:", error);
+				}
+			} else {
+				// Proceed with other endpoints or handle token absence
+				// You can fetch data from other endpoints here or handle the absence of token
+			}
+		};
 
-  const handleClick = async (serviceProviderID, Accept) => {
-    console.log("click " + id + status + "toke ");
+		fetchData();
+	}, [id, token, pathname]); // Include token and pathname in the dependencies array
 
-    try {
-      const response = await axios.post(
-        `http://localhost:8081/api/v1/admin/toogle-service-providers-status/${serviceProviderID}`,
-        null,
-        {
-          params: {
-            Accept: Accept,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+	const handleClick = async (serviceProviderID, Accept) => {
+		console.log("click " + id + status + "toke ");
 
-      console.log(response.data); // Handle the response data as needed
+		try {
+			const response = await axios.post(
+				`http://localhost:8081/api/v1/admin/toogle-service-providers-status/${serviceProviderID}`,
+				null,
+				{
+					params: {
+						Accept: Accept,
+					},
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
 
-      return response.data; // Return data if needed
-    } catch (error) {
-      console.error("Error:", error);
-      throw new Error("Failed to submit service provider status");
-    }
-  };
+			console.log(response.data); // Handle the response data as needed
 
-  const handleDownload = (dataUrl, fileName) => {
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.download = fileName;
-    link.click();
-  };
+			return response.data; // Return data if needed
+		} catch (error) {
+			console.error("Error:", error);
+			throw new Error("Failed to submit service provider status");
+		}
+	};
 
-  const renderImage = (blobData, fileName) => {
-    if (blobData && blobData instanceof Blob) {
-      const imgUrl = URL.createObjectURL(blobData);
-      return (
-        <>
-          <img src={imgUrl} alt={fileName} width={200} height={200} />
-          <button onClick={() => handleDownload(imgUrl, fileName)}>Download {fileName}</button>
-        </>
-      );
-    } else {
-      return <div>No image available</div>;
-    }
-  };
+	// Render loading state while fetching data
+	if (!serviceProviderInfo) {
+		return <div>Loading...</div>;
+	}
 
-  return (
+	const handleAcceptance = async() => {
+		
+		const token = localStorage.getItem("token");
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		try {
+			const response = await axios.put(
+				`http://localhost:8081/api/v1/service/assign/${id}/${id2}`,
+				null,
+				config
+			);
+			// Handle successful acceptance (e.g., show a success message)
+			console.log("Request accepted:", response.data);
+
+			navigate("/jobrequest");
+
+		} catch (error) {
+			// Handle error (e.g., show an error message)
+			console.error("Error accepting request:", error);
+		}
+
+	}
+
+	return (
 		<div className='professional-profile__card'>
 			<div className='professional-profile__header'>
 				<img
@@ -270,8 +312,8 @@ const ProfessionalProfileCard = ({
 						to={`/issues/${id}`}
 					>
 						Log Issue
-          </NavLink>
-         
+					</NavLink>
+
 					{/* <button className="professional-profile__message-btn">Message</button>
         <button className="professional-profile__issue-btn">Log Issue</button> */}
 				</div>
@@ -311,6 +353,38 @@ const ProfessionalProfileCard = ({
 						</Button>
 					</div>
 				</>
+			)}
+
+			{useServiceDetails && (
+				<div className='flex flex-col'>
+					<div>
+						<p>{/* Service Category */} i.e., Plumbling</p>
+
+						<p>{/* Appoint */} i.e., 05/02/24</p>
+					</div>
+					<div>{/* Description */} i.e., OMG my ..........</div>
+					<div className='flex flex-row w-12 h-12'>
+						{/* pictures */}{" "}
+						<img
+							src='/src/assets/Maintenance.jpg'
+							alt=''
+							srcset=''
+						/>
+						<img
+							src='/src/assets/Maintenance.jpg'
+							alt=''
+							srcset=''
+						/>
+						<img
+							src='/src/assets/Maintenance.jpg'
+							alt=''
+							srcset=''
+						/>
+					</div>
+					<div>
+						<button className="" onClick={handleAcceptance}>Accept Request</button>
+					</div>
+				</div>
 			)}
 		</div>
 	);

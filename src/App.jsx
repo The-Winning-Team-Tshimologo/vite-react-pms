@@ -39,6 +39,7 @@ import ApplicantPage from "./pages/admin/applicantPage/ApplicantPage";
 import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
+import Dashboard from "./components/dashboard/Dashboard";
 
 
 function App({ children }) {
@@ -100,6 +101,10 @@ function App({ children }) {
 
 				//   ),
 				// },
+				{
+					path: "/",
+					element: <Dashboard />,
+				},
 				{
 					path: "/updateServiceProvider",
 					element: <Update />,
@@ -275,8 +280,8 @@ function App({ children }) {
 						</ProtectedRoute>
 					),
 				},
-        {
-					path: "/customer-profile/:id",
+				{
+					path: "/customer-profile/:id/:id2",
 					element: (
 						<ProtectedRoute>
 							<CustomerProfile />
