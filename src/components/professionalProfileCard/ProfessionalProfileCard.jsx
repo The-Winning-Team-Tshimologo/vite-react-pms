@@ -63,6 +63,7 @@ const ProfessionalProfileCard = ({
 }) => {
   const [serviceProviderInfo, setServiceProviderInfo] = useState([]);
   const token = localStorage.getItem("token");
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,7 +78,7 @@ const ProfessionalProfileCard = ({
         );
 
         setServiceProviderInfo(response.data);
-        console.log("sp :", serviceProviderInfo);
+        console.log("sp :", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -119,201 +120,254 @@ const ProfessionalProfileCard = ({
     link.click();
   };
 
-  const renderImage = (blobData, fileName) => {
-    if (blobData && blobData instanceof Blob) {
-      const imgUrl = URL.createObjectURL(blobData);
-      return (
-        <>
-          <img src={imgUrl} alt={fileName} width={200} height={200} />
-          <button onClick={() => handleDownload(imgUrl, fileName)}>Download {fileName}</button>
-        </>
-      );
-    } else {
-      return <div>No image available</div>;
-    }
+  const convertBase64ToBlobUrl = (base64) => {
+    // console.log(base64);
+  //   if (!base64) {
+  //     return <div>No data provided</div>;
+  //   }
+
+  //   const isImage = base64.startsWith('iVBOR');
+
+  // if (isImage) {
+  //   return <img src={`data:image/png;base64,${base64}`} alt="Base64" width="350" height="400" />;
+  // } else {
+  //   // Convert base64 to Blob URL for PDF
+  //   const binaryString = window.atob(base64);
+  //   const binaryLen = binaryString.length;
+  //   const bytes = new Uint8Array(binaryLen);
+  //   for (let i = 0; i < binaryLen; i++) {
+  //     bytes[i] = binaryString.charCodeAt(i);
+  //   }
+  //   const blob = new Blob([bytes], { type: 'application/pdf' });
+  //   const blobUrl = window.URL.createObjectURL(blob);
+
+  //   return (
+  //     <object data={blobUrl} type="application/pdf" width="350" height="400">
+  //       <embed src={blobUrl} type="application/pdf" />
+  //     </object>
+  //   ); }
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+  if (!base64) {
+        return <div>No data provided</div>;
+      }
+
+   // Convert base64 to Blob URL
+   const binaryString = window.atob(base64);
+   const binaryLen = binaryString.length;
+   const bytes = new Uint8Array(binaryLen);
+   for (let i = 0; i < binaryLen; i++) {
+     bytes[i] = binaryString.charCodeAt(i);
+   }
+   let blob = new Blob([bytes]);
+   let blobUrl = window.URL.createObjectURL(blob);
+
+   const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+ 
+   return (
+     <div>
+       {/* Attempt to display as an image */}
+       <img src={blobUrl} alt="Base64" width="350" height="400" style={{ display: imageLoaded ? 'block' : 'none' }}
+        onLoad={handleImageLoad} />
+ 
+       {/* Fallback to display as a PDF */}
+       <object data={convet(bytes)} type="application/pdf" width="350" height="400" style={{ display: imageLoaded ? 'none' : 'block' }}>
+         <embed src={convet(bytes)} type="application/pdf" width="350" height="400" />
+       </object>
+     </div>
+   );
+
+ 
   };
 
+  const convet =(bytes)=>{
+
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    return blobUrl;
+    
+  }
+
   return (
-		<div className='professional-profile__card'>
-			<div className='professional-profile__header'>
-				<img
-					src={`data:multipart/form-data;base64,${serviceProviderInfo.profilePicture}`}
-					alt={serviceProviderInfo.firstName}
-					className='professional-profile__image'
-				/>
-				<div className='professional-profile__header-info'>
-					<h2 className='professional-profile__name'>
-						{serviceProviderInfo.firstName}
-						<div className='professional-profile__rating'>
-							{serviceProviderInfo.rating}/5 ★
-						</div>
-					</h2>
-					<div className='professional-profile__profession-info'>
-						<p className='professional-profile__profession'>
-							{serviceProviderInfo.category
-								? serviceProviderInfo.category.name
-								: "N/A"}
-						</p>
-						<p>
-							{" "}
-							{serviceProviderInfo.address
-								? serviceProviderInfo.address.city
-								: "N/A"}{" "}
-						</p>
-					</div>
+    <div className="professional-profile__card">
+      <div className="professional-profile__header">
+        <img
+          src={`data:multipart/form-data;base64,${serviceProviderInfo.profilePicture}`}
+          alt={serviceProviderInfo.firstName}
+          className="professional-profile__image"
+        />
+        <div className="professional-profile__header-info">
+          <h2 className="professional-profile__name">
+            {serviceProviderInfo.firstName}
+            <div className="professional-profile__rating">
+              {serviceProviderInfo.rating}/5 ★
+            </div>
+          </h2>
+          <div className="professional-profile__profession-info">
+            <p className="professional-profile__profession">
+              {serviceProviderInfo.category
+                ? serviceProviderInfo.category.name
+                : "N/A"}
+            </p>
+            <p>
+              {" "}
+              {serviceProviderInfo.address
+                ? serviceProviderInfo.address.city
+                : "N/A"}{" "}
+            </p>
+          </div>
 
-					<div className='professional-profile__details'>
-						<span className='professional-profile__reviews'>
-							{serviceProviderInfo.reviews
-								? serviceProviderInfo.reviews.length
-								: 0}{" "}
-							Reviews
-						</span>
-						<span className='professional-profile-horizontal-divider'></span>
-						<span className='professional-profile__reviews'>
-							Projects Completed {professionalProfile.reviewsCount}
-						</span>
-						<span className='professional-profile-horizontal-divider'></span>
-						<span className='professional-profile__rate'>
-							R
-							{serviceProviderInfo.profile
-								? serviceProviderInfo.profile.hourlyRate
-								: "N/A"}{" "}
-							per hour
-						</span>
-						<span className='professional-profile-horizontal-divider'></span>
-						<span className='professional-profile__availability'>
-							<p className='w-fit'>Availability:</p>{" "}
-							{professionalProfile.availability.join(", ")}
-						</span>
-					</div>
-					<div className='professional-profile__ratings'></div>
-					<div className='professional-profile__rate-availability'></div>
-				</div>
-			</div>
-			<div className='professional-profile__body-details'>
-				<div className='professional-profile__summary'>
-					<h2 className='professional-profile__text-bold'>
-						Professional Summary
-					</h2>
-					<p>
-						{serviceProviderInfo.profile
-							? serviceProviderInfo.profile.professionalSummary
-							: "N/A"}
-					</p>
-				</div>
-				<br />
-				<div className='professional-profile__experience'>
-					<h2 className='professional-profile__text-bold'>Work Experience</h2>
-					{serviceProviderInfo &&
-						serviceProviderInfo.profile &&
-						Array.isArray(serviceProviderInfo.profile.workExperienceList) &&
-						serviceProviderInfo.profile.workExperienceList.map((job, index) => (
-							<div
-								key={index}
-								className='professional-profile__job'
-							>
-								<h4>
-									<strong> {job.title} </strong> at {job.companyName}
-								</h4>
-								<p>
-									{job.startDate.split("T")[0]} to {"     "}
-									{job.endDate ? job.endDate.split("T")[0] : "Present"}
-								</p>
-								<p>{job.description}</p>
-								<br />
-							</div>
-						))}
-				</div>
+          <div className="professional-profile__details">
+            <span className="professional-profile__reviews">
+              {serviceProviderInfo.reviews
+                ? serviceProviderInfo.reviews.length
+                : 0}{" "}
+              Reviews
+            </span>
+            <span className="professional-profile-horizontal-divider"></span>
+            <span className="professional-profile__reviews">
+              Projects Completed {professionalProfile.reviewsCount}
+            </span>
+            <span className="professional-profile-horizontal-divider"></span>
+            <span className="professional-profile__rate">
+              R
+              {serviceProviderInfo.profile
+                ? serviceProviderInfo.profile.hourlyRate
+                : "N/A"}{" "}
+              per hour
+            </span>
+            <span className="professional-profile-horizontal-divider"></span>
+            <span className="professional-profile__availability">
+              <p className="w-fit">Availability:</p>{" "}
+              {professionalProfile.availability.join(", ")}
+            </span>
+          </div>
+          <div className="professional-profile__ratings"></div>
+          <div className="professional-profile__rate-availability"></div>
+        </div>
+      </div>
+      <div className="professional-profile__body-details">
+        <div className="professional-profile__summary">
+          <h2 className="professional-profile__text-bold">
+            Professional Summary
+          </h2>
+          <p>
+            {serviceProviderInfo.profile
+              ? serviceProviderInfo.profile.professionalSummary
+              : "N/A"}
+          </p>
+        </div>
+        <br />
+        <div className="professional-profile__experience">
+          <h2 className="professional-profile__text-bold">Work Experience</h2>
+          {serviceProviderInfo &&
+            serviceProviderInfo.profile &&
+            Array.isArray(serviceProviderInfo.profile.workExperienceList) &&
+            serviceProviderInfo.profile.workExperienceList.map((job, index) => (
+              <div key={index} className="professional-profile__job">
+                <h4>
+                  <strong> {job.title} </strong> at {job.companyName}
+                </h4>
+                <p>
+                  {job.startDate.split("T")[0]} to {"     "}
+                  {job.endDate ? job.endDate.split("T")[0] : "Present"}
+                </p>
+                <p>{job.description}</p>
+                <br />
+              </div>
+            ))}
+        </div>
 
-				<div className='professional-profile__education'>
-					<h2 className='professional-profile__text-bold'>Education</h2>
-					{serviceProviderInfo &&
-						serviceProviderInfo.profile &&
-						Array.isArray(serviceProviderInfo.profile.education) &&
-						serviceProviderInfo.profile.education.map((education, index) => (
-							<div key={index}>
-								<p>
-									{" "}
-									<strong>{education.qualification} </strong>
-								</p>
-								<p>{education.institution} </p>
-								<p>
-									{education.startDate.split("T")[0]} to {"     "}
-									{education.enddate
-										? education.enddate.split("T")[0]
-										: "Present"}
-								</p>
-							</div>
-						))}
-				</div>
-				<br />
-				<div className='professional-profile__skills'>
-					<h2 className='professional-profile__text-bold'>Skills</h2>
-					<p>
-						{serviceProviderInfo.profile
-							? serviceProviderInfo.profile.skills
-							: "N/A"}
-					</p>
-				</div>
-			</div>
-			{useButtons && (
-				<div className='professional-profile__actions'>
-					<NavLink
-						className='professional-profile__message-btn'
-						to='/inbox'
-					>
-						Message
-					</NavLink>
-					<NavLink
-						className='professional-profile__issue-btn'
-						to={`/issues/${id}`}
-					>
-						Log Issue
+        <div className="professional-profile__education">
+          <h2 className="professional-profile__text-bold">Education</h2>
+          {serviceProviderInfo &&
+            serviceProviderInfo.profile &&
+            Array.isArray(serviceProviderInfo.profile.education) &&
+            serviceProviderInfo.profile.education.map((education, index) => (
+              <div key={index}>
+                <p>
+                  {" "}
+                  <strong>{education.qualification} </strong>
+                </p>
+                <p>{education.institution} </p>
+                <p>
+                  {education.startDate.split("T")[0]} to {"     "}
+                  {education.enddate
+                    ? education.enddate.split("T")[0]
+                    : "Present"}
+                </p>
+              </div>
+            ))}
+        </div>
+        <br />
+        <div className="professional-profile__skills">
+          <h2 className="professional-profile__text-bold">Skills</h2>
+          <p>
+            {serviceProviderInfo.profile
+              ? serviceProviderInfo.profile.skills
+              : "N/A"}
+          </p>
+        </div>
+      </div>
+      {useButtons && (
+        <div className="professional-profile__actions">
+          <NavLink className="professional-profile__message-btn" to="/inbox">
+            Message
           </NavLink>
-         
-					{/* <button className="professional-profile__message-btn">Message</button>
+          <NavLink
+            className="professional-profile__issue-btn"
+            to={`/issues/${id}`}
+          >
+            Log Issue
+          </NavLink>
+
+          {/* <button className="professional-profile__message-btn">Message</button>
         <button className="professional-profile__issue-btn">Log Issue</button> */}
-				</div>
-			)}
-			{useDocs && (
-				<>
-					<div className='application-documents__container'>
-						<div>Document 1</div>
-						<div>Document 2</div>
-						<div>
-							<h3>Bank Statement</h3>
-							{renderImage(
-								serviceProviderInfo.bankStatement,
-								"bank_statement.png"
-							)}
-						</div>
-						<div>
-							<h3>Resume</h3>
-							{renderImage(serviceProviderInfo.resume, "resume.png")}
-						</div>
-					</div>
-					<div className='application-documents-action__btns'>
-						<Button className='application-document__download-btn'>
-							Download
-						</Button>
-						<Button
-							className='application-document__accept-btn'
-							onClick={() => handleClick(id, true)}
-						>
-							Accept
-						</Button>
-						<Button
-							className='application-document__reject-btn'
-							onClick={() => handleClick(id, false)}
-						>
-							Reject
-						</Button>
-					</div>
-				</>
-			)}
-		</div>
-	);
+        </div>
+      )}
+      {useDocs && (
+        <>
+          <div className="application-documents__container">
+            <div>Document 1</div>
+            <div>Document 2</div>
+            <div>
+              <h3>Bank Statement</h3>
+              {/* {renderImage(
+                serviceProviderInfo.bankStatement,
+                "bank_statement.png"
+              )} */}
+              {convertBase64ToBlobUrl(serviceProviderInfo.bankStatement)}
+            </div>
+            <div>
+              <h3>Resume</h3>
+              {/* {renderImage2(serviceProviderInfo.resume, "resume.png")} */}
+              {convertBase64ToBlobUrl(serviceProviderInfo.profilePicture)}
+            </div>
+          </div>
+          <div className="application-documents-action__btns">
+            <Button className="application-document__download-btn">
+              Download
+            </Button>
+            <Button
+              className="application-document__accept-btn"
+              onClick={() => handleClick(id, true)}
+            >
+              Accept
+            </Button>
+            <Button
+              className="application-document__reject-btn"
+              onClick={() => handleClick(id, false)}
+            >
+              Reject
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default ProfessionalProfileCard;
