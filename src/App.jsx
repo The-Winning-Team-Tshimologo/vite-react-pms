@@ -34,10 +34,11 @@ import ReviewPage from "./pages/reviewPage/ReviewPage";
 import Applications from "./pages/admin/applications/Applications";
 import Users from "./pages/admin/users/Users";
 import ApplicantPage from "./pages/admin/applicantPage/ApplicantPage";
-import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
+import ServiceRequest from "./components/serviceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
+import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
 
 
 function App({ children }) {
@@ -67,12 +68,20 @@ function App({ children }) {
 			element: <SPSignupUploadDocument />,
 		},
 		{
+			path: "/SPSignupProfileApplication",
+			element: <SPSignupApplication />,
+		},
+		{
 			path: "/SPSignupProfile",
 			element: <SPSignupProfile />,
 		},
 		{
-			path: "/SPSignupProfileApplication",
-			element: <SPSignupApplication />,
+			path: "/SPSignupProfile",
+			element: <SPSignupProfile />,
+		},
+		{
+			path: "/SPActivation",
+			element: <Activation />,
 		},
 		{
 			element: (

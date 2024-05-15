@@ -1,7 +1,7 @@
 
 import React from "react";
 import { MdOutlinePinDrop, MdQuestionMark } from "react-icons/md";
-import ServiceRequest from "@/components/ServiceRequest/ServiceRequest";
+import ServiceRequest from "@/components/serviceRequest/ServiceRequest";
 import axios from "axios";
 import { useEffect } from "react";
 

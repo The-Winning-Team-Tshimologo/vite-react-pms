@@ -1,13 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router";
-import { Navigate } from "react-router";
 
 const FormContext = createContext();
 
 export const useFormContext = () => useContext(FormContext);
 
-//  Handles nested structures optimally when updating form data. A robust solution that ensures deep merging of state,
-//  especially for complex forms with nested objects and arrays
 function deepMergeObjects(target, source) {
   const output = { ...target };
   if (typeof target === "object" && typeof source === "object") {
@@ -26,13 +22,11 @@ function deepMergeObjects(target, source) {
 
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
-    // Initialize with all fields that will be collected across steps
-    // id: "",
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     password: "",
     confirmPassword: "",
-    profilePicture: "",
+    profilePicture: null,
     userName: "",
     rating: 0,
     mobile: "",
@@ -53,33 +47,28 @@ export const FormProvider = ({ children }) => {
       companyName: "",
       description: "",
     },
-
     education: {
       institution: "",
       qualification: "",
       startDate: "",
       endDate: "",
     },
-
     skills: "",
     hourlyRate: "",
     qualification: "",
-    criminalRecord: "",
-    resume: "",
+    criminalRecord: null,
+    resume: null,
     bankName: "",
     accountNumber: "",
     typeOfAccount: "",
     branchCode: "",
-    bankStatement: "",
+    bankStatement: null,
     agreement: "",
+    identityDocument: null,
   });
 
-  // const updateFormData = (newData) => {
-  //   setFormData((prev) => ({ ...prev, ...newData }));
-  // };
-  const updateFormData = (newData) => {
+  const updateFormData = (newData) =>
     setFormData((prev) => deepMergeObjects(prev, newData));
-  };
 
   return (
     <FormContext.Provider value={{ formData, updateFormData }}>
@@ -88,92 +77,95 @@ export const FormProvider = ({ children }) => {
   );
 };
 
-// Function to handle the submission of form data
-export const submitData = async (formData) => {
-  // const { formData, updateFormData } = useFormContext();
+export const submitData = async (formData, onSuccess, onError) => {
   const endpoint = "http://localhost:8081/api/v1/auth/signup-sp";
   const formDataObject = new FormData();
 
-  // Append text data as JSON string
-  const dataToSubmit = {
+  // Ensure JSON data is stringified
+  const jsonData = JSON.stringify({
     userName: formData.userName,
     email: formData.email,
     password: formData.password,
-    firstname: formData.firstname,
-    lastname: formData.lastname,
+    firstName: formData.firstName,
+    lastName: formData.lastName,
     mobile: formData.mobile,
     rating: formData.rating,
-    address: {
-      streetName: formData.address.streetName,
-      city: formData.address.city,
-      province: formData.address.province,
-      zipCode: formData.address.zipCode,
-    },
+    category: { name: formData.expertise },
+    address: formData.address,
     bankName: formData.bankName,
-    // accountNumber: formData.accountNumber,
     typeOfAccount: formData.typeOfAccount,
     branchCode: formData.branchCode,
-  };
-  formDataObject.append("data", JSON.stringify(dataToSubmit));
+  });
 
-  const filesToSubmit = {
+  // Append stringified JSON to FormData
+  formDataObject.append("data", jsonData);
+
+  const jsonProfileData = JSON.stringify({
     skills: formData.skills,
     expertise: formData.expertise,
     professionalSummary: formData.professionalSummary,
-    // yearsOfPaidExperience: formData.yearsOfPaidExperience,
-    workExperienceList: {
-      startDate: formData.workExperience.startDate,
-      endDate: formData.workExperience.endDate,
-      title: formData.workExperience.title,
-      companyName: formData.workExperience.companyName,
-      description: formData.workExperience.description,
-    },
-    numberOfTasksCompleted: 0,
-    education: {
-      institution: formData.education.institution,
-      qualification: formData.education.qualification,
-      startDate: formData.education.startDate,
-      endDate: formData.education.startDate,
-    },
     numberOfYearsWorked: formData.numberOfYearsWorked,
-    verification: true,
     hourlyRate: formData.hourlyRate,
-  };
-  formDataObject.append("profile", JSON.stringify(filesToSubmit));
+    workExperienceList: [formData.workExperience], // Ensure this is an array
+    education: [formData.education], // Ensure this is an array
+    verification: formData.verification,
+    hourlyRate: formData.hourlyRate,
+  });
 
-  // Append files if present
-  if (formData.profilePicture) {
-    formDataObject.append("profilePicture", formData.profilePicture);
-  }
-  if (formData.qualification) {
-    formDataObject.append("qualification", formData.qualification);
-  }
-  if (formData.criminalRecord) {
-    formDataObject.append("criminalRecord", formData.criminalRecord);
-  }
-  if (formData.resume) {
-    formDataObject.append("resume", formData.resume);
-  }
-  if (formData.bankStatement) {
-    formDataObject.append("bankStatement", formData.bankStatement);
-  }
+  // Append profile data
+  formDataObject.append("profile", jsonProfileData);
 
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      body: formData,
-    });
+  // const fileFields = ["profilePicture", "bankStatement", "identityDocument"];
+
+  // fileFields.forEach((inputName) => {
+  //   console.log("File to be appended:", formData[inputName]);
+
+  //   if (formData[inputName] && formData[inputName] instanceof File) {
+  //     formDataObject.append(
+  //       inputName,
+  //       formData[inputName],
+  //       formData[inputName].name
+  //     );
+  //   } else {
+  //     console.error(inputName + " is not available or not a file");
+  //   }
+  // });
+
+  // if (
+  //   formData["profilePicture"] &&
+  //   formData["profilePicture"] instanceof File
+  // ) {
+  //   formDataObject.append(
+  //     inputName,
+  //     formData[inputName],
+  //     formData[inputName].name
+  //   );
+  // } else {
+  //   console.error(inputName + " is not available or not a file");
+  // }
+
+  // for (let [key, value] of formDataObject.entries()) {
+  //   console.log(`${key}:`, value);
+  // }
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    body: formDataObject,
+  });
+
+  const contentType = response.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
     const responseData = await response.json();
     if (response.ok) {
       console.log("Service Provider created successfully:", responseData);
-      <Navigate to={"/SPActivation"} />;
+      onSuccess(responseData);
     } else {
-      console.log("Form Context Joining Data For Backend: ", formData);
-      throw new Error(
-        `Backend returned status ${response.status}: ${responseData.message}`
-      );
+      console.error("Failed to submit form:", responseData.message);
+      onError(responseData.message);
     }
-  } catch (error) {
-    console.error("Failed to submit form:", error.message);
+  } else {
+    const textResponse = await response.text();
+    console.error("Non-JSON response received:", textResponse);
+    onError(textResponse);
   }
 };

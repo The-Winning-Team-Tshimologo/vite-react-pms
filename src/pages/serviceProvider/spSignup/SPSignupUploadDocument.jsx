@@ -4,15 +4,44 @@ import SPSIgnupProgress from "./SPSIgnupProgress";
 import Header from "@/components/header/Header";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
+import { helix } from "ldrs";
 
 export const SPSignupUploadDocument = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+
+  // const handleChange = (e) => {
+  //   const { name, value, type } = e.target;
+  //   updateFormData({ [name]: type === "file" ? e.target.files[0] : value });
+  //   if (errors[name]) {
+  //     setErrors({ ...errors, [name]: null }); // Clear errors on change
+  //   }
+  // };
+
+  const handleFileChange = (inputName) => (eventOrFiles) => {
+    // Check if it comes from Dropzone or from an input
+    let file = null;
+    if (Array.isArray(eventOrFiles)) {
+      // From Dropzone
+      file = eventOrFiles[0]; // Assuming you only want the first file
+    } else if (eventOrFiles.target && eventOrFiles.target.files) {
+      // From input
+      file = eventOrFiles.target.files[0];
+    }
+
+    if (file && file instanceof File) {
+      updateFormData((prevFormData) => ({
+        ...prevFormData,
+        [inputName]: file,
+      }));
+    }
+  };
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    updateFormData({ [name]: type === "file" ? e.target.files[0] : value });
+    const { name, value } = e.target;
+    updateFormData({ ...formData, [name]: value });
     if (errors[name]) {
       setErrors({ ...errors, [name]: null }); // Clear errors on change
     }
@@ -22,11 +51,10 @@ export const SPSignupUploadDocument = () => {
     const newErrors = {};
     // Validate that all required fields and files are provided
     [
-      "id",
-      "qualification",
+      "identityDocument",
+      "bankStatement",
       "criminalRecord",
       "resume",
-      "bankStatement",
       "bankName",
       "accountNumber",
       "typeOfAccount",
@@ -40,14 +68,36 @@ export const SPSignupUploadDocument = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     console.log("Form submitted:", formData);
+  //     // Here you can handle navigation or further steps
+  //     navigate("/SPSignupProfile");
+  //   } else {
+  //     console.log("errors:", errors);
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    helix.register(); // Assuming helix.register() is synchronous
+    setLoading(true); // Set loading state to true before the request simulation
+
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      // Here you can handle navigation or further steps
-      navigate("/SPSignupProfile");
+      try {
+        // Simulate a network request with a 250ms delay
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupProfile"); // Redirect on successful submission
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false); // Reset loading state after the request simulation
+      }
     } else {
-      console.log("errors:", errors);
+      console.log("Validation errors:", errors);
+      setLoading(false); // Reset loading state if validation fails
     }
   };
 
@@ -57,9 +107,20 @@ export const SPSignupUploadDocument = () => {
   return (
     <>
       <Header />
+      {isLoading && (
+        <>
+          <div className="loading-overlay">
+            <l-helix size="150" speed="1.5" color="black"></l-helix>
+          </div>
+        </>
+      )}
       <div className="SignupUploadDocument">
         <div className="SPSignupUploadDocument__progress ml-10">
-          <SPSIgnupProgress completedPages={50} page={"Background Check"} />
+          <SPSIgnupProgress
+            completedPages={50}
+            page={"Background Check"}
+            className=""
+          />
         </div>
         {/* <h2>SPSignupUploadDocument</h2> */}
         <div className="SPSignupUploadDocument__form">
@@ -69,25 +130,25 @@ export const SPSignupUploadDocument = () => {
 
           <form onSubmit={handleSubmit}>
             <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"id"}
-              formData={formData.id}
-              errors={errors.id}
+              handleChange={handleFileChange("identityDocument")}
+              onDrop={handleFileChange("identityDocument")}
+              inputName={"identityDocument"}
+              formData={formData.identityDocument}
+              errors={errors.identityDocument}
               labelName={"ID/Passport/License No."}
             />
 
             <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
+              handleChange={handleFileChange("qualification")}
+              onDrop={handleFileChange("qualification")}
               inputName={"qualification"}
               formData={formData.qualification}
               errors={errors.qualification}
               labelName={"Qualification/Certificate"}
             />
             <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
+              handleChange={handleFileChange("criminalRecord")}
+              onDrop={handleFileChange("criminalRecord")}
               inputName={"criminalRecord"}
               formData={formData.criminalRecord}
               errors={errors.criminalRecord}
@@ -95,8 +156,8 @@ export const SPSignupUploadDocument = () => {
             />
 
             <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
+              handleChange={handleFileChange("resume")}
+              onDrop={handleFileChange("resume")}
               inputName={"resume"}
               formData={formData.resume}
               errors={errors.resume}
@@ -168,12 +229,12 @@ export const SPSignupUploadDocument = () => {
             </div>
 
             <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"bankStatement"}
+              handleChange={handleFileChange("bankStatement")}
+              onDrop={handleFileChange("bankStatement")}
+              inputName="bankStatement"
               formData={formData.bankStatement}
               errors={errors.bankStatement}
-              labelName={"Alternatively, submit scanned bank statement "}
+              labelName="Upload Bank Statement"
             />
 
             <button type="submit" className="submit-button -ms-60">

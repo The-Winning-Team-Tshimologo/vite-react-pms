@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "../Form.css";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
+import { helix } from "ldrs";
 
 const Application = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
 
   // Correct handleChange to handle nested array updates
   const handleChange = (e) => {
@@ -25,7 +27,6 @@ const Application = () => {
     }
   };
 
-
   const validateForm = () => {
     const newErrors = {};
     let isValid = true;
@@ -40,7 +41,7 @@ const Application = () => {
     ];
 
     // Check non-nested fields
-    fields.forEach(field => {
+    fields.forEach((field) => {
       if (!formData[field]) {
         newErrors[field] = "This field is required";
         isValid = false;
@@ -52,7 +53,7 @@ const Application = () => {
       { path: "address.streetName", label: "address.streetName" },
       { path: "address.city", label: "address.city" },
       { path: "address.province", label: "address.province" },
-      { path: "address.zipCode", label: "address.zipCode" }
+      { path: "address.zipCode", label: "address.zipCode" },
     ];
 
     // Check nested fields
@@ -66,14 +67,21 @@ const Application = () => {
 
     setErrors(newErrors);
     return isValid;
-};
+  };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Form submitted:", formData);
-      navigate("/SPSignupUploadDocuments");
+    const newErrors = validateForm(formData);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      setLoading(true); // Start loading
+      setTimeout(() => {
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupUploadDocuments");
+        setLoading(false); // Stop loading
+      }, 250); // Adjust the timeout duration as needed
     } else {
       console.log("Validation errors:", errors);
     }
@@ -81,7 +89,14 @@ const Application = () => {
 
   return (
     <div className="flex-col">
-      {/* Username Field */}
+      {isLoading && (
+        <>
+          {/* <l-helix size="150" speed="1.5" color="black"></l-helix> */}
+          <div className="loading-overlay">
+            <l-helix size="150" speed="1.5" color="black"></l-helix>
+          </div>
+        </>
+      )}
       <label htmlFor="userName">
         Username
         {errors.userName && (
@@ -93,7 +108,7 @@ const Application = () => {
         type="text"
         id="userName"
         name="userName"
-        placeholder="Please enter your username"
+        placeholder="Enter Username"
         value={formData.userName || ""}
         onChange={handleChange}
       />
@@ -110,7 +125,7 @@ const Application = () => {
         type="number"
         id="mobile"
         name="mobile"
-        placeholder="Please enter your mobile number"
+        placeholder="Enter Mobile Number"
         value={formData.mobile || ""}
         onChange={handleChange}
       />
@@ -125,7 +140,7 @@ const Application = () => {
         type="email"
         id="email"
         name="email"
-        placeholder="Enter email"
+        placeholder="Enter Email"
         value={formData.email || ""}
         onChange={handleChange}
       />
@@ -133,14 +148,15 @@ const Application = () => {
       {/* Street Name Field */}
       <label htmlFor="address.streetName">
         Street Name
-        {errors['address.streetName'] && (
-            <span className="error-message">{errors['address.streetName']}</span>
-          )}
+        {errors["address.streetName"] && (
+          <span className="error-message">{errors["address.streetName"]}</span>
+        )}
       </label>
       <input
         className="application_input"
         type="text"
         name="address.streetName"
+        placeholder="Enter Street Name"
         value={formData.address.streetName || ""}
         onChange={handleChange}
       />
@@ -149,15 +165,16 @@ const Application = () => {
       <label htmlFor="address.city">
         City
         {/* {errors.city && <span className="error-message">{errors.address.city}</span>} */}
-        {errors['address.city'] && (
-            <span className="error-message">{errors['address.city']}</span>
-          )}
+        {errors["address.city"] && (
+          <span className="error-message">{errors["address.city"]}</span>
+        )}
       </label>
       <input
         className="application_input"
         type="text"
         id="city"
         name="address.city"
+        placeholder="Enter City"
         value={formData.address.city || ""}
         onChange={handleChange}
       />
@@ -168,14 +185,15 @@ const Application = () => {
         {/* {errors.province && (
           <span className="error-message">{errors.address.province}</span>
         )} */}
-        {errors['address.province'] && (
-            <span className="error-message">{errors['address.province']}</span>
-          )}
+        {errors["address.province"] && (
+          <span className="error-message">{errors["address.province"]}</span>
+        )}
       </label>
       <input
         className="application_input"
         type="text"
         name="address.province"
+        placeholder="Enter Province"
         value={formData.address.province || ""}
         onChange={handleChange}
       />
@@ -186,15 +204,16 @@ const Application = () => {
         {/* {errors.zipCode && (
           <span className="error-message">{errors.address.zipCode}</span>
         )}  */}
-        {errors['address.zipCode'] && (
-            <span className="error-message">{errors['address.zipCode']}</span>
-          )}
+        {errors["address.zipCode"] && (
+          <span className="error-message">{errors["address.zipCode"]}</span>
+        )}
       </label>
       <input
         className="application_input"
         type="number"
         id="zipCode"
         name="address.zipCode"
+        placeholder="Enter Zip Cpde"
         pattern="[0-9]{5}"
         maxLength="5"
         value={formData.address.zipCode || ""}

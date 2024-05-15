@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useFormContext } from "@/utils/FormContext";
 import "./SPSignup.css";
 import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
-import { useDropzone } from "react-dropzone";
-import uploadIcon from "@/assets/upload-icon.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import FileUpload2 from "@/components/fileUpload/FileUpload2";
+import { helix } from "ldrs";
+import { useDropzone } from "react-dropzone";
 
 export const SPSignup = () => {
   const { formData, updateFormData } = useFormContext();
   const navigate = useNavigate();
-
+  const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
@@ -23,19 +23,67 @@ export const SPSignup = () => {
     setInputType2(inputType2 === "password" ? "text" : "password");
   };
 
-  const handleChange = (e) => {
-    const { name, type, files } = e.target;
-    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    // console.log("Accepted files:", acceptedFiles);
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      // Assuming you want to handle only the first file
+      const file = acceptedFiles[0];
+      updateFormData({ ...formData, [inputName]: file });
+    }
   };
 
-  const handleFileChange = (inputName) => (acceptedFiles) => {
-    updateFormData({ [inputName]: acceptedFiles[0] });
+  // const handleFileChange = (inputName) => (eventOrFiles) => {
+  //   // Determine if the event is from an input element or Dropzone
+  //   let files = eventOrFiles.target ? eventOrFiles.target.files : eventOrFiles;
+
+  //   // Check if files exist and the first item is a File object
+  //   if (files.length > 0 && files[0] instanceof File) {
+  //     const file = files[0];
+  //     updateFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       [inputName]: file,
+  //     }));
+  //     console.log("File stored:", file);
+  //   }
+  // };
+
+  // const handleFileChange = (inputName) => (eventOrFiles) => {
+  //   // Check if it comes from Dropzone or from an input
+  //   let file = null;
+  //   if (Array.isArray(eventOrFiles)) {
+  //     // From Dropzone
+  //     file = eventOrFiles[0]; // Assuming you only want the first file
+  //   } else if (eventOrFiles.target && eventOrFiles.target.files) {
+  //     // From input
+  //     file = eventOrFiles.target.files[0];
+  //   }
+
+  //   if (file && file instanceof File) {
+  //     updateFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       [inputName]: file,
+  //     }));
+  //   }
+  // };
+
+  
+
+  const handleChange = (e) => {
+    // const { name, type, files } = e.target;
+    // updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
+    const { name, value } = e.target;
+    updateFormData({ ...formData, [name]: e.target.value });
   };
+
+  // const handleFileChange = (inputName) => (acceptedFiles) => {
+  //   updateFormData({ [inputName]: acceptedFiles[0] });
+  // };
+
   const validateForm = () => {
     const newErrors = {};
     [
-      "firstname",
-      "lastname",
+      "firstName",
+      "lastName",
       "password",
       "confirmPassword",
       "profilePicture",
@@ -53,17 +101,33 @@ export const SPSignup = () => {
       newErrors.confirmPassword = "Passwords do not match";
     }
 
+    // Check password length
+    if (formData.password && formData.password.length < 8) {
+      newErrors.password = " Password must be at least 8 characters";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    helix.register();
+    setLoading(true);
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      navigate("/SPSignupProfileApplication"); // Redirect on successful submission
+      try {
+        // Simulate a network request
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupProfileApplication"); // Redirect on successful submission
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false);
+      }
     } else {
       console.log("Validation errors:", errors);
+      setLoading(false);
     }
   };
 
@@ -76,6 +140,13 @@ export const SPSignup = () => {
 
   return (
     <div className="sp__container">
+      {isLoading && (
+        <>
+          <div className="loading-overlay">
+            <l-helix size="150" speed="1.5" color="black"></l-helix>
+          </div>
+        </>
+      )}
       <div className="sp__context">
         <div className="sp__context_side">
           <h2 className="sp__context_side__title">Join as a Pro</h2>
@@ -85,27 +156,33 @@ export const SPSignup = () => {
           <form onSubmit={handleSubmit}>
             <div className="sp__context_form_top">
               <div className="formFiled">
-                <label>Firstname</label>
-                {errors.firstname && (
-                  <span className="error-message">{errors.firstname}</span>
-                )}
+                <label>
+                  Firstname{" "}
+                  {errors.firstName && (
+                    <span className="error-message">{errors.firstName}</span>
+                  )}
+                </label>
+
                 <input
                   type="text"
-                  name="firstname"
-                  value={formData.firstname || ""}
+                  name="firstName"
+                  value={formData.firstName || ""}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="formFiled">
-                <label>Lastname</label>
-                {errors.lastname && (
-                  <span className="error-message">{errors.lastname}</span>
-                )}
+                <label>
+                  Lastname{" "}
+                  {errors.lastName && (
+                    <span className="error-message">{errors.lastName}</span>
+                  )}
+                </label>
+
                 <input
                   type="text"
-                  name="lastname"
-                  value={formData.lastname || ""}
+                  name="lastName"
+                  value={formData.lastName || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -158,28 +235,32 @@ export const SPSignup = () => {
             </div>
 
             <div className="file-upload-container">
-              <label>
+              {/* <label>
                 Upload Avatar
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
-              </label>
+              </label> */}
               <FileUpload2
-                handleChange={handleChange}
-                onDrop={handleFileChange}
+                handleChange={handleFileChange("profilePicture")}
+                onDrop={handleFileChange("profilePicture")}
                 inputName="profilePicture"
                 formData={formData.profilePicture}
                 errors={errors.profilePicture}
-                labelName="Upload Avatar"
+                labelName="Upload Profile Picture"
               />
-              {formData.profilePicture && (
+
+              {/* {formData.profilePicture && (
                 <div className="file-feedback">
                   <p>File selected: {formData.profilePicture.name}</p>
                 </div>
-              )}
+              )} */}
             </div>
             <p>
-              Already have an account? <NavLink to={"/signin"}>Sign in</NavLink>
+              Already have an account?{" "}
+              <NavLink to={"/signin"} className={" text-blue-500"}>
+                Sign in
+              </NavLink>
             </p>
             <button type="submit">Next</button>
           </form>

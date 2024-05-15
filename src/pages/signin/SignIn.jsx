@@ -42,7 +42,7 @@ function Signin() {
       } finally {
         setLoading(false); // Stop loading after login attempt
       }
-    }, 3000); // Delay for 3000 milliseconds (3 seconds)
+    }, 1000); // Delay for 3000 milliseconds (3 seconds)
   };
 
   return (

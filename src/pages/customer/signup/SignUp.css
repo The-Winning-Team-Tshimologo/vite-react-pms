@@ -22,6 +22,7 @@
 }
 
 .signup-content {
+  flex: 1;
   background-color: var(--color-secondary);
   color: white;
   display: flex;
@@ -30,8 +31,8 @@
   align-items: flex-start;
   min-height: 100vh;
   /* position: static; */
-
-  padding: 25px;
+  /* height: max-content; */
+  padding: 18rem 5rem;
   width: 50%;
 }
 

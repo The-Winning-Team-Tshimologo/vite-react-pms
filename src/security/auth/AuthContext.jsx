@@ -172,7 +172,7 @@ export const AuthProvider = ({ children }) => {
       return true;
     } catch (error) {
       console.error("Registration failed:", error);
-      throw new Error("Registration failed");
+      throw new Error("Failed to signup", error);
     }
   };
 
