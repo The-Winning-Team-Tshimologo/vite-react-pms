@@ -169,12 +169,12 @@ const ProfessionalProfileCard = ({
    return (
      <div>
        {/* Attempt to display as an image */}
-       <img src={blobUrl} alt="Base64" width="350" height="400" style={{ display: imageLoaded ? 'block' : 'none' }}
+       <img src={blobUrl} alt="Base64" width="80%" height="250px" style={{ display: imageLoaded ? 'block' : 'none' }}
         onLoad={handleImageLoad} />
  
        {/* Fallback to display as a PDF */}
-       <object data={convet(bytes)} type="application/pdf" width="350" height="400" style={{ display: imageLoaded ? 'none' : 'block' }}>
-         <embed src={convet(bytes)} type="application/pdf" width="350" height="400" />
+       <object data={convet(bytes)} type="application/pdf" width="80%" height="250px" style={{ display: imageLoaded ? 'none' : 'block' }}>
+         <embed src={convet(bytes)} type="application/pdf" width="80%" height="250px" />
        </object>
      </div>
    );
