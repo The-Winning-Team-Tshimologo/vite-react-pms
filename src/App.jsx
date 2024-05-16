@@ -7,14 +7,12 @@ import {
   createBrowserRouter,
   useNavigate,
 } from "react-router-dom";
-
 import AuthProvider from "./security/auth/AuthContext";
-
 import ProtectedRoute from "./security/ProtectedRoute";
 import LandingPage from "./pages/landingPage/LandingPage";
 import { FormProvider } from "./utils/FormContext";
 import Signin from "./pages/signin/SignIn";
-import SignUp from "./pages/signup/SignUp";
+import SignUp from "./pages/customer/signup/SignUp";
 import { SPSignup } from "./pages/serviceProvider/spSignup/SPSignup";
 import { SPSignupUploadDocument } from "./pages/serviceProvider/spSignup/SPSignupUploadDocument";
 import { SPSignupProfile } from "./pages/serviceProvider/spSignup/SPSignupProfile";
@@ -76,15 +74,6 @@ function App({ children }) {
 			path: "/SPSignupProfileApplication",
 			element: <SPSignupApplication />,
 		},
-
-		// {
-		//   path: "/bookAppointment",
-		//   element: <BookAppointment />,
-		// },
-		// {
-		//   path: "/browseProfessionals",
-		//   element: <BrowseProfessionals />,
-		// },
 		{
 			element: (
 				<ProtectedRoute>
@@ -92,15 +81,15 @@ function App({ children }) {
 				</ProtectedRoute>
 			),
 			children: [
-				// {
-				//   index: true,
-				//   path: "/landing",
-				//   element: (
+				{
+				  
+				  path: "/",
+				  element: (
 
-				//       <LandingPage />
+				      <Dashboard />
 
-				//   ),
-				// },
+				  ),
+				},
 				{
 					path: "/",
 					element: <Dashboard />,

@@ -1,16 +1,16 @@
-/** @format */
-
 import React from "react";
 import Header from "../header/Header";
-import {Heading1} from 'lucide-react';
 
 const Dashboard = () => {
-	return (
-		<div>
-            <Header />
-            <h1 className="ms-2">Welcome</h1>
-		</div>
-	);
+  return (
+    <div>
+      <Header />
+      <div className="flex items-center justify-center h-screen">
+        <h2>Welcome</h2>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
+

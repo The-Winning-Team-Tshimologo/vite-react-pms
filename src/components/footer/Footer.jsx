@@ -1,9 +1,9 @@
-import "./Footer.css";
+import './footer.css'
 import fb from "../../assets/fb.png";
 import x from "../../assets/xcom.png";
 import ig from "../../assets/ig.png";
 
-const footer = () => {
+const Footer = () => {
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
@@ -93,10 +93,10 @@ const footer = () => {
               <p>Privacy</p>
             </a>
           </div>
-          <div>
+          <div className="footer-newsletter__container">
             <p>Subscribe to our email newsletter</p>
-            <div>
-              <input type="text" /> <button>SUBSCRIBE</button>
+            <div className="flex flex-row gap-5">
+              <input type="text" className="footer-newsletter__input" /> <button className="footer-newsletter__btn">SUBSCRIBE</button>
             </div>
             <p>Follow us</p>
             <div className="flex gap-4">
@@ -128,4 +128,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
