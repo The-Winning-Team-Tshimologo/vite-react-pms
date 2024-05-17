@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useFormContext } from "@/utils/FormContext";
 import "./SPSignup.css";
-import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router-dom";
-import FileUpload2 from "@/components/fileUpload/FileUpload2";
 import { helix } from "ldrs";
-import { useDropzone } from "react-dropzone";
+import { FaFile } from "react-icons/fa";
 
 export const SPSignup = () => {
   const { formData, updateFormData } = useFormContext();
@@ -14,6 +13,7 @@ export const SPSignup = () => {
   const [errors, setErrors] = useState({});
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
+  const [profilePicture, setProfilePicture] = useState();
 
   const toggleInputType1 = () => {
     setInputType1(inputType1 === "password" ? "text" : "password");
@@ -23,61 +23,56 @@ export const SPSignup = () => {
     setInputType2(inputType2 === "password" ? "text" : "password");
   };
 
-  const handleFileChange = (inputName) => (acceptedFiles) => {
-    // console.log("Accepted files:", acceptedFiles);
-    if (acceptedFiles && acceptedFiles.length > 0) {
-      // Assuming you want to handle only the first file
-      const file = acceptedFiles[0];
-      updateFormData({ ...formData, [inputName]: file });
-    }
-  };
+  const handleChange = (name, e) => {
+    const { type, files, value } = e.target;
+    // const updatedValue = type === "file" ? files[0] : value;
+    const updatedValue = type === "file" ? files[0] : value;
+    // const updatedValue = value;
 
-  // const handleFileChange = (inputName) => (eventOrFiles) => {
-  //   // Determine if the event is from an input element or Dropzone
-  //   let files = eventOrFiles.target ? eventOrFiles.target.files : eventOrFiles;
-
-  //   // Check if files exist and the first item is a File object
-  //   if (files.length > 0 && files[0] instanceof File) {
-  //     const file = files[0];
-  //     updateFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       [inputName]: file,
-  //     }));
-  //     console.log("File stored:", file);
-  //   }
-  // };
-
-  // const handleFileChange = (inputName) => (eventOrFiles) => {
-  //   // Check if it comes from Dropzone or from an input
-  //   let file = null;
-  //   if (Array.isArray(eventOrFiles)) {
-  //     // From Dropzone
-  //     file = eventOrFiles[0]; // Assuming you only want the first file
-  //   } else if (eventOrFiles.target && eventOrFiles.target.files) {
-  //     // From input
-  //     file = eventOrFiles.target.files[0];
-  //   }
-
-  //   if (file && file instanceof File) {
-  //     updateFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       [inputName]: file,
-  //     }));
-  //   }
-  // };
+    updateFormData({ [name]: updatedValue });
 
   
 
-  const handleChange = (e) => {
-    // const { name, type, files } = e.target;
-    // updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
-    const { name, value } = e.target;
-    updateFormData({ ...formData, [name]: e.target.value });
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: null }); // Clear errors on change
+    }
   };
 
-  // const handleFileChange = (inputName) => (acceptedFiles) => {
-  //   updateFormData({ [inputName]: acceptedFiles[0] });
-  // };
+  const handleFileChange2 = (e, key) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        localStorage.setItem(key, reader.result);
+        // formData.append(
+        //   "profilePicture",
+        //   getFileFromLocalStorage("profilePicture")
+        // );
+        // updateFormData({ [profilePicture]: getFileFromLocalStorage("profilePicture") });
+        // updateFormData(
+        //   profilePicture,
+        //   getFileFromLocalStorage("profilePicture")
+        // );
+        // setFile(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const getFileFromLocalStorage = (key) => {
+    const base64String = localStorage.getItem(key);
+    if (base64String) {
+      const byteString = atob(base64String.split(",")[1]);
+      const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: mimeString });
+    }
+    return null;
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -86,10 +81,10 @@ export const SPSignup = () => {
       "lastName",
       "password",
       "confirmPassword",
-      "profilePicture",
+      // "profilePicture",
     ].forEach((field) => {
       if (!formData[field]) {
-        newErrors[field] = "  This field is required";
+        newErrors[field] = "This field is required";
       }
     });
 
@@ -101,9 +96,8 @@ export const SPSignup = () => {
       newErrors.confirmPassword = "Passwords do not match";
     }
 
-    // Check password length
     if (formData.password && formData.password.length < 8) {
-      newErrors.password = " Password must be at least 8 characters";
+      newErrors.password = "Password must be at least 8 characters";
     }
 
     setErrors(newErrors);
@@ -116,14 +110,17 @@ export const SPSignup = () => {
     setLoading(true);
     if (validateForm()) {
       try {
-        // Simulate a network request
         await new Promise((resolve) => setTimeout(resolve, 250));
+
         console.log("Form submitted:", formData);
-        navigate("/SPSignupProfileApplication"); // Redirect on successful submission
+        navigate("/SPSignupProfileApplication");
       } catch (error) {
         console.error("Submission error:", error);
       } finally {
         setLoading(false);
+        // console.log("pp", localStorage.getItem("profilePicture"));
+        console.log("profilePicture", getFileFromLocalStorage("profilePicture"));
+   
       }
     } else {
       console.log("Validation errors:", errors);
@@ -131,21 +128,12 @@ export const SPSignup = () => {
     }
   };
 
-  const onDrop = (acceptedFiles) => {
-    updateFormData({ profilePicture: acceptedFiles[0] });
-  };
-
-  const { getRootProps, getInputProps, isDragActive, isDragAccept } =
-    useDropzone({ onDrop });
-
   return (
     <div className="sp__container">
       {isLoading && (
-        <>
-          <div className="loading-overlay">
-            <l-helix size="150" speed="1.5" color="black"></l-helix>
-          </div>
-        </>
+        <div className="loading-overlay">
+          <l-helix size="150" speed="1.5" color="black"></l-helix>
+        </div>
       )}
       <div className="sp__context">
         <div className="sp__context_side">
@@ -162,15 +150,13 @@ export const SPSignup = () => {
                     <span className="error-message">{errors.firstName}</span>
                   )}
                 </label>
-
                 <input
                   type="text"
                   name="firstName"
                   value={formData.firstName || ""}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange("firstName", e)}
                 />
               </div>
-
               <div className="formFiled">
                 <label>
                   Lastname{" "}
@@ -178,16 +164,14 @@ export const SPSignup = () => {
                     <span className="error-message">{errors.lastName}</span>
                   )}
                 </label>
-
                 <input
                   type="text"
                   name="lastName"
                   value={formData.lastName || ""}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange("lastName", e)}
                 />
               </div>
             </div>
-
             <div className="formFiled">
               <label>
                 Password
@@ -199,7 +183,7 @@ export const SPSignup = () => {
                 type={inputType1}
                 name="password"
                 value={formData.password || ""}
-                onChange={handleChange}
+                onChange={(e) => handleChange("password", e)}
               />
               <span onClick={toggleInputType1} className="icon-button">
                 {inputType1 === "password" ? (
@@ -209,7 +193,6 @@ export const SPSignup = () => {
                 )}
               </span>
             </div>
-
             <div className="formFiled">
               <label>
                 Confirm Password
@@ -223,7 +206,7 @@ export const SPSignup = () => {
                 type={inputType2}
                 name="confirmPassword"
                 value={formData.confirmPassword || ""}
-                onChange={handleChange}
+                onChange={(e) => handleChange("confirmPassword", e)}
               />
               <span onClick={toggleInputType2} className="icon-button">
                 {inputType2 === "password" ? (
@@ -233,28 +216,23 @@ export const SPSignup = () => {
                 )}
               </span>
             </div>
-
             <div className="file-upload-container">
-              {/* <label>
-                Upload Avatar
+              <label>
+                Upload Profile Picture
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
-              </label> */}
-              <FileUpload2
-                handleChange={handleFileChange("profilePicture")}
-                onDrop={handleFileChange("profilePicture")}
-                inputName="profilePicture"
-                formData={formData.profilePicture}
-                errors={errors.profilePicture}
-                labelName="Upload Profile Picture"
+              </label>
+              {/* <input
+                type="file"
+                name="profilePicture"
+                onChange={(e) => handleChange("profilePicture", e)}
+              /> */}
+              <input
+                type="file"
+                name="profilePicture"
+                onChange={(e) => handleFileChange2(e, "profilePicture")}
               />
-
-              {/* {formData.profilePicture && (
-                <div className="file-feedback">
-                  <p>File selected: {formData.profilePicture.name}</p>
-                </div>
-              )} */}
             </div>
             <p>
               Already have an account?{" "}
@@ -286,7 +264,6 @@ export const SPSignup = () => {
             are applying for
           </li>
         </ul>
-        <br />
         <p>
           <strong>
             We (Property Maintenance System) are not an employer, simply connect

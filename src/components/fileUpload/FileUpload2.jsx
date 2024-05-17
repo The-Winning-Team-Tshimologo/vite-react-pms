@@ -3,16 +3,17 @@ import { useDropzone } from "react-dropzone";
 import uploadIcon from "../../assets/upload-icon.png";
 
 const FileUpload2 = ({
-  handleFileChange,
+  handleChange,
   onDrop,
   inputName,
   formData,
   errors,
   labelName,
 }) => {
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => handleFileChange(inputName)(acceptedFiles),
-  });
+  const { getRootProps, getInputProps, isDragActive, isDragAccept } =
+    useDropzone({
+      onDrop: (acceptedFiles) => onDrop(inputName, acceptedFiles),
+    });
 
   return (
     <div className="file-upload-container">
@@ -22,12 +23,12 @@ const FileUpload2 = ({
       <div
         className="file-upload-box"
         {...getRootProps()}
-        // style={{
-        //   borderColor: isDragActive ? "#888" : "#5E8D83",
-        //   backgroundColor: isDragAccept ? "#f0f8ff" : "#f8fafc",
-        // }}
+        style={{
+          borderColor: isDragActive ? "#888" : "#5E8D83",
+          backgroundColor: isDragAccept ? "#f0f8ff" : "#f8fafc",
+        }}
       >
-        <div className="flex items-center justify-center p-2 rounded-full h-10 ">
+        <div className="flex items-center justify-center p-2 rounded-full h-10">
           <img src={uploadIcon} alt="Upload" className="h-12" />
         </div>
         <p>
@@ -38,11 +39,13 @@ const FileUpload2 = ({
         </p>
         <p style={{ fontSize: "12px" }}>Supported formats: JPEG, PNG, PDF</p>
         <input
-          {...getInputProps()}
+          type="file"
+          accept="image/*"
           id={`file-upload-${inputName}`}
           name={inputName}
-          onChange={() => handleFileChange(inputName)} // make sure this matches your handleFileChange setup
+          onChange={(e) => handleChange(inputName, e)}
           style={{ display: "none" }}
+          {...getInputProps()}
         />
       </div>
       {formData && (

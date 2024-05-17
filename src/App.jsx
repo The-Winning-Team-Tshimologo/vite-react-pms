@@ -38,6 +38,7 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
+import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
 
 
 function App({ children }) {
@@ -73,6 +74,10 @@ function App({ children }) {
 		{
 			path: "/SPSignupProfileApplication",
 			element: <SPSignupApplication />,
+		},
+		{
+			path: "/SPActivation",
+			element: <Activation />,
 		},
 		{
 			element: (
