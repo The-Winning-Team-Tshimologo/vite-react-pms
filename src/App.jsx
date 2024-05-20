@@ -209,6 +209,14 @@ function App({ children }) {
 					),
 				},
 				{
+					path: "/sp-profile2/:id/:application",
+					element: (
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					),
+				},
+				{
 					path: "/reminders",
 					element: (
 						<ProtectedRoute>

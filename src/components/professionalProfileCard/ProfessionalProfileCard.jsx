@@ -183,6 +183,49 @@ const ProfessionalProfileCard = ({
 
 	}
 
+	const convertBase64ToBlobUrl = (base64) => {
+
+		const [imageLoaded, setImageLoaded] = useState(false);
+  if (!base64) {
+        return <div>No data provided</div>;
+      }
+
+   // Convert base64 to Blob URL
+   const binaryString = window.atob(base64);
+   const binaryLen = binaryString.length;
+   const bytes = new Uint8Array(binaryLen);
+   for (let i = 0; i < binaryLen; i++) {
+     bytes[i] = binaryString.charCodeAt(i);
+   }
+   let blob = new Blob([bytes]);
+   let blobUrl = window.URL.createObjectURL(blob);
+
+   const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+ 
+   return (
+     <div>
+       {/* Attempt to display as an image */}
+       <img src={blobUrl} alt="Base64" width="350" height="400" style={{ display: imageLoaded ? 'block' : 'none' }}
+        onLoad={handleImageLoad} />
+ 
+       {/* Fallback to display as a PDF */}
+       <object data={convet(bytes)} type="application/pdf" width="350" height="400" style={{ display: imageLoaded ? 'none' : 'block' }}>
+         <embed src={convet(bytes)} type="application/pdf" width="350" height="400" />
+       </object>
+     </div>
+   );
+	};
+
+	const convet =(bytes)=>{
+
+		const blob = new Blob([bytes], { type: 'application/pdf' });
+		const blobUrl = window.URL.createObjectURL(blob);
+	
+		return blobUrl;
+		
+	  }
 	return (
 		<div className='professional-profile__card'>
 			<div className='professional-profile__header'>
@@ -330,18 +373,20 @@ const ProfessionalProfileCard = ({
 			{useDocs && (
 				<>
 					<div className='application-documents__container'>
-						<div>Document 1</div>
-						<div>Document 2</div>
+						{/* <div>Document 1</div>
+						<div>Document 2</div> */}
 						<div>
 							<h3>Bank Statement</h3>
-							{renderImage(
+							{/* {renderImage(
 								serviceProviderInfo.bankStatement,
 								"bank_statement.png"
-							)}
+							)} */}
+							{convertBase64ToBlobUrl(serviceProviderInfo.bankStatement)}
 						</div>
 						<div>
 							<h3>Resume</h3>
-							{renderImage(serviceProviderInfo.resume, "resume.png")}
+							{/* {renderImage(serviceProviderInfo.resume, "resume.png")} */}
+							{convertBase64ToBlobUrl(serviceProviderInfo.profilePicture)}
 						</div>
 					</div>
 					<div className='application-documents-action__btns'>
