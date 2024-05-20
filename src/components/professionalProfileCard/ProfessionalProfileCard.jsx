@@ -67,7 +67,15 @@ const ProfessionalProfileCard = ({
 	const { pathname } = useLocation(); // Get the current URL path
 	const [serviceProviderInfo, setServiceProviderInfo] = useState([]);
 	const token = localStorage.getItem("token");
-	const navigate = useNavigate();
+  const navigate = useNavigate();
+ const { userName } = useParams();
+
+ const handleMessageClick = () => {
+		const currentUser = JSON.parse(localStorage.getItem("user")).userName; // Assuming you store the user object in local storage
+		navigate(`/inbox`, {
+			state: { userName: currentUser, user2: userName },
+		});
+ };
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -301,12 +309,13 @@ const ProfessionalProfileCard = ({
 			</div>
 			{useButtons && (
 				<div className='professional-profile__actions'>
-					<NavLink
+					<button
 						className='professional-profile__message-btn'
-						to='/inbox'
+						onClick={handleMessageClick}
 					>
 						Message
-					</NavLink>
+					</button>
+
 					<NavLink
 						className='professional-profile__issue-btn'
 						to={`/issues/${id}`}
@@ -382,7 +391,12 @@ const ProfessionalProfileCard = ({
 						/>
 					</div>
 					<div>
-						<button className="" onClick={handleAcceptance}>Accept Request</button>
+						<button
+							className=''
+							onClick={handleAcceptance}
+						>
+							Accept Request
+						</button>
 					</div>
 				</div>
 			)}

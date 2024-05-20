@@ -14,7 +14,7 @@ const CustomerProfile = () => {
 			<div className='review-carousel__container'>
 				(
 				<ProfessionalProfileCard
-					useButtons={false}
+					useButtons={true}
 					useDocs={false}
 					useServiceDetails={true}
 					id={id}

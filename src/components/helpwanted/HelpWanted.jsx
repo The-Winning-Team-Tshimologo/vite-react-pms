@@ -9,7 +9,7 @@ const HelpWanted = ({ SystemWide }) => {
 	const navigate = useNavigate();
 
 	const handleClickEvent = () => {
-		navigate(`/customer-profile/${SystemWide.serviceId}/${SystemWide.userId}`);
+		navigate(`/customer-profile/${SystemWide.serviceId}/${SystemWide.userId}/${SystemWide.userName}`);
 	};
 
 	return (

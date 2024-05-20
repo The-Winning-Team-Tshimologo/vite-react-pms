@@ -82,13 +82,8 @@ function App({ children }) {
 			),
 			children: [
 				{
-				  
-				  path: "/",
-				  element: (
-
-				      <Dashboard />
-
-				  ),
+					path: "/",
+					element: <Dashboard />,
 				},
 				{
 					path: "/",
@@ -173,6 +168,14 @@ function App({ children }) {
 					),
 				},
 				{
+					path: "/inbox/:userName",
+					element: (
+						<ProtectedRoute>
+							<MessagingPage />
+						</ProtectedRoute>
+					),
+				},
+				{
 					path: "/invoice",
 					element: (
 						<ProtectedRoute>
@@ -189,7 +192,7 @@ function App({ children }) {
 					),
 				},
 				{
-					path: "/sp-profile/:id/:review",
+					path: "/sp-profile/:id",
 					element: (
 						<ProtectedRoute>
 							<Profile />
@@ -198,7 +201,7 @@ function App({ children }) {
 				},
 
 				{
-					path: "/sp-profile/:id",
+					path: "/sp-profile/:id/:userName",
 					element: (
 						<ProtectedRoute>
 							<Profile />
@@ -270,7 +273,7 @@ function App({ children }) {
 					),
 				},
 				{
-					path: "/customer-profile/:id/:id2",
+					path: "/customer-profile/:id/:id2/:userName",
 					element: (
 						<ProtectedRoute>
 							<CustomerProfile />

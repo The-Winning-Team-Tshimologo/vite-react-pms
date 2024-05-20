@@ -50,9 +50,14 @@ const BrowseProfessionals = () => {
 	}, []); // Empty dependency array to ensure useEffect runs only once when component mounts
 
 	const handleClick = (selectedProfile) => {
-		console.log(selectedProfile);
-		navigate(`/sp-profile/${selectedProfile.userId}`);
+		
+		navigate(
+			`/sp-profile/${selectedProfile.userId}/${selectedProfile.userName}`
+			
+		);
 	};
+
+
 
 
 	return (
