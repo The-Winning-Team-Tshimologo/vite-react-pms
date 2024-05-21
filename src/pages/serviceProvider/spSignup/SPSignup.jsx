@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useFormContext } from "@/utils/FormContext";
 import "./SPSignup.css";
-import { FaFile, FaEye, FaEyeSlash } from "react-icons/fa6";
-import { useDropzone } from "react-dropzone";
-import uploadIcon from "@/assets/upload-icon.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router-dom";
+import { helix } from "ldrs";
+import { FaFile } from "react-icons/fa";
 import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
 export const SPSignup = () => {
@@ -15,10 +15,12 @@ export const SPSignup = () => {
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
 
+  // Toggle the visibility of the password input field
   const toggleInputType1 = () => {
     setInputType1(inputType1 === "password" ? "text" : "password");
   };
 
+  // Toggle the visibility of the confirm password input field
   const toggleInputType2 = () => {
     setInputType2(inputType2 === "password" ? "text" : "password");
   };
@@ -31,6 +33,8 @@ export const SPSignup = () => {
   const handleFileChange = (inputName) => (acceptedFiles) => {
     updateFormData({ [inputName]: acceptedFiles[0] });
   };
+//  Validate the form fields
+
   const validateForm = () => {
     const newErrors = {};
     [
@@ -57,25 +61,39 @@ export const SPSignup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    helix.register(); // Perform any necessary actions before submission
+    setLoading(true);
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      navigate("/SPSignupProfileApplication"); // Redirect on successful submission
+      try {
+        // Simulate a delay for form submission
+        await new Promise((resolve) => setTimeout(resolve, 250));
+
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupProfileApplication"); // Navigate to the next page on success
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false);
+        console.log(
+          "profilePicture",
+          getFileFromLocalStorage("profilePicture")
+        );
+      }
     } else {
       console.log("Validation errors:", errors);
     }
   };
 
-  const onDrop = (acceptedFiles) => {
-    updateFormData({ profilePicture: acceptedFiles[0] });
-  };
-
-  const { getRootProps, getInputProps, isDragActive, isDragAccept } =
-    useDropzone({ onDrop });
-
   return (
     <div className="sp__container">
+      {isLoading && (
+        <div className="loading-overlay">
+          <l-helix size="150" speed="1.5" color="black"></l-helix>
+        </div>
+      )}
       <div className="sp__context">
         <div className="sp__context_side">
           <h2 className="sp__context_side__title">Join as a Pro</h2>
@@ -91,8 +109,9 @@ export const SPSignup = () => {
                 )}
                 <input
                   type="text"
-                  name="firstname"
-                  value={formData.firstname || ""}
+                  name="firstName"
+                  value={formData.firstName || ""}
+                  // onChange={(e) => handleChange("firstName", e)}
                   onChange={handleChange}
                 />
               </div>
@@ -104,8 +123,9 @@ export const SPSignup = () => {
                 )}
                 <input
                   type="text"
-                  name="lastname"
-                  value={formData.lastname || ""}
+                  name="lastName"
+                  value={formData.lastName || ""}
+                  // onChange={(e) => handleChange("lastName", e)}
                   onChange={handleChange}
                 />
               </div>
@@ -122,6 +142,7 @@ export const SPSignup = () => {
                 type={inputType1}
                 name="password"
                 value={formData.password || ""}
+                // onChange={(e) => handleChange("password", e)}
                 onChange={handleChange}
               />
               <span onClick={toggleInputType1} className="icon-button">
@@ -146,6 +167,7 @@ export const SPSignup = () => {
                 type={inputType2}
                 name="confirmPassword"
                 value={formData.confirmPassword || ""}
+                // onChange={(e) => handleChange("confirmPassword", e)}
                 onChange={handleChange}
               />
               <span onClick={toggleInputType2} className="icon-button">
@@ -159,7 +181,7 @@ export const SPSignup = () => {
 
             <div className="file-upload-container">
               <label>
-                Upload Avatar
+                {/* Upload Avatar */}
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
@@ -172,11 +194,6 @@ export const SPSignup = () => {
                 errors={errors.profilePicture}
                 labelName="Upload Avatar"
               />
-              {formData.profilePicture && (
-                <div className="file-feedback">
-                  <p>File selected: {formData.profilePicture.name}</p>
-                </div>
-              )}
             </div>
             <p>
               Already have an account? <NavLink to={"/signin"}>Sign in</NavLink>

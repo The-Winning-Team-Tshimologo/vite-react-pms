@@ -39,6 +39,7 @@ import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
 import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfileCard";
+import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
 
 
 function App({ children }) {
@@ -74,6 +75,10 @@ function App({ children }) {
 		{
 			path: "/SPSignupProfileApplication",
 			element: <SPSignupApplication />,
+		},
+		{
+			path: "/SPActivation",
+			element: <Activation />,
 		},
 		{
 			element: (

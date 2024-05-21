@@ -6,12 +6,12 @@ const FileUpload2 = ({handleChange, onDrop, inputName,formData,errors,labelName}
     useDropzone({ onDrop: onDrop(inputName) });
   return (
     <div className="file-upload-container">
-              <label>
+              {/* <label>
                 {labelName}{" "}
                 {errors && (
                   <span className="error-message">{errors}</span>
                 )}
-              </label>
+              </label> */}
               <div
                 className="file-upload-box"
                 {...getRootProps()}
