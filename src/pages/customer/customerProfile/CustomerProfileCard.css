@@ -1,0 +1,43 @@
+.card_border_line {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    margin: 100px;
+    margin-left: 25%;
+    justify-content: space-between;
+  }
+  
+  .profile-pic {
+    margin-right: 20px;
+  }
+  
+  .profile-pic img {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+  }
+  
+  .content {
+    flex: 1; /* Take remaining space */
+  }
+  
+  .Name_Surname {
+    margin-left: auto; /* Push to the right */
+  }
+  
+  .location {
+    margin-top: 1.5rem; /* Adjust spacing */
+  }
+  
+  .submit_button {
+    background-color: #131111;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 7rem;
+  }

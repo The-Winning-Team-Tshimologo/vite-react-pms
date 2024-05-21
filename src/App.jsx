@@ -38,6 +38,7 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
+import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfileCard";
 
 
 function App({ children }) {
@@ -285,6 +286,14 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<CustomerProfile />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/customer-profile-card",
+					element: (
+						<ProtectedRoute>
+							<CustomerProfileCard />
 						</ProtectedRoute>
 					),
 				},
