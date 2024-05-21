@@ -3,54 +3,64 @@ import SPSIgnupProgress from "./SPSIgnupProgress";
 import Header from "@/components/header/Header";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
+import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
 export const SPSignupUploadDocument = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const handleChange = (name, e) => {
-    const { type, files, value } = e.target;
-    const updatedValue = type === "file" ? files[0] : value;
-    updateFormData({ [name]: updatedValue });
+  // const handleChange = (name, e) => {
+  //   const { type, files, value } = e.target;
+  //   const updatedValue = type === "file" ? files[0] : value;
+  //   updateFormData({ [name]: updatedValue });
 
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null }); // Clear errors on change
-    }
+  //   if (errors[name]) {
+  //     setErrors({ ...errors, [name]: null }); // Clear errors on change
+  //   }
+  // };
+
+  const handleChange = (e) => {
+    const { name, type, files } = e.target;
+    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
   };
 
-  const handleFileChange2 = (e, key) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        localStorage.setItem(key, reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    updateFormData({ [inputName]: acceptedFiles[0] });
   };
 
-  const getFileFromLocalStorage = (key) => {
-    const base64String = localStorage.getItem(key);
-    if (base64String) {
-      const byteString = atob(base64String.split(",")[1]);
-      const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ab], { type: mimeString });
-    }
-    return null;
-  };
+  // const handleFileChange2 = (e, key) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       localStorage.setItem(key, reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // const getFileFromLocalStorage = (key) => {
+  //   const base64String = localStorage.getItem(key);
+  //   if (base64String) {
+  //     const byteString = atob(base64String.split(",")[1]);
+  //     const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
+  //     const ab = new ArrayBuffer(byteString.length);
+  //     const ia = new Uint8Array(ab);
+  //     for (let i = 0; i < byteString.length; i++) {
+  //       ia[i] = byteString.charCodeAt(i);
+  //     }
+  //     return new Blob([ab], { type: mimeString });
+  //   }
+  //   return null;
+  // };
 
   const validateForm = () => {
     const newErrors = {};
     // Validate that all required fields and files are provided
     const requiredFields = [
       "identityDocument",
-      // "qualification",
+      "qualification",
       "criminalRecord",
       "resume",
       "bankStatement",
@@ -74,12 +84,12 @@ export const SPSignupUploadDocument = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form submitted:", formData);
-      console.log("profilePicture", getFileFromLocalStorage("profilePicture"));
-      console.log("identityDocument", getFileFromLocalStorage("identityDocument"));
-      console.log("qualification", getFileFromLocalStorage("qualification"));
-      console.log("criminalRecord", getFileFromLocalStorage("criminalRecord"));
-      console.log("resume", getFileFromLocalStorage("resume"));
-      console.log("bankStatement", getFileFromLocalStorage("bankStatement"));
+      // console.log("profilePicture", getFileFromLocalStorage("profilePicture"));
+      // console.log("identityDocument", getFileFromLocalStorage("identityDocument"));
+      // console.log("qualification", getFileFromLocalStorage("qualification"));
+      // console.log("criminalRecord", getFileFromLocalStorage("criminalRecord"));
+      // console.log("resume", getFileFromLocalStorage("resume"));
+      // console.log("bankStatement", getFileFromLocalStorage("bankStatement"));
       navigate("/SPSignupProfile");
     } else {
       console.log("Validation errors:", errors);
@@ -103,37 +113,36 @@ export const SPSignupUploadDocument = () => {
               <label>
                 ID/Passport/License No.
                 {errors.identityDocument && (
-                  <span className="error-message">{errors.identityDocument}</span>
+                  <span className="error-message">
+                    {errors.identityDocument}
+                  </span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="identityDocument"
-                onChange={(e) => handleChange("identityDocument", e)}
-              /> */}
-                <input
-                type="file"
-                name="identityDocument"
-                onChange={(e) => handleFileChange2(e, "identityDocument")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="identityDocument"
+                formData={formData.identityDocument}
+                errors={errors.identityDocument}
+                // labelName="Upload Avatar"
               />
             </div>
 
             <div className="file-upload-container">
               <label>
+                {" "}
                 Qualification/Certificate
                 {errors.qualification && (
                   <span className="error-message">{errors.qualification}</span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="qualification"
-                onChange={(e) => handleChange("qualification", e)}
-              /> */}
-               <input
-                type="file"
-                name="qualification"
-                onChange={(e) => handleFileChange2(e, "qualification")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="qualification"
+                formData={formData.qualification}
+                errors={errors.qualification}
+                // labelName="Upload Avatar"
               />
             </div>
 
@@ -144,15 +153,13 @@ export const SPSignupUploadDocument = () => {
                   <span className="error-message">{errors.criminalRecord}</span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="criminalRecord"
-                onChange={(e) => handleChange("criminalRecord", e)}
-              /> */}
-              <input
-                type="file"
-                name="criminalRecord"
-                onChange={(e) => handleFileChange2(e, "criminalRecord")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="criminalRecord"
+                formData={formData.criminalRecord}
+                errors={errors.criminalRecord}
+                // labelName="Upload Avatar"
               />
             </div>
 
@@ -163,15 +170,13 @@ export const SPSignupUploadDocument = () => {
                   <span className="error-message">{errors.resume}</span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="resume"
-                onChange={(e) => handleChange("resume", e)}
-              /> */}
-              <input
-                type="file"
-                name="resume"
-                onChange={(e) => handleFileChange2(e, "resume")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="resume"
+                formData={formData.resume}
+                errors={errors.resume}
+                // labelName="Upload Avatar"
               />
             </div>
 
@@ -186,7 +191,7 @@ export const SPSignupUploadDocument = () => {
                 type="text"
                 name="bankName"
                 value={formData.bankName || ""}
-                onChange={(e) => handleChange("bankName", e)}
+                onChange={handleChange}
               />
             </div>
 
@@ -201,7 +206,7 @@ export const SPSignupUploadDocument = () => {
                 type="number"
                 name="accountNumber"
                 value={formData.accountNumber || ""}
-                onChange={(e) => handleChange("accountNumber", e)}
+                onChange={handleChange}
               />
             </div>
 
@@ -216,7 +221,7 @@ export const SPSignupUploadDocument = () => {
                 type="text"
                 name="typeOfAccount"
                 value={formData.typeOfAccount || ""}
-                onChange={(e) => handleChange("typeOfAccount", e)}
+                onChange={handleChange}
               />
             </div>
 
@@ -231,7 +236,7 @@ export const SPSignupUploadDocument = () => {
                 type="number"
                 name="branchCode"
                 value={formData.branchCode || ""}
-                onChange={(e) => handleChange("branchCode", e)}
+                onChange={handleChange}
               />
             </div>
 
@@ -242,15 +247,13 @@ export const SPSignupUploadDocument = () => {
                   <span className="error-message">{errors.bankStatement}</span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="bankStatement"
-                onChange={(e) => handleChange("bankStatement", e)}
-              /> */}
-               <input
-                type="file"
-                name="bankStatement"
-                onChange={(e) => handleFileChange2(e, "bankStatement")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="bankStatement"
+                formData={formData.bankStatement}
+                errors={errors.bankStatement}
+                // labelName="Upload Avatar"
               />
             </div>
 

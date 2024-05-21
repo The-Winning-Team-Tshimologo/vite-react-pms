@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router-dom";
 import { helix } from "ldrs";
 import { FaFile } from "react-icons/fa";
+import FileUpload2 from "@/components/fileUpload/FileUpload2";
 
 export const SPSignup = () => {
   const { formData, updateFormData } = useFormContext();
@@ -13,67 +14,27 @@ export const SPSignup = () => {
   const [errors, setErrors] = useState({});
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
-  const [profilePicture, setProfilePicture] = useState();
 
+  // Toggle the visibility of the password input field
   const toggleInputType1 = () => {
     setInputType1(inputType1 === "password" ? "text" : "password");
   };
 
+  // Toggle the visibility of the confirm password input field
   const toggleInputType2 = () => {
     setInputType2(inputType2 === "password" ? "text" : "password");
   };
 
-  const handleChange = (name, e) => {
-    const { type, files, value } = e.target;
-    // const updatedValue = type === "file" ? files[0] : value;
-    const updatedValue = type === "file" ? files[0] : value;
-    // const updatedValue = value;
-
-    updateFormData({ [name]: updatedValue });
-
-  
-
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null }); // Clear errors on change
-    }
+  const handleChange = (e) => {
+    const { name, type, files } = e.target;
+    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
   };
 
-  const handleFileChange2 = (e, key) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        localStorage.setItem(key, reader.result);
-        // formData.append(
-        //   "profilePicture",
-        //   getFileFromLocalStorage("profilePicture")
-        // );
-        // updateFormData({ [profilePicture]: getFileFromLocalStorage("profilePicture") });
-        // updateFormData(
-        //   profilePicture,
-        //   getFileFromLocalStorage("profilePicture")
-        // );
-        // setFile(file);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    updateFormData({ [inputName]: acceptedFiles[0] });
   };
 
-  const getFileFromLocalStorage = (key) => {
-    const base64String = localStorage.getItem(key);
-    if (base64String) {
-      const byteString = atob(base64String.split(",")[1]);
-      const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ab], { type: mimeString });
-    }
-    return null;
-  };
-
+  // Validate the form fields
   const validateForm = () => {
     const newErrors = {};
     [
@@ -81,10 +42,10 @@ export const SPSignup = () => {
       "lastName",
       "password",
       "confirmPassword",
-      // "profilePicture",
+      "profilePicture",
     ].forEach((field) => {
       if (!formData[field]) {
-        newErrors[field] = "This field is required";
+        newErrors[field] = "  This field is required";
       }
     });
 
@@ -96,31 +57,30 @@ export const SPSignup = () => {
       newErrors.confirmPassword = "Passwords do not match";
     }
 
-    if (formData.password && formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    helix.register();
+    helix.register(); // Perform any necessary actions before submission
     setLoading(true);
     if (validateForm()) {
       try {
+        // Simulate a delay for form submission
         await new Promise((resolve) => setTimeout(resolve, 250));
 
         console.log("Form submitted:", formData);
-        navigate("/SPSignupProfileApplication");
+        navigate("/SPSignupProfileApplication"); // Navigate to the next page on success
       } catch (error) {
         console.error("Submission error:", error);
       } finally {
         setLoading(false);
-        // console.log("pp", localStorage.getItem("profilePicture"));
-        console.log("profilePicture", getFileFromLocalStorage("profilePicture"));
-   
+        console.log(
+          "profilePicture",
+          getFileFromLocalStorage("profilePicture")
+        );
       }
     } else {
       console.log("Validation errors:", errors);
@@ -150,13 +110,16 @@ export const SPSignup = () => {
                     <span className="error-message">{errors.firstName}</span>
                   )}
                 </label>
+
                 <input
                   type="text"
                   name="firstName"
                   value={formData.firstName || ""}
-                  onChange={(e) => handleChange("firstName", e)}
+                  // onChange={(e) => handleChange("firstName", e)}
+                  onChange={handleChange}
                 />
               </div>
+
               <div className="formFiled">
                 <label>
                   Lastname{" "}
@@ -164,14 +127,17 @@ export const SPSignup = () => {
                     <span className="error-message">{errors.lastName}</span>
                   )}
                 </label>
+
                 <input
                   type="text"
                   name="lastName"
                   value={formData.lastName || ""}
-                  onChange={(e) => handleChange("lastName", e)}
+                  // onChange={(e) => handleChange("lastName", e)}
+                  onChange={handleChange}
                 />
               </div>
             </div>
+
             <div className="formFiled">
               <label>
                 Password
@@ -183,7 +149,8 @@ export const SPSignup = () => {
                 type={inputType1}
                 name="password"
                 value={formData.password || ""}
-                onChange={(e) => handleChange("password", e)}
+                // onChange={(e) => handleChange("password", e)}
+                onChange={handleChange}
               />
               <span onClick={toggleInputType1} className="icon-button">
                 {inputType1 === "password" ? (
@@ -193,6 +160,7 @@ export const SPSignup = () => {
                 )}
               </span>
             </div>
+
             <div className="formFiled">
               <label>
                 Confirm Password
@@ -206,7 +174,8 @@ export const SPSignup = () => {
                 type={inputType2}
                 name="confirmPassword"
                 value={formData.confirmPassword || ""}
-                onChange={(e) => handleChange("confirmPassword", e)}
+                // onChange={(e) => handleChange("confirmPassword", e)}
+                onChange={handleChange}
               />
               <span onClick={toggleInputType2} className="icon-button">
                 {inputType2 === "password" ? (
@@ -216,29 +185,25 @@ export const SPSignup = () => {
                 )}
               </span>
             </div>
+
             <div className="file-upload-container">
               <label>
-                Upload Profile Picture
+                {/* Upload Avatar */}
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
               </label>
-              {/* <input
-                type="file"
-                name="profilePicture"
-                onChange={(e) => handleChange("profilePicture", e)}
-              /> */}
-              <input
-                type="file"
-                name="profilePicture"
-                onChange={(e) => handleFileChange2(e, "profilePicture")}
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="profilePicture"
+                formData={formData.profilePicture}
+                errors={errors.profilePicture}
+                labelName="Upload Avatar"
               />
             </div>
             <p>
-              Already have an account?{" "}
-              <NavLink to={"/signin"} className={" text-blue-500"}>
-                Sign in
-              </NavLink>
+              Already have an account? <NavLink to={"/signin"}>Sign in</NavLink>
             </p>
             <button type="submit">Next</button>
           </form>
@@ -264,6 +229,7 @@ export const SPSignup = () => {
             are applying for
           </li>
         </ul>
+        <br />
         <p>
           <strong>
             We (Property Maintenance System) are not an employer, simply connect

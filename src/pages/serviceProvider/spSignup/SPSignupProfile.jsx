@@ -85,15 +85,6 @@ export const SPSignupProfile = () => {
     return isValid;
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     console.log("Form submitted:", formData);
-  //     handleFinalSubmit();
-  //   } else {
-  //     console.log("Validation errors:", errors);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
