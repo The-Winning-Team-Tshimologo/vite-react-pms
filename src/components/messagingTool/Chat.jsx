@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { subscribeToMessages, sendMessage } from "./websocket-client"; // Import subscribeToMessages function
 import "./Chat.css";
 
 const Chat = ({ user2, userName }) => {
@@ -13,8 +12,16 @@ const Chat = ({ user2, userName }) => {
 
 	useEffect(() => {
 		fetchConversations();
-		subscribeToMessages(handleReceivedMessage); // Subscribe to incoming messages
-	}, []);
+
+		// Set up polling to fetch conversations every second
+		const intervalId = setInterval(() => {
+			fetchConversations();
+			
+		}, 1000);
+
+		// Clean up the interval on component unmount
+		return () => clearInterval(intervalId);
+	}, [selectedUser]);
 
 	const fetchConversations = async () => {
 		try {
@@ -27,9 +34,8 @@ const Chat = ({ user2, userName }) => {
 				}
 			);
 			setConversations(response.data);
-			if (user2 && response.data[user2]) {
-				setSelectedConversation(response.data[user2]);
-				setSelectedUser(user2); // Set the initial selected user
+			if (selectedUser && response.data[selectedUser]) {
+				setSelectedConversation(response.data[selectedUser]);
 			}
 		} catch (error) {
 			console.error("Error fetching conversations", error);
@@ -56,29 +62,17 @@ const Chat = ({ user2, userName }) => {
 				}
 			);
 
-			// Send the message via WebSocket
-			sendMessage(message);
-
-			setSelectedConversation([...selectedConversation, message]);
+			// Update the conversation state with the new message
+			setSelectedConversation((prev) => [...prev, message]);
 			setNewMessage("");
 		} catch (error) {
 			console.error("Error sending message", error);
 		}
 	};
 
-	const handleReceivedMessage = (message) => {
-		// Update conversation with the received message
-		if (
-			(message.sender === selectedUser && message.recipient === userName) ||
-			(message.sender === userName && message.recipient === selectedUser)
-		) {
-			setSelectedConversation([...selectedConversation, message]);
-		}
-	};
-
 	const selectConversation = (recipient) => {
 		setSelectedConversation(conversations[recipient]);
-		setSelectedUser(recipient); // Update the selected user
+		setSelectedUser(recipient);
 	};
 
 	return (

@@ -280,6 +280,7 @@ function App({ children }) {
 						</ProtectedRoute>
 					),
 				},
+				
 			],
 		},
 	]);
