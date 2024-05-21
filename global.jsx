@@ -1,0 +1,4 @@
+/** @format */
+
+window.global = window;
+

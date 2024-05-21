@@ -65,11 +65,6 @@ const SignUp = () => {
       }
     });
 
-    // Password length validation
-    if (data.password && data.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    }
-
     if (data.password !== data.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
@@ -92,17 +87,13 @@ const SignUp = () => {
           if (response) {
             navigate("/signin");
           } else {
-            setFailed(true);
             throw new Error("Registration failed");
           }
         } catch (error) {
-          setFailed(true);
           console.error("Registration failed:", error);
           setErrors({ formError: error.message });
-        } finally {
-          setLoading(false);
         }
-      }, 1000);
+      }, 3000);
     }
   };
 
@@ -116,7 +107,6 @@ const SignUp = () => {
           </div>
         </>
       )}
-
       <div className="signup-content">
         <h1>Welcome to Our Community</h1>
         <p>
@@ -139,18 +129,6 @@ const SignUp = () => {
       </div>
 
       <div className="signup-form">
-        {failed && (
-          <div className="w-fit align-middle ms-auto me-auto">
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Signup Failed</AlertTitle>
-              <AlertDescription>
-                Email and/or Username already exists use a unique Username and
-                Email.
-              </AlertDescription>
-            </Alert>
-          </div>
-        )}
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div className="formFiled">

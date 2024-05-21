@@ -3,19 +3,10 @@ import { Textarea } from "@/components/ui/textarea";
 import SPSIgnupProgress from "./SPSIgnupProgress";
 import Header from "@/components/header/Header";
 import { submitData, useFormContext } from "@/utils/FormContext";
-import { useNavigate } from "react-router";
-import { helix } from "ldrs";
-
 export const SPSignupProfile = () => {
   const { formData, updateFormData } = useFormContext();
 
   const [errors, setErrors] = useState({});
-  const [isLoading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleSuccess = () => navigate("/SPActivation");
-  const handleError = (message) => alert(`Error: ${message}`);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,43 +79,27 @@ export const SPSignupProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true before the request simulation
-
     if (validateForm()) {
-      try {
-        // Simulate a network request with a 250ms delay
-        await new Promise((resolve) => setTimeout(resolve, 250));
-        console.log("Form submitted:", formData);
-        handleFinalSubmit();
-      } catch (error) {
-        console.error("Submission error:", error);
-      } finally {
-        setLoading(false); // Reset loading state after the request simulation
-      }
+      console.log("Form submitted:", formData);
+      handleFinalSubmit();
     } else {
       console.log("Validation errors:", errors);
-      setLoading(false); // Reset loading state if validation fails
     }
   };
 
   const handleFinalSubmit = () => {
-    submitData(formData, handleSuccess, handleError);
+    submitData(formData);
   };
 
   const handleCheckboxChange = (e) => {
     updateFormData({ agreement: e.target.checked });
   };
 
+  let page = "Activation";
+
   return (
     <>
       <Header />
-      {isLoading && (
-        <>
-          <div className="loading-overlay">
-            <l-helix size="150" speed="1.5" color="black"></l-helix>
-          </div>
-        </>
-      )}
       <div className="SPSignupProfile__container flex">
         <div className="SPSignupProfile__progress  ml-10">
           <SPSIgnupProgress completedPages={75} page={"Profile"} />
@@ -245,10 +220,10 @@ export const SPSignupProfile = () => {
               <label>
                 Description
                 {errors["workExperience.description"] && (
-                  <span className="error-message">
-                    {errors["workExperience.description"]}
-                  </span>
-                )}
+                    <span className="error-message">
+                      {errors["workExperience.description"]}
+                    </span>
+                  )}
                 <Textarea
                   name={"workExperience.description"}
                   value={formData.workExperience.description}
@@ -260,7 +235,9 @@ export const SPSignupProfile = () => {
               </label>
             </div>
             <div className="p-10  pb-0 ">
-              <p>Education</p>
+              <p>
+                Education
+              </p>
               <div className="flex mt-1">
                 <label
                   htmlFor="education.startDate"

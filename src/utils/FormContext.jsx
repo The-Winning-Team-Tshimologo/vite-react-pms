@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 // Create a Context for the form data
 const FormContext = createContext();
@@ -26,11 +28,13 @@ export const useFormContext = () => useContext(FormContext);
 // FormProvider component to provide form data and update function to its children
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    // Initialize with all fields that will be collected across steps
+    // id: "",
+    firstname: "",
+    lastname: "",
     password: "",
     confirmPassword: "",
-    profilePicture: null,
+    profilePicture: "",
     userName: "",
     rating: 0,
     mobile: "",
@@ -51,24 +55,25 @@ export const FormProvider = ({ children }) => {
       companyName: "",
       description: "",
     },
+
     education: {
       institution: "",
       qualification: "",
       startDate: "",
       endDate: "",
     },
+
     skills: "",
     hourlyRate: "",
     qualification: "",
-    criminalRecord: null,
-    resume: null,
+    criminalRecord: "",
+    resume: "",
     bankName: "",
     accountNumber: "",
     typeOfAccount: "",
     branchCode: "",
-    bankStatement: null,
+    bankStatement: "",
     agreement: "",
-    identityDocument: null,
   });
 
   // Function to update the form data by deeply merging with new data
@@ -94,16 +99,22 @@ export const submitData = async (formData, onSuccess, onError) => {
     userName: formData.userName,
     email: formData.email,
     password: formData.password,
-    firstName: formData.firstName,
-    lastName: formData.lastName,
+    firstname: formData.firstname,
+    lastname: formData.lastname,
     mobile: formData.mobile,
     rating: formData.rating,
-    category: { name: formData.expertise },
-    address: formData.address,
+    address: {
+      streetName: formData.address.streetName,
+      city: formData.address.city,
+      province: formData.address.province,
+      zipCode: formData.address.zipCode,
+    },
     bankName: formData.bankName,
+    // accountNumber: formData.accountNumber,
     typeOfAccount: formData.typeOfAccount,
     branchCode: formData.branchCode,
   });
+  formDataObject.append("data", JSON.stringify(dataToSubmit));
 
   formDataObject.append("data", jsonData);
 
@@ -112,7 +123,23 @@ export const submitData = async (formData, onSuccess, onError) => {
     skills: formData.skills,
     expertise: formData.expertise,
     professionalSummary: formData.professionalSummary,
+    // yearsOfPaidExperience: formData.yearsOfPaidExperience,
+    workExperienceList: {
+      startDate: formData.workExperience.startDate,
+      endDate: formData.workExperience.endDate,
+      title: formData.workExperience.title,
+      companyName: formData.workExperience.companyName,
+      description: formData.workExperience.description,
+    },
+    numberOfTasksCompleted: 0,
+    education: {
+      institution: formData.education.institution,
+      qualification: formData.education.qualification,
+      startDate: formData.education.startDate,
+      endDate: formData.education.startDate,
+    },
     numberOfYearsWorked: formData.numberOfYearsWorked,
+    verification: true,
     hourlyRate: formData.hourlyRate,
     workExperienceList: [formData.workExperience], // Ensure this is an array
     education: [formData.education], // Ensure this is an array

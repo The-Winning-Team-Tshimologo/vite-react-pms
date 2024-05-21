@@ -7,14 +7,10 @@ const SPSIgnupProgress = ({ completedPages, page }) => {
   // const completedPages = ;
   const progressPercentage = (completedPages / 100) * 100;
 
-  const progressStyle = {
-    transition: 'width 0.5s ease-in-out', 
-  };
-
   return (
     <div className="progress__bar sticky top-10 ">
       <p>{`${progressPercentage.toFixed(0)}% Complete`}</p>
-      <Progress value={progressPercentage.toFixed(2)} style={progressStyle}/>
+      <Progress value={progressPercentage.toFixed(2)} className="pbar" />
       <p
         className={
           page === "Personal Information"

@@ -10,7 +10,7 @@ import FileUpload2 from "@/components/fileUpload/FileUpload2";
 export const SPSignup = () => {
   const { formData, updateFormData } = useFormContext();
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
@@ -33,13 +33,13 @@ export const SPSignup = () => {
   const handleFileChange = (inputName) => (acceptedFiles) => {
     updateFormData({ [inputName]: acceptedFiles[0] });
   };
+//  Validate the form fields
 
-  // Validate the form fields
   const validateForm = () => {
     const newErrors = {};
     [
-      "firstName",
-      "lastName",
+      "firstname",
+      "lastname",
       "password",
       "confirmPassword",
       "profilePicture",
@@ -84,7 +84,6 @@ export const SPSignup = () => {
       }
     } else {
       console.log("Validation errors:", errors);
-      setLoading(false);
     }
   };
 
@@ -104,13 +103,10 @@ export const SPSignup = () => {
           <form onSubmit={handleSubmit}>
             <div className="sp__context_form_top">
               <div className="formFiled">
-                <label>
-                  Firstname{" "}
-                  {errors.firstName && (
-                    <span className="error-message">{errors.firstName}</span>
-                  )}
-                </label>
-
+                <label>Firstname</label>
+                {errors.firstname && (
+                  <span className="error-message">{errors.firstname}</span>
+                )}
                 <input
                   type="text"
                   name="firstName"
@@ -121,13 +117,10 @@ export const SPSignup = () => {
               </div>
 
               <div className="formFiled">
-                <label>
-                  Lastname{" "}
-                  {errors.lastName && (
-                    <span className="error-message">{errors.lastName}</span>
-                  )}
-                </label>
-
+                <label>Lastname</label>
+                {errors.lastname && (
+                  <span className="error-message">{errors.lastname}</span>
+                )}
                 <input
                   type="text"
                   name="lastName"

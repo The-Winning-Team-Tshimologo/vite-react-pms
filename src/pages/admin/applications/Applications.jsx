@@ -71,8 +71,8 @@ useEffect(() => {
 }, []);
 
   const handleClick =(userId)=>{
-    console.log(userId);  
-    navigate("/sp-profile/"+userId+"/"+true)
+    // console.log(userId);  
+    navigate("/sp-profile2/"+userId+"/"+userId)
 
 
   }

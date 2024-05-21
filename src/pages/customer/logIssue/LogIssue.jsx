@@ -1,16 +1,15 @@
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Calendar from "@/components/calendar/Calendar";
 import Dropdown from "@/components/dropdown/Dropdown";
-import FileUpload from "@/components/fileUpload/FileUpload";
 import Header from "@/components/header/Header";
-import React, { useState } from "react";
-import "./LogIssue.css";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import "./LogIssue.css";
 
 const LogIssue = () => {
-  const { id } = useParams(); // Ensure this line extracts the 'id' correctly
+  const { id } = useParams(); // Extracts the 'id' correctly
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [description, setDescription] = useState("");
@@ -19,7 +18,7 @@ const LogIssue = () => {
     streetName: "",
     city: "",
     province: "",
-    postalCode: "",
+    zipCode: "",
   });
   const [selectedDate, setSelectedDate] = useState(null); // Add selectedDate state
   const [pictures, setPictures] = useState([]);
@@ -28,11 +27,6 @@ const LogIssue = () => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setPictures(files);
-    console.log(files);
-  };
-
-  const handleFileUpload = () => {
-    window.alert("yey you");
   };
 
   const handleCalendar = (selectedDate) => {
@@ -58,21 +52,17 @@ const LogIssue = () => {
           address,
         },
         createAppointmentDTO: {
-          appointmentDate: selectedDate ? selectedDate : null,
+          appointmentDate: selectedDate || null,
           appointmentMessage: descriptionBook,
         },
       };
 
-      // Append requestDTOData as a string to the FormData object
-      formData.append("requestDTOData", JSON.stringify(requestDTOData));
-
-      // Append each file from the 'files' array to the FormData object
-      pictures.forEach((file) => {
-        formData.append("files", file);
+      formData.append("data", JSON.stringify(requestDTOData));
+      pictures.forEach((picture, index) => {
+        formData.append(`pictures[${index}]`, picture);
       });
-      let url = `http://localhost:8081/api/v1/service/create/`;
-      // let url = `http://localhost:8081/api/v1/service/create/test/`;
 
+      let url = "http://localhost:8081/api/v1/service-request/";
       if (id) {
         // If serviceProviderId is available, include it in the URL
         url += `${id}/${selectedCategory}`;
@@ -93,10 +83,6 @@ const LogIssue = () => {
   return (
     <>
       <Header />
-      {/* <div className="mt-10 mr-2 mx-2">
-        <h1>Log an Issue</h1>
-      </div> */}
-
       <div className="issues__container">
         <div className="flex justify-between pt-4">
           <div className="ms-10 p-4">
@@ -137,9 +123,9 @@ const LogIssue = () => {
                 className="p-2"
                 type="number"
                 placeholder="Postal Code"
-                value={address.postalCode}
+                value={address.zipCode}
                 onChange={(e) =>
-                  setAddress({ ...address, postalCode: e.target.value })
+                  setAddress({ ...address, zipCode: e.target.value })
                 }
               />
             </div>
@@ -160,15 +146,6 @@ const LogIssue = () => {
 
         <div className="flex flex-col w-fit margin-center py-10">
           <h2 className="text-center">Upload</h2>
-          {/* <FileUpload
-						handleFileChange={handleFileChange("pictures")}
-						onDrop={handleFileChange("pictures")}
-						inputName="pictures"
-						formData={pictures}
-						errors={errors.pictures}
-						labelName="Upload Profile Picture"
-					/> */}
-
           <input type="file" multiple onChange={handleFileChange} />
         </div>
 
@@ -188,9 +165,7 @@ const LogIssue = () => {
           </div>
 
           <div className="flex-1 flex flex-col justify-center">
-            {/* Adjusted to center the Calendar and Submit button vertically */}
             <Calendar getSelectedDate={handleCalendar} />
-            {/* <button className="mt-4 ">Submit</button> */}
             <div className="flex justify-center margin-center w-96">
               <Button variant="custom" onClick={handleSubmit}>
                 Submit

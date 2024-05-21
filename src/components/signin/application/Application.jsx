@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import "../Form.css";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
-import { helix } from "ldrs";
 
 const Application = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +23,7 @@ const Application = () => {
       setErrors({ ...errors, [name]: null });
     }
   };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -62,7 +61,7 @@ const Application = () => {
 
     setErrors(newErrors);
     return isValid;
-  };
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -198,7 +197,6 @@ const Application = () => {
           value={formData.address?.zipCode || ""}
           onChange={handleChange}
         />
-
         <label htmlFor="expertise">
           Main Service
           {errors.expertise && (

@@ -9,7 +9,7 @@ import ReviewCarouselCard from "@/components/reviewCarouselCard/ReviewCarouselCa
 
 
 const Profile = () => {
-	const { id, review } = useParams();
+	const { id, application } = useParams();
 
 
 	return (
@@ -17,7 +17,7 @@ const Profile = () => {
 			<div className='profile__container'>
 				<Header />
 				<div className='review-carousel__container'>
-					{review ? (
+					{application ? (
 						<ProfessionalProfileCard
 							useButtons={false}
 							useDocs={true}
@@ -25,6 +25,7 @@ const Profile = () => {
 						/>
 					) : (
 						<>
+						<h2>{application}</h2>
 							<ProfessionalProfileCard
 								useButtons={true}
 								id={id}
