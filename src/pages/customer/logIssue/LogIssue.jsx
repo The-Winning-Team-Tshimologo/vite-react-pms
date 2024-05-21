@@ -19,9 +19,17 @@ const LogIssue = () => {
 		streetName: "",
 		city: "",
 		province: "",
-		postalCode: "",
+		zipCode: "",
 	});
 	const [selectedDate, setSelectedDate] = useState(null); // Add selectedDate state
+	const [pictures, setPictures] = useState([]);
+	const [errors, setErrors] = useState({});
+
+	const handleFileChange = (e) => {
+		const files = Array.from(e.target.files);
+		setPictures(files);
+	  };
+	
 
 	const handleFileUpload = () => {
 		window.alert("yey you");
@@ -35,14 +43,16 @@ const LogIssue = () => {
 	const handleSubmit = async () => {
 		try {
 			const token = localStorage.getItem("token");
+			const formData = new FormData();
 			const config = {
 				headers: {
 					Authorization: `Bearer ${token}`,
-					"Content-Type": "application/json",
+					"Content-Type": "multipart/form-data",
 				},
 			};
-
-			const postData = {
+	
+			// Construct the requestDTOData object
+			const requestDTOData = {
 				createServiceRequestDTO: {
 					description,
 					address,
@@ -53,7 +63,15 @@ const LogIssue = () => {
 				},
 			};
 
+			// Append requestDTOData as a string to the FormData object
+			formData.append('requestDTOData', JSON.stringify(requestDTOData));
+	
+			// Append each file from the 'files' array to the FormData object
+			pictures.forEach((file) => {
+				formData.append('files', file);
+			});
 			let url = `http://localhost:8081/api/v1/service/create/`;
+			// let url = `http://localhost:8081/api/v1/service/create/test/`;
 
 			if (id) {
 				// If serviceProviderId is available, include it in the URL
@@ -61,9 +79,13 @@ const LogIssue = () => {
 			} else {
 				// Otherwise, use the default endpoint
 				url += `${selectedCategory}`;
-			}
+			}		
 
-			const response = await axios.post(url, postData, config);
+			// for (let pair of formData.entries()) {
+			// 	console.log(pair[0] + ':', pair[1]);
+			// }
+			
+			const response = await axios.post(url, formData, config);
 			console.log(response.data);
 			window.alert("Service requested successfully");
 		} catch (error) {
@@ -72,6 +94,7 @@ const LogIssue = () => {
 		}
 	};
 
+	
 	return (
 		<>
 			<Header />
@@ -119,9 +142,9 @@ const LogIssue = () => {
 								className='p-2'
 								type='number'
 								placeholder='Postal Code'
-								value={address.postalCode}
+								value={address.zipCode}
 								onChange={(e) =>
-									setAddress({ ...address, postalCode: e.target.value })
+									setAddress({ ...address, zipCode: e.target.value })
 								}
 							/>
 						</div>
@@ -142,7 +165,16 @@ const LogIssue = () => {
 
 				<div className='flex flex-col w-fit margin-center py-10'>
 					<h2 className='text-center'>Upload</h2>
-					<FileUpload onClick={handleFileUpload} />
+					{/* <FileUpload
+						handleFileChange={handleFileChange("pictures")}
+						onDrop={handleFileChange("pictures")}
+						inputName="pictures"
+						formData={pictures}
+						errors={errors.pictures}
+						labelName="Upload Profile Picture"
+					/> */}
+
+				<input type="file" multiple onChange={handleFileChange} />
 				</div>
 
 				<div className='appointment__container flex'>
