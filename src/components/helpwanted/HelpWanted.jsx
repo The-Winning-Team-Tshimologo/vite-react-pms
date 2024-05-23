@@ -19,9 +19,9 @@ const HelpWanted = ({ SystemWide }) => {
 		>
 			<div className='flex items-center h-auto'>
 				<img
-					src={SystemWide.pictures}
+					src={`data:image/png;base64,${SystemWide.pictures}`}
 					alt='profile pic'
-					className='w-[50px] h-[50px] mr-4'
+					className='w-[50px] h-[50px] mr-4 rounded-full'
 				/>
 				<div className='information-details-container  flex-row'>
 					<div className='detail-container'>

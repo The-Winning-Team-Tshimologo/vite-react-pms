@@ -1,0 +1,80 @@
+/* Update.css */
+
+/* Profile Picture Section */
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatar-container h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.input-file {
+    margin-bottom: 10px;
+}
+
+.primary-btn {
+    background-color: var(--color-secondary);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    /* Add margin top to create space between the address inputs and the button */
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Address Section */
+.formField {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    text-align: center;
+}
+
+
+.address-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.address-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.address-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}

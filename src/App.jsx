@@ -38,6 +38,7 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
+import UpdateCustomerProfile from "./components/updateProfile/UpdateCustomerProfile";
 
 
 function App({ children }) {
@@ -261,6 +262,14 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<Update />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "customer-profile-update",
+					element: (
+						<ProtectedRoute>
+							<UpdateCustomerProfile/>
 						</ProtectedRoute>
 					),
 				},

@@ -83,9 +83,9 @@ const JobRequestItem = ({ ServiceRequest }) => {
 		<li className='personal-request'>
 			<div className='flex items-center h-auto'>
 				<img
-					src={ServiceRequest.customer.profilePicture}
+					src={`data:image/png;base64,${ServiceRequest.customer.profilePicture}`}
 					alt='profile pic'
-					className='w-[50px] h-[50px] mr-4'
+					className='w-[50px] h-[50px] mr-4 rounded-full'
 				/>
 				<div className='information-details-container justify-between flex-row'>
 					<div className='detail-container'>
