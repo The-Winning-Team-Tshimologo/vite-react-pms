@@ -4,8 +4,12 @@ import { MdOutlinePinDrop, MdQuestionMark } from "react-icons/md";
 import ServiceRequest from "@/components/ServiceRequest/ServiceRequest";
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const JobRequestItem = ({ ServiceRequest }) => {
+
+	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		
@@ -76,19 +80,24 @@ const JobRequestItem = ({ ServiceRequest }) => {
 			// Handle error (e.g., show an error message)
 			console.error("Error accepting request:", error);
 		}
+	};	
+
+
+	const handleClickEvent = () => {
+		navigate(`/customer-profile/${ServiceRequest.serviceId}/${ServiceRequest.customer.userId}/${ServiceRequest.customer.username}`);
+		console.log("clicked",ServiceRequest);
 	};
 
-
 	return (
-		<li className='personal-request'>
-			<div className='flex items-center h-auto'>
+		<li className='personal-request'  >
+			<div className='flex items-center h-auto' >
 				<img
 					src={`data:image/png;base64,${ServiceRequest.customer.profilePicture}`}
 					alt='profile pic'
 					className='w-[50px] h-[50px] mr-4 rounded-full'
 				/>
-				<div className='information-details-container justify-between flex-row'>
-					<div className='detail-container'>
+				<div className='information-details-container justify-between flex-row '  >
+					<div className='detail-container cursor-pointer' onClick={handleClickEvent}>
 						<div className='ml-10 font-bold'>
 							{ServiceRequest.customer.firstName}{" "}
 							{ServiceRequest.customer.lastName}

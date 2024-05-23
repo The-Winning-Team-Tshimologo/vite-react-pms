@@ -76,7 +76,8 @@ export const SPSignupProfile = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form submitted:", formData);
