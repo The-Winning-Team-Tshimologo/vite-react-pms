@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Header from "@/components/header/Header";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Appointments.css";
+import { useNavigate } from "react-router";
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -91,6 +92,7 @@ export const eventStyleGetter = (event, start, end, isSelected) => {
 const Appointments = () => {
   const [ServiceRequest, setServiceRequest] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServiceRequests = async () => {
@@ -118,9 +120,6 @@ const Appointments = () => {
         }
 
         const data = await response.json();
-        console.log("request ", data);
-
-        // setServiceRequest(data);
         createCalendarEvents(data);
       } catch (error) {
         console.error("Error fetching service requests:", error.message);
@@ -133,7 +132,7 @@ const Appointments = () => {
   }, []);
 
   const handleSelectEvent = (event) => {
-    alert(`Event: ${event.title + event.id}`);
+    navigate(`/customer-profile/${event.id}/${event.customerId}/${event.customerUsername}`);
   };
 
   const createCalendarEvents = (ServiceRequestData) => {
@@ -149,6 +148,8 @@ const Appointments = () => {
         event.address.zipCode,
       start: new Date(new Date(event.appointmentDate).setHours(0, 0, 0)),
       end: new Date(new Date(event.appointmentDate).setHours(1, 0, 0)),
+      customerId:event.customer.userId,
+      customerUsername:event.customer.username,
     }));
     setServiceRequest(calendarEvents);
   };
@@ -158,16 +159,6 @@ const Appointments = () => {
       <Header />
       <div className="flex justify-center items-center min-h-screen">
         <div style={{ width: "90%" }}>
-          {/* <Calendar
-            localizer={localizer}
-            events={myEventsList}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 800 }}
-            eventPropGetter={eventStyleGetter}
-            onSelectEvent={handleSelectEvent}
-          /> */}
-
             <Calendar
               localizer={localizer}
               events={ServiceRequest}

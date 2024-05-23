@@ -14,7 +14,7 @@ const HelpWanted = ({ SystemWide }) => {
 
 	return (
 		<li
-			className='personal-request w-[491px] bg-[#D9D9D9] border-none	'
+			className='personal-request w-[491px] bg-[#D9D9D9] border-none	cursor-pointer'
 			onClick={handleClickEvent}
 		>
 			<div className='flex items-center h-auto'>
