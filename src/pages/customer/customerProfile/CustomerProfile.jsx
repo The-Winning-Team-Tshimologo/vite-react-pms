@@ -13,13 +13,13 @@ const CustomerProfile = () => {
 			<Header />
 			<div className='review-carousel__container'>
 				(
-				<ProfessionalProfileCard
+				{/* <ProfessionalProfileCard
 					useButtons={true}
 					useDocs={false}
 					useServiceDetails={true}
 					id={id}
 					id2={id2}
-				/>
+				/> */}
 				)
 			</div>
 		</div>

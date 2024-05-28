@@ -28,14 +28,43 @@ export const SPSignup = () => {
     updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
   };
 
+   // Handle file changes and store the file in localStorage
+  //  const handleFileChange2 = (e, key) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       localStorage.setItem(key, reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // // Retrieve a file from localStorage
+  // const getFileFromLocalStorage = (key) => {
+  //   const base64String = localStorage.getItem(key);
+  //   if (base64String) {
+  //     const byteString = atob(base64String.split(",")[1]);
+  //     const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
+  //     const ab = new ArrayBuffer(byteString.length);
+  //     const ia = new Uint8Array(ab);
+  //     for (let i = 0; i < byteString.length; i++) {
+  //       ia[i] = byteString.charCodeAt(i);
+  //     }
+  //     return new Blob([ab], { type: mimeString });
+  //   }
+  //   return null;
+  // };
+
   const handleFileChange = (inputName) => (acceptedFiles) => {
     updateFormData({ [inputName]: acceptedFiles[0] });
   };
+
   const validateForm = () => {
     const newErrors = {};
     [
-      "firstname",
-      "lastname",
+      "firstName",
+      "lastName",
       "password",
       "confirmPassword",
       "profilePicture",
@@ -86,26 +115,26 @@ export const SPSignup = () => {
             <div className="sp__context_form_top">
               <div className="formFiled">
                 <label>Firstname</label>
-                {errors.firstname && (
-                  <span className="error-message">{errors.firstname}</span>
+                {errors.firstName && (
+                  <span className="error-message">{errors.firstName}</span>
                 )}
                 <input
                   type="text"
-                  name="firstname"
-                  value={formData.firstname || ""}
+                  name="firstName"
+                  value={formData.firstName || ""}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="formFiled">
                 <label>Lastname</label>
-                {errors.lastname && (
-                  <span className="error-message">{errors.lastname}</span>
+                {errors.lastName && (
+                  <span className="error-message">{errors.lastName}</span>
                 )}
                 <input
                   type="text"
-                  name="lastname"
-                  value={formData.lastname || ""}
+                  name="lastName"
+                  value={formData.lastName || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -159,7 +188,7 @@ export const SPSignup = () => {
 
             <div className="file-upload-container">
               <label>
-                Upload Avatar
+                {/* Upload Avatar */}
                 {errors.profilePicture && (
                   <span className="error-message">{errors.profilePicture}</span>
                 )}
@@ -172,11 +201,6 @@ export const SPSignup = () => {
                 errors={errors.profilePicture}
                 labelName="Upload Avatar"
               />
-              {formData.profilePicture && (
-                <div className="file-feedback">
-                  <p>File selected: {formData.profilePicture.name}</p>
-                </div>
-              )}
             </div>
             <p>
               Already have an account? <NavLink to={"/signin"}>Sign in</NavLink>

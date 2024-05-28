@@ -1,38 +1,36 @@
 import React, { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router";
-import { Navigate } from "react-router";
 
+// Create a Context for the form data
 const FormContext = createContext();
 
+// Custom hook to use the FormContext
 export const useFormContext = () => useContext(FormContext);
 
-//  Handles nested structures optimally when updating form data. A robust solution that ensures deep merging of state,
-//  especially for complex forms with nested objects and arrays
-function deepMergeObjects(target, source) {
-  const output = { ...target };
-  if (typeof target === "object" && typeof source === "object") {
-    for (const key in source) {
-      if (source[key] instanceof Date) {
-        output[key] = new Date(source[key]);
-      } else if (typeof source[key] === "object" && key in target) {
-        output[key] = deepMergeObjects(target[key], source[key]);
-      } else {
-        output[key] = source[key];
-      }
-    }
-  }
-  return output;
-}
+// Helper function to deeply merge two objects
+// function deepMergeObjects(target, source) {
+//   const output = { ...target };
+//   if (typeof target === "object" && typeof source === "object") {
+//     for (const key in source) {
+//       if (source[key] instanceof Date) {
+//         output[key] = new Date(source[key]);
+//       } else if (typeof source[key] === "object" && key in target) {
+//         output[key] = deepMergeObjects(target[key], source[key]);
+//       } else {
+//         output[key] = source[key];
+//       }
+//     }
+//   }
+//   return output;
+// }
 
+// FormProvider component to provide form data and update function to its children
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
-    // Initialize with all fields that will be collected across steps
-    // id: "",
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     password: "",
     confirmPassword: "",
-    profilePicture: "",
+    profilePicture: null,
     userName: "",
     rating: 0,
     mobile: "",
@@ -53,33 +51,32 @@ export const FormProvider = ({ children }) => {
       companyName: "",
       description: "",
     },
-
     education: {
       institution: "",
       qualification: "",
       startDate: "",
       endDate: "",
     },
-
     skills: "",
     hourlyRate: "",
     qualification: "",
-    criminalRecord: "",
-    resume: "",
+    criminalRecord: null,
+    resume: null,
     bankName: "",
     accountNumber: "",
     typeOfAccount: "",
     branchCode: "",
-    bankStatement: "",
+    bankStatement: null,
     agreement: "",
+    identityDocument: null,
   });
 
-  // const updateFormData = (newData) => {
-  //   setFormData((prev) => ({ ...prev, ...newData }));
-  // };
-  const updateFormData = (newData) => {
-    setFormData((prev) => deepMergeObjects(prev, newData));
-  };
+  // Function to update the form data by deeply merging with new data
+  // const updateFormData = (newData) =>
+  //   setFormData((prev) => deepMergeObjects(prev, newData));
+
+  const updateFormData = (newData) =>
+    setFormData((prev) => ({ ...prev, ...newData }));
 
   return (
     <FormContext.Provider value={{ formData, updateFormData }}>
@@ -142,7 +139,7 @@ export const submitData = async (formData) => {
   formDataObject.append("profile", JSON.stringify(filesToSubmit));
 
   // Append files if present
-  if (formData.profilePicture) {
+  if (formData.profilePicture ) {
     formDataObject.append("profilePicture", formData.profilePicture);
   }
   if (formData.qualification) {
@@ -158,22 +155,41 @@ export const submitData = async (formData) => {
     formDataObject.append("bankStatement", formData.bankStatement);
   }
 
+  for (const pair of formDataObject.entries()) {
+    if (pair[1] instanceof File) {
+      console.log(`${pair[0]}: `, {
+        name: pair[1].name,
+        type: pair[1].type,
+        size: pair[1].size,
+      });
+    } else {
+      console.log(`${pair[0]}: `, pair[1]);
+    }
+  }
+
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      body: formData,
+      body: formDataObject,
     });
-    const responseData = await response.json();
-    if (response.ok) {
-      console.log("Service Provider created successfully:", responseData);
-      <Navigate to={"/SPActivation"} />;
+
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Service Provider created successfully:", responseData);
+        onSuccess(responseData);
+      } else {
+        console.error("Failed to submit form:", responseData.message);
+        onError(responseData.message);
+      }
     } else {
-      console.log("Form Context Joining Data For Backend: ", formData);
-      throw new Error(
-        `Backend returned status ${response.status}: ${responseData.message}`
-      );
+      const textResponse = await response.text();
+      console.error("Non-JSON response received:", textResponse);
+      onError(textResponse);
     }
   } catch (error) {
-    console.error("Failed to submit form:", error.message);
+    console.error("Error submitting form:", error);
+    // onError(error.message);
   }
 };

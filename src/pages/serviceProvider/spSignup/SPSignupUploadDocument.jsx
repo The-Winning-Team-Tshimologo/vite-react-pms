@@ -22,7 +22,7 @@ export const SPSignupUploadDocument = () => {
     const newErrors = {};
     // Validate that all required fields and files are provided
     [
-      "id",
+      "identityDocument",
       "qualification",
       "criminalRecord",
       "resume",
@@ -71,9 +71,9 @@ export const SPSignupUploadDocument = () => {
             <FileUpload2
               handleChange={handleChange}
               onDrop={onDrop}
-              inputName={"id"}
-              formData={formData.id}
-              errors={errors.id}
+              inputName={"identityDocument"}
+              formData={formData.identityDocument}
+              errors={errors.identityDocument}
               labelName={"ID/Passport/License No."}
             />
 
