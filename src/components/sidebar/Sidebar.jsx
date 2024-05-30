@@ -26,6 +26,15 @@ const Sidebar = () => {
     logout();
   };
 
+  // const handleViewProfile = () => {
+	// 	console.log("View Profile clicked");
+	// 	// Check if the user role is ROLE_CUSTOMER
+	// 	if (user && user.roles.includes("ROLE_CUSTOMER")) {
+	// 		// Navigate to /customer-profile-update if the user role is ROLE_CUSTOMER
+	// 		navigate("/customer-profile-update");
+	// 	}
+	// };
+
   return (
     <div
       className={`content__container ${sidebarCollapsed ? "collapsed" : ""}`}
@@ -200,7 +209,7 @@ const Sidebar = () => {
 
         <div className="bottom-links">
           <NavLink
-            to="/profile"
+            to="/customer-profile-update"
             style={{
               display:
                 user?.roles?.includes("ROLE_CUSTOMER") ||
@@ -217,7 +226,7 @@ const Sidebar = () => {
             </h3>
           </NavLink>
 
-          <div onClick={handleLogout}>
+          <div onClick={handleLogout} className="cursor__pointer-visible">
             <h3>
               <IoIosLogOut />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
