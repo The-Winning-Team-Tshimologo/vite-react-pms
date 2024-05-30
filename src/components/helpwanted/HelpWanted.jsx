@@ -14,14 +14,14 @@ const HelpWanted = ({ SystemWide }) => {
 
 	return (
 		<li
-			className='personal-request w-[491px] bg-[#D9D9D9] border-none	'
+			className='personal-request w-[491px] bg-[#D9D9D9] border-none	cursor-pointer'
 			onClick={handleClickEvent}
 		>
 			<div className='flex items-center h-auto'>
 				<img
-					src={SystemWide.pictures}
+					src={`data:image/png;base64,${SystemWide.pictures}`}
 					alt='profile pic'
-					className='w-[50px] h-[50px] mr-4'
+					className='w-[50px] h-[50px] mr-4 rounded-full'
 				/>
 				<div className='information-details-container  flex-row'>
 					<div className='detail-container'>

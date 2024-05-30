@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import dayjs from "dayjs";
 import Header from "@/components/header/Header";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Appointments.css";
+import { useNavigate } from "react-router";
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -89,19 +90,85 @@ export const eventStyleGetter = (event, start, end, isSelected) => {
 };
 
 const Appointments = () => {
+  const [ServiceRequest, setServiceRequest] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchServiceRequests = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found");
+        }
+
+        const response = await fetch(
+          "http://localhost:8081/api/v1/service/serviceRequests",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error("Unauthorized access");
+          } else {
+            throw new Error("Failed to fetch data");
+          }
+        }
+
+        const data = await response.json();
+        createCalendarEvents(data);
+      } catch (error) {
+        console.error("Error fetching service requests:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServiceRequests();
+  }, []);
+
+  const handleSelectEvent = (event) => {
+    navigate(`/customer-profile/${event.id}/${event.customerId}/${event.customerUsername}`);
+  };
+
+  const createCalendarEvents = (ServiceRequestData) => {
+    const calendarEvents = ServiceRequestData.map((event) => ({
+      id: event.serviceId,
+      title:
+        event.category.name +
+        " | " +
+        event.address.city +
+        ", " +
+        event.address.streetName +
+        ",  " +
+        event.address.zipCode,
+      start: new Date(new Date(event.appointmentDate).setHours(0, 0, 0)),
+      end: new Date(new Date(event.appointmentDate).setHours(1, 0, 0)),
+      customerId:event.customer.userId,
+      customerUsername:event.customer.username,
+    }));
+    setServiceRequest(calendarEvents);
+  };
+
   return (
     <div>
       <Header />
       <div className="flex justify-center items-center min-h-screen">
         <div style={{ width: "90%" }}>
-          <Calendar
-            localizer={localizer}
-            events={myEventsList}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 800 }}
-            eventPropGetter={eventStyleGetter}
-          />
+            <Calendar
+              localizer={localizer}
+              events={ServiceRequest}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: 800 }}
+              eventPropGetter={eventStyleGetter}
+              onSelectEvent={handleSelectEvent}
+            />
+          
         </div>
       </div>
     </div>

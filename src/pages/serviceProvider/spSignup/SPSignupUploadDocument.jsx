@@ -1,27 +1,29 @@
-import FileUpload2 from "@/components/fileUpload/FileUpload2";
 import React, { useState } from "react";
 import SPSIgnupProgress from "./SPSIgnupProgress";
 import Header from "@/components/header/Header";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
+import FileUpload2 from "@/components/fileUpload/FileUpload2";
+import "./SPSignup.css"
 
 export const SPSignupUploadDocument = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    updateFormData({ [name]: type === "file" ? e.target.files[0] : value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null }); // Clear errors on change
-    }
+    const { name, type, files } = e.target;
+    updateFormData({ [name]: type === "file" ? files[0] : e.target.value });
+  };
+
+  const handleFileChange = (inputName) => (acceptedFiles) => {
+    updateFormData({ [inputName]: acceptedFiles[0] });
   };
 
   const validateForm = () => {
     const newErrors = {};
-    // Validate that all required fields and files are provided
-    [
+    const requiredFields = [
       "identityDocument",
       "qualification",
       "criminalRecord",
@@ -31,80 +33,119 @@ export const SPSignupUploadDocument = () => {
       "accountNumber",
       "typeOfAccount",
       "branchCode",
-    ].forEach((field) => {
+    ];
+
+    requiredFields.forEach((field) => {
       if (!formData[field]) {
         newErrors[field] = `${field} is required`;
       }
     });
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when form submission starts
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      // Here you can handle navigation or further steps
-      navigate("/SPSignupProfile");
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 250)); // Simulate a delay for form submission
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupProfile");
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false); // Set loading to false when form submission ends
+      }
     } else {
-      console.log("errors:", errors);
+      setLoading(false); // Set loading to false if validation fails
+      console.log("Validation errors:", errors);
     }
   };
 
-  const onDrop = (fieldName) => (acceptedFiles) => {
-    updateFormData({ [fieldName]: acceptedFiles[0] });
-  };
   return (
     <>
       <Header />
+      {isLoading && (
+        <div className="loading-overlay">
+          <l-helix size="150" speed="1.5" color="black"></l-helix>
+        </div>
+      )}
       <div className="SignupUploadDocument">
         <div className="SPSignupUploadDocument__progress ml-10">
           <SPSIgnupProgress completedPages={50} page={"Background Check"} />
         </div>
-        {/* <h2>SPSignupUploadDocument</h2> */}
         <div className="SPSignupUploadDocument__form">
           <h2 className="w-full text-center">
             <span className="-ms-52">Application</span>
           </h2>
 
           <form onSubmit={handleSubmit}>
-            <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"identityDocument"}
-              formData={formData.identityDocument}
-              errors={errors.identityDocument}
-              labelName={"ID/Passport/License No."}
-            />
+            <div className="file-upload-container">
+              <label>
+                ID/Passport/License No.
+                {errors.identityDocument && (
+                  <span className="error-message">
+                    {errors.identityDocument}
+                  </span>
+                )}
+              </label>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="identityDocument"
+                formData={formData.identityDocument}
+                errors={errors.identityDocument}
+              />
+            </div>
 
-            <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"qualification"}
-              formData={formData.qualification}
-              errors={errors.qualification}
-              labelName={"Qualification/Certificate"}
-            />
-            <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"criminalRecord"}
-              formData={formData.criminalRecord}
-              errors={errors.criminalRecord}
-              labelName={"Criminal Record/Clearance Certificate"}
-            />
+            <div className="file-upload-container">
+              <label>
+                Qualification/Certificate
+                {errors.qualification && (
+                  <span className="error-message">{errors.qualification}</span>
+                )}
+              </label>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="qualification"
+                formData={formData.qualification}
+                errors={errors.qualification}
+              />
+            </div>
 
-            <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"resume"}
-              formData={formData.resume}
-              errors={errors.resume}
-              labelName={"Resume"}
-            />
+            <div className="file-upload-container">
+              <label>
+                Criminal Record/Clearance Certificate
+                {errors.criminalRecord && (
+                  <span className="error-message">{errors.criminalRecord}</span>
+                )}
+              </label>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="criminalRecord"
+                formData={formData.criminalRecord}
+                errors={errors.criminalRecord}
+              />
+            </div>
 
-            <div className="bankDetails__header">
-              <span>Account Details</span>
+            <div className="file-upload-container">
+              <label>
+                Resume
+                {errors.resume && (
+                  <span className="error-message">{errors.resume}</span>
+                )}
+              </label>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="resume"
+                formData={formData.resume}
+                errors={errors.resume}
+              />
             </div>
 
             <div className="formFiled">
@@ -117,9 +158,9 @@ export const SPSignupUploadDocument = () => {
               <input
                 type="text"
                 name="bankName"
-                value={formData.bankName}
+                value={formData.bankName || ""}
                 onChange={handleChange}
-              />{" "}
+              />
             </div>
 
             <div className="formFiled">
@@ -132,9 +173,9 @@ export const SPSignupUploadDocument = () => {
               <input
                 type="number"
                 name="accountNumber"
-                value={formData.accountNumber}
+                value={formData.accountNumber || ""}
                 onChange={handleChange}
-              />{" "}
+              />
             </div>
 
             <div className="formFiled">
@@ -147,9 +188,9 @@ export const SPSignupUploadDocument = () => {
               <input
                 type="text"
                 name="typeOfAccount"
-                value={formData.typeOfAccount}
+                value={formData.typeOfAccount || ""}
                 onChange={handleChange}
-              />{" "}
+              />
             </div>
 
             <div className="formFiled">
@@ -162,19 +203,26 @@ export const SPSignupUploadDocument = () => {
               <input
                 type="number"
                 name="branchCode"
-                value={formData.branchCode}
+                value={formData.branchCode || ""}
                 onChange={handleChange}
-              />{" "}
+              />
             </div>
 
-            <FileUpload2
-              handleChange={handleChange}
-              onDrop={onDrop}
-              inputName={"bankStatement"}
-              formData={formData.bankStatement}
-              errors={errors.bankStatement}
-              labelName={"Alternatively, submit scanned bank statement "}
-            />
+            <div className="file-upload-container">
+              <label>
+                Alternatively, submit scanned bank statement
+                {errors.bankStatement && (
+                  <span className="error-message">{errors.bankStatement}</span>
+                )}
+              </label>
+              <FileUpload2
+                handleChange={handleChange}
+                onDrop={handleFileChange}
+                inputName="bankStatement"
+                formData={formData.bankStatement}
+                errors={errors.bankStatement}
+              />
+            </div>
 
             <button type="submit" className="submit-button -ms-60">
               Next
@@ -185,3 +233,5 @@ export const SPSignupUploadDocument = () => {
     </>
   );
 };
+
+export default SPSignupUploadDocument;

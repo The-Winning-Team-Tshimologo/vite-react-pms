@@ -19,7 +19,7 @@ const LogIssue = () => {
 		streetName: "",
 		city: "",
 		province: "",
-		postalCode: "",
+		zipCode: "",
 	});
 	const [selectedDate, setSelectedDate] = useState(null); // Add selectedDate state
 	const [pictures, setPictures] = useState([]);
@@ -81,6 +81,10 @@ const LogIssue = () => {
 				url += `${selectedCategory}`;
 			}		
 
+			// for (let pair of formData.entries()) {
+			// 	console.log(pair[0] + ':', pair[1]);
+			// }
+			
 			const response = await axios.post(url, formData, config);
 			console.log(response.data);
 			window.alert("Service requested successfully");
@@ -138,9 +142,9 @@ const LogIssue = () => {
 								className='p-2'
 								type='number'
 								placeholder='Postal Code'
-								value={address.postalCode}
+								value={address.zipCode}
 								onChange={(e) =>
-									setAddress({ ...address, postalCode: e.target.value })
+									setAddress({ ...address, zipCode: e.target.value })
 								}
 							/>
 						</div>

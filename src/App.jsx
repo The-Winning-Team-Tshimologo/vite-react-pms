@@ -38,6 +38,9 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
+import UpdateCustomerProfile from "./components/updateProfile/UpdateCustomerProfile";
+import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfileCard";
+import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
 
 
 function App({ children }) {
@@ -73,6 +76,10 @@ function App({ children }) {
 		{
 			path: "/SPSignupProfileApplication",
 			element: <SPSignupApplication />,
+		},
+		{
+			path: "/SPActivation",
+			element: <Activation />,
 		},
 		{
 			element: (
@@ -265,6 +272,14 @@ function App({ children }) {
 					),
 				},
 				{
+					path: "customer-profile-update",
+					element: (
+						<ProtectedRoute>
+							<UpdateCustomerProfile/>
+						</ProtectedRoute>
+					),
+				},
+				{
 					path: "/ServiceRequest",
 					element: (
 						<ProtectedRoute>
@@ -285,6 +300,14 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<CustomerProfile />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/customer-profile-card",
+					element: (
+						<ProtectedRoute>
+							<CustomerProfileCard />
 						</ProtectedRoute>
 					),
 				},

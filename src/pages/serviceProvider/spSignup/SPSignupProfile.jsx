@@ -3,10 +3,14 @@ import { Textarea } from "@/components/ui/textarea";
 import SPSIgnupProgress from "./SPSIgnupProgress";
 import Header from "@/components/header/Header";
 import { submitData, useFormContext } from "@/utils/FormContext";
+// import "./SPSignupProfile.css"; // Ensure you have the necessary CSS for the loading overlay
+import { useNavigate } from "react-router-dom";
+
 export const SPSignupProfile = () => {
   const { formData, updateFormData } = useFormContext();
-
   const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false); // Add loading state
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +27,9 @@ export const SPSignupProfile = () => {
       setErrors({ ...errors, [name]: null });
     }
   };
+
+  const handleSuccess = () => navigate("/SPActivation");
+  const handleError = (message) => alert(`Error: ${message}`);
 
   // Validate all required fields including dynamic fields
   const validateForm = () => {
@@ -76,18 +83,27 @@ export const SPSignupProfile = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when form submission starts
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      handleFinalSubmit();
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 250)); // Simulate a delay for form submission
+        console.log("Form submitted:", formData);
+        handleFinalSubmit();
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false); // Set loading to false when form submission ends
+      }
     } else {
+      setLoading(false); // Set loading to false if validation fails
       console.log("Validation errors:", errors);
     }
   };
 
   const handleFinalSubmit = () => {
-    submitData(formData);
+    submitData(formData, handleSuccess, handleError);
   };
 
   const handleCheckboxChange = (e) => {
@@ -99,6 +115,11 @@ export const SPSignupProfile = () => {
   return (
     <>
       <Header />
+      {isLoading && (
+        <div className="loading-overlay">
+          <l-helix size="150" speed="1.5" color="black"></l-helix>
+        </div>
+      )}
       <div className="SPSignupProfile__container flex">
         <div className="SPSignupProfile__progress  ml-10">
           <SPSIgnupProgress completedPages={75} page={"Profile"} />
@@ -219,10 +240,10 @@ export const SPSignupProfile = () => {
               <label>
                 Description
                 {errors["workExperience.description"] && (
-                    <span className="error-message">
-                      {errors["workExperience.description"]}
-                    </span>
-                  )}
+                  <span className="error-message">
+                    {errors["workExperience.description"]}
+                  </span>
+                )}
                 <Textarea
                   name={"workExperience.description"}
                   value={formData.workExperience.description}
@@ -234,9 +255,7 @@ export const SPSignupProfile = () => {
               </label>
             </div>
             <div className="p-10  pb-0 ">
-              <p>
-                Education
-              </p>
+              <p>Education</p>
               <div className="flex mt-1">
                 <label
                   htmlFor="education.startDate"
@@ -400,3 +419,5 @@ export const SPSignupProfile = () => {
     </>
   );
 };
+
+export default SPSignupProfile;

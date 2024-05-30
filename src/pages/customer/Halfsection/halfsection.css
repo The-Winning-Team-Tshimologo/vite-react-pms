@@ -1,0 +1,108 @@
+.box_border {
+    
+    width: 45rem;
+    height: 27rem;
+    background-color: #ffffff;
+    border: 1px solid#ccc;
+    border-radius: 5px;
+    margin-left: 27rem;
+    padding: 4rem;
+  }
+  .box_border_left{
+   margin-top: 2rem;
+    width: 9rem;
+    height: 2.5rem;
+    border: 1px solid #131111;
+    margin-left: 7rem;
+}
+.box_content_left{
+    width: 5.5rem;
+    height: 1.9rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    margin-top: -1.4rem;
+    margin-left: 1rem;
+}
+
+
+ .box_border_right{
+   margin-top: -2.5rem;
+   margin-left: 25rem;
+    width: 9rem;
+    height: 2.5rem;
+    border: 1px solid #131111;
+}
+
+.box_content_right{
+    width: 7.1rem;
+    height: 1.9rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    margin-top: -1.4rem;
+    margin-left: 1rem;
+}
+
+
+  .box_border h1{
+    z-index: 2rem;
+    font-size:medium
+  }
+  .box_content {
+    position: absolute; 
+    top: 368px; 
+    left: 43%; 
+    transform: translateX(-50%); 
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ffffff;
+  }
+  
+  .box_content h1 {
+    margin: 0; /* Remove default margin for h1 */
+  }
+
+  .description_box{
+    margin-top: 7rem;
+    width: 29rem;
+    height: 4rem;
+    border: 1px solid #131111;
+    margin-left: 7rem;
+
+  }
+
+  .box_content_description{
+    width: 6rem;
+    height: 1.9rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    margin-top: -1.4rem;
+    margin-left: 3rem;
+}
+
+.image_row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 27px;
+    
+  }
+  
+  .image_row img {
+    width: 30%; /* Adjust the width as needed */
+  }
+  
+  .button_right {
+    float: right;
+    background-color: #131111;
+    border: 1px solid #131111;
+    border-radius: 5px; /* Adjust the border-radius value to control the curvature */
+    color: white;
+    padding: 10px 10px; /* Adjust padding as needed */
+    cursor: pointer;
+  }
+  
+  .button_right:hover {
+    background-color: #2c2b2b; /* Change background color on hover */
+  }
