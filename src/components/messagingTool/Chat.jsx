@@ -10,7 +10,7 @@ const Chat = ({ user2, userName }) => {
 	const [selectedConversation, setSelectedConversation] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const [selectedUser, setSelectedUser] = useState(user2);
-	const navigate = useNavigate();
+	const navigate = useNavigate
 	useEffect(() => {
 		fetchConversations();
 
@@ -77,7 +77,6 @@ const Chat = ({ user2, userName }) => {
 
 		handleMessageClick();
 	};
-	
 
 	const handleMessageClick = (recipient) => {
 		const currentUser = JSON.parse(localStorage.getItem("user")).userName; // Assuming you store the user object in local storage
