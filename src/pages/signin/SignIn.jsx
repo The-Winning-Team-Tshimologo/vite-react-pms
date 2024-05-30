@@ -87,7 +87,8 @@ function Signin() {
             {errors.password && (
               <p className="paragraph-red">{errors.password.message}</p>
             )}
-            <div >
+
+            <div className="password-container">
               <input
                 {...register("password", {
                   required: "Password is required",
@@ -100,14 +101,32 @@ function Signin() {
                 className="input"
                 placeholder="Enter your Password"
               />
-              <span onClick={toggleInputType} className="icon-button">
-                {inputType === "password" ? (
-                  <FaEye className="icon-button__icon" />
-                ) : (
-                  <FaEyeSlash className="icon-button__icon" />
-                )}
+              <span onClick={toggleInputType} className="password-icon">
+                {inputType === "password" ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
+
+            {/* <div>
+              <input
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must contain at least 8 characters",
+                  },
+                })}
+                type={inputType} // Use the state for input type
+                className="input"
+                placeholder="Enter your Password" 
+              />
+              <span onClick={toggleInputType} className="">
+                {inputType === "password" ? (
+                  <FaEye className="" />
+                ) : (
+                  <FaEyeSlash className="" />
+                )}
+              </span>
+            </div> */}
 
             {/* <div className="formFiled">
               <label>
