@@ -37,13 +37,15 @@
   }
   
   .submit_button {
-    background-color: #131111;
+    background-color:var(--color-secondary);
     border: none;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 7rem;
+    transition: background-color 0.3s ease;
+
   }
 
 .context{
@@ -52,6 +54,9 @@
   /* align-items: ; */
 }
 
+.submit_button:hover{
+  background-color:var(--color-primary);
+}
 
   /*  ADDED CSS  */
 
@@ -141,7 +146,7 @@
   
   .accept-button {
     display: block;
-    background-color: #007bff;
+    background-color:var(--color-secondary);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -157,7 +162,7 @@
   }
   
   .accept-button:hover {
-    background-color: #0056b3;
+    background-color: var(--color-primary);
   }
   
   
