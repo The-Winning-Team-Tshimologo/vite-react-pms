@@ -80,13 +80,13 @@
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: var(--color-secondary);
     color: #fff;
     cursor: pointer;
 }
 
 .send-button:hover {
-    background-color: #0056b3;
+    background-color: var(--color-secondary-opaque);
 }
 /* Chat.css */
 

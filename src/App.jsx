@@ -93,10 +93,6 @@ function App({ children }) {
 					element: <Dashboard />,
 				},
 				{
-					path: "/",
-					element: <Dashboard />,
-				},
-				{
 					path: "/updateServiceProvider",
 					element: <Update />,
 				},
