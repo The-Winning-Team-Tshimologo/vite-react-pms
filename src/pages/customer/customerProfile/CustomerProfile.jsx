@@ -94,17 +94,7 @@ const CustomerProfile = () => {
   return (
     <div className="profile__container">
       <Header />
-      {/* <div className='review-carousel__container'>
-				(
-				<ProfessionalProfileCard
-					useButtons={true}
-					useDocs={false}
-					useServiceDetails={true}
-					id={id}
-					id2={id2}
-				/>
-				)
-			</div> */}
+    
 
       {/* **************************************Customer profile*************************** */}
 

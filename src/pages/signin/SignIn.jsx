@@ -7,12 +7,14 @@ import { NavLink } from "react-router-dom";
 import { helix } from "ldrs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 function Signin() {
   const auth = useAuth();
 
   const [isLoading, setLoading] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [inputType, setInputType] = useState("password"); // Add state for password input type
 
   const navigate = useNavigate();
   const {
@@ -21,6 +23,10 @@ function Signin() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm();
+
+  const toggleInputType = () => {
+    setInputType(inputType === "password" ? "text" : "password");
+  };
 
   const onSubmit = async (data) => {
     setFailed(false);
@@ -49,25 +55,22 @@ function Signin() {
     <>
       <div className="form__container">
         {isLoading && (
-          <>
-            {/* <l-helix size="150" speed="1.5" color="black"></l-helix> */}
-            <div className="loading-overlay">
-              <l-helix size="150" speed="1.5" color="black"></l-helix>
-            </div>
-          </>
-        )}
-        <div className="signin-form__signin">
-        {failed && (
-          <div className="mb-5">
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Login Failed</AlertTitle>
-              <AlertDescription>
-                Bad Credentials, please check your email and password
-              </AlertDescription>
-            </Alert>
+          <div className="loading-overlay">
+            <l-helix size="150" speed="1.5" color="black"></l-helix>
           </div>
         )}
+        <div className="signin-form__signin">
+          {failed && (
+            <div className="mb-5">
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Login Failed</AlertTitle>
+                <AlertDescription>
+                  Bad Credentials, please check your email and password
+                </AlertDescription>
+              </Alert>
+            </div>
+          )}
           <form onSubmit={handleSubmit(onSubmit)} id="form2">
             <h2>Sign in</h2>
             <label className="Signin_labelname-email">Email</label>
@@ -84,18 +87,70 @@ function Signin() {
             {errors.password && (
               <p className="paragraph-red">{errors.password.message}</p>
             )}
-            <input
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must contain at least 5 characters",
-                },
-              })}
-              type="password"
-              className="input"
-              placeholder="Enter your Password"
-            />
+
+            <div className="password-container">
+              <input
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must contain at least 8 characters",
+                  },
+                })}
+                type={inputType} // Use the state for input type
+                className="input"
+                placeholder="Enter your Password"
+              />
+              <span onClick={toggleInputType} className="password-icon">
+                {inputType === "password" ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
+
+            {/* <div>
+              <input
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must contain at least 8 characters",
+                  },
+                })}
+                type={inputType} // Use the state for input type
+                className="input"
+                placeholder="Enter your Password" 
+              />
+              <span onClick={toggleInputType} className="">
+                {inputType === "password" ? (
+                  <FaEye className="" />
+                ) : (
+                  <FaEyeSlash className="" />
+                )}
+              </span>
+            </div> */}
+
+            {/* <div className="formFiled">
+              <label>
+                Password
+                {errors.password && (
+                  <span className="error-message">{errors.password}</span>
+                )}
+              </label>
+              <input
+                type={inputType1}
+                name="password"
+                value={formData.password || ""}
+                // onChange={(e) => handleChange("password", e)}
+                onChange={handleChange}
+              />
+              <span onClick={toggleInputType1} className="icon-button">
+                {inputType1 === "password" ? (
+                  <FaEye className="icon-button__icon" />
+                ) : (
+                  <FaEyeSlash className="icon-button__icon" />
+                )}
+              </span>
+            </div> */}
+
             <button
               id="signin-button"
               disabled={isSubmitting}
