@@ -43,10 +43,6 @@
     /* Add margin top to create space between the address inputs and the button */
 }
 
-.primary-btn:hover {
-    background-color: #0056b3;
-}
-
 /* Address Section */
 .formField {
     margin-bottom: 20px;
