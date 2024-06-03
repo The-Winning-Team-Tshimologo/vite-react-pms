@@ -246,3 +246,8 @@ input:-webkit-autofill:active {
 .cursor__pointer-visible {
   cursor: pointer;
 }
+
+.error-message {
+  color: red;
+  width: fit-content;
+}

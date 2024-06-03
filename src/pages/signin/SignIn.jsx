@@ -73,21 +73,23 @@ function Signin() {
           )}
           <form onSubmit={handleSubmit(onSubmit)} id="form2">
             <h2>Sign in</h2>
-            <label className="Signin_labelname-email">Email</label>
-            {errors.email && (
-              <p className="paragraph-red-2">{errors.email.message}</p>
-            )}
+            <label className="Signin_labelname">
+              Email{" "}
+              {errors.email && (
+                <p className="error-message">{errors.email.message}</p>
+              )}
+            </label>
+
             <input
               {...register("email", { required: "Email is required" })}
               type="email"
               placeholder="Enter Email"
               className="input"
             />
-            <label className="Signin_labelname">Password</label>
-            {errors.password && (
-              <p className="paragraph-red">{errors.password.message}</p>
-            )}
-
+            <label className="Signin_labelname">Password  {errors.password && (
+              <p className="error-message">{errors.password.message}</p>
+            )}</label>
+           
             <div className="password-container">
               <input
                 {...register("password", {
