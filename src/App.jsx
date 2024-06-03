@@ -300,6 +300,14 @@ function App({ children }) {
 					),
 				},
 				{
+					path: "/customer-profile/:id/:id2/:userName/:status",
+					element: (
+						<ProtectedRoute>
+							<CustomerProfile />
+						</ProtectedRoute>
+					),
+				},
+				{
 					path: "/customer-profile-card",
 					element: (
 						<ProtectedRoute>

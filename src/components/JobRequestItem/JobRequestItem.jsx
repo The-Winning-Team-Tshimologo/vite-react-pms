@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-const JobRequestItem = ({ ServiceRequest }) => {
+const JobRequestItem = ({ ServiceRequest, fetchServiceRequests}) => {
 
 	const navigate = useNavigate();
 
@@ -29,6 +29,7 @@ const JobRequestItem = ({ ServiceRequest }) => {
 				config
 			);
 			// Handle successful acceptance (e.g., show a success message)
+			fetchServiceRequests();
 			console.log("Request accepted:", response.data);
 		} catch (error) {
 			// Handle error (e.g., show an error message)
@@ -52,6 +53,7 @@ const JobRequestItem = ({ ServiceRequest }) => {
 				config
 			);
 			// Handle successful acceptance (e.g., show a success message)
+			fetchServiceRequests();
 			console.log("Request accepted:", response.data);
 		} catch (error) {
 			// Handle error (e.g., show an error message)
@@ -75,6 +77,7 @@ const JobRequestItem = ({ ServiceRequest }) => {
 				config
 			);
 			// Handle successful acceptance (e.g., show a success message)
+			fetchServiceRequests();
 			console.log("Request accepted:", response.data);
 		} catch (error) {
 			// Handle error (e.g., show an error message)
@@ -84,9 +87,11 @@ const JobRequestItem = ({ ServiceRequest }) => {
 
 
 	const handleClickEvent = () => {
-		navigate(`/customer-profile/${ServiceRequest.serviceId}/${ServiceRequest.customer.userId}/${ServiceRequest.customer.username}`);
+		navigate(`/customer-profile/${ServiceRequest.serviceId}/${ServiceRequest.customer.userId}/${ServiceRequest.customer.username}/${ServiceRequest.status}`);
 		console.log("clicked",ServiceRequest);
 	};
+
+	
 
 	return (
 		<li className='personal-request'  >
@@ -109,7 +114,7 @@ const JobRequestItem = ({ ServiceRequest }) => {
 									size={24}
 									className='mt-[9px] mr-4'
 								/>
-								{ServiceRequest.address.SreetName}
+								{ServiceRequest.address.streetName}
 								<br />
 								{ServiceRequest.address.city}
 							</div>
@@ -121,6 +126,7 @@ const JobRequestItem = ({ ServiceRequest }) => {
 								<p className='mr-1'>Requesting </p>{" "}
 								{ServiceRequest.category.name}
 							</div>
+							<div className={`serviceRequest-status ml-10 ${ServiceRequest.status}`}>{ServiceRequest.status}</div>
 						</div>
 					</div>
 					<div className='two-buttons flex items-center space-x-2'>

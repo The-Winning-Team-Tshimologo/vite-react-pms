@@ -12,6 +12,8 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { useAuth } from "../../security/auth/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { IoGitPullRequestOutline ,IoCalendarClearOutline } from "react-icons/io5";
+import { GoCheckbox } from "react-icons/go";
 
 const Sidebar = () => {
   const { sidebarCollapsed, setSidebarCollapsed, logout, user } = useAuth();
@@ -152,7 +154,7 @@ const Sidebar = () => {
             }}
           >
             <h3>
-              <SlPicture />
+              <IoGitPullRequestOutline />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
                 Job Request
               </span>
@@ -168,7 +170,7 @@ const Sidebar = () => {
             }}
           >
             <h3>
-              <SlPicture />
+              <GoCheckbox />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
                 Completed Jobs
               </span>
@@ -196,7 +198,8 @@ const Sidebar = () => {
             }}
           >
             <h3>
-              <SlPicture />
+              {/* <SlPicture /> */}
+              <IoCalendarClearOutline />
               <span className={sidebarCollapsed ? "icon-only" : ""}>
                 Appointments
               </span>

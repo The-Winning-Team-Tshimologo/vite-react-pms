@@ -13,11 +13,10 @@ function JobRequest() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [ServiceRequest, setServiceRequest] = useState([]);
 	const [SystemWide, setSystemWide] = useState([]);
+	const [mainData, setMainData] = useState([]);
+    const [activeTab, setActiveTab] = useState('acceptedPending');
 
-	
-
-	useEffect(() => {
-		const fetchServiceRequests = async () => {
+	const fetchServiceRequests = async () => {
 			try {
 				const token = localStorage.getItem("token");
 				if (!token) {
@@ -43,12 +42,17 @@ function JobRequest() {
 
 				const data = await response.json();
 				console.log(data);
-				setServiceRequest(data);
+				setMainData(data);
+				// setServiceRequest(data);
+				setServiceRequest(data.filter(item => item.status === 'ACCEPTED' || item.status === 'PENDING'));
+    
 			} catch (error) {
 				console.error("Error fetching service requests:", error.message);
 			}
 		};
 
+	useEffect(() => {
+		
 		const fetchSystemWide = async () => {
 			try {
 				const token = localStorage.getItem("token");
@@ -92,6 +96,20 @@ function JobRequest() {
 		setSearchQuery(query);
 	};
 
+	// implementation of tabs to filter data that is displayed
+
+	const filterData = (data, tab) => {
+		if (tab === 'acceptedPending') {
+			setServiceRequest(data.filter(item => item.status === 'ACCEPTED' || item.status === 'PENDING'));
+		} else if (tab === 'rejected') {
+			setServiceRequest(data.filter(item => item.status === 'REJECTED'));
+		}
+	  };
+
+	const handleTabClick = (tab) => {
+		setActiveTab(tab);
+		filterData(mainData, tab);
+	  };
 
 
 	return (
@@ -107,12 +125,21 @@ function JobRequest() {
 						<h3 className='ml-[140px] py-2 font-bold text-[18px]'>
 							Track recent job requests
 						</h3>
+						<div className="tabs">
+							<button 
+							className={activeTab === 'acceptedPending' ? 'active' : ''}
+							onClick={() => handleTabClick('acceptedPending')}>Accepted / Pending</button>
+							<button 
+							 className={activeTab === 'rejected' ? 'active' : ''}
+							onClick={() => handleTabClick('rejected')}>Rejected</button>
+						</div>
 						{ServiceRequest.length > 0 ? (
 							<ul className='mb-7'>
 								{ServiceRequest.map((ServiceRequest, index) => (
 									<JobRequestItem
 										key={index}
 										ServiceRequest={ServiceRequest}
+										fetchServiceRequests= {fetchServiceRequests}
 									/>
 								))}
 							</ul>
