@@ -176,48 +176,48 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const registerSP = async ({
-    name,
-    surname,
-    email,
-    user_name,
-    password,
-    address,
-  }) => {
-    try {
-      const response = await fetch(
-        "http://localhost:8081/api/v1/auth/signup-sp",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userName: user_name,
-            email,
-            password,
-            firstName: name,
-            lastName: surname,
-            address: AddressDTO(address), // Convert address to AddressDTO
-          }),
-        }
-      );
+  // const registerSP = async ({
+  //   name,
+  //   surname,
+  //   email,
+  //   user_name,
+  //   password,
+  //   address,
+  // }) => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8081/api/v1/auth/signup-sp",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userName: user_name,
+  //           email,
+  //           password,
+  //           firstName: name,
+  //           lastName: surname,
+  //           address: AddressDTO(address), // Convert address to AddressDTO
+  //         }),
+  //       }
+  //     );
 
-      if (!response.ok) {
-        const errorMessage = await response.text(); // Get the error message from the response
-        throw new Error(errorMessage); // Throw an error with the message
-      }
+  //     if (!response.ok) {
+  //       const errorMessage = await response.text(); // Get the error message from the response
+  //       throw new Error(errorMessage); // Throw an error with the message
+  //     }
 
-      // If registration is successful, navigate to the sign-in page
-      //   navigate("/signin");
-      <Navigate to={"/signin"} />;
+  //     // If registration is successful, navigate to the sign-in page
+  //     //   navigate("/signin");
+  //     <Navigate to={"/signin"} />;
 
-      return true;
-    } catch (error) {
-      console.error("Registration failed:", error);
-      throw new Error("Registration failed");
-    }
-  };
+  //     return true;
+  //   } catch (error) {
+  //     console.error("Registration failed:", error);
+  //     throw new Error("Registration failed");
+  //   }
+  // };
 
   const logout = () => {
     // Remove all related items from local storage

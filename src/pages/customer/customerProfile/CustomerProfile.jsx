@@ -8,7 +8,7 @@ import download from "../../../assets/download.jpeg";
 import axios from "axios";
 
 const CustomerProfile = () => {
-  const { id, id2, userName } = useParams();
+  const { id, id2, userName, status } = useParams();
   const navigate = useNavigate();
   // ADDED PROFILE CODE
   //   const [data, setData] = useState(null);
@@ -81,7 +81,8 @@ const CustomerProfile = () => {
 			);
 			console.log("Request accepted:", response.data);
 
-			navigate("/jobrequest");
+		navigate(`/customer-profile/${ServiceRequest.serviceId}/${ServiceRequest.customer.userId}/${ServiceRequest.customer.username}/${ServiceRequest.status}`);
+			// navigate("/jobrequest");
 
 		} catch (error) {
 			console.error("Error accepting request:", error);
@@ -89,22 +90,86 @@ const CustomerProfile = () => {
 
 	}
 
+  const handleAcceptRequest = async () => {
+		const token = localStorage.getItem("token");
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		try {
+			const response = await axios.post(
+				`http://localhost:8081/api/v1/service/accept/${ServiceRequest.serviceId}`,
+				null,
+				config
+			);
+			// Handle successful acceptance (e.g., show a success message)
+      navigate("/jobrequest");
+			// console.log("Request accepted:", response.data);
+		} catch (error) {
+			// Handle error (e.g., show an error message)
+			console.error("Error accepting request:", error);
+		}
+ };
+
+  const handleDecline = async () => {
+    // Handle decline action
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8081/api/v1/service/decline/${id}`,
+        null,
+        config
+      );
+      // Handle successful acceptance (e.g., show a success message)
+     
+      console.log("Request decline:", response.data);
+			navigate("/jobrequest");
+
+    } catch (error) {
+      // Handle error (e.g., show an error message)
+      console.error("Error accepting request:", error);
+    }
+  };
+
+  const handleWithdraw = async () => {
+    // Handle withdraw action
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8081/api/v1/service/withdraw/${ServiceRequest.serviceId}`,
+        null,
+        config
+      );
+      // Handle successful acceptance (e.g., show a success message)
+      console.log("Request Withdraw:", response.data);
+			navigate("/jobrequest");
+
+    } catch (error) {
+      // Handle error (e.g., show an error message)
+      console.error("Error accepting request:", error);
+    }
+  };
+
   // END
 
   return (
     <div className="profile__container">
       <Header />
-      {/* <div className='review-carousel__container'>
-				(
-				<ProfessionalProfileCard
-					useButtons={true}
-					useDocs={false}
-					useServiceDetails={true}
-					id={id}
-					id2={id2}
-				/>
-				)
-			</div> */}
+    
 
       {/* **************************************Customer profile*************************** */}
 
@@ -167,12 +232,46 @@ const CustomerProfile = () => {
           <img key={index} src={image} alt={`service-request-${index}`} />
         ))} */}
           </div>
-          <button
-            className="accept-button"
-            onClick={handleAcceptance}
-          >
-            Accept Request
-          </button>
+          {!status  ? (
+            <button className="accept-button" onClick={handleAcceptance}>
+              Accept Request
+            </button>
+          ) : (
+            <div className="two-buttons flex items-center space-x-2">
+              {ServiceRequest.status === "PENDING" && (
+                <>
+                  <button
+                    className="status-button bg-[#008000] text-white"
+                    onClick={handleAcceptRequest}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className="status-button bg-[#D9D9D9]"
+                    onClick={handleDecline}
+                  >
+                    Decline
+                  </button>
+                </>
+              )}
+              {ServiceRequest.status === "ACCEPTED" && (
+                <button
+                  className="status-button bg-[#D9D9D9] "
+                  onClick={handleWithdraw}
+                >
+                  Withdraw
+                </button>
+              )}
+              {ServiceRequest.status === "REJECTED" && (
+                <button
+                  className="status-button bg-[#D9D9D9]  opacity-70 cursor-not-allowed"
+                  disabled
+                >
+                  Rejected
+                </button>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <h2>No Service request data</h2>

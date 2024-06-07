@@ -4,21 +4,13 @@ import Header from "@/components/header/Header";
 import { useFormContext } from "@/utils/FormContext";
 import { useNavigate } from "react-router";
 import FileUpload2 from "@/components/fileUpload/FileUpload2";
+import "./SPSignup.css"
 
 export const SPSignupUploadDocument = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
-
-  // const handleChange = (name, e) => {
-  //   const { type, files, value } = e.target;
-  //   const updatedValue = type === "file" ? files[0] : value;
-  //   updateFormData({ [name]: updatedValue });
-
-  //   if (errors[name]) {
-  //     setErrors({ ...errors, [name]: null }); // Clear errors on change
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, type, files } = e.target;
@@ -29,35 +21,8 @@ export const SPSignupUploadDocument = () => {
     updateFormData({ [inputName]: acceptedFiles[0] });
   };
 
-  // const handleFileChange2 = (e, key) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       localStorage.setItem(key, reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-  // const getFileFromLocalStorage = (key) => {
-  //   const base64String = localStorage.getItem(key);
-  //   if (base64String) {
-  //     const byteString = atob(base64String.split(",")[1]);
-  //     const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
-  //     const ab = new ArrayBuffer(byteString.length);
-  //     const ia = new Uint8Array(ab);
-  //     for (let i = 0; i < byteString.length; i++) {
-  //       ia[i] = byteString.charCodeAt(i);
-  //     }
-  //     return new Blob([ab], { type: mimeString });
-  //   }
-  //   return null;
-  // };
-
   const validateForm = () => {
     const newErrors = {};
-    // Validate that all required fields and files are provided
     const requiredFields = [
       "identityDocument",
       "qualification",
@@ -80,18 +45,21 @@ export const SPSignupUploadDocument = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when form submission starts
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      // console.log("profilePicture", getFileFromLocalStorage("profilePicture"));
-      // console.log("identityDocument", getFileFromLocalStorage("identityDocument"));
-      // console.log("qualification", getFileFromLocalStorage("qualification"));
-      // console.log("criminalRecord", getFileFromLocalStorage("criminalRecord"));
-      // console.log("resume", getFileFromLocalStorage("resume"));
-      // console.log("bankStatement", getFileFromLocalStorage("bankStatement"));
-      navigate("/SPSignupProfile");
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 250)); // Simulate a delay for form submission
+        console.log("Form submitted:", formData);
+        navigate("/SPSignupProfile");
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        setLoading(false); // Set loading to false when form submission ends
+      }
     } else {
+      setLoading(false); // Set loading to false if validation fails
       console.log("Validation errors:", errors);
     }
   };
@@ -99,6 +67,11 @@ export const SPSignupUploadDocument = () => {
   return (
     <>
       <Header />
+      {isLoading && (
+        <div className="loading-overlay">
+          <l-helix size="150" speed="1.5" color="black"></l-helix>
+        </div>
+      )}
       <div className="SignupUploadDocument">
         <div className="SPSignupUploadDocument__progress ml-10">
           <SPSIgnupProgress completedPages={50} page={"Background Check"} />
@@ -124,13 +97,11 @@ export const SPSignupUploadDocument = () => {
                 inputName="identityDocument"
                 formData={formData.identityDocument}
                 errors={errors.identityDocument}
-                // labelName="Upload Avatar"
               />
             </div>
 
             <div className="file-upload-container">
               <label>
-                {" "}
                 Qualification/Certificate
                 {errors.qualification && (
                   <span className="error-message">{errors.qualification}</span>
@@ -142,7 +113,6 @@ export const SPSignupUploadDocument = () => {
                 inputName="qualification"
                 formData={formData.qualification}
                 errors={errors.qualification}
-                // labelName="Upload Avatar"
               />
             </div>
 
@@ -159,7 +129,6 @@ export const SPSignupUploadDocument = () => {
                 inputName="criminalRecord"
                 formData={formData.criminalRecord}
                 errors={errors.criminalRecord}
-                // labelName="Upload Avatar"
               />
             </div>
 
@@ -176,7 +145,6 @@ export const SPSignupUploadDocument = () => {
                 inputName="resume"
                 formData={formData.resume}
                 errors={errors.resume}
-                // labelName="Upload Avatar"
               />
             </div>
 
@@ -253,7 +221,6 @@ export const SPSignupUploadDocument = () => {
                 inputName="bankStatement"
                 formData={formData.bankStatement}
                 errors={errors.bankStatement}
-                // labelName="Upload Avatar"
               />
             </div>
 

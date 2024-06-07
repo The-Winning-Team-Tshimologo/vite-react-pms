@@ -242,3 +242,7 @@ input:-webkit-autofill:active {
 .icon-button {
   left: 44%;
 }
+
+.cursor__pointer-visible {
+  cursor: pointer;
+}

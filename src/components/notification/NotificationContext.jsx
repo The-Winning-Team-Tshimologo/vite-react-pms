@@ -1,33 +1,14 @@
 /** @format */
 
-// NotificationContext.js
-import React, { createContext, useContext, useState, useEffect } from "react";
-import WebSocketService from "../notification/WebSocketService";
+import React, { createContext, useState } from "react";
 
-const NotificationContext = createContext();
-
-export const useNotification = () => useContext(NotificationContext);
+export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
-	const [notifications, setNotifications] = useState([]);
-
-	useEffect(() => {
-		WebSocketService.connect(() => {
-			WebSocketService.subscribe("/user/topic/messages", (message) => {
-				setNotifications((prevNotifications) => [
-					...prevNotifications,
-					message,
-				]);
-			});
-		});
-
-		return () => {
-			WebSocketService.disconnect();
-		};
-	}, []);
+	const [unreadCount, setUnreadCount] = useState(0);
 
 	return (
-		<NotificationContext.Provider value={{ notifications }}>
+		<NotificationContext.Provider value={{ unreadCount, setUnreadCount }}>
 			{children}
 		</NotificationContext.Provider>
 	);

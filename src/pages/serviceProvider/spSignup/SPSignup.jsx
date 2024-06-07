@@ -14,6 +14,7 @@ export const SPSignup = () => {
   const [errors, setErrors] = useState({});
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
+  const [isLoading, setLoading] = useState(false);
 
   // Toggle the visibility of the password input field
   const toggleInputType1 = () => {
@@ -38,8 +39,8 @@ export const SPSignup = () => {
   const validateForm = () => {
     const newErrors = {};
     [
-      "firstname",
-      "lastname",
+      "firstName",
+      "lastName",
       "password",
       "confirmPassword",
       "profilePicture",
@@ -104,8 +105,8 @@ export const SPSignup = () => {
             <div className="sp__context_form_top">
               <div className="formFiled">
                 <label>Firstname</label>
-                {errors.firstname && (
-                  <span className="error-message">{errors.firstname}</span>
+                {errors.firstName && (
+                  <span className="error-message">{errors.firstName}</span>
                 )}
                 <input
                   type="text"
@@ -118,8 +119,8 @@ export const SPSignup = () => {
 
               <div className="formFiled">
                 <label>Lastname</label>
-                {errors.lastname && (
-                  <span className="error-message">{errors.lastname}</span>
+                {errors.lastName && (
+                  <span className="error-message">{errors.lastName}</span>
                 )}
                 <input
                   type="text"

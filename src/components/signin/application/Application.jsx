@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 const Application = () => {
   const { formData, updateFormData } = useFormContext();
   const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {

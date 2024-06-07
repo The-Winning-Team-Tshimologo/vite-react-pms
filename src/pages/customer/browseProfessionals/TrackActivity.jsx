@@ -63,9 +63,9 @@ const TrackActivity = () => {
 						<div
 							className='TrackActivity__card'
 							key={index}
-							onClick={() => {
-								handleClick(service);
-							}}
+							// onClick={() => {
+							// 	handleClick(service);
+							// }}
 						>
 							<div className='TrackActivity-header'>
 								<img

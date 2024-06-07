@@ -5,11 +5,11 @@ import "./Header.css";
 import { useAuth } from "@/security/auth/AuthContext";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import Notification from "../notification/Notification"; // Import Notification component
+import { FaRegEnvelope } from "react-icons/fa";
+import Notification from "../notification/SystemNotification"; // Import Notification component
 
 const Header = () => {
-	const { sidebarCollapsed, setSidebarCollapsed, userDetails, user } =
-		useAuth();
+	const { sidebarCollapsed, setSidebarCollapsed, userDetails, user, logout } = useAuth();
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const navigate = useNavigate();
 
@@ -29,7 +29,14 @@ const Header = () => {
 		}
 	};
 
+	const handleMessage = () => {
+		if (user && user.roles.includes("ROLE_SERVICE_PROVIDER") || user && user.roles.includes("ROLE_CUSTOMER")) {
+			navigate("/inbox")
+		}
+	};
+
 	const handleLogout = () => {
+		logout();
 		console.log("Log Out clicked");
 	};
 
@@ -45,9 +52,8 @@ const Header = () => {
 			</div>
 			<div
 				className='header__user-details'
-				onClick={toggleDropdown}
 			>
-				<Notification />
+				<FaRegEnvelope onClick={handleMessage} className="cursor__pointer-visible"/>
 				<p>
 					{userDetails ? userDetails.fullName : "No user details available"}
 				</p>
@@ -58,7 +64,7 @@ const Header = () => {
 							src={`data:image/png;base64,${userDetails.profilePicture}`}
 							alt='user profile picture'
 						/>
-						<HiEllipsisVertical />
+						<HiEllipsisVertical onClick={toggleDropdown} className="cursor__pointer-visible"/>
 					</>
 				) : (
 					<img

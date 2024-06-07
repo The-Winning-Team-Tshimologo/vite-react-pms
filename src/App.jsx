@@ -40,13 +40,13 @@ import ServiceRequest from "./components/ServiceRequest/ServiceRequest";
 import Comms from "./components/comms/Comms";
 import CustomerProfile from "./pages/customer/customerProfile/CustomerProfile";
 import Dashboard from "./components/dashboard/Dashboard";
-
 import UpdateCustomerProfile from "./components/updateProfile/UpdateCustomerProfile";
-
 import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfileCard";
 import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
+import SystemNotification from "./components/notification/SystemNotification";
 import { NotificationProvider } from "./components/notification/NotificationContext";
-import NotificationComponent from "./components/notification/Notification";
+
+
 
 function App({ children }) {
 	const router = createBrowserRouter([
@@ -98,10 +98,6 @@ function App({ children }) {
 					element: <Dashboard />,
 				},
 				{
-					path: "/",
-					element: <Dashboard />,
-				},
-				{
 					path: "/updateServiceProvider",
 					element: <Update />,
 				},
@@ -118,7 +114,7 @@ function App({ children }) {
 					path: "/notification",
 					element: (
 						<ProtectedRoute>
-							<NotificationComponent />
+							<SystemNotification />
 						</ProtectedRoute>
 					),
 				},
@@ -317,6 +313,14 @@ function App({ children }) {
 					),
 				},
 				{
+					path: "/customer-profile/:id/:id2/:userName/:status",
+					element: (
+						<ProtectedRoute>
+							<CustomerProfile />
+						</ProtectedRoute>
+					),
+				},
+				{
 					path: "/customer-profile-card",
 					element: (
 						<ProtectedRoute>
@@ -331,7 +335,7 @@ function App({ children }) {
 	return (
 		<FormProvider>
 			<AuthProvider>
-				<NotificationProvider>
+			<NotificationProvider>
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<RouterProvider router={router}>{children}</RouterProvider>
 					</LocalizationProvider>

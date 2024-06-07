@@ -12,10 +12,13 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { useAuth } from "../../security/auth/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { IoGitPullRequestOutline ,IoCalendarClearOutline } from "react-icons/io5";
+import { GoCheckbox } from "react-icons/go";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { NotificationContext } from "../notification/NotificationContext";
 const Sidebar = () => {
   const { sidebarCollapsed, setSidebarCollapsed, logout, user } = useAuth();
-
+ const { unreadCount } = useContext(NotificationContext);
   const handleSideBarCollapse = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
@@ -23,6 +26,15 @@ const Sidebar = () => {
   const handleLogout = () => {
     logout();
   };
+
+  // const handleViewProfile = () => {
+	// 	console.log("View Profile clicked");
+	// 	// Check if the user role is ROLE_CUSTOMER
+	// 	if (user && user.roles.includes("ROLE_CUSTOMER")) {
+	// 		// Navigate to /customer-profile-update if the user role is ROLE_CUSTOMER
+	// 		navigate("/customer-profile-update");
+	// 	}
+	// };
 
   return (
 		<div
@@ -111,19 +123,23 @@ const Sidebar = () => {
 					<NavLink
 						to='/notification'
 						style={{
-							display: user?.roles?.includes("ROLE_CUSTOMER")
-								? "block"
-								: "none",
+							display:
+								user?.roles?.includes("ROLE_CUSTOMER") ||
+								user?.roles?.includes("ROLE_SERVICE_PROVIDER")
+									? "block"
+									: "none",
 						}}
 					>
 						<h3>
-							<TfiCommentAlt />
+							<IoIosNotificationsOutline />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>
 								Notifications
 							</span>
+							{unreadCount > 0 && (
+								<span className='notification-count'>{unreadCount}</span>
+							)}
 						</h3>
 					</NavLink>
-
 					<NavLink
 						to='/reminders'
 						style={{
@@ -158,7 +174,7 @@ const Sidebar = () => {
 						}}
 					>
 						<h3>
-							<SlPicture />
+							<IoGitPullRequestOutline />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>
 								Job Request
 							</span>
@@ -174,7 +190,7 @@ const Sidebar = () => {
 						}}
 					>
 						<h3>
-							<SlPicture />
+							<GoCheckbox />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>
 								Completed Jobs
 							</span>
@@ -202,7 +218,8 @@ const Sidebar = () => {
 						}}
 					>
 						<h3>
-							<SlPicture />
+							{/* <SlPicture /> */}
+							<IoCalendarClearOutline />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>
 								Appointments
 							</span>
@@ -212,7 +229,7 @@ const Sidebar = () => {
 
 				<div className='bottom-links'>
 					<NavLink
-						to='/profile'
+						to='/customer-profile-update'
 						style={{
 							display:
 								user?.roles?.includes("ROLE_CUSTOMER") ||
@@ -229,7 +246,10 @@ const Sidebar = () => {
 						</h3>
 					</NavLink>
 
-					<div onClick={handleLogout}>
+					<div
+						onClick={handleLogout}
+						className='cursor__pointer-visible'
+					>
 						<h3>
 							<IoIosLogOut />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>

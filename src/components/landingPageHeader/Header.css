@@ -17,14 +17,18 @@
 }
 
 .header__btn {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     color: white;
     padding: 0.25rem 2rem;
     border: none;
     width: 173px;
     height: 48px;
     font-size: 20px;
+    border-radius: 2px;
+}
 
+.header__btn:hover {
+    background-color: var(--color-secondary-opaque);
 }
 
 .header__active {

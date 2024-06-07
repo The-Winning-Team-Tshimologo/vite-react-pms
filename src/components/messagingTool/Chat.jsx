@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Chat.css";
+import { useNavigate } from "react-router";
 
 const Chat = ({ user2, userName }) => {
 	const [conversations, setConversations] = useState({});
 	const [selectedConversation, setSelectedConversation] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const [selectedUser, setSelectedUser] = useState(user2);
-
+	const navigate = useNavigate
 	useEffect(() => {
 		fetchConversations();
 
@@ -73,7 +74,16 @@ const Chat = ({ user2, userName }) => {
 	const selectConversation = (recipient) => {
 		setSelectedConversation(conversations[recipient]);
 		setSelectedUser(recipient);
+
+		handleMessageClick();
 	};
+
+	const handleMessageClick = (recipient) => {
+		const currentUser = JSON.parse(localStorage.getItem("user")).userName; // Assuming you store the user object in local storage
+		navigate(`/inbox`, {
+		  state: { userName: currentUser, user2: recipient },
+		});
+	 };
 
 	return (
 		<div className='chat-container'>

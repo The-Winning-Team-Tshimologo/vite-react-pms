@@ -14,7 +14,9 @@ const MessagingPage = () => {
 	};
 
 	// Fallback to paramUserName if stateUserName is not provided
-	const userName = stateUserName || paramUserName;
+	// const userName = stateUserName || paramUserName;
+	const userName = stateUserName || JSON.parse(localStorage.getItem("user")).userName; 
+
 
 	return (
 		<>
