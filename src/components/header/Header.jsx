@@ -1,16 +1,17 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { useAuth } from "@/security/auth/AuthContext";
 import { HiEllipsisVertical } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import { FaRegEnvelope } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import Notification from "../notification/SystemNotification"; // Import Notification component
 
 const Header = () => {
 	const { sidebarCollapsed, setSidebarCollapsed, userDetails, user, logout } = useAuth();
 	const [dropdownVisible, setDropdownVisible] = useState(false);
-	const navigate = useNavigate(); // Initialize useNavigate for navigation
+	const navigate = useNavigate();
 
 	const handleSideBarCollapse = () => {
 		setSidebarCollapsed(!sidebarCollapsed);
@@ -23,9 +24,7 @@ const Header = () => {
 
 	const handleViewProfile = () => {
 		console.log("View Profile clicked");
-		// Check if the user role is ROLE_CUSTOMER
 		if (user && user.roles.includes("ROLE_CUSTOMER")) {
-			// Navigate to /customer-profile-update if the user role is ROLE_CUSTOMER
 			navigate("/customer-profile-update");
 		}
 	};
@@ -40,38 +39,6 @@ const Header = () => {
 		logout();
 		console.log("Log Out clicked");
 	};
-
-	useEffect(() => {
-		console.log("User details updated", userDetails);
-	}, [userDetails]);
-
-	useEffect(() => {
-		const closeDropdown = () => setDropdownVisible(false);
-		if (dropdownVisible) {
-			document.addEventListener("click", closeDropdown);
-		} else {
-			document.removeEventListener("click", closeDropdown);
-		}
-
-		return () => {
-			document.removeEventListener("click", closeDropdown);
-		};
-	}, [dropdownVisible]);
-
-	if (!userDetails) {
-		return (
-			<div className='header__container'>
-				<div>
-					<img
-						className='w-fit h-20'
-						src='/src/assets/pms-logo.png'
-						alt='PMS Logo'
-						onClick={handleSideBarCollapse}
-					/>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className='header__container'>

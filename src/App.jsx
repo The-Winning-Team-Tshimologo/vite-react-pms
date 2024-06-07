@@ -1,11 +1,13 @@
+/** @format */
+
 import React from "react";
 import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
-  RouterProvider,
-  createBrowserRouter,
-  useNavigate,
+	RouterProvider,
+	createBrowserRouter,
+	useNavigate,
 } from "react-router-dom";
 import AuthProvider from "./security/auth/AuthContext";
 import ProtectedRoute from "./security/ProtectedRoute";
@@ -41,10 +43,13 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UpdateCustomerProfile from "./components/updateProfile/UpdateCustomerProfile";
 import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfileCard";
 import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
+import SystemNotification from "./components/notification/SystemNotification";
+import { NotificationProvider } from "./components/notification/NotificationContext";
+
 
 
 function App({ children }) {
-  const router = createBrowserRouter([
+	const router = createBrowserRouter([
 		{
 			index: true,
 			path: "/landing",
@@ -102,6 +107,14 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<LogIssue />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/notification",
+					element: (
+						<ProtectedRoute>
+							<SystemNotification />
 						</ProtectedRoute>
 					),
 				},
@@ -271,7 +284,7 @@ function App({ children }) {
 					path: "customer-profile-update",
 					element: (
 						<ProtectedRoute>
-							<UpdateCustomerProfile/>
+							<UpdateCustomerProfile />
 						</ProtectedRoute>
 					),
 				},
@@ -319,15 +332,17 @@ function App({ children }) {
 		},
 	]);
 
-  return (
-    <FormProvider>
-      <AuthProvider>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <RouterProvider router={router}>{children}</RouterProvider>
-        </LocalizationProvider>
-      </AuthProvider>
-    </FormProvider>
-  );
+	return (
+		<FormProvider>
+			<AuthProvider>
+			<NotificationProvider>
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
+						<RouterProvider router={router}>{children}</RouterProvider>
+					</LocalizationProvider>
+				</NotificationProvider>
+			</AuthProvider>
+		</FormProvider>
+	);
 }
 
 export default App;
