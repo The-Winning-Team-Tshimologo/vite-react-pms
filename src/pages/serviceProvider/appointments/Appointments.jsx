@@ -132,7 +132,7 @@ const Appointments = () => {
   }, []);
 
   const handleSelectEvent = (event) => {
-    navigate(`/customer-profile/${event.id}/${event.customerId}/${event.customerUsername}`);
+    navigate(`/customer-profile/${event.id}/${event.customerId}/${event.customerUsername}/${event.requestStatus}`);
   };
 
   const createCalendarEvents = (ServiceRequestData) => {
@@ -150,6 +150,7 @@ const Appointments = () => {
       end: new Date(new Date(event.appointmentDate).setHours(1, 0, 0)),
       customerId:event.customer.userId,
       customerUsername:event.customer.username,
+      requestStatus:event.status,
     }));
     setServiceRequest(calendarEvents);
   };
