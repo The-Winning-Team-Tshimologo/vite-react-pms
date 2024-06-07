@@ -63,18 +63,6 @@
 } */
 
 
-.paragraph-red {
-  color: red;
-
-
-}
-
-.paragraph-red-2 {
-  color: red;
-
-
-}
-
 .image-div {
   height: fit-content;
   width: fit-content;
@@ -119,4 +107,9 @@
   top: 35%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.Signin_labelname {
+  display: inline-flex;
+  gap: .5rem;
 }

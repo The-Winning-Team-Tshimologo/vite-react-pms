@@ -94,23 +94,54 @@ export const AuthProvider = ({ children }) => {
         setUser(authenticationResponse);
         setAuthenticated(true);
 
-        // Redirect based on user role
-        switch (authenticationResponse.roles) {
-          case "ROLE_CUSTOMER":
-            // Redirect customer to customer dashboard
-            <Navigate to={"/"} />;
-            break;
-          case "ROLE_SERVICE_PROVIDER":
-            // Redirect service provider to provider dashboard
-            <Navigate to={"/jobrequest"} />;
-            break;
-          case "ROLE_ADMIN":
-            // Redirect admin to admin dashboard
-            <Navigate to={"/admin-dashboard"} />;
-            break;
-          default:
-            break;
+        // // Redirect based on user role
+        // user?.roles?.includes("ROLE_ADMIN");
+
+        // if (authenticationResponse.roles.includes("ROLE_CUSTOMER")) {
+        //   console.log("Customer logged in");
+        //   <Navigate to={"/browse-professionals"} />;
+        // } else if (
+        //   authenticationResponse.roles.includes("ROLE_SERVICE_PROVIDER")
+        // ) {
+        //   console.log("SP logged in");
+        //   <Navigate to={"/jobrequest"} />;
+        // } else if (
+        //   authenticationResponse.roles.includes("ROLE_SERVICE_PROVIDER")
+        // ) {
+        //   console.log("Admin logged in");
+        //   <Navigate to={"/admin-dashboard"} />;
+        // }
+
+        const userRole = authenticationResponse.roles[0]; // Assuming a single role
+
+        if (userRole === "ROLE_CUSTOMER") {
+          console.log("Customer logged in");
+          <Navigate to={"/browse-professionals"} />;
+        } else if (userRole === "ROLE_SERVICE_PROVIDER") {
+          console.log("SP logged in");
+          <Navigate to={"/jobrequest"} />;
+        } else if (userRole === "ROLE_ADMIN") {
+          console.log("Admin logged in");
+          <Navigate to={"/admin-dashboard"} />;
         }
+
+
+        // switch (authenticationResponse.roles) {
+        //   case "ROLE_CUSTOMER":
+        //     // Redirect customer to customer dashboard
+        //     <Navigate to={"/"} />;
+        //     break;
+        //   case "ROLE_SERVICE_PROVIDER":
+        //     // Redirect service provider to provider dashboard
+        //     <Navigate to={"/jobrequest"} />;
+        //     break;
+        //   case "ROLE_ADMIN":
+        //     // Redirect admin to admin dashboard
+        //     <Navigate to={"/admin-dashboard"} />;
+        //     break;
+        //   default:
+        //     break;
+        // }
 
         return true;
       } else {
@@ -120,7 +151,9 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
     } catch (error) {
-      setError(`Login failed: ${error.message}, Please check your credentials.`);
+      setError(
+        `Login failed: ${error.message}, Please check your credentials.`
+      );
       console.error("Login failed: Bad Credentials");
       return false;
     }
@@ -175,49 +208,6 @@ export const AuthProvider = ({ children }) => {
       throw new Error("Registration failed");
     }
   };
-
-  // const registerSP = async ({
-  //   name,
-  //   surname,
-  //   email,
-  //   user_name,
-  //   password,
-  //   address,
-  // }) => {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:8081/api/v1/auth/signup-sp",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           userName: user_name,
-  //           email,
-  //           password,
-  //           firstName: name,
-  //           lastName: surname,
-  //           address: AddressDTO(address), // Convert address to AddressDTO
-  //         }),
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       const errorMessage = await response.text(); // Get the error message from the response
-  //       throw new Error(errorMessage); // Throw an error with the message
-  //     }
-
-  //     // If registration is successful, navigate to the sign-in page
-  //     //   navigate("/signin");
-  //     <Navigate to={"/signin"} />;
-
-  //     return true;
-  //   } catch (error) {
-  //     console.error("Registration failed:", error);
-  //     throw new Error("Registration failed");
-  //   }
-  // };
 
   const logout = () => {
     // Remove all related items from local storage
