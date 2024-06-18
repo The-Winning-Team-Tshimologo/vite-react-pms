@@ -76,6 +76,7 @@
 .primary-btn-login {
   background-color: #D2E1CC;
   border: none;
+  z-index: 5;
 }
 
 .primary-btn-login:hover {

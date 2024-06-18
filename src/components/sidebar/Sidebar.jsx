@@ -165,6 +165,8 @@ const Sidebar = () => {
 						</h3>
 					</NavLink>
 
+					
+
 					<NavLink
 						to='/jobrequest'
 						style={{
@@ -222,6 +224,22 @@ const Sidebar = () => {
 							<IoCalendarClearOutline />
 							<span className={sidebarCollapsed ? "icon-only" : ""}>
 								Appointments
+							</span>
+						</h3>
+					</NavLink>
+
+					<NavLink to='/serviceReview'
+					style={{
+						display:
+							user?.roles?.includes("ROLE_CUSTOMER") ||
+							user?.roles?.includes("ROLE_SERVICE_PROVIDER")
+								? "block"
+								: "none",
+					}}>
+						<h3>
+							<MdOutlineContacts />
+							<span className={sidebarCollapsed ? "icon-only" : ""}>
+								Service Review
 							</span>
 						</h3>
 					</NavLink>

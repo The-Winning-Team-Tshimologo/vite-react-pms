@@ -24,6 +24,7 @@ const TrackActivity = () => {
 					config
 				);
 				setServiceData(response.data);
+				console.log(response.data);
 				setLoading(false);
 			} catch (error) {
 				setError("Failed to fetch data");
