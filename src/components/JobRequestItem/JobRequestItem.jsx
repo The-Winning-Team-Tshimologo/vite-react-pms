@@ -91,6 +91,10 @@ const JobRequestItem = ({ ServiceRequest, fetchServiceRequests}) => {
 		console.log("clicked",ServiceRequest);
 	};
 
+	const handleReview = () => {
+		navigate("/review/"+ServiceRequest.serviceId);
+	  };
+
 	
 
 	return (
@@ -126,20 +130,20 @@ const JobRequestItem = ({ ServiceRequest, fetchServiceRequests}) => {
 								<p className='mr-1'>Requesting </p>{" "}
 								{ServiceRequest.category.name}
 							</div>
-							<div className={`serviceRequest-status ml-10 ${ServiceRequest.status}`}>{ServiceRequest.status}</div>
+							<div className={`serviceRequest-status ml-10 ${ServiceRequest.status}`}>{ServiceRequest.completed === true? "COMPLETED" : ServiceRequest.status}</div>
 						</div>
 					</div>
 					<div className='two-buttons flex items-center space-x-2'>
 						{ServiceRequest.status === "PENDING" && (
 							<>
 								<button
-									className='bg-[#008000] mr-[10px] p-[8px]'
+									className='status-button bg-[#008000] mr-[10px] p-[8px] text-white'
 									onClick={handleAcceptRequest}
 								>
 									Accept
 								</button>
 								<button
-									className='bg-[#D9D9D9] p-[8px]'
+									className='status-button bg-[#D9D9D9] p-[8px]'
 									onClick={handleDecline}
 								>
 									Decline
@@ -147,16 +151,25 @@ const JobRequestItem = ({ ServiceRequest, fetchServiceRequests}) => {
 							</>
 						)}
 						{ServiceRequest.status === "ACCEPTED" && (
+							 ServiceRequest.completed ? (
+								<button
+								  className="status-button bg-[#2C3639]  text-white p-[12px]"
+								  onClick={handleReview}
+								>
+								  Write review
+								</button>
+							  ) : (
 							<button
-								className='bg-[#D9D9D9] mr-[15px] p-[12px]'
+								className=' status-button bg-[#D9D9D9] mr-[15px] p-[12px]'
 								onClick={handleWithdraw}
 							>
 								Withdraw
 							</button>
+							  )
 						)}
 						{ServiceRequest.status === "REJECTED" && (
 							<button
-								className='bg-[#D9D9D9] mr-[15px] p-[12px] opacity-50 cursor-not-allowed'
+								className=' status-button bg-[#D9D9D9] mr-[15px] p-[12px] opacity-50 cursor-not-allowed'
 								disabled
 							>
 								Rejected

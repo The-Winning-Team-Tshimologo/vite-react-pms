@@ -45,6 +45,7 @@ import CustomerProfileCard from "./pages/customer/customerProfile/CustomerProfil
 import Activation from "./pages/serviceProvider/spSignup/onbaording/Activation";
 import SystemNotification from "./components/notification/SystemNotification";
 import { NotificationProvider } from "./components/notification/NotificationContext";
+import ServiceReview from "./components/review/ServiceReview";
 
 
 
@@ -241,7 +242,7 @@ function App({ children }) {
 					),
 				},
 				{
-					path: "/review",
+					path: "/review/:id",
 					element: (
 						<ProtectedRoute>
 							<ReviewPage />
@@ -253,6 +254,14 @@ function App({ children }) {
 					element: (
 						<ProtectedRoute>
 							<Applications />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "/serviceReview",
+					element: (
+						<ProtectedRoute>
+							<ServiceReview />
 						</ProtectedRoute>
 					),
 				},

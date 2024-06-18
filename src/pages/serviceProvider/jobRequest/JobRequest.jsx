@@ -44,7 +44,7 @@ function JobRequest() {
 				console.log(data);
 				setMainData(data);
 				// setServiceRequest(data);
-				setServiceRequest(data.filter(item => item.status === 'ACCEPTED' || item.status === 'PENDING'));
+				setServiceRequest(data.filter(item => (item.status === 'ACCEPTED' || item.status === 'PENDING') && item.completed === false));
     
 			} catch (error) {
 				console.error("Error fetching service requests:", error.message);
@@ -100,9 +100,12 @@ function JobRequest() {
 
 	const filterData = (data, tab) => {
 		if (tab === 'acceptedPending') {
-			setServiceRequest(data.filter(item => item.status === 'ACCEPTED' || item.status === 'PENDING'));
+			setServiceRequest(data.filter(item => (item.status === 'ACCEPTED' || item.status === 'PENDING') && item.completed === false));
 		} else if (tab === 'rejected') {
 			setServiceRequest(data.filter(item => item.status === 'REJECTED'));
+		}
+		else if (tab === 'completed') {
+			setServiceRequest(data.filter(item => item.status === 'ACCEPTED' && item.completed === true));
 		}
 	  };
 
@@ -132,6 +135,9 @@ function JobRequest() {
 							<button 
 							 className={activeTab === 'rejected' ? 'active' : ''}
 							onClick={() => handleTabClick('rejected')}>Rejected</button>
+							<button 
+							 className={activeTab === 'completed' ? 'active' : ''}
+							onClick={() => handleTabClick('completed')}>Completed</button>
 						</div>
 						{ServiceRequest.length > 0 ? (
 							<ul className='mb-7'>
