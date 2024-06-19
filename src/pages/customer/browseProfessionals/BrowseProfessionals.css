@@ -146,6 +146,34 @@
 
 }
 
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-backdrop);
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+}
+
+.pagination button.active {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
+
+
 /* .profile__AppointmentDate{
     color: ;
   } */

@@ -7,6 +7,9 @@ const TrackActivity = () => {
 	const [serviceData, setServiceData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
+	const [activeTab, setActiveTab] = useState("acceptedPending");
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage] = useState(6);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -23,8 +26,9 @@ const TrackActivity = () => {
 					"http://localhost:8081/api/v1/service/customer",
 					config
 				);
-				setServiceData(response.data);
-				console.log(response.data);
+				// setServiceData(response.data.sort((a, b) => new Date(b.appointmentDate) - new Date(a.appointmentDate)));
+				setServiceData(response.data.sort((a, b) => b.id - a.id));
+
 				setLoading(false);
 			} catch (error) {
 				setError("Failed to fetch data");
@@ -52,21 +56,57 @@ const TrackActivity = () => {
 		return statusColor;
 	};
 
+	const handleTabClick = (tab) => {
+		setActiveTab(tab);
+		setCurrentPage(1); // Reset to the first page when the tab changes
+	};
+
+	const filterData = () => {
+		switch (activeTab) {
+			case "acceptedPending":
+				return serviceData.filter(
+					(service) =>
+						service.status === "ACCEPTED" || service.status === "PENDING"
+				);
+			case "rejected":
+				return serviceData.filter((service) => service.status === "REJECTED");
+			case "completed":
+				return serviceData.filter((service) => service.status === "ACCEPTED" && service.completed === true);
+			default:
+				return serviceData;
+		}
+	};
+
+	const filteredData = filterData();
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 	return (
 		<div className='TrackActivity'>
 			<h2 className='px-10'>Track Activity</h2>
+			<div className="tabs">
+				<button
+					className={activeTab === 'acceptedPending' ? 'active' : ''}
+					onClick={() => handleTabClick('acceptedPending')}>Accepted / Pending</button>
+				<button
+					className={activeTab === 'rejected' ? 'active' : ''}
+					onClick={() => handleTabClick('rejected')}>Rejected</button>
+				{/* <button
+					className={activeTab === 'completed' ? 'active' : ''}
+					onClick={() => handleTabClick('completed')}>Completed</button> */}
+			</div>
 			{loading && <p>Loading...</p>}
 			{error && <p>{error}</p>}
-			{serviceData.length === 0 && <p>No activity</p>}
-			{serviceData.length > 0 && (
+			{currentItems.length === 0 && !loading && <p>No activity</p>}
+			{currentItems.length > 0 && (
 				<div className='profile-container'>
-					{serviceData.map((service, index) => (
+					{currentItems.map((service, index) => (
 						<div
 							className='TrackActivity__card'
 							key={index}
-							// onClick={() => {
-							// 	handleClick(service);
-							// }}
 						>
 							<div className='TrackActivity-header'>
 								<img
@@ -95,6 +135,16 @@ const TrackActivity = () => {
 								</div>
 							</div>
 						</div>
+					))}
+				</div>
+			)}
+			{/* Pagination */}
+			{filteredData.length > itemsPerPage && (
+				<div className='pagination'>
+					{Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) }, (_, i) => (
+						<button key={i} onClick={() => paginate(i + 1)} className={currentPage === i + 1 ? 'active' : ''}>
+							{i + 1}
+						</button>
 					))}
 				</div>
 			)}

@@ -88,16 +88,6 @@ const LogIssue = () => {
 			const response = await axios.post(url, formData, config);
 			console.log(response.data);
 			window.alert("Service requested successfully");
-
-			setSelectedCategory(null);
-			setDescription("");
-			setDescriptionBook("");
-			setAddress.streetName("");
-			setAddress.city= "";
-			setAddress.province= "";
-			setAddress.zipCode= "";
-			setSelectedDate(null); // Add selectedDate state
-			setPictures([]);
 		} catch (error) {
 			console.error("Error requesting service:", error);
 			window.alert("Failed to request service. Please try again later.");

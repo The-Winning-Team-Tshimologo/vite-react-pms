@@ -7,9 +7,10 @@ import axios from 'axios';
 const Review = () => {
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
-  const [selectedOval, setSelectedOval] = useState(null); // State to track selected oval
-  const [errorMessage, setErrorMessage] = useState(""); // Initialize errorMessage state
+  const [selectedOval, setSelectedOval] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false); 
   const { id } = useParams();
 
   const handleRatingChange = (newRating) => {
@@ -19,26 +20,18 @@ const Review = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic form validation
     if (rating === 0 || description.trim() === "") {
       setErrorMessage("Please provide both rating and description.");
       return;
     }
 
-    // Reset error message
-    setErrorMessage("");
-
-    // Handle submission logic here
-    console.log("Rating:", rating);
-    console.log("Description:", description);
-    console.log("id:", id);
-    // You can submit the data to your backend or do any further processing here
     setErrorMessage("");
     setSuccessMessage("");
+    setIsLoading(true); 
 
     const token = localStorage.getItem("token");
 
-    const reviewData = {
+    const reviewRequestDTO = {
       serviceRequestId: id,
       rating,
       feedback: description,
@@ -53,8 +46,8 @@ const Review = () => {
 
     try {
       const response = await axios.post(
-        `/review/service-provider/${id}`,
-        reviewData,
+        `http://localhost:8081/api/v1/review/service-provider/${id}`,
+        reviewRequestDTO,
         config
       );
 
@@ -68,6 +61,8 @@ const Review = () => {
       }
     } catch (error) {
       setErrorMessage(`Failed to submit review: ${error.message}`);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -118,6 +113,9 @@ const Review = () => {
             {errorMessage && (
               <p className="text-red-500 mt-2">{errorMessage}</p>
             )}
+            {successMessage && (
+              <p className="text-green-500 mt-2">{successMessage}</p>
+            )}
             <div className="oval-container">
               <div
                 className={`oval-shape ${
@@ -165,8 +163,9 @@ const Review = () => {
                 type="submit"
                 style={{ color: "white", padding: "10px 50px" }}
                 className="bg-[#1d1d1d]"
+                disabled={isLoading} 
               >
-                Submit
+                {isLoading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>
